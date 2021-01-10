@@ -1,0 +1,372 @@
+\documentclass[a4paper]{article}
+\usepackage[dvipsnames, svgnames, x11names]{xcolor}
+\usepackage{tikz-cd}
+\tikzcdset{row sep/normal=1cm}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage[left=3cm, right=3cm, top=2cm]{geometry}
+\usepackage{sectsty}
+\usepackage[perpage]{footmisc}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pdfpages}
+\usepackage{multirow}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{bussproofs}
+\usepackage{graphicx}
+\usepackage{epigraph}
+\usepackage{enumitem}
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{cor}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{exmp}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{ex}{Exercise}[section]
+\newtheorem{sol}{Solution}[section]
+
+\definecolor{background}{RGB}{255,230,230}
+\pagecolor{background}
+
+\definecolor{TextColor}{RGB}{255,122,162}
+
+\chapterfont{\color{TextColor}}
+\sectionfont{\color{TextColor}\Huge}
+\setlist{nolistsep,topsep=-7pt}
+\pgfplotsset{width=10cm,compat=newest}
+%\usepgfplotslibrary{external}
+%\tikzexternalize[prefix=tikz/]
+\newcommand{\ssubparagraph}{ \parshape 1 1cm \dimexpr\linewidth-2cm\relax}
+%\numberwithin{equation}{section}
+
+% \quad : width of  1 'M'
+% \qquad : 4
+% \0x20 (\ ) : 1/3
+% \; : 2/7
+% \, : 1/6
+% \! : -1/6
+
+% \addtocounter{<envname>}{nubmer}
+% Expl. \addtocounter{thm}{2}
+% \setcounter{<envname>}{nubmer}
+% Expl. \setcounter{ex}{3}
+% -->  Exercise 1.4
+
+\newcommand{\setexcounter}[1]{
+    \setcounter{ex}{#1}
+    \setcounter{sol}{#1}
+}
+
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\ms}[1]{\mathscr{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\bbA}{\mathbb A}
+\newcommand{\bbB}{\mathbb B}
+\newcommand{\bbC}{\mathbb C}
+\newcommand{\bbD}{\mathbb D}
+\newcommand{\bbE}{\mathbb E}
+\newcommand{\bbF}{\mathbb F}
+\newcommand{\bbG}{\mathbb G}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\bbI}{\mathbb I}
+\newcommand{\bbJ}{\mathbb J}
+\newcommand{\bbK}{\mathbb K}
+\newcommand{\bbL}{\mathbb L}
+\newcommand{\bbM}{\mathbb M}
+\newcommand{\bbN}{\mathbb N}
+\newcommand{\bbO}{\mathbb O}
+\newcommand{\bbP}{\mathbb P}
+\newcommand{\bbQ}{\mathbb Q}
+\newcommand{\bbR}{\mathbb R}
+\newcommand{\bbS}{\mathbb S}
+\newcommand{\bbT}{\mathbb T}
+\newcommand{\bbU}{\mathbb U}
+\newcommand{\bbV}{\mathbb V}
+\newcommand{\bbW}{\mathbb W}
+\newcommand{\bbX}{\mathbb X}
+\newcommand{\bbY}{\mathbb Y}
+\newcommand{\bbZ}{\mathbb Z}
+\newcommand{\mcA}{\mc A}
+\newcommand{\mcB}{\mc B}
+\newcommand{\mcC}{\mc C}
+\newcommand{\mcD}{\mc D}
+\newcommand{\mcE}{\mc E}
+\newcommand{\mcF}{\mc F}
+\newcommand{\mcG}{\mc G}
+\newcommand{\mcH}{\mc H}
+\newcommand{\mcI}{\mc I}
+\newcommand{\mcJ}{\mc J}
+\newcommand{\mcK}{\mc K}
+\newcommand{\mcL}{\mc L}
+\newcommand{\mcM}{\mc M}
+\newcommand{\mcN}{\mc N}
+\newcommand{\mcO}{\mc O}
+\newcommand{\mcP}{\mc P}
+\newcommand{\mcQ}{\mc Q}
+\newcommand{\mcR}{\mc R}
+\newcommand{\mcS}{\mc S}
+\newcommand{\mcT}{\mc T}
+\newcommand{\mcU}{\mc U}
+\newcommand{\mcV}{\mc V}
+\newcommand{\mcW}{\mc W}
+\newcommand{\mcX}{\mc X}
+\newcommand{\mcY}{\mc Y}
+\newcommand{\mcZ}{\mc Z}
+\newcommand{\msA}{\ms A}
+\newcommand{\msB}{\ms B}
+\newcommand{\msC}{\ms C}
+\newcommand{\msD}{\ms D}
+\newcommand{\msE}{\ms E}
+\newcommand{\msF}{\ms F}
+\newcommand{\msG}{\ms G}
+\newcommand{\msH}{\ms H}
+\newcommand{\msI}{\ms I}
+\newcommand{\msJ}{\ms J}
+\newcommand{\msK}{\ms K}
+\newcommand{\msL}{\ms L}
+\newcommand{\msM}{\ms M}
+\newcommand{\msN}{\ms N}
+\newcommand{\msO}{\ms O}
+\newcommand{\msP}{\ms P}
+\newcommand{\msQ}{\ms Q}
+\newcommand{\msR}{\ms R}
+\newcommand{\msS}{\ms S}
+\newcommand{\msT}{\ms T}
+\newcommand{\msU}{\ms U}
+\newcommand{\msV}{\ms V}
+\newcommand{\msW}{\ms W}
+\newcommand{\msX}{\ms X}
+\newcommand{\msY}{\ms Y}
+\newcommand{\msZ}{\ms Z}
+\newcommand{\mfA}{\mf A}
+\newcommand{\mfB}{\mf B}
+\newcommand{\mfC}{\mf C}
+\newcommand{\mfD}{\mf D}
+\newcommand{\mfE}{\mf E}
+\newcommand{\mfF}{\mf F}
+\newcommand{\mfG}{\mf G}
+\newcommand{\mfH}{\mf H}
+\newcommand{\mfI}{\mf I}
+\newcommand{\mfJ}{\mf J}
+\newcommand{\mfK}{\mf K}
+\newcommand{\mfL}{\mf L}
+\newcommand{\mfM}{\mf M}
+\newcommand{\mfN}{\mf N}
+\newcommand{\mfO}{\mf O}
+\newcommand{\mfP}{\mf P}
+\newcommand{\mfQ}{\mf Q}
+\newcommand{\mfR}{\mf R}
+\newcommand{\mfS}{\mf S}
+\newcommand{\mfT}{\mf T}
+\newcommand{\mfU}{\mf U}
+\newcommand{\mfV}{\mf V}
+\newcommand{\mfW}{\mf W}
+\newcommand{\mfX}{\mf X}
+\newcommand{\mfY}{\mf Y}
+\newcommand{\mfZ}{\mf Z}
+\newcommand{\mfa}{\mf a}
+\newcommand{\mfb}{\mf b}
+\newcommand{\mfc}{\mf c}
+\newcommand{\mfd}{\mf d}
+\newcommand{\mfe}{\mf e}
+\newcommand{\mff}{\mf f}
+\newcommand{\mfg}{\mf g}
+\newcommand{\mfh}{\mf h}
+\newcommand{\mfi}{\mf i}
+\newcommand{\mfj}{\mf j}
+\newcommand{\mfk}{\mf k}
+\newcommand{\mfl}{\mf l}
+\newcommand{\mfm}{\mf m}
+\newcommand{\mfn}{\mf n}
+\newcommand{\mfo}{\mf o}
+\newcommand{\mfp}{\mf p}
+\newcommand{\mfq}{\mf q}
+\newcommand{\mfr}{\mf r}
+\newcommand{\mfs}{\mf s}
+\newcommand{\mft}{\mf t}
+\newcommand{\mfu}{\mf u}
+\newcommand{\mfv}{\mf v}
+\newcommand{\mfw}{\mf w}
+\newcommand{\mfx}{\mf x}
+\newcommand{\mfy}{\mf y}
+\newcommand{\mfz}{\mf z}
+\newcommand{\mbfA}{\mathbf A}
+\newcommand{\mbfB}{\mathbf B}
+\newcommand{\mbfC}{\mathbf C}
+\newcommand{\mbfD}{\mathbf D}
+\newcommand{\mbfE}{\mathbf E}
+\newcommand{\mbfF}{\mathbf F}
+\newcommand{\mbfG}{\mathbf G}
+\newcommand{\mbfH}{\mathbf H}
+\newcommand{\mbfI}{\mathbf I}
+\newcommand{\mbfJ}{\mathbf J}
+\newcommand{\mbfK}{\mathbf K}
+\newcommand{\mbfL}{\mathbf L}
+\newcommand{\mbfM}{\mathbf M}
+\newcommand{\mbfN}{\mathbf N}
+\newcommand{\mbfO}{\mathbf O}
+\newcommand{\mbfP}{\mathbf P}
+\newcommand{\mbfQ}{\mathbf Q}
+\newcommand{\mbfR}{\mathbf R}
+\newcommand{\mbfS}{\mathbf S}
+\newcommand{\mbfT}{\mathbf T}
+\newcommand{\mbfU}{\mathbf U}
+\newcommand{\mbfV}{\mathbf V}
+\newcommand{\mbfW}{\mathbf W}
+\newcommand{\mbfX}{\mathbf X}
+\newcommand{\mbfY}{\mathbf Y}
+\newcommand{\mbfZ}{\mathbf Z}
+\newcommand{\bs}{\backslash}
+\newcommand{\bbRn}{\mathbb R^n}
+\newcommand{\ecyc}[1]{\langle #1\rangle}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\unitgrp}[1]{#1^{\mspace{-4mu}\times}}
+\newcommand{\grad}{\triangledown}
+\newcommand{\normal}{\trianglelefteq}
+\newcommand{\nnormal}{\ntrianglelefteq}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\gen}[1]{\langle #1 \rangle}
+\newcommand{\nilradical}[1]{\sqrt{\gen{0}}_{#1}}
+\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\E}{\exists}
+\newcommand{\A}{\forall}
+
+\DeclareMathOperator{\GL}{\rm{GL}}
+\DeclareMathOperator{\SL}{\rm{SL}}
+\DeclareMathOperator{\Mod}{\rm{Mod}}
+\DeclareMathOperator{\Mor}{\rm{Mor}}
+\DeclareMathOperator{\Obj}{\rm{Obj}}
+\DeclareMathOperator{\Id}{\rm{Id}}
+\DeclareMathOperator{\End}{\rm{End}}
+\DeclareMathOperator{\Hom}{\rm{Hom}}
+\DeclareMathOperator{\Res}{\rm{Res}}
+\DeclareMathOperator{\Spec}{\rm{Spec}}
+\DeclareMathOperator{\Proj}{\rm{Proj}}
+\DeclareMathOperator{\Supp}{\rm{Supp}}
+\DeclareMathOperator{\Ker}{\rm{Ker}}
+\DeclareMathOperator{\Nil}{\rm{Nil}}
+\DeclareMathOperator{\sh}{\rm{sh}}
+\DeclareMathOperator{\Coker}{\rm{Coker}}
+\DeclareMathOperator{\Rank}{\rm{Rank}}
+\DeclareMathOperator{\Frac}{\rm{Frac}}
+\DeclareMathOperator{\Rad}{\rm{Rad}}
+\DeclareMathOperator{\Ann}{\rm{Ann}}
+\DeclareMathOperator{\Disc}{\rm{Disc}}
+\DeclareMathOperator{\Lcm}{\rm{lcm}}
+\DeclareMathOperator{\Gcd}{\rm{gcd}}
+\DeclareMathOperator{\Conv}{Conv}
+\DeclareMathOperator{\Cone}{Cone}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Ord}{Ord}
+\DeclareMathOperator{\Ass}{Ass}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Char}{Char}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Card}{Card}
+\DeclareMathOperator{\OPT}{OPT}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Th}{Th}
+\DeclareMathOperator{\Jac}{\rm{Jac}}
+\DeclareMathOperator{\Specmax}{\rm{Spec_{max}}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\DeclareMathOperator{\Adj}{Adj}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+
+\begin{document}
+    \title{Notes of Introducion to Commutative Algebra}
+    \author{{\color{pink}{Cloudi}}{\color{Aquamarine}{fold}}}
+    \maketitle
+    \newpage
+
+    \setcounter{section}{-1}
+
+    \section{Notations}
+
+    \vspace*{0.9cm}
+
+    \begin{flushleft}
+        Coordinate ring of $k$-variety $X$ : $k[X]$\\
+        Category of commutative rings : $\mbf{CRing}$\\
+        Jacobson radical of ring $R$ : $\Jac(R)$\\
+        Polynomial ring with $n$-variables over ring $R$ : $R[x]_n$ or $R[x_1, \dotsc, x_n]$\\
+        Radical ideal of ideal $I$ : $\sqrt{I}$\\
+
+    \end{flushleft}
+
+
+    \section{Exercises of Chapter 1 : Rings and Ideals}
+
+    \vspace*{0.9cm}
+    
+    \begin{ex}
+        $A \in \mbf{CRing} $, $x \in \sqrt{\gen{0}}$ $\to$ $u \in \unitgrp{A} \to u+x \in \unitgrp{A}$
+    \end{ex}
+
+    \begin{sol}
+        \
+        \begin{prooftree}
+            \AxiomC{$x \in \sqrt{\gen{0}}$}
+            \UnaryInfC{$\E d \in \bbZ \ .\ x^{d} = 0$}
+            \RightLabel{$w1$}
+            \UnaryInfC{$(1+x)\cdot (\sum^{d-1}_{i=0}(-x)^{i})=1$}
+            \UnaryInfC{$1+x \in \unitgrp{A}$}
+            \AxiomC{$u \in \unitgrp{A}$}
+            \UnaryInfC{$1+x \in \unitgrp{A} \leftrightarrow  u+ux \in \unitgrp{A}$}
+            \AxiomC{$x \in \sqrt{\gen{0}}$}
+            \UnaryInfC{$\A r \in A \ .\  rx \in \sqrt{\gen{0}}$}
+            \RightLabel{$w2$}
+            \TrinaryInfC{$ u+x \in \unitgrp{A}$}
+        \end{prooftree}
+        \begin{center}
+        \begin{align*}
+            & w1 : 1-x^n = (1+x)\cdot \left( \sum^{n-1}_{i=0}x^{i} \right) \\
+            & w2 : u(1+\inv{u}x) = u+x,  \inv{u}x \in \unitgrp{A}
+        \end{align*}
+        \end{center}
+        \qed
+    \end{sol}
+
+    \setexcounter{3}
+
+    \begin{ex}
+        $A \in \mbf{CRing} \to \Jac(A[x]) = \sqrt{\gen{0}}_{A[x]}$
+    \end{ex}
+
+    \begin{sol}
+        $$\Jac(A[x])=\bigcap_{m\in \Specmax(A[x])}m$$\\
+        $$\sqrt{\gen{0}}_{A[x]}=\bigcap_{P\in \Spec(A[x])}P$$\\
+        $$\Jac(A[x])\supseteq  \sqrt{\gen{0}}_{A[x]}$$\\
+        $$q \in \Jac(A[x]) \leftrightarrow \A y \in A[x]\ .\ 1 - qy \in \unitgrp{A[x]}$$\\
+        $c \in \unitgrp{A[x]} \to , c_0 \in \unitgrp{A} \ \rm{and}\  \A i\neq 0 \ .\ c_i \in \sqrt{\gen{0}}_A$\\
+        $c \in \sqrt{\gen{0}}_{A[x]} \leftrightarrow  \A i \ .\ c_i \in \sqrt{\gen{0}}_A$\\
+        $c=\sum_{i}c_i x^i \ (\A i \ .\ c_i \in A)$\\
+        $q \in \Jac(A[x]) \to 1 - q \in \unitgrp{A[x]} \to \A i, q_i \in \sqrt{\gen{0}}_{A[x]} \to q \in \nilradical{A[x]}$\\
+        \qed
+    \end{sol}
+
+    
+
+\end{document}
