@@ -18,14 +18,14 @@
 \usepackage{multirow}
 \usepackage{mathtools}
 \usepackage{mathrsfs}
-\usepackage{bussproofs}
+\usepackage{ebproof}
 \usepackage{graphicx}
 \usepackage{epigraph}
 \usepackage{enumitem}
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
-\newtheorem{prop}[thm]{Propositionx
+\newtheorem{prop}[thm]{Proposition}
 \newtheorem*{cor}{Corollary}
 
 \theoremstyle{definition}
@@ -59,6 +59,17 @@
 % \; : 2/7
 % \, : 1/6
 % \! : -1/6
+
+% \addtocounter{<envname>}{nubmer}
+% Expl. \addtocounter{thm}{2}
+% \setcounter{<envname>}{nubmer}
+% Expl. \setcounter{ex}{3}
+% -->  Exercise 1.4
+
+\newcommand{\setexcounter}[1]{
+    \setcounter{ex}{#1}
+    \setcounter{sol}{#1}
+}
 
 \newcommand{\bb}[1]{\mathbb{#1}}
 \newcommand{\mc}[1]{\mathcal{#1}}
@@ -231,6 +242,7 @@
 \newcommand{\nnormal}{\ntrianglelefteq}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\gen}[1]{\langle #1 \rangle}
+\newcommand{\nilradical}[1]{\sqrt{\gen{0}}_{#1}}
 \newcommand{\inv}[1]{#1^{-1}}
 \newcommand{\E}{\exists}
 \newcommand{\A}{\forall}
@@ -274,24 +286,30 @@
 \DeclareMathOperator{\Dom}{Dom}
 \DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\Th}{Th}
+\DeclareMathOperator{\Jac}{\rm{Jac}}
+\DeclareMathOperator{\Specmax}{\rm{Spec_{max}}}
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
 \DeclareMathOperator{\Adj}{Adj}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 
-
 \begin{document}
-    \title{Title}
+    \title{Funtion Spaces}
     \author{{\color{pink}{Cloudi}}{\color{Aquamarine}{fold}}}
     \maketitle
     \newpage
 
     \setcounter{section}{-1}
 
-    \section{Sect}
+    \section{Notations}
     
-    \hspace*{2.5cm}
-    
+    \vspace*{0.3cm}
 
+    \begin{align*}
+        &\text{Category of sets } &: \ &\mbf{Set} \\
+        &\text{Category of topological spaces }&: \ &\mbf{Top} \\
+        &\text{Category of (one-point-)based topological spaces }&: \  &\mbf{Top}_* \\ 
+    \end{align*}
+    
 \end{document}
