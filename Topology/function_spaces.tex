@@ -235,6 +235,7 @@
 \newcommand{\bs}{\backslash}
 \newcommand{\bbRn}{\mathbb R^n}
 \newcommand{\ecyc}[1]{\langle #1\rangle}
+\newcommand{\interior}[1]{\overset{\circ}{#1}}
 \newcommand{\ol}[1]{\overline{#1}}
 \newcommand{\unitgrp}[1]{#1^{\mspace{-4mu}\times}}
 \newcommand{\grad}{\triangledown}
@@ -244,6 +245,7 @@
 \newcommand{\gen}[1]{\langle #1 \rangle}
 \newcommand{\nilradical}[1]{\sqrt{\gen{0}}_{#1}}
 \newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\unitcell}[1]{\overset{\!\!\!\! \circ}{\bbD^{#1}}}
 \newcommand{\E}{\exists}
 \newcommand{\A}{\forall}
 
@@ -307,9 +309,13 @@
     \vspace*{0.3cm}
 
     \begin{align*}
-        &\text{Category of sets } &: \ &\mbf{Set} \\
-        &\text{Category of topological spaces }&: \ &\mbf{Top} \\
-        &\text{Category of (one-point-)based topological spaces }&: \  &\mbf{Top}_* \\ 
+        & \text{Category of sets } &: \ &\mbf{Set} \\
+        & \text{Category of topological spaces }&: \ &\mbf{Top} \\
+        & \text{Category of (one-point-)based topological spaces }&: \  &\mbf{Top}_* \\
+        & \text{Euclidean space of dimension $n$ } &: \ & \bbRn\\
+        & \text{Unit cell of dimension $n$ } &: \ & \unitcell{n} \\
+        & \text{Unit disk of dimension $n$ } &: \ & \bbD^n\\
+        & \text{Unit sphere of dimension $n-1$ } &: \ & \bbS^{n-1}\\
     \end{align*}
     
 \end{document}

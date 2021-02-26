@@ -235,6 +235,7 @@
 \newcommand{\bs}{\backslash}
 \newcommand{\bbRn}{\mathbb R^n}
 \newcommand{\ecyc}[1]{\langle #1\rangle}
+\newcommand{\interior}[1]{\overset{\circ}{#1}}
 \newcommand{\ol}[1]{\overline{#1}}
 \newcommand{\unitgrp}[1]{#1^{\mspace{-4mu}\times}}
 \newcommand{\grad}{\triangledown}
@@ -244,6 +245,7 @@
 \newcommand{\gen}[1]{\langle #1 \rangle}
 \newcommand{\nilradical}[1]{\sqrt{\gen{0}}_{#1}}
 \newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\unitcell}[1]{\overset{\!\!\!\! \circ}{\bbD^{#1}}}
 \newcommand{\E}{\exists}
 \newcommand{\A}{\forall}
 
@@ -305,17 +307,16 @@
 
     \section{Notations}
 
-    \vspace*{0.9cm}
+    \vspace*{0.3cm}
 
-    \begin{flushleft}
-        Coordinate ring of $k$-variety $X$ : $k[X]$\\
-        Category of commutative rings : $\mbf{CRing}$\\
-        Jacobson radical of ring $R$ : $\Jac(R)$\\
-        Polynomial ring with $n$-variables over ring $R$ : $R[x]_n$ or $R[x_1, \dotsc, x_n]$\\
-        Radical ideal of ideal $I$ : $\sqrt{I}$\\
-        Element in polynomial ring $A[x]$ : $c \in A[x] := c=\sum_{i}c_i x^i \ (\A i \ .\ c_i \in A)$\\
-
-    \end{flushleft}
+    \begin{align*}
+        & \text{Category of commutative rings }      &: \ & \mbf{CRing}\\
+        & \text{Coordinate ring of $k$-variety $X$ } &: \ & k[X]\\
+        & \text{Element in polynomial ring $A[x]$ }  &: \ & c \in A[x] := c=\sum_{i}c_i x^i \ (\A i \ .\ c_i \in A)\\
+        & \text{Jacobson radical of ring $R$ }       &: \ & \Jac(R)\\
+        & \text{Polynomial ring with $n$-variables over ring $R$ } &: \ & R[x]_n \text{ or } R[x_1, \dotsc, x_n]\\
+        & \text{Radical ideal of ideal $I$ }         &: \ & \sqrt{I}\\
+    \end{align*}
 
 
     \section{Exercises of Chapter 1 : Rings and Ideals}
