@@ -18,14 +18,14 @@
 \usepackage{multirow}
 \usepackage{mathtools}
 \usepackage{mathrsfs}
-\usepackage{ebproof}
+\usepackage{bussproofs}
 \usepackage{graphicx}
 \usepackage{epigraph}
 \usepackage{enumitem}
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
-\newtheorem{prop}[thm]{Proposition}
+\newtheorem{prop}[thm]{Propositionx
 \newtheorem*{cor}{Corollary}
 
 \theoremstyle{definition}
@@ -59,17 +59,6 @@
 % \; : 2/7
 % \, : 1/6
 % \! : -1/6
-
-% \addtocounter{<envname>}{nubmer}
-% Expl. \addtocounter{thm}{2}
-% \setcounter{<envname>}{nubmer}
-% Expl. \setcounter{ex}{3}
-% -->  Exercise 1.4
-
-\newcommand{\setexcounter}[1]{
-    \setcounter{ex}{#1}
-    \setcounter{sol}{#1}
-}
 
 \newcommand{\bb}[1]{\mathbb{#1}}
 \newcommand{\mc}[1]{\mathcal{#1}}
@@ -242,7 +231,6 @@
 \newcommand{\nnormal}{\ntrianglelefteq}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\gen}[1]{\langle #1 \rangle}
-\newcommand{\nilradical}[1]{\sqrt{\gen{0}}_{#1}}
 \newcommand{\inv}[1]{#1^{-1}}
 \newcommand{\E}{\exists}
 \newcommand{\A}{\forall}
@@ -286,8 +274,6 @@
 \DeclareMathOperator{\Dom}{Dom}
 \DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\Th}{Th}
-\DeclareMathOperator{\Jac}{\rm{Jac}}
-\DeclareMathOperator{\Specmax}{\rm{Spec_{max}}}
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
 \DeclareMathOperator{\Adj}{Adj}
@@ -296,123 +282,16 @@
 
 
 \begin{document}
-    \title{Notes of Introducion to Commutative Algebra}
+    \title{Title}
     \author{{\color{pink}{Cloudi}}{\color{Aquamarine}{fold}}}
     \maketitle
     \newpage
 
     \setcounter{section}{-1}
 
-    \section{Notations}
-
-    \vspace*{0.9cm}
-
-    \begin{flushleft}
-        Coordinate ring of $k$-variety $X$ : $k[X]$\\
-        Category of commutative rings : $\mbf{CRing}$\\
-        Jacobson radical of ring $R$ : $\Jac(R)$\\
-        Polynomial ring with $n$-variables over ring $R$ : $R[x]_n$ or $R[x_1, \dotsc, x_n]$\\
-        Radical ideal of ideal $I$ : $\sqrt{I}$\\
-        Element in polynomial ring $A[x]$ : $c \in A[x] := c=\sum_{i}c_i x^i \ (\A i \ .\ c_i \in A)$\\
-
-    \end{flushleft}
-
-
-    \section{Exercises of Chapter 1 : Rings and Ideals}
-
-    \vspace*{0.9cm}
+    \section{Sect}
     
-    \begin{ex}
-        $A \in \mbf{CRing} $, $x \in \sqrt{\gen{0}}$ $\to$ $u \in \unitgrp{A} \to u+x \in \unitgrp{A}$
-    \end{ex}
-
-    \begin{sol}
-        \ \\
-        \begin{prooftree}
-            \hypo{ x \in \sqrt{\gen{0}} }
-            \infer1{ \E d \in \bbZ \ .\ x^{d} = 0 }
-            \infer1[w1]{ (1+x)\cdot (\sum^{d-1}_{i=0}(-x)^{i})=1 }
-            \infer1{ 1+x \in \unitgrp{A} }
-            \hypo{ u \in \unitgrp{A} }
-            \infer1{ 1+x \in \unitgrp{A} \leftrightarrow  u+ux \in \unitgrp{A} }
-            \hypo{ x \in \sqrt{\gen{0}} }
-            \infer1{ \A r \in A \ .\  rx \in \sqrt{\gen{0}} }
-            \infer3[w2]{ u+x \in \unitgrp{A}}
-        \end{prooftree}\\
-        \begin{center}
-        \begin{align*}
-            & \text{w1} : 1-x^n = (1+x)\cdot \left( \sum^{n-1}_{i=0}x^{i} \right) \\
-            & \text{w2} : u(1+\inv{u}x) = u+x,  \inv{u}x \in \unitgrp{A}
-        \end{align*}
-        \end{center}
-        \qed
-    \end{sol}
-
-    \setexcounter{3}
-
-    \begin{ex}
-        $A \in \mbf{CRing} \to \Jac(A[x]) = \sqrt{\gen{0}}_{A[x]}$
-    \end{ex}
-
-    \begin{sol}
-        \ \\
-        \begin{center}
-        \begin{prooftree}
-            \hypo{ \text{lemma 1} }
-            \hypo{ \text{lemma 2} }
-            \infer2{ c \in \sqrt{\gen{0}}_{A[x]} \leftrightarrow  \A i \ .\ c_i \in \sqrt{\gen{0}}_A }
-            \infer1[w1]{ q \in \Jac(A[x]) \to q \in \nilradical{A[x]} }
-            \hypo{ \text{def 1} }
-            \hypo{ \text{def 2} }
-            \infer2[w2]{ \Jac(A[x])\supseteq  \nilradical{A[x]}}
-            \infer2{ \Jac(A[x]) = \sqrt{\gen{0}}_{A[x]} }
-        \end{prooftree}\\
-        \begin{align*}
-            & \text{def 1} : \Jac(A[x])=\bigcap_{m\in \Specmax(A[x])}m\\
-            & \text{def 2} : \sqrt{\gen{0}}_{A[x]}=\bigcap_{P\in \Spec(A[x])}P\\
-            & \text{lemma 1} : q \in \Jac(A[x]) \leftrightarrow \A y \in A[x]\ .\ 1 - qy \in \unitgrp{A[x]} &  \text{(Textbook Ch1 Prop 1.9)}\\
-            & \text{lemma 2} : c \in \unitgrp{A[x]} \to , c_0 \in \unitgrp{A} \ \rm{and}\  \A i\neq 0 \ .\ c_i \in \sqrt{\gen{0}}_A & \text{(Textbook Ch1 Ex 2.i)}\\
-            & \text{w1} : q \in \Jac(A[x]) \to 1 - q \in \unitgrp{A[x]} \to \A i, q_i \in \sqrt{\gen{0}}_{A[x]} \to q \in \nilradical{A[x]}\\
-            & \text{w2} : I \in \Specmax{A} \to I \in \Spec{A}
-        \end{align*}
-        \end{center}
-        \qed
-    \end{sol}
-
-    \setexcounter{5}
-
-    \begin{ex}
-        $A \in \mbf{CRing} \to \left( I \nsubseteq  \nilradical{A} \to \E \ e \in I, e^2 = e \neq 0 \right) \to \Jac{A} = \nilradical{A} $
-    \end{ex}
-
-    \begin{sol}
-        \ \\
-        \begin{center}
-        \begin{prooftree}
-            \hypo{I  \nsubseteq  \nilradical{A} \to \E \ e \in I, e^2 = e \neq 0 }
-            \hypo{ \Jac{A} \nsubseteq \nilradical{A} }
-            \infer2{ \E e \in \Jac{A} , e^2 = e \neq 0 }
-            \infer1[lemma 1]{ 1 - e \in \unitgrp{A} \ \text{and} \  e(1-e)=0}
-            \infer1{e = e (1 - e) \inv{(1 - e)} = 0 \inv{(1 - e)} = 0}
-            \infer1{\bot}
-        \end{prooftree}
-        $\Rightarrow \Jac{A} \subseteq \nilradical{A}$\\
-        \ \\
-        \ \\
-        \begin{prooftree}
-            \hypo{ \Jac{A} \subseteq \nilradical{A} }
-            \hypo{ \Jac(A)\supseteq  \sqrt{\gen{0}}_{A} \ \text{(lemma 2)}}
-            \infer2{\Jac{A} = \nilradical{A}}
-        \end{prooftree}\\
-        \begin{align*}
-            & \text{lemma 1} : q \in \Jac(A[x]) \leftrightarrow \A y \in A[x]\ .\ 1 - qy \in \unitgrp{A[x]} &  \text{(Textbook Ch1 Prop 1.9)}\\
-            & \text{lemma 2} : \text{Sol 1.4. w2}
-        \end{align*}
-        \end{center}
-        \qed
-    \end{sol}
-    
-
+    \hspace*{2.5cm}
     
 
 \end{document}
