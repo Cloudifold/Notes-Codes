@@ -289,6 +289,7 @@
 \DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\Th}{Th}
 \DeclareMathOperator{\Jac}{\rm{Jac}}
+\DeclareMathOperator{\Rel}{\rm{rel}}
 \DeclareMathOperator{\Specmax}{\rm{Spec_{max}}}
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
@@ -296,6 +297,9 @@
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 
+% above : global newcommands and global operators
+% 
+% below : local newcommands amd local operators
 
 \begin{document}
     \title{Notes of Introducion to Commutative Algebra}
@@ -315,6 +319,7 @@
         & \text{Element in polynomial ring $A[x]$ }  &: \ & c \in A[x] := c=\sum_{i}c_i x^i \ (\A i \ .\ c_i \in A)\\
         & \text{Jacobson radical of ring $R$ }       &: \ & \Jac(R)\\
         & \text{Polynomial ring with $n$-variables over ring $R$ } &: \ & R[x]_n \text{ or } R[x_1, \dotsc, x_n]\\
+        & \text{Nilradical of ring $A$ }             &: \ & \nilradical{A}\\
         & \text{Radical ideal of ideal $I$ }         &: \ & \sqrt{I}\\
     \end{align*}
 
@@ -406,7 +411,7 @@
             \infer2{\Jac{A} = \nilradical{A}}
         \end{prooftree}\\
         \begin{align*}
-            & \text{lemma 1} : q \in \Jac(A[x]) \leftrightarrow \A y \in A[x]\ .\ 1 - qy \in \unitgrp{A[x]} &  \text{(Textbook Ch1 Prop 1.9)}\\
+            & \text{lemma 1} : q \in \Jac(A) \leftrightarrow \A y \in A\ .\ 1 - qy \in \unitgrp{A} &  \text{(Textbook Ch1 Prop 1.9)}\\
             & \text{lemma 2} : \text{Sol 1.4. w2}
         \end{align*}
         \end{center}
