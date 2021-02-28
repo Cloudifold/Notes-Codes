@@ -437,9 +437,13 @@
         By definition, $\inv{ev}(V) = \{ (f,x) \mid f(x) \in V \}$,
         We take $(f,x) \in \inv{ev}(V)$ for the next step.
         \par  By continity of $f$, we have $\inv{f} (V)$ is open in $X$.
-        By locally compactness of $X$, there exist
-        $ O \in \mcT_X$ such that $x \in O \subseteq \ol{O} \subseteq V$
-        and $\ol{O}$ is compact. Put $K := \ol{O}$, 
+        By locally compactness of $X$ and $X$ is Hausdorff, there exist
+        $ O_{(f,x)} \in \mcT_X$ such that $x \in O_{(f,x)} \subseteq \ol{O_{(f,x)}} \subseteq V$
+        and $\ol{O_{(f,x)}}$ is compact. Put $K_{(f,x)} := \ol{O_{(f,x)}}$
+        \par Now we have $(f,x) \in V^{K_{(f,x)}} \times O_{(f,x)} \subseteq \inv{ev}(V)$, that means
+        $$ \inv{ev}(V) = \bigcup \left\{ V^{K_{(f,x)}} \times O_{(f,x)} \right\}_{(f,x) \in \inv{ev}(V)} $$ 
+        is a union of open sets. That is, $\inv{ev}(V)$ is open.
+        \qed
     \end{prf}
     
     
