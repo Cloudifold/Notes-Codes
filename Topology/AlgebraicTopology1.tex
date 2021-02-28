@@ -246,7 +246,7 @@
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\gen}[1]{\langle #1 \rangle}
 \newcommand{\nilradical}[1]{\sqrt{\gen{0}}_{#1}}
-\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\inv}[1]{#1^{\text{-}1}}
 \newcommand{\unitcell}[1]{\overset{\!\!\!\! \circ}{\bbD^{#1}}}
 \newcommand{\E}{\exists}
 \newcommand{\A}{\forall}
@@ -427,7 +427,20 @@
         That is, the default topology on $\Homtop(X,Y)$ is the $\mbf{compact\text{-}open}$ topology.
     \end{note}
 
-    
+    \begin{prop}
+        If X is locally compact and Hausdorff, then the $\mbf{compact\text{-}open}$
+        topology is admissible.
+    \end{prop}
+    \begin{prf}
+        We have to show $ev : \Homtop(X,Y) \times X \to Y$ is continuous.
+        That is $V \in \mcT_Y \to \inv{ev}(V) \in \mcT_{\Homtop(X,Y) \times X }$.
+        By definition, $\inv{ev}(V) = \{ (f,x) \mid f(x) \in V \}$,
+        We take $(f,x) \in \inv{ev}(V)$ for the next step.
+        \par  By continity of $f$, we have $\inv{f} (V)$ is open in $X$.
+        By locally compactness of $X$, there exist
+        $ O \in \mcT_X$ such that $x \in O \subseteq \ol{O} \subseteq V$
+        and $\ol{O}$ is compact. Put $K := \ol{O}$, 
+    \end{prf}
     
     
 \end{document}
