@@ -22,6 +22,9 @@
 \usepackage{graphicx}
 \usepackage{epigraph}
 \usepackage{enumitem}
+\usepackage{indentfirst}
+
+
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
@@ -72,6 +75,7 @@
     \setcounter{ex}{#1}
     \setcounter{sol}{#1}
 }
+\newcommand{\setsubsectcounter}[1]{\setcounter{subsection}{#1}}
 
 \newcommand{\bb}[1]{\mathbb{#1}}
 \newcommand{\mc}[1]{\mathcal{#1}}
@@ -247,6 +251,7 @@
 \newcommand{\gen}[1]{\langle #1 \rangle}
 \newcommand{\nilradical}[1]{\sqrt{\gen{0}}_{#1}}
 \newcommand{\inv}[1]{#1^{\text{-}1}}
+\newcommand{\id}{\mathrm{id}}
 \newcommand{\unitcell}[1]{\overset{\!\!\!\! \circ}{\bbD^{#1}}}
 \newcommand{\E}{\exists}
 \newcommand{\A}{\forall}
@@ -291,7 +296,8 @@
 \DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\Th}{Th}
 \DeclareMathOperator{\Jac}{\rm{Jac}}
-\DeclareMathOperator{\Rel}{\rm{rel}}
+\DeclareMathOperator{\Iso}{\rm{Iso}}
+\DeclareMathOperator{\Rel}{\mathrm{rel}}
 \DeclareMathOperator{\Specmax}{\rm{Spec_{max}}}
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
@@ -305,9 +311,11 @@
 
 \newcommand{\phead}{\hspace*{0.46cm}}
 \DeclareMathOperator{\Homtop}{\rm{Hom}_{\mbf{Top}}}
+\DeclareMathOperator{\Maptop}{\rm{Map}_{\mbf{Top}}}
+
 
 \begin{document}
-    \title{Funtion Spaces}
+    \title{Function Spaces}
     \author{{\color{pink}{Cloudi}}{\color{Aquamarine}{fold}}}
     \maketitle
     \newpage
@@ -315,13 +323,12 @@
     \setcounter{section}{-1}
 
     \section{Notations}
-    
-    \vspace*{0.3cm}
 
     \begin{align*}
         & \text{Category of sets } &: \ & \mbf{Set} \\
         & \text{Category of topological spaces }&: \ & \mbf{Top} \\
         & \text{Category of (one-point-)based topological spaces }&: \  & \mbf{Top}_* \\
+        & \text{Category of pairs $(X,A)$ of space $X$ and subspace $A$ } &: \ & \mbf{Top}(2) \\
         & \text{Topological space $X$ with topology $\mcT$ } &: \ & X_{\mcT}\\
         & \text{Euclidean space of dimension $n$ } &: \ & \bbRn\\
         & \text{Unit cube of dimension $n$ } &: \ & I^n\\
@@ -339,21 +346,21 @@
     \end{align*}
 
 
-    \section{Funtion Spaces}
+    \section{Function Spaces}
 
-    \setcounter{subsection}{-1}
+    \setsubsectcounter{-1}
 
     \subsection{Introduction}
 
     Function spaces, are origins of many important constructions such as
     Loop spaces, Path spaces and so on.
-    The duality between funtion spaces and product spaces will [ todo ]
+    The duality between function spaces and product spaces will [ todo ]
 
     \subsection{Admissible Topology}
 
     \begin{defn}
         A topology on $\Homtop(X, Y)$ is $\mbf{admissible}$ if 
-        the evaluation funtion $ev$ is $\mbf{continuous}$. Where $ev$ is defined by : 
+        the evaluation function $ev$ is $\mbf{continuous}$. Where $ev$ is defined by : 
         \begin{align*}
             ev  : \Homtop(X,Y) \times X & \to Y \\
             (f, x)& \mapsto f(x)
@@ -423,8 +430,7 @@
     \end{prf}
 
     \begin{note}
-        Now we denote $\Homtop(X,Y)_{\mcT_{co}}$ simply by $\Homtop(X,Y)$.
-        That is, the default topology on $\Homtop(X,Y)$ is the $\mbf{compact\text{-}open}$ topology.
+        Now we denote $\Homtop(X,Y)_{\mcT_{co}}$ simply by $\Maptop(X,Y)$.
     \end{note}
 
     \begin{prop}
@@ -432,7 +438,7 @@
         topology is admissible.
     \end{prop}
     \begin{prf}
-        We have to show $ev : \Homtop(X,Y) \times X \to Y$ is continuous.
+        We have to show $ev : \Homtop(X,Y)_{\mcT_{co}} \times X \to Y$ is continuous.
         That is $V \in \mcT_Y \to \inv{ev}(V) \in \mcT_{\Homtop(X,Y) \times X }$.
         By definition, $\inv{ev}(V) = \{ (f,x) \mid f(x) \in V \}$,
         We take $(f,x) \in \inv{ev}(V)$ for the next step.
@@ -445,6 +451,39 @@
         is a union of open sets. That is, $\inv{ev}(V)$ is open.
         \qed
     \end{prf}
+
+    
+    \section{Compactly Generated Spaces}
+
+    \setsubsectcounter{-1}
+
+    \subsection{Introduction}
+
+    A $\mbf{compactly\ generated}$ space (in a certain sense) is such a space that the continuous images in it of
+    all $\mbf{compact\ Hausdorff}$ spaces tell you everything about its topology.
+    \par Why $\mbf{compact\ Hausdorff}$? Maybe the reason is that $\mbf{compact}$ implies existance of limit(1),
+    and $\mbf{Hausdorff}$ implies the uniqueness of limit(1).  
+
+    \subsection{Related Definitios}
+
+    \begin{defn}
+        A function $f : X \to Y$ between the underlying set of topological spaces
+        is $k\mbf{\text{-}continuous}$ if for all $\mbf{compact\ Hausdorff}$ spaces $C$
+        and continuous functions $t : C \to X$, $f \circ t : C \to Y$ is continuous. 
+    \end{defn}
+
+    \begin{defn}
+        A topological space $X$ is a $k\mbf{\text{-}space}$ if forall $f : X \to Y$ (in $\mbf{Set}$),
+        $f$ is continuous $\Leftrightarrow$ $f$ is $k\mbf{\text{-}continuous}$
+    \end{defn}
+
+    \begin{note}
+        Equivalent definitions of $k\mbf{\text{-}space}$ 
+    \end{note}
+
+    \subsection{Category of Compactly Generated Spaces}
+
+
     
     
 \end{document}

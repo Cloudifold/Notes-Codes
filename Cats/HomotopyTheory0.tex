@@ -1,0 +1,1135 @@
+\documentclass[a4paper]{article}
+\usepackage[dvipsnames, svgnames, x11names]{xcolor}
+\usepackage{tikz-cd}
+\tikzcdset{row sep/normal=1cm}
+\tikzcdset{column sep/normal=1cm}
+\usepackage{amsfonts}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{enumerate}
+\usepackage[left=3cm, right=3cm, top=2cm]{geometry}
+\usepackage{sectsty}
+\usepackage[perpage]{footmisc}
+\usepackage{amsthm}
+\usepackage{tikz-cd}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{pdfpages}
+\usepackage{multirow}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{ebproof}
+\usepackage{graphicx}
+\usepackage{epigraph}
+\usepackage{enumitem}
+\usepackage{indentfirst}
+
+\usepackage{quiver}
+
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{cor}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{exmp}{Example}[section]
+
+\newtheorem*{prf}{Proof}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{ex}{Exercise}[section]
+\newtheorem{sol}{Solution}[section]
+
+\definecolor{background}{RGB}{255,230,230}
+\pagecolor{background}
+
+\tikzcdset{background color = background}
+
+\definecolor{TextColor}{RGB}{255,122,162}
+
+\chapterfont{\color{TextColor}}
+\sectionfont{\color{TextColor}\Huge}
+\setlist{nolistsep,topsep=-7pt}
+\pgfplotsset{width=10cm,compat=newest}
+%\usepgfplotslibrary{external}
+%\tikzexternalize[prefix=tikz/]
+\newcommand{\ssubparagraph}{ \parshape 1 1cm \dimexpr\linewidth-2cm\relax}
+%\numberwithin{equation}{section}
+
+% \quad : width of  1 'M'
+% \qquad : 4
+% \0x20 (\ ) : 1/3
+% \; : 2/7
+% \, : 1/6
+% \! : -1/6
+
+% \addtocounter{<envname>}{nubmer}
+% Expl. \addtocounter{thm}{2}
+% \setcounter{<envname>}{nubmer}
+% Expl. \setcounter{ex}{3}
+% -->  Exercise 1.4
+
+\newcommand{\setexcounter}[1]{
+    \setcounter{ex}{#1}
+    \setcounter{sol}{#1}
+}
+\newcommand{\setsubsectcounter}[1]{\setcounter{subsection}{#1}}
+
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mf}[1]{\mathfrak{#1}}
+\newcommand{\ms}[1]{\mathscr{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\bbA}{\mathbb A}
+\newcommand{\bbB}{\mathbb B}
+\newcommand{\bbC}{\mathbb C}
+\newcommand{\bbD}{\mathbb D}
+\newcommand{\bbE}{\mathbb E}
+\newcommand{\bbF}{\mathbb F}
+\newcommand{\bbG}{\mathbb G}
+\newcommand{\bbH}{\mathbb H}
+\newcommand{\bbI}{\mathbb I}
+\newcommand{\bbJ}{\mathbb J}
+\newcommand{\bbK}{\mathbb K}
+\newcommand{\bbL}{\mathbb L}
+\newcommand{\bbM}{\mathbb M}
+\newcommand{\bbN}{\mathbb N}
+\newcommand{\bbO}{\mathbb O}
+\newcommand{\bbP}{\mathbb P}
+\newcommand{\bbQ}{\mathbb Q}
+\newcommand{\bbR}{\mathbb R}
+\newcommand{\bbS}{\mathbb S}
+\newcommand{\bbT}{\mathbb T}
+\newcommand{\bbU}{\mathbb U}
+\newcommand{\bbV}{\mathbb V}
+\newcommand{\bbW}{\mathbb W}
+\newcommand{\bbX}{\mathbb X}
+\newcommand{\bbY}{\mathbb Y}
+\newcommand{\bbZ}{\mathbb Z}
+\newcommand{\mcA}{\mc A}
+\newcommand{\mcB}{\mc B}
+\newcommand{\mcC}{\mc C}
+\newcommand{\mcD}{\mc D}
+\newcommand{\mcE}{\mc E}
+\newcommand{\mcF}{\mc F}
+\newcommand{\mcG}{\mc G}
+\newcommand{\mcH}{\mc H}
+\newcommand{\mcI}{\mc I}
+\newcommand{\mcJ}{\mc J}
+\newcommand{\mcK}{\mc K}
+\newcommand{\mcL}{\mc L}
+\newcommand{\mcM}{\mc M}
+\newcommand{\mcN}{\mc N}
+\newcommand{\mcO}{\mc O}
+\newcommand{\mcP}{\mc P}
+\newcommand{\mcQ}{\mc Q}
+\newcommand{\mcR}{\mc R}
+\newcommand{\mcS}{\mc S}
+\newcommand{\mcT}{\mc T}
+\newcommand{\mcU}{\mc U}
+\newcommand{\mcV}{\mc V}
+\newcommand{\mcW}{\mc W}
+\newcommand{\mcX}{\mc X}
+\newcommand{\mcY}{\mc Y}
+\newcommand{\mcZ}{\mc Z}
+\newcommand{\msA}{\ms A}
+\newcommand{\msB}{\ms B}
+\newcommand{\msC}{\ms C}
+\newcommand{\msD}{\ms D}
+\newcommand{\msE}{\ms E}
+\newcommand{\msF}{\ms F}
+\newcommand{\msG}{\ms G}
+\newcommand{\msH}{\ms H}
+\newcommand{\msI}{\ms I}
+\newcommand{\msJ}{\ms J}
+\newcommand{\msK}{\ms K}
+\newcommand{\msL}{\ms L}
+\newcommand{\msM}{\ms M}
+\newcommand{\msN}{\ms N}
+\newcommand{\msO}{\ms O}
+\newcommand{\msP}{\ms P}
+\newcommand{\msQ}{\ms Q}
+\newcommand{\msR}{\ms R}
+\newcommand{\msS}{\ms S}
+\newcommand{\msT}{\ms T}
+\newcommand{\msU}{\ms U}
+\newcommand{\msV}{\ms V}
+\newcommand{\msW}{\ms W}
+\newcommand{\msX}{\ms X}
+\newcommand{\msY}{\ms Y}
+\newcommand{\msZ}{\ms Z}
+\newcommand{\mfA}{\mf A}
+\newcommand{\mfB}{\mf B}
+\newcommand{\mfC}{\mf C}
+\newcommand{\mfD}{\mf D}
+\newcommand{\mfE}{\mf E}
+\newcommand{\mfF}{\mf F}
+\newcommand{\mfG}{\mf G}
+\newcommand{\mfH}{\mf H}
+\newcommand{\mfI}{\mf I}
+\newcommand{\mfJ}{\mf J}
+\newcommand{\mfK}{\mf K}
+\newcommand{\mfL}{\mf L}
+\newcommand{\mfM}{\mf M}
+\newcommand{\mfN}{\mf N}
+\newcommand{\mfO}{\mf O}
+\newcommand{\mfP}{\mf P}
+\newcommand{\mfQ}{\mf Q}
+\newcommand{\mfR}{\mf R}
+\newcommand{\mfS}{\mf S}
+\newcommand{\mfT}{\mf T}
+\newcommand{\mfU}{\mf U}
+\newcommand{\mfV}{\mf V}
+\newcommand{\mfW}{\mf W}
+\newcommand{\mfX}{\mf X}
+\newcommand{\mfY}{\mf Y}
+\newcommand{\mfZ}{\mf Z}
+\newcommand{\mfa}{\mf a}
+\newcommand{\mfb}{\mf b}
+\newcommand{\mfc}{\mf c}
+\newcommand{\mfd}{\mf d}
+\newcommand{\mfe}{\mf e}
+\newcommand{\mff}{\mf f}
+\newcommand{\mfg}{\mf g}
+\newcommand{\mfh}{\mf h}
+\newcommand{\mfi}{\mf i}
+\newcommand{\mfj}{\mf j}
+\newcommand{\mfk}{\mf k}
+\newcommand{\mfl}{\mf l}
+\newcommand{\mfm}{\mf m}
+\newcommand{\mfn}{\mf n}
+\newcommand{\mfo}{\mf o}
+\newcommand{\mfp}{\mf p}
+\newcommand{\mfq}{\mf q}
+\newcommand{\mfr}{\mf r}
+\newcommand{\mfs}{\mf s}
+\newcommand{\mft}{\mf t}
+\newcommand{\mfu}{\mf u}
+\newcommand{\mfv}{\mf v}
+\newcommand{\mfw}{\mf w}
+\newcommand{\mfx}{\mf x}
+\newcommand{\mfy}{\mf y}
+\newcommand{\mfz}{\mf z}
+\newcommand{\mbfA}{\mathbf A}
+\newcommand{\mbfB}{\mathbf B}
+\newcommand{\mbfC}{\mathbf C}
+\newcommand{\mbfD}{\mathbf D}
+\newcommand{\mbfE}{\mathbf E}
+\newcommand{\mbfF}{\mathbf F}
+\newcommand{\mbfG}{\mathbf G}
+\newcommand{\mbfH}{\mathbf H}
+\newcommand{\mbfI}{\mathbf I}
+\newcommand{\mbfJ}{\mathbf J}
+\newcommand{\mbfK}{\mathbf K}
+\newcommand{\mbfL}{\mathbf L}
+\newcommand{\mbfM}{\mathbf M}
+\newcommand{\mbfN}{\mathbf N}
+\newcommand{\mbfO}{\mathbf O}
+\newcommand{\mbfP}{\mathbf P}
+\newcommand{\mbfQ}{\mathbf Q}
+\newcommand{\mbfR}{\mathbf R}
+\newcommand{\mbfS}{\mathbf S}
+\newcommand{\mbfT}{\mathbf T}
+\newcommand{\mbfU}{\mathbf U}
+\newcommand{\mbfV}{\mathbf V}
+\newcommand{\mbfW}{\mathbf W}
+\newcommand{\mbfX}{\mathbf X}
+\newcommand{\mbfY}{\mathbf Y}
+\newcommand{\mbfZ}{\mathbf Z}
+\newcommand{\bs}{\backslash}
+\newcommand{\bbRn}{\mathbb R^n}
+\newcommand{\ecyc}[1]{\langle #1\rangle}
+\newcommand{\interior}[1]{\overset{\circ}{#1}}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\unitgrp}[1]{#1^{\mspace{-4mu}\times}}
+\newcommand{\grad}{\triangledown}
+\newcommand{\normal}{\trianglelefteq}
+\newcommand{\nnormal}{\ntrianglelefteq}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\gen}[1]{\langle #1 \rangle}
+\newcommand{\nilradical}[1]{\sqrt{\gen{0}}_{#1}}
+\newcommand{\inv}[1]{#1^{\text{-}1}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\unitcell}[1]{\overset{\!\!\!\! \circ}{\bbD^{#1}}}
+\newcommand{\E}{\exists}
+\newcommand{\A}{\forall}
+\newcommand{\Fct}{\mathrm{Funct}}
+
+\DeclareMathOperator{\GL}{\rm{GL}}
+\DeclareMathOperator{\SL}{\rm{SL}}
+\DeclareMathOperator{\Mod}{\rm{Mod}}
+\DeclareMathOperator{\Mor}{\rm{Mor}}
+\DeclareMathOperator{\Obj}{\rm{Obj}}
+\DeclareMathOperator{\Id}{\rm{Id}}
+\DeclareMathOperator{\End}{\rm{End}}
+\DeclareMathOperator{\Hom}{\rm{Hom}}
+\DeclareMathOperator{\Res}{\rm{Res}}
+\DeclareMathOperator{\Spec}{\rm{Spec}}
+\DeclareMathOperator{\Proj}{\rm{Proj}}
+\DeclareMathOperator{\Inj}{\rm{Inj}}
+\DeclareMathOperator{\Supp}{\rm{Supp}}
+\DeclareMathOperator{\Ker}{\rm{Ker}}
+\DeclareMathOperator{\Nil}{\rm{Nil}}
+\DeclareMathOperator{\sh}{\rm{sh}}
+\DeclareMathOperator{\Coker}{\rm{Coker}}
+\DeclareMathOperator{\Rank}{\rm{Rank}}
+\DeclareMathOperator{\Frac}{\rm{Frac}}
+\DeclareMathOperator{\Rad}{\rm{Rad}}
+\DeclareMathOperator{\Ann}{\rm{Ann}}
+\DeclareMathOperator{\Arr}{\rm{Arr}}
+\DeclareMathOperator{\Disc}{\rm{Disc}}
+\DeclareMathOperator{\Lcm}{\rm{lcm}}
+\DeclareMathOperator{\Gcd}{\rm{gcd}}
+\DeclareMathOperator{\Conv}{Conv}
+\DeclareMathOperator{\Cone}{Cone}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Ord}{Ord}
+\DeclareMathOperator{\Ass}{Ass}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Char}{Char}
+\DeclareMathOperator{\Span}{Span}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Card}{Card}
+\DeclareMathOperator{\OPT}{OPT}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Th}{Th}
+\DeclareMathOperator{\Jac}{\rm{Jac}}
+\DeclareMathOperator{\Iso}{\rm{Iso}}
+\DeclareMathOperator{\Rel}{\mathrm{rel}}
+\DeclareMathOperator{\Specmax}{\rm{Spec_{max}}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\DeclareMathOperator{\Adj}{Adj}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+% above : global newcommands and global operators
+% 
+% below : local newcommands amd local operators
+
+\newcommand{\Cofib}{\mathrm{Cofib}}
+\newcommand{\Fib}{\mathrm{Fib}}
+
+\newcommand{\phead}{\hspace*{0.46cm}}
+\DeclareMathOperator{\Homtop}{\rm{Hom}_{\mbf{Top}}}
+
+\begin{document}
+    \title{Homotopy Theory}
+    \author{{\color{pink}{Cloudi}}{\color{Aquamarine}{fold}}}
+    \maketitle
+    \newpage
+
+    \section{Notations}
+
+    \begin{align*}
+        & \text{Category of sets } &: \ & \mbf{Set} \\
+        & \text{Category of topological spaces }&: \ & \mbf{Top} \\
+        & \text{Category of (one-point-)based topological spaces }&: \  & \mbf{Top}_* \\
+        & \text{Category of pairs $(X,A)$ of space $X$ and subspace $A$ } &: \ & \mbf{Top}(2) \\
+        & \text{Topological space $X$ with topology $\mcT$ } &: \ & X_{\mcT}\\
+        & \text{Euclidean space of dimension $n$ } &: \ & \bbRn\\
+        & \text{Unit cube of dimension $n$ } &: \ & I^n\\
+        & \text{Boundary of $I^n$ }          &: \ & \partial I^n\\
+        & \text{Unit interval $I$}           &: \ & I = I^1\\
+        & \text{Unit cell of dimension $n$ } &: \ & \unitcell{n} \\
+        & \text{Unit disk of dimension $n$ } &: \ & \bbD^n\\
+        & \text{Unit sphere of dimension $n-1$ } &: \ & \bbS^{n-1}\\
+        & \text{Inclusion or Embedding } &: \ & \hookrightarrow \\
+        & \text{Monomorphsim }      &: \ & \rightarrowtail \\
+        & \text{Epimorphsim }       &: \ & \twoheadrightarrow \\
+        & \text{Hom functor of category $\mcC $} &: \ & \Hom_{\mcC}(-,-)\\
+        & \text{Limit (inverse limit) (projective limit) } &: \ & \lim_{\leftarrow} \\
+        & \text{Colimit (direct limit) (inductive limit) } &: \ & \lim_{\rightarrow} \\
+    \end{align*}
+
+    \newpage
+
+    \section{Preliminary Definitions}
+
+    \begin{defn}
+        A object $R$ is called a $\mbf{retract}$ of $B$ if there are
+        morphisms $s : A \to B, r : B \to A$ such that $r \circ s = \id_A$.
+        In this case,
+        $r$ is called a $\mbf{retraction}$ of $s$ and
+        $s$ is called a $section$ of $r$.
+        $$ \id_A : A \xrightarrow[section]{s} B \xrightarrow[retraction]{r} A$$
+    \end{defn}
+
+    \begin{prop}
+        For any category $\mcC$, $\Iso(\mcC)$ is closed under forming retracts in $\Arr(\mcC)$.
+    \end{prop}
+    \begin{prf}
+        \par For $f \in \Iso(\mcC)$, $g$ is a retract of $f$ in $\Arr(\mcC)$, $\inv{g} = b \circ \inv{f} \circ a$
+        \[\begin{tikzcd}
+            \bullet & \bullet & \bullet \\
+            \bullet & \bullet & \bullet
+            \arrow["a"', from=2-1, to=2-2]
+            \arrow[from=1-1, to=1-2]
+            \arrow["f"', curve={height=6pt}, from=1-2, to=2-2]
+            \arrow["g"', from=1-1, to=2-1]
+            \arrow["{\inv{f}}"', curve={height=6pt}, from=2-2, to=1-2]
+            \arrow["b", from=1-2, to=1-3]
+            \arrow[from=2-2, to=2-3]
+            \arrow["g", from=1-3, to=2-3]
+        \end{tikzcd}\]
+        \qed
+    \end{prf}
+
+    \newpage
+
+    \section{Abstract Homotopy Theory}
+
+    \setsubsectcounter{-1}
+
+    \subsection{Introduction}
+
+    In generality, homotopy theory is the study of mathematical contexts in
+    which morphisms are equipped with a concept of homotopy between them,
+    hence with a concept of “equivalent deformations” of morphisms,
+    and then iteratively with homotopies of homotopies between those, and so forth.
+
+    \par A fundamental insight due to (Quillen 67) is that in fact
+    all constructions in homotopy theory are elegantly expressible
+    via just the abstract interplay of these classes of morphisms.
+    This was distilled in (Quillen 67) into
+    a small set of axioms called a $\mbf{model\ category}$ structure
+    (because it serves to make all objects be models for homotopy types.)
+
+    \par This abstract homotopy theory is the royal road for
+    handling any flavor of homotopy theory,
+    in particular the stable homotopy theory.
+    Here we discuss the basic constructions and facts in abstract homotopy theory,
+    then below we conclude this Introduction to Homotopy Theory by
+    showing that topological spaces equipped with the above system of
+    classes continuous functions is indeed an example of
+    abstract homotopy theory in this sense.
+
+
+    \subsection{Related Definitions}
+
+    \begin{defn}
+        A $\mbf{category\ with\ weak\ equivalences}$ is
+        \begin{enumerate}
+            \item A category $\mcC$;
+            \item A sub-class $W \subseteq \Mor(\mcC)$;
+        \end{enumerate}
+        \ \\
+        such that
+        \begin{enumerate}
+            \item $W$ contains all isomorphisms in $\mcC$
+            \item $W$ is closed under $\mbf{two\text{-}out\text{-} of\text{-} three}$ :
+            \par In every commutative diagram in $\mcC$ of the form
+            \begin{tikzcd}
+                & Y \\
+                X && Z
+                \arrow[from=2-1, to=2-3]
+                \arrow[from=2-1, to=1-2]
+                \arrow[from=1-2, to=2-3]
+            \end{tikzcd}
+
+            if two of the three morphisms are in $W$, then so is the third.
+
+        \end{enumerate}
+
+    \end{defn}
+
+    \begin{note}
+        The further axioms of a $\mbf{model\ category}$ serve the sole purpose of
+        making the universal homotopy theory induced by
+        a category with weak equivalences be tractable.
+
+    \end{note}
+
+    \begin{defn}
+        A $\mbf{model\ category}$ is
+        \begin{enumerate}
+            \item A category $\mcC$ with limits and colimits;
+            \item Three sub-classes $W$, $\Fib$, $\Cofib$ $ \subseteq \Mor(\mcC)$ of morphisms in $\mcC$;
+        \end{enumerate}
+        \ \\
+        such that
+        \begin{enumerate}
+            \item $(\mcC, W)$ is a $\mbf{category\ with\ weak\ equivalences}$;
+            \item Pairs $(W \cap \Cofib, \Fib)$ and $(\Cofib, W \cap \Fib)$ are both
+            $\mbf{weak\ factorization\ systems}$.
+        \end{enumerate}
+
+    \end{defn}
+
+    \begin{note}
+        We say:
+        \begin{itemize}
+            \item elements in $W$ are $\mbf{weak\ equivalences}$;
+            \item elements in $\Fib$ are $\mbf{fibrations}$;
+            \item elements in $\Cofib$ are $\mbf{cofibrations}$;
+            \item elements in $W \cap \Fib$ are $\mbf{acyclic(trivial)\ fibrations}$;
+            \item elements in $W \cap \Cofib$ are $\mbf{acyclic(trivial)\ cofibrations}$;
+        \end{itemize}
+
+    \end{note}
+
+    \begin{defn}
+        $\mbf{extension, lift\ and\ lifting}$ : 
+        \par We assert that diagrams, morphisms and objects below are in a category $\mcC$.
+        \par Given diagram of the form
+        \begin{tikzcd}
+            X & Y \\
+            Z
+            \arrow["p"', from=1-1, to=2-1]
+            \arrow["f", from=1-1, to=1-2]
+        \end{tikzcd}
+        , the $\mbf{extension}$ of $f$ along $p$ is a morphism $\ol{f} : Z \to Y$
+        such that the diagram
+        \begin{tikzcd}
+            X & Y \\
+            Z
+            \arrow["p"', from=1-1, to=2-1]
+            \arrow["f", from=1-1, to=1-2]
+            \arrow["{\overline{f}}"', from=2-1, to=1-2]
+        \end{tikzcd}
+        commutes.
+
+        \par Dually, given a diagram of the form
+        \begin{tikzcd}
+            & Z \\
+            X & Y
+            \arrow["f", from=2-1, to=2-2]
+            \arrow["p", from=1-2, to=2-2]
+        \end{tikzcd}
+        , the $\mbf{lift}$ of $f$ through $p$ is a morphism $\ol{f} : X \to Z$ such that
+        the diagram
+        \begin{tikzcd}
+            & Z \\
+            X & Y
+            \arrow["f", from=2-1, to=2-2]
+            \arrow["p", from=1-2, to=2-2]
+            \arrow["{\overline{f}}", from=2-1, to=1-2]
+        \end{tikzcd}
+        commutes.
+
+        \par Combining the two cases, given a commutative square $\msC$ :
+        \begin{tikzcd}
+            X & Z \\
+            Y & W
+            \arrow["{f_b}", from=2-1, to=2-2]
+            \arrow["{p_r}", from=1-2, to=2-2]
+            \arrow["{p_l}"', from=1-1, to=2-1]
+            \arrow["{f_t}", from=1-1, to=1-2]
+        \end{tikzcd}
+        the $\mbf{lifting}$ in $\msC$ is a morphism $\ol{f} : Y \to Z$
+        such that the diagram
+        \begin{tikzcd}
+            X & Z \\
+            Y & W
+            \arrow["{f_b}", from=2-1, to=2-2]
+            \arrow["{p_r}", from=1-2, to=2-2]
+            \arrow["{\overline{f}}", from=2-1, to=1-2]
+            \arrow["{p_l}"', from=1-1, to=2-1]
+            \arrow["{f_t}", from=1-1, to=1-2]
+        \end{tikzcd}
+        commutes.
+
+    \end{defn}
+
+    \begin{defn}
+        $\mbf{right\ and\ left\ lifting\ property}$
+        \par Diagrams, morphisms and objects below are in a category $\mcC$.
+        \par With a given sub-class of morphisms $K \subseteq \Mor(\mcC)$ :
+        \\
+        \par A morphism $p_r$ is said to have the
+        $\mbf{right\ lifting\ property}$ against $K$ or to be
+        a $K\mbf{\text{-}injective\ morphism}$
+        if in all commutative diagrams
+        \begin{tikzcd}
+            X & Z \\
+            Y & W
+            \arrow["{f_b}", from=2-1, to=2-2]
+            \arrow["{p_r}", from=1-2, to=2-2]
+            \arrow["{\overline{f}}", from=2-1, to=1-2]
+            \arrow["{p_l}"', from=1-1, to=2-1]
+            \arrow["{f_t}", from=1-1, to=1-2]
+        \end{tikzcd}
+        with $p_r$ on the right and any $p_l \in K$ on the left,
+        the $\mbf{lifting}$ in the diagram exists.
+        \\
+        \par Dually, A morphism $p_l$ is said to have the
+        $\mbf{left\ lifting\ property}$ against $K$ or to be
+        a $K\mbf{\text{-}projective\ morphism}$
+        if in all commutative diagrams
+        \begin{tikzcd}
+            X & Z \\
+            Y & W
+            \arrow["{f_b}", from=2-1, to=2-2]
+            \arrow["{p_r}", from=1-2, to=2-2]
+            \arrow["{\overline{f}}", from=2-1, to=1-2]
+            \arrow["{p_l}"', from=1-1, to=2-1]
+            \arrow["{f_t}", from=1-1, to=1-2]
+        \end{tikzcd}
+        with $p_l$ on the left and any $p_r \in K$ on the right,
+        the $\mbf{lifting}$ in the diagram exists.
+    \end{defn}
+
+    \begin{defn}
+        A $\mbf{weak\ factorization\ system}$ (WFS) on a category $\mcC$ is
+        a pair $(\Proj, \Inj)$ of two classes of morphisms of $\mcC$ such that
+
+        \begin{enumerate}
+            \item Every morphism $f : X \to Y$ in $\mcC$ can be factored as
+            \begin{tikzcd}
+                X & Z & Y
+                \arrow["{p \in \Proj}", from=1-1, to=1-2]
+                \arrow["{i \in \Inj}", from=1-2, to=1-3]
+            \end{tikzcd}
+            \item The classes are closed under having the $\mbf{lifting\ property}$ against each other.
+            That is:
+            \begin{enumerate}
+                \item $\Proj$ is $precisely$ the class of morphisms having the $\mbf{left\ lifting\ property}$ against $\Inj$.
+                \item $\Inj$ is $precisely$ the class of morphisms having the $\mbf{right\ lifting\ property}$ against $\Proj$.
+            \end{enumerate}
+        \end{enumerate}
+
+    \end{defn}
+
+    \begin{rem}
+        The factorization just ensured $existanse$.
+    \end{rem}
+
+    \begin{defn}
+        For $\mcC$ a category, a $\mbf{functorial\ factorization}$ of the morphisms in $\mcC$ is a functor
+        $ fact : \mcC^{\Delta[1]} \to \mcC^{\Delta[2]} $, which is the right inverse of
+        the composition functor $d_1 : \mcC^{\Delta[2]} \to \mcC^{\Delta[1]} $. Equalently,
+        $ d_1 \circ fact = \id_{\mcC^{\Delta[1]}} $
+    \end{defn}
+    
+    \begin{rem}
+        The notation above is defined at $\mbf{simplex\ category}$ and at $\mbf{nerve}$ of a category.
+        The $\mbf{arrow\ category}$ of a category $\mcC$ is
+        $\Arr(\mcC) := \mcC^{\Delta[1]} := \Fct(\Delta[1], \mcC)$ whose objects are morphisms in $\mcC$.
+        $\mcC^{\Delta[2]} := \Fct(\Delta[2], \mcC)$, its objects are pairs of two composable morphisms in $\mcC$.
+    \end{rem}
+
+    \begin{defn} 
+        A $weak\ factorization\ system$ is a $\mbf{functorial\ weak\ factorization\ system}$
+        if the factorization of morphisms can be $chosen$ to be a $functorial\ factorization\ fact : \mcC^{\Delta[1]} \to \mcC^{\Delta[2]}$,
+        such that $(d_2 \circ fact) (\Obj(\mcC^{\Delta[1]})) \subseteq \Proj$ and $(d_0 \circ fact) (\Obj(\mcC^{\Delta[1]})) \subseteq \Inj$.
+        Where
+        \begin{align*}
+            d_2, d_0 &: &\mcC^{\Delta[2]} &\ \longrightarrow \ \mcC^{\Delta[1]}\\
+            d_2 &: &\ast \overset{f}{\to} \ast \overset{s}{\to} \ast
+                &\ \longmapsto \ \ast \overset{f}{\to} \ast\\
+            d_0 &: &\ast \overset{f}{\to} \ast \overset{s}{\to} \ast
+                &\ \longmapsto \ \ast \overset{s}{\to} \ast
+        \end{align*}
+
+    \end{defn}
+
+    \begin{note}
+        Not all $weak\ factorization\ system$ is $functorial$,
+        although most (including those produced by the $\mbf{small\ object\ argument}$) are.
+    \end{note}
+
+    \begin{prop}
+        Let $\mcC$ be a category, $K \subseteq \Mor(\mcC)$ a class of morphisms in $\mcC$.
+        Write $K \Proj$, $K \Inj$ respectively for
+        the sub-classes of $K$-projective morphisms
+        and of $K$-injective morphisms.
+        We have properties of $K \Proj$ and $K \Inj$ below:
+        \begin{enumerate}
+            \item Both contain $\Iso(\mcC)$.
+            \item Both are closed under composition in $\mcC$.\\
+                And $K \Proj$ is closed under $\mbf{transfinite\ composition}$.
+            \item Both are closed under forming retracts in the arrow category $\Arr(\mcC)$.
+            \item $K \Proj$ is closed under pushouts in $\mcC$ ("cobase change").\\
+                $K \Inj$ is closed under pullbacks in $\mcC$ ("base change").
+            \item $K \Proj$ is closed under coproducts in $\Arr(\mcC)$.\\
+                $K \Inj$ is closed under products in $\Arr(\mcC)$.
+        \end{enumerate}
+    \end{prop}
+
+    \begin{prf}
+        \ 
+        \par $\mbf{1.\ Containing\ isomorphisms}$\\
+
+            Trivial for $K \Inj$:
+            \begin{tikzcd}[row sep = 1.5cm, column sep = 1.5cm]
+                \bullet & \bullet \\
+                \bullet & \bullet
+                \arrow["f", from=1-1, to=1-2]
+                \arrow["{p \in K}", from=1-2, to=2-2]
+                \arrow["g"', from=2-1, to=2-2]
+                \arrow["{i \in \Iso}"', from=1-1, to=2-1]
+                \arrow["{f \circ \inv{i}}"{marking}, dotted, from=2-1, to=1-2]
+            \end{tikzcd}
+            And dual is also trivial.  \\
+
+        \par $\mbf{2.\ Clousure\ under\ composition}$\\
+
+            \par For $K \Inj$:
+
+            \[\begin{tikzcd}[row sep = 0.75cm, column sep = 0.95cm]
+                \bullet && X \\
+                && Z \\
+                \bullet && Y
+                \arrow["{k \in K}"', from=1-1, to=3-1]
+                \arrow["g"', from=3-1, to=3-3]
+                \arrow["f", from=1-1, to=1-3]
+                \arrow["{p_1 \in K \Inj}", from=1-3, to=2-3]
+                \arrow["{p_2\in K \Inj}", from=2-3, to=3-3]
+            \end{tikzcd}\]
+
+            \par Compose $f, p_1$:
+
+            \[\begin{tikzcd}
+                \bullet & Z \\
+                \bullet & Y
+                \arrow["{p_1 \circ f}", from=1-1, to=1-2]
+                \arrow["{p_2 \in K \Inj}", from=1-2, to=2-2]
+                \arrow["g"', from=2-1, to=2-2]
+                \arrow["{k \in K}"', from=1-1, to=2-1]
+                \arrow["{\E \ l_1}"{marking}, dotted, from=2-1, to=1-2]
+            \end{tikzcd}\]
+
+            \par Then we have:
+
+            \[\begin{tikzcd}
+                \bullet & X \\
+                \bullet & Z
+                \arrow["{ f}", from=1-1, to=1-2]
+                \arrow["{p_1 \in K \Inj}", from=1-2, to=2-2]
+                \arrow["{l_1}"', from=2-1, to=2-2]
+                \arrow["{k \in K}"', from=1-1, to=2-1]
+                \arrow["\E \ l_2"{marking}, dotted, from=2-1, to=1-2]
+            \end{tikzcd}\]
+
+            \par The $l_2$ is the expected lifting of the diagram:
+
+            \[\begin{tikzcd}[row sep = 0.75cm, column sep = 0.95cm]
+                \bullet && X \\
+                && Z \\
+                \bullet && Y
+                \arrow["{k \in K}"', from=1-1, to=3-1]
+                \arrow["g"', from=3-1, to=3-3]
+                \arrow["f", from=1-1, to=1-3]
+                \arrow["{p_1 \in K \Inj}", from=1-3, to=2-3]
+                \arrow["{p_2\in K \Inj}", from=2-3, to=3-3]
+                \arrow["{\E\ l_1}"{marking}, dotted, from=3-1, to=2-3]
+                \arrow["{\E\ l_2}"{marking}, dotted, from=3-1, to=1-3]
+            \end{tikzcd}\]
+
+            \par For finite composition of morphisms in $K \Proj$, we have the dual forms of above.
+            The clousure under $transfinite\ composition$ follows since it is given by
+            $colimits$ of $sequential$ composition.
+            And $successive$ liftings as below constitutes a cocone.
+            The extension of those liftings to the colimit is just the expected lifting.
+
+            \[\begin{tikzcd}
+                \bullet && \bullet \\
+                \bullet \\
+                \bullet \\
+                \bullet \\
+                \bullet && \bullet
+                \arrow[from=5-1, to=5-3]
+                \arrow[from=1-3, to=5-3]
+                \arrow[from=1-1, to=2-1]
+                \arrow[from=2-1, to=3-1]
+                \arrow["\cdots"{marking}, draw=none, from=4-1, to=5-1]
+                \arrow[from=1-1, to=1-3]
+                \arrow[from=3-1, to=5-3]
+                \arrow[from=2-1, to=5-3]
+                \arrow[dotted, from=2-1, to=1-3]
+                \arrow[dotted, from=3-1, to=1-3, crossing over]
+                \arrow[from=3-1, to=4-1]
+                \arrow[dotted, from=4-1, to=1-3, crossing over]
+                \arrow[from=4-1, to=5-3]
+                \arrow["{\underset{\to}{\lim}}"{marking}, dotted, from=5-1, to=1-3, crossing over]
+            \end{tikzcd}\]
+        
+        \par $\mbf{3.\ Closure\ under\ retracts}$\\
+
+            \par Let $j$ be the retract in $\Arr(\mcC)$  of $i \in K \Proj$
+
+            \[\begin{tikzcd}
+                A & X & A \\
+                B & Y & B
+                \arrow["{i\in K \Proj}", from=1-2, to=2-2]
+                \arrow[from=1-2, to=1-3]
+                \arrow[from=2-2, to=2-3]
+                \arrow["\id_A : \hspace*{2.77cm}"{marking}, from=1-1, to=1-2]
+                \arrow["\id_B : \hspace*{2.77cm}"{marking}, from=2-1, to=2-2]
+                \arrow["j", from=1-1, to=2-1]
+                \arrow["j", from=1-3, to=2-3]
+            \end{tikzcd}\]
+
+            Then for a commutative square (named $\msC$):
+
+            \[\begin{tikzcd}
+                A & \bullet \\
+                B & \bullet
+                \arrow["{k\in K}", from=1-2, to=2-2]
+                \arrow[from=1-1, to=1-2]
+                \arrow[from=2-1, to=2-2]
+                \arrow["j", from=1-1, to=2-1]
+            \end{tikzcd}\]
+
+            It is equalent to its $pasting\ composite$ with the retract diagram above:
+
+            \[\begin{tikzcd}
+                A & X & A & \bullet \\
+                B & Y & B & \bullet
+                \arrow["{k\in K}", from=1-4, to=2-4]
+                \arrow[from=1-3, to=1-4]
+                \arrow[from=2-3, to=2-4]
+                \arrow["j", from=1-3, to=2-3]
+                \arrow[from=1-2, to=1-3]
+                \arrow[from=2-2, to=2-3]
+                \arrow["{i \in K \Proj}", from=1-2, to=2-2]
+                \arrow[from=1-1, to=1-2]
+                \arrow["j", from=1-1, to=2-1]
+                \arrow["s_2",from=2-1, to=2-2]
+            \end{tikzcd}\]
+
+            The expected lifting of $\msC$ is just $l_1 \circ s_2$:
+
+            \[\begin{tikzcd}
+                A & X & A & \bullet \\
+                B & Y & B & \bullet
+                \arrow["{k\in K}", from=1-4, to=2-4]
+                \arrow[from=1-3, to=1-4]
+                \arrow[from=2-3, to=2-4]
+                \arrow[from=1-2, to=1-3]
+                \arrow[from=2-2, to=2-3]
+                \arrow["i", from=1-2, to=2-2]
+                \arrow[from=1-1, to=1-2]
+                \arrow["j", from=1-1, to=2-1]
+                \arrow["{s_2}", from=2-1, to=2-2]
+                \arrow["{\E\ l_1}"{marking}, dotted, from=2-2, to=1-4]
+            \end{tikzcd}\]
+
+        \par $\mbf{4.\ Closure\ under\ pullbacks\ and\ pushouts}$\\
+
+            \par For all $p \in K \Inj$, and $f^* p$ the $base\ change$ of $p$ along some $f$
+            we have the pullback diagram $(1)$:
+
+            \[\begin{tikzcd}
+                P & X \\
+                Y & Z
+                \arrow["f"', from=2-1, to=2-2]
+                \arrow["p", from=1-2, to=2-2]
+                \arrow["{f^*p}"', from=1-1, to=2-1]
+                \arrow[from=1-1, to=1-2]
+                \arrow["{\big \lrcorner}"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+            \end{tikzcd}\]
+
+            \par Our goal is to show that $f^* p$ has the $right\ lifting\ property$ against $K$.
+            So, we consider $(2)$:
+
+            \[\begin{tikzcd}
+                A & P & X \\
+                B & Y & Z
+                \arrow["f"', from=2-2, to=2-3]
+                \arrow["{p \in K \Inj}", from=1-3, to=2-3]
+                \arrow["{f^*p}"', from=1-2, to=2-2]
+                \arrow["p^*f", from=1-2, to=1-3]
+                \arrow["{\big \lrcorner}"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
+                \arrow["g"',from=2-1, to=2-2]
+                \arrow["w", from=1-1, to=1-2]
+                \arrow["{{i \in K}}"', from=1-1, to=2-1]
+            \end{tikzcd}\]
+
+            \par Because of $p$ has the $right\ lifting\ property$ against $K$ $(3)$:
+
+            \[\begin{tikzcd}
+                A & P & X \\
+                B & Y & Z
+                \arrow["f"', from=2-2, to=2-3]
+                \arrow["{p \in K Inj}", from=1-3, to=2-3]
+                \arrow["p^*f", from=1-2, to=1-3]
+                \arrow["g"', from=2-1, to=2-2]
+                \arrow["w", from=1-1, to=1-2]
+                \arrow["{{i \in K}}"', from=1-1, to=2-1]
+                \arrow["{\E \ l_{fg}}"{marking}, dotted, from=2-1, to=1-3]
+            \end{tikzcd}\]
+
+            \par By the $universal\ property$ of pullback $(4)$:
+
+            \[\begin{tikzcd}
+                & P & X \\
+                B & Y & Z
+                \arrow["f"', from=2-2, to=2-3]
+                \arrow["p", from=1-3, to=2-3]
+                \arrow[from=1-2, to=2-2]
+                \arrow["p^*f", from=1-2, to=1-3]
+                \arrow["g"', from=2-1, to=2-2]
+                \arrow["{\ \ \! l_{fg}}"', from=2-1, to=1-3, crossing over]
+                \arrow["{\E \ l_g}"{marking}, dotted, from=2-1, to=1-2]
+                \arrow["{\big \lrcorner}"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
+            \end{tikzcd}\]
+
+            \par It remains to show the commutativity of that diagram:
+
+            \[\begin{tikzcd}
+                A & P \\
+                B
+                \arrow["{l_{g}}"', from=2-1, to=1-2]
+                \arrow["{i}"', from=1-1, to=2-1]
+                \arrow["w", from=1-1, to=1-2]
+            \end{tikzcd}\]
+
+            \par By the universal property of limits :
+            $\Hom(-, \lim\limits_{\leftarrow} D) \overset{c}{\cong} \Cone(-, D)$.
+            To prove $l_g \circ i = w$, is equalent to prove $c(l_g \circ i) = c(w)$.
+
+            \[\begin{tikzcd}
+                A & P & X \\
+                B & Y & Z
+                \arrow["{l_{g}}", from=2-1, to=1-2]
+                \arrow["{i }"', from=1-1, to=2-1]
+                \arrow["w", from=1-1, to=1-2]
+                \arrow[from=1-2, to=2-2]
+                \arrow["{p^*f}", from=1-2, to=1-3]
+                \arrow["p", from=1-3, to=2-3]
+                \arrow["f"', from=2-2, to=2-3]
+                \arrow["g"', from=2-1, to=2-2]
+                \arrow["{\ \ \! l_{fg}}"', from=2-1, to=1-3, crossing over]
+                \arrow["{\big \lrcorner}"{anchor=center, pos=0.125}, draw=none, from=1-2, to=2-3]
+            \end{tikzcd}\]
+
+            \par Following the diagram above (we $have\ not$ said that the diagrams above is commutative before):
+            \begin{align*}
+                c(w) &= (p^*f \circ w, f^*p \circ w) & by\ def\\
+                c(l_g \circ i) &= (p^*f \circ l_g \circ i,\ f^*p \circ l_g \circ i) & by\ def\\
+                &= (l_{fg} \circ i,\ g \circ i)  & by\ diagram\ (4)\\
+                &= (p^*f \circ w,\ f^*p \circ w) = c(w) & by\ diagram\ (3)\ and\ (2)\\
+            \end{align*}
+
+            \par The other case is formally dual.\\
+
+        \par $\mbf{5.\ Closure\ under\ products\ and\ coproducts}$\\
+
+            \par It is easy to prove that the product $\prod\limits_{s \in S} p_s$ of
+            a family of arrows(objects) $\{p_s : A_s \to B_s\}_{s \in S}$ in the arrow category
+            $\Arr(\mcC)$ is just the unique morphism determined by
+            the morphisms $\{ p_s \circ pr_{A_s} \}_{s \in S}$ out of $\prod\limits_{s \in S} A_s$
+            and the  $universal\ property$ of products $\prod\limits_{s \in S} B_s$.
+            The $s$-th projection of $\prod\limits_{s \in S} p_s$ in $\Arr(\mcC)$ is just $(pr_{A_s}, pr_{B_s})$:
+
+            \[\begin{tikzcd}
+                {\prod\limits_{s \in S} A_s} & {A_s} \\
+                {\prod\limits_{s \in S} B_s} & {B_s}
+                \arrow["{\prod\limits_{s\in S}p_s}"', from=1-1, to=2-1]
+                \arrow["{pr_{A_s}}", from=1-1, to=1-2]
+                \arrow["{pr_{B_s}}"', from=2-1, to=2-2]
+                \arrow["{p_s}", from=1-2, to=2-2]
+            \end{tikzcd}\]
+
+            With all $p_s \in K \Inj$, Let the diagram below commute:
+
+            \[\begin{tikzcd}[column sep = 1.15cm]
+                X & {\prod\limits_{s \in S} A_s} \\
+                Y & {\prod\limits_{s \in S} B_s}
+                \arrow["{\prod\limits_{s\in S}p_s}", from=1-2, to=2-2]
+                \arrow["x", from=1-1, to=1-2]
+                \arrow["y"', from=2-1, to=2-2]
+                \arrow["{f \in K}"', from=1-1, to=2-1]
+            \end{tikzcd}\]
+
+            \par Our goal is to get a $lifting$ of the diagram above.
+            By the universal property of the product. We have a family of commutative diagrams:
+
+            \[ \left\{
+            \begin{tikzcd}
+                X & {A_s} \\
+                Y & {B_s}
+                \arrow["{f \in K}"', from=1-1, to=2-1]
+                \arrow["{p_s}", from=1-2, to=2-2]
+                \arrow["{pr_{B_s} \circ y}"', from=2-1, to=2-2]
+                \arrow["{pr_{A_s} \circ x}", from=1-1, to=1-2]
+            \end{tikzcd}
+            \right\}_{s \in S} \]
+
+            By all $p_s \in K \Inj$, we have a family of liftings:
+
+            \[ \left\{
+            \begin{tikzcd}
+                X & {A_s} \\
+                Y & {B_s}
+                \arrow["{f \in K}"', from=1-1, to=2-1]
+                \arrow["{p_s}", from=1-2, to=2-2]
+                \arrow["{pr_{B_s} \circ y}"', from=2-1, to=2-2]
+                \arrow["{pr_{A_s} \circ x}", from=1-1, to=1-2]
+                \arrow["{\E\ l_s}"{marking}, dotted, from=2-1, to=1-2]
+            \end{tikzcd}
+            \right\}_{s \in S} \]
+
+            \par Therefore, there is a unique morphism $\prod\limits_{s \in S} l_s : Y \to \prod\limits_{s \in S} A_s$
+            determined by the universal property of product $\prod\limits_{s \in S} A_s$
+
+            \[\begin{tikzcd}[row sep = 1.6cm, column sep = 1.6cm]
+                X & {\prod\limits_{s \in S} A_s} & {A_s} \\
+                Y & {\prod\limits_{s \in S} B_s} & {B_s}
+                \arrow["{pr_{A_s}}", from=1-2, to=1-3]
+                \arrow["{pr_{B_s}}"', from=2-2, to=2-3]
+                \arrow["{p_s}", from=1-3, to=2-3]
+                \arrow["x", from=1-1, to=1-2]
+                \arrow["y"', from=2-1, to=2-2]
+                \arrow["f"', from=1-1, to=2-1]
+                \arrow["{l_s}"{pos = 0.4}, from=2-1, to=1-3]
+                \arrow["{\prod\limits_{s\in S} p_s}", from=1-2, to=2-2, crossing over]
+                \arrow["{\prod\limits_{s\in S} l_s}"{pos = 0.55}, from=2-1, to=1-2]
+            \end{tikzcd}\]
+
+            \par By the universal property of product, The diagram above (named $\msC$) commutes.
+            To see this, we just need to chase two sub-diagrams:
+            $\msC$ without vertice $X$ and $\msC$ without vertices $B_s$ and ${\prod\limits_{s \in S} B_s}$.
+            \par Because the diagram drawed above commutes, ${\prod\limits_{s\in S} l_s}$ is the expected lifting.
+
+        \qed
+        
+        \end{prf}
+
+        \begin{prop}
+            Given a model category $(\mcC, W, \Fib, \Cofib)$, then its
+            class of weak equivalences $W$ is closed under forming retracts in $\Arr(\mcC)$.
+        \end{prop}
+        \begin{prf}
+            \par For every $w \in W$ and $f$ is a retract of $w$ in $\Arr(\mcC)$:
+            First we consider the case $f \in \Fib$:
+
+            \[\begin{tikzcd}
+                A & X & A \\
+                B & Y & B
+                \arrow["{w}", from=1-2, to=2-2]
+                \arrow["r_1", from=1-2, to=1-3]
+                \arrow["r_2", from=2-2, to=2-3]
+                \arrow["\id_A : \hspace*{2.77cm}"{marking}, "s_1", from=1-1, to=1-2]
+                \arrow["\id_B : \hspace*{2.77cm}"{marking}, "s_2",from=2-1, to=2-2]
+                \arrow["f", from=1-1, to=2-1]
+                \arrow["f", from=1-3, to=2-3]
+            \end{tikzcd}\]
+
+            \par Factor $w$ through $(\Proj, \Inj) := (\Cofib, W \cap \Fib)$:
+
+            \[\begin{tikzcd}
+                A & X & A \\
+                A & Z & A \\
+                B & Y & B
+                \arrow["\id_B : \hspace*{2.77cm}"{marking}, "{s_2}", from=3-1, to=3-2]
+                \arrow["{r_2}", from=3-2, to=3-3]
+                \arrow["f \in \Inj"', from=2-3, to=3-3]
+                \arrow["{w_2 \in \Inj}"', from=2-2, to=3-2]
+                \arrow["{w_1 \in \Proj}"', from=1-2, to=2-2]
+                \arrow["\id_A"', from=1-3, to=2-3]
+                \arrow["\id_A"', from=1-1, to=2-1]
+                \arrow["f \in \Inj"', from=2-1, to=3-1]
+                \arrow["\id_A : \hspace*{2.77cm}"{marking}, "{s_1}", from=1-1, to=1-2]
+                \arrow["{r_1}", from=1-2, to=1-3]
+                \arrow["\id_A : \hspace*{2.77cm}"{marking}, "s", from=2-1, to=2-2]
+                \arrow["r", from=2-2, to=2-3]
+            \end{tikzcd}\]
+            
+
+            \par Where $s := w_1 \circ s_1$ and $r$ is a lifting of
+            \begin{tikzcd}
+                X & A \\
+                Z & B
+                \arrow["{r_2 \circ w_2}"', from=2-1, to=2-2]
+                \arrow["{w_1 \in W \cap \Cofib}"', from=1-1, to=2-1]
+                \arrow["{\id_A \circ r_1}", from=1-1, to=1-2]
+                \arrow["{f \in \Fib}", from=1-2, to=2-2]
+            \end{tikzcd} (by 2-out-of-3, $w_1 \in W$).
+            By $\Inj$ is closed under forming retracts in $\Arr(\mcC)$, $f \in \Inj = W \cap \Fib \subseteq W$.
+            Now we consider the general case:
+
+            \[\begin{tikzcd}
+                A & X & A \\
+                B & Y & B
+                \arrow["{w}", from=1-2, to=2-2]
+                \arrow["r_1", from=1-2, to=1-3]
+                \arrow["r_2", from=2-2, to=2-3]
+                \arrow["\id_A : \hspace*{2.77cm}"{marking}, "s_1", from=1-1, to=1-2]
+                \arrow["\id_B : \hspace*{2.77cm}"{marking}, "s_2",from=2-1, to=2-2]
+                \arrow["f", from=1-1, to=2-1]
+                \arrow["f", from=1-3, to=2-3]
+            \end{tikzcd}\]
+
+            \par Factor $f$ through $(\Proj, \Inj) := (W \cap \Cofib, \Fib)$:
+
+            \[\begin{tikzcd}
+                A & X & A \\
+                C &   & C \\
+                B & Y & B
+                \arrow["\id_B : \hspace*{2.77cm}"{marking}, "{s_2}", from=3-1, to=3-2]
+                \arrow["{r_2}", from=3-2, to=3-3]
+                \arrow["{f_2 \in \Inj}"', from=2-3, to=3-3]
+                \arrow["{f_1 \in \Proj}"', from=1-3, to=2-3]
+                \arrow["{f_1 \in \Proj}"', from=1-1, to=2-1]
+                \arrow["{f_2 \in \Inj}"', from=2-1, to=3-1]
+                \arrow["{w}"', from=1-2, to=3-2]
+                \arrow["\id_A : \hspace*{2.77cm}"{marking}, "{s_1}", from=1-1, to=1-2]
+                \arrow["{r_1}", from=1-2, to=1-3]
+                \arrow["f", curve={height=-12pt}, from=1-1, to=3-1]
+                \arrow["f", curve={height=-12pt}, from=1-3, to=3-3]
+            \end{tikzcd}\]
+
+            \par Take the pushout $P$ of $f_1$ and $s_1$, by the universal property of pushout
+            (apply it on $(s_2 \circ f_2, w)$ and $(\id_C, f_1 \circ r_1)$), we have a commutative diagram:
+
+            \[\begin{tikzcd}
+                A & X & A \\
+                C & P & C \\
+                B & Y & B
+                \arrow["{\big \lrcorner}"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+                \arrow["\id_B : \hspace*{2.77cm}"{marking}, "{s_2}", from=3-1, to=3-2]
+                \arrow["{r_2}", from=3-2, to=3-3]
+                \arrow["{f_2}"', from=2-3, to=3-3]
+                \arrow["w_1"', from=1-2, to=2-2]
+                \arrow["{f_1}"', from=1-3, to=2-3]
+                \arrow["{f_1}"', from=1-1, to=2-1]
+                \arrow["{f_2}"', from=2-1, to=3-1]
+                \arrow["\id_A : \hspace*{2.77cm}"{marking}, "{s_1}", from=1-1, to=1-2]
+                \arrow["{r_1}", from=1-2, to=1-3]
+                \arrow["w"{pos=0.25}, curve={height=-12pt}, from=1-2, to=3-2]
+                \arrow[from=2-1, to=2-2]
+                \arrow["\id_C"'{pos=0.2}, curve={height=12pt}, from=2-1, to=2-3, crossing over]
+                \arrow["{\E!\ \! r_3}", dotted, from=2-2, to=2-3]
+                \arrow["{\E!\ \! w_2}"', dotted, from=2-2, to=3-2]
+            \end{tikzcd}\]
+
+            \par By $\Proj$ is closed under forming pushouts and $2\text{-}out\text{-}of\text{-}3$:
+
+            \[\begin{tikzcd}
+                A & X & A \\
+                C & Z & C \\
+                B & Y & B
+                \arrow["\id_B : \hspace*{2.77cm}"{marking}, "{s_2}", from=3-1, to=3-2]
+                \arrow["{r_2}", from=3-2, to=3-3]
+                \arrow["{f_2 \in \Inj}"', from=2-3, to=3-3]
+                \arrow["w_2 \in W"', from=2-2, to=3-2]
+                \arrow["{w_1 \in Proj}"', from=1-2, to=2-2]
+                \arrow["{f_1 \in Proj}"', from=1-3, to=2-3]
+                \arrow["{f_1 \in Proj}"', from=1-1, to=2-1]
+                \arrow["{f_2 \in \Inj}"', from=2-1, to=3-1]
+                \arrow["\id_A : \hspace*{2.77cm}"{marking}, "{s_1}", from=1-1, to=1-2]
+                \arrow["{r_1}", from=1-2, to=1-3]
+                \arrow["\id_C : \hspace*{2.77cm}"{marking}, "s_3", from=2-1, to=2-2]
+                \arrow["r_3", from=2-2, to=2-3]
+                \arrow["{\big \lrcorner}"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+            \end{tikzcd}\]
+
+        \end{prf}
+
+    \subsection{Homotopy}
+
+    
+    
+\end{document}

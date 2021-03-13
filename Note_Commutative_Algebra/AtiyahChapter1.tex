@@ -33,6 +33,8 @@
 \newtheorem{conj}{Conjecture}[section]
 \newtheorem{exmp}{Example}[section]
 
+\newtheorem*{prf}{Proof}
+
 \theoremstyle{remark}
 \newtheorem*{rem}{Remark}
 \newtheorem*{note}{Note}
@@ -70,6 +72,7 @@
     \setcounter{ex}{#1}
     \setcounter{sol}{#1}
 }
+\newcommand{\setsubsectcounter}[1]{\setcounter{subsection}{#1}}
 
 \newcommand{\bb}[1]{\mathbb{#1}}
 \newcommand{\mc}[1]{\mathcal{#1}}
@@ -245,6 +248,7 @@
 \newcommand{\gen}[1]{\langle #1 \rangle}
 \newcommand{\nilradical}[1]{\sqrt{\gen{0}}_{#1}}
 \newcommand{\inv}[1]{#1^{\text{-}1}}
+\newcommand{\id}{\mathrm{id}}
 \newcommand{\unitcell}[1]{\overset{\!\!\!\! \circ}{\bbD^{#1}}}
 \newcommand{\E}{\exists}
 \newcommand{\A}{\forall}
@@ -289,7 +293,8 @@
 \DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\Th}{Th}
 \DeclareMathOperator{\Jac}{\rm{Jac}}
-\DeclareMathOperator{\Rel}{\rm{rel}}
+\DeclareMathOperator{\Iso}{\rm{Iso}}
+\DeclareMathOperator{\rel}{\mathrm{rel}}
 \DeclareMathOperator{\Specmax}{\rm{Spec_{max}}}
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
