@@ -38,6 +38,7 @@
 \newtheorem{defn}{Definition}[section]
 \newtheorem{conj}{Conjecture}[section]
 \newtheorem{exmp}{Example}[section]
+\newtheorem{intro}[defn]{Introduction}
 
 \newtheorem*{prf}{Proof}
 
@@ -415,7 +416,7 @@
     abstract homotopy theory in this sense.
 
 
-    \subsection{Related Definitions}
+    \subsection{Factorization Systems}
 
     \begin{defn}
         A $\mbf{category\ with\ weak\ equivalences}$ is
@@ -1109,7 +1110,7 @@
             
             \[\begin{tikzcd}
                 A & X & A \\
-                C & Z & C \\
+                C & P & C \\
                 B & Y & B
                 \arrow["\id_B : \hspace*{2.77cm}"{marking}, "{s_2}", from=3-1, to=3-2]
                 \arrow["{r_2}", from=3-2, to=3-3]
@@ -1129,8 +1130,46 @@
         \end{prf}
 
         \begin{lem}
-            $\mbf{(retract\ argument)}$
+            $\mbf{(retract\ argument)}$ For a pair of composable morphisms :
+            $f : X \overset{i}{\longrightarrow} A \overset{p}{\longrightarrow} Y$
+            We have :
+            \begin{enumerate}
+                \item If $f$ has the $\mbf{left\ lifting\ property}$ against $p$, then $f$ is a $\mbf{retract}$ of $i$ in $\Arr(\mcC)$.
+                \item If $f$ has the $\mbf{right\ lifting\ property}$ against $i$, then $f$ is a $\mbf{retract}$ of $p$ in $\Arr(\mcC)$.
+            \end{enumerate}
         \end{lem}
+
+        \begin{prf}
+            Consider the first case, by $f$ has the $\mbf{left\ lifting\ property}$ against $p$, we have:
+            \[\begin{tikzcd}
+                X & A \\
+                Y & Y
+                \arrow["f"', from=1-1, to=2-1]
+                \arrow["i", from=1-1, to=1-2]
+                \arrow["p", from=1-2, to=2-2]
+                \arrow["{\id_Y}"', from=2-1, to=2-2]
+                \arrow["{\E\ g}"{marking, pos=0.45}, dotted, from=2-1, to=1-2]
+            \end{tikzcd}\]
+            Rearranging the diagram above, we get:
+            \[\begin{tikzcd}
+                X & X & X \\
+                Y & A & Y
+                \arrow["f", from=1-1, to=2-1]
+                \arrow["\id_Y : \hspace*{2.85cm}"{marking}, "g"', from=2-1, to=2-2]
+                \arrow["p"', from=2-2, to=2-3]
+                \arrow["\id_X : \hspace*{2.85cm}"{marking}, "{\id_X}", from=1-1, to=1-2]
+                \arrow["i", from=1-2, to=2-2]
+                \arrow["{\id_X}", from=1-2, to=1-3]
+                \arrow["f", from=1-3, to=2-3]
+            \end{tikzcd}\]
+            \par That is just what we need.
+            And the second case follows by formally dual.
+        \end{prf}
+
+        \begin{intro}
+            Motivation of $\mbf{small\ object\ argument}$ :
+            
+        \end{intro}
 
     \subsection{Homotopy}
 
