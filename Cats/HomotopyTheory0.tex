@@ -302,6 +302,11 @@
 \DeclareMathOperator{\Card}{Card}
 \DeclareMathOperator{\OPT}{OPT}
 \DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Cod}{Cod}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\Path}{Path}
+\DeclareMathOperator{\Cyl}{Cyl}
 \DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\Th}{Th}
 \DeclareMathOperator{\Jac}{\rm{Jac}}
@@ -389,8 +394,6 @@
     \newpage
 
     \section{Abstract Homotopy Theory}
-
-    \setsubsectcounter{-1}
 
     \subsection{Introduction}
 
@@ -556,7 +559,6 @@
             Y & W
             \arrow["{f_b}", from=2-1, to=2-2]
             \arrow["{p_r}", from=1-2, to=2-2]
-            \arrow["{\overline{f}}", from=2-1, to=1-2]
             \arrow["{p_l}"', from=1-1, to=2-1]
             \arrow["{f_t}", from=1-1, to=1-2]
         \end{tikzcd}
@@ -572,7 +574,6 @@
             Y & W
             \arrow["{f_b}", from=2-1, to=2-2]
             \arrow["{p_r}", from=1-2, to=2-2]
-            \arrow["{\overline{f}}", from=2-1, to=1-2]
             \arrow["{p_l}"', from=1-1, to=2-1]
             \arrow["{f_t}", from=1-1, to=1-2]
         \end{tikzcd}
@@ -594,15 +595,15 @@
             \item The classes are closed under having the $\mbf{lifting\ property}$ against each other.
             That is:
             \begin{enumerate}
-                \item $\Proj$ is $precisely$ the class of morphisms having the $\mbf{left\ lifting\ property}$ against $\Inj$.
-                \item $\Inj$ is $precisely$ the class of morphisms having the $\mbf{right\ lifting\ property}$ against $\Proj$.
+                \item $\Proj$ is \emph{precisely} the class of morphisms having the \textbf{left lifting property} against $\Inj$.
+                \item $\Inj$ is \emph{precisely} the class of morphisms having the $\mbf{right\ lifting\ property}$ against $\Proj$.
             \end{enumerate}
         \end{enumerate}
 
     \end{defn}
 
     \begin{rem}
-        The factorization just ensured $existanse$.
+        The factorization just ensured \emph{existence}.
     \end{rem}
 
     \begin{defn}
@@ -1130,7 +1131,7 @@
         \end{prf}
 
         \begin{lem}
-            $\mbf{(retract\ argument)}$ For a pair of composable morphisms :
+            $\mbf{(retract\ argument)}$ For a pair of composable morphisms:
             $f : X \overset{i}{\longrightarrow} A \overset{p}{\longrightarrow} Y$
             We have :
             \begin{enumerate}
@@ -1167,11 +1168,138 @@
         \end{prf}
 
         \begin{intro}
-            Motivation of $\mbf{small\ object\ argument}$ :
+            Motivation of $\mbf{small\ object\ argument}$:
+            \par Given a $\mbf{Set}$ of morphisms $C \in \Mor(\mcC)$ in some category $\mcC$,
+            a \emph{natual} question is how to factor a morphism $f : X \to Y$ through a relative $C$-cell complex followed by a $C$-injective morphism.
+            $$ f : X \overset{\in C \text{-cell}}{\longrightarrow} \hat{X} \overset{\in C \Inj}{\longrightarrow} Y $$
+
+            \par A first approximation is attaching all \textbf{possible} $C$-cells to $X$,
+            where possible $C$-cells is just an object in $C/f := (C \cap \Arr(\mcC))/f$:
+            \[\begin{tikzcd}
+                {\dom(c)} & X \\
+                {\cod(c)} & Y
+                \arrow["c"', from=1-1, to=2-1]
+                \arrow[from=1-1, to=1-2]
+                \arrow[from=2-1, to=2-2]
+                \arrow["f", from=1-2, to=2-2]
+            \end{tikzcd}\]
             
+            \par The attaching pushout is:
+
+            \[\begin{tikzcd}[row sep = 1.2cm]
+                {\coprod\limits_{c \in C/f} \dom(c)} & X \\
+                {\coprod\limits_{c\in C/f} \cod(c)} & X_1
+                \arrow["{\coprod\limits_{c\in C/f} c}"', from=1-1, to=2-1]
+                \arrow[from=1-1, to=1-2]
+                \arrow["p_1"', from=2-1, to=2-2]
+                \arrow["f_1", from=1-2, to=2-2]
+                \arrow["{\Big \lrcorner}"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+            \end{tikzcd}\]
+
+            \par By the fact that the coproduct is over all commuting squres to $f$,
+            we have commutative diagram:
+
+            \[\begin{tikzcd}
+                {{\coprod\limits_{c\in C/f} \dom(c)}} & X \\
+                {{\coprod\limits_{c\in C/f} \cod(c)}} & Y
+                \arrow[from=1-1, to=2-1]
+                \arrow[from=2-1, to=2-2]
+                \arrow[from=1-1, to=1-2]
+                \arrow["f", from=1-2, to=2-2]
+            \end{tikzcd}\]
+
+            \par By the universal property of colimit we have that $f$ is factored through a relative $C$-cell complex $f_1$,
+            the commutative diagram (1):
+
+            \[\begin{tikzcd}
+                {{\coprod\limits_{c\in C/f} \dom(c)}} & X \\
+                {{\coprod\limits_{c\in C/f} \dom(c)}} & {X_1} \\
+                {{\coprod\limits_{c\in C/f} \cod(c)}} & Y
+                \arrow["\id"', from=1-1, to=2-1]
+                \arrow[from=2-1, to=3-1]
+                \arrow[from=3-1, to=3-2]
+                \arrow["i_1", from=2-2, to=3-2]
+                \arrow[from=1-1, to=1-2]
+                \arrow["{f_1}", from=1-2, to=2-2]
+                \arrow["{p_1}"', from=3-1, to=2-2]
+                \arrow["{\Big \lrcorner}"{anchor=center, pos=0.125, rotate=180}, shift left=1, draw=none, from=2-2, to=1-1]
+            \end{tikzcd}\]
+
+            \par The map $p_1$ \textbf{almost} exhibits the expecting right lifting of $i_1$ against $C$,
+            the failure of that to hold on is only the fact that the morphism ${{\coprod\limits_{c\in C/f} \dom(c)}} \to {X_1} $ is missing,
+            which means that \textbf{not all} $c \in C/i_1$ could have a lifting.
+            \par If we have $c \in C/i_1$ with $s : \cod(c) \to Y$ and $z : \dom(c) \to X_1$ be the morphism $c \to i_1$,
+            we \textbf{don't always} have a $\hat{z} : \dom(c) \to X$ makes the diagram below commutes
+            (equalently, $z$ factors through the $X \to X_1$).
+            Only for those $c \in C/i_1$ such that $z$ factors through the $X \to X_1$,
+            the lifting could be found.
+
+            \[\begin{tikzcd}
+                & X \\
+                {\dom(c)} & {X_1} \\
+                {\cod(c)} & Y
+                \arrow["c"', from=2-1, to=3-1]
+                \arrow["s"', from=3-1, to=3-2]
+                \arrow["z"', from=2-1, to=2-2]
+                \arrow["{i_1}", from=2-2, to=3-2]
+                \arrow["{\hat{z}}", dotted, from=2-1, to=1-2]
+                \arrow[from=1-2, to=2-2]
+            \end{tikzcd}\]
+
+            \par The $i_1$ is \textbf{almost} a $C$-injective morphism,
+            the idea of the \textbf{small object argument} now is to fix it,
+            make a \textbf{real} $C$-injective morphism. 
+            The way it works is iterating the construction:
+            \par Next factor $X_1 \to Y$ in the same way into $X_1 \to X_2 \to Y$.
+            Since relative cell complex is closed under transfinite composition,
+            for $\alpha$ an ordinal, at stage $X_{\alpha}$, the $X \to X_{\alpha}$
+            is still a relative $C$-cell complex.
+            \par Intuitively,
+            the failure of the $X_{\alpha} \to Y$ to be a $C$-injective morphism becomes smaller and smaller,
+            for the condition of the existence of the factorization
+            $$\dom(c) \to X_{\alpha} \longmapsto \dom(X) \to X_{\beta} \to X_{\alpha} \hspace*{1cm} \text{(where  $\beta < \alpha$)}$$
+            is less and less (intuitively) as the $X_\beta$ grow larger and larger.
+            \par The concept of \textbf{small object} is just what makes this intuition precise and finishes the small object argument.
+            But now we just need the following simple version:
         \end{intro}
+        \begin{defn}
+            For $\mcC$ a category and $C \subseteq \Mor(\mcC)$ a \textbf{subset} of morphisms in $\mcC$,
+            say that $C$ have \textbf{small domains} if there exists an ordinal $\alpha$
+            such that for any $c \in C$ and for any relative $C$-cell complex given by \textbf{transfinite composition of length $\alpha$}
+            $$f : X \to X_1 \to X_2 \to \cdots \to X_{\beta} \to \cdots \to X_\alpha$$
+            any morphism $\dom(c) \to \hat{X}$ factors through a stage $X_{\beta} \to X_{\alpha}$ of some ordinal $\beta < \alpha$:
+            \[\begin{tikzcd}
+                & {X_{\beta}} \\
+                {\dom(c)} & {\hat{X}}
+                \arrow[from=2-1, to=2-2]
+                \arrow[from=1-2, to=2-2]
+                \arrow[from=2-1, to=1-2]
+            \end{tikzcd}\]
+
+        \end{defn}
+
+        \begin{prop}
+            Let $\mcC$ be a locally small category with all small colimits.
+            If a set $ C \subseteq  \Mor(\mcC)$ of morphisms has \textbf{small domains},
+            then every morphism $f : X \rightarrow Y$ in $\mcC$ factors through a relative $C$-cell complex followed by a $C$-injective morphism:
+            $$ f : X \overset{\in C \text{-cell}}{\longrightarrow} \hat{X} \overset{\in C \Inj}{\longrightarrow} Y $$
+        \end{prop}
+
+        \begin{note}
+            The locally smallness above is to restrict the size of $C/f := (C \cap \Arr(\mcC))/f$.
+        \end{note}
+
 
     \subsection{Homotopy}
+
+        We discuss how the concept of homotopy is abstractly realized in model categories
+
+        \begin{defn}
+            Let $\mcC$ be a model category, $X \in \Obj(C)$.
+            \begin{enumerate}
+                \item A \textbf{path space object} $Path(X)$ for XX is a factorization of the diagonal Δ X:X→X×X\Delta_X \;\colon\; X \to X \times X as
+            \end{enumerate}
+        \end{defn}
 
     
     
