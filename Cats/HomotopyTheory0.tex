@@ -323,7 +323,7 @@
 % 
 % below : local newcommands amd local operators
 
-\newcommand{\Cofib}{\mathrm{Cofib}}
+\newcommand{\Cof}{\mathrm{Cof}}
 \newcommand{\Fib}{\mathrm{Fib}}
 
 \newcommand{\phead}{\hspace*{0.46cm}}
@@ -458,13 +458,13 @@
         A $\mbf{model\ category}$ is
         \begin{enumerate}
             \item A category $\mcC$ with limits and colimits;
-            \item Three sub-classes $W$, $\Fib$, $\Cofib$ $ \subseteq \Mor(\mcC)$ of morphisms in $\mcC$;
+            \item Three sub-classes $W$, $\Fib$, $\Cof$ $ \subseteq \Mor(\mcC)$ of morphisms in $\mcC$;
         \end{enumerate}
         \ \\
         such that
         \begin{enumerate}
             \item $(\mcC, W)$ is a $\mbf{category\ with\ weak\ equivalences}$;
-            \item Pairs $(W \cap \Cofib, \Fib)$ and $(\Cofib, W \cap \Fib)$ are both
+            \item Pairs $(W \cap \Cof, \Fib)$ and $(\Cof, W \cap \Fib)$ are both
             $\mbf{weak\ factorization\ systems}$.
         \end{enumerate}
 
@@ -475,9 +475,9 @@
         \begin{itemize}
             \item elements in $W$ are $\mbf{weak\ equivalences}$;
             \item elements in $\Fib$ are $\mbf{fibrations}$;
-            \item elements in $\Cofib$ are $\mbf{cofibrations}$;
+            \item elements in $\Cof$ are $\mbf{cofibrations}$;
             \item elements in $W \cap \Fib$ are $\mbf{acyclic(trivial)\ fibrations}$;
-            \item elements in $W \cap \Cofib$ are $\mbf{acyclic(trivial)\ cofibrations}$;
+            \item elements in $W \cap \Cof$ are $\mbf{acyclic(trivial)\ cofibrations}$;
         \end{itemize}
 
     \end{note}
@@ -1000,7 +1000,7 @@
         \end{prf}
 
         \begin{prop}
-            Given a model category $(\mcC, W, \Fib, \Cofib)$, then its
+            Given a model category $(\mcC, W, \Fib, \Cof)$, then its
             class of weak equivalences $W$ is closed under forming retracts in $\Arr(\mcC)$.
         \end{prop}
         \begin{prf}
@@ -1019,7 +1019,7 @@
                 \arrow["f", from=1-3, to=2-3]
             \end{tikzcd}\]
 
-            \par Factor $w$ through $(\Proj, \Inj) := (\Cofib, W \cap \Fib)$:
+            \par Factor $w$ through $(\Proj, \Inj) := (\Cof, W \cap \Fib)$:
 
             \[\begin{tikzcd}
                 A & X & A \\
@@ -1045,7 +1045,7 @@
                 X & A \\
                 Z & B
                 \arrow["{r_2 \circ w_2}"', from=2-1, to=2-2]
-                \arrow["{w_1 \in W \cap \Cofib}"', from=1-1, to=2-1]
+                \arrow["{w_1 \in W \cap \Cof}"', from=1-1, to=2-1]
                 \arrow["{\id_A \circ r_1}", from=1-1, to=1-2]
                 \arrow["{f \in \Fib}", from=1-2, to=2-2]
             \end{tikzcd} (by 2-out-of-3, $w_1 \in W$).
@@ -1064,7 +1064,7 @@
                 \arrow["f", from=1-3, to=2-3]
             \end{tikzcd}\]
 
-            \par Factor $f$ through $(\Proj, \Inj) := (W \cap \Cofib, \Fib)$:
+            \par Factor $f$ through $(\Proj, \Inj) := (W \cap \Cof, \Fib)$:
 
             \[\begin{tikzcd}
                 A & X & A \\
@@ -1117,9 +1117,9 @@
                 \arrow["{r_2}", from=3-2, to=3-3]
                 \arrow["{f_2 \in \Inj}"', from=2-3, to=3-3]
                 \arrow["w_2 \in W"', from=2-2, to=3-2]
-                \arrow["{w_1 \in Proj}"', from=1-2, to=2-2]
-                \arrow["{f_1 \in Proj}"', from=1-3, to=2-3]
-                \arrow["{f_1 \in Proj}"', from=1-1, to=2-1]
+                \arrow["{w_1 \in \Proj}"', from=1-2, to=2-2]
+                \arrow["{f_1 \in \Proj}"', from=1-3, to=2-3]
+                \arrow["{f_1 \in \Proj}"', from=1-1, to=2-1]
                 \arrow["{f_2 \in \Inj}"', from=2-1, to=3-1]
                 \arrow["\id_A : \hspace*{2.77cm}"{marking}, "{s_1}", from=1-1, to=1-2]
                 \arrow["{r_1}", from=1-2, to=1-3]
@@ -1132,7 +1132,7 @@
 
         \begin{lem}
             $\mbf{(retract\ argument)}$ For a pair of composable morphisms:
-            $f : X \overset{i}{\longrightarrow} A \overset{p}{\longrightarrow} Y$
+            $f : X \overset{i}{\longrightarrow} A \overset{p}{\longrightarrow}  Y$
             We have :
             \begin{enumerate}
                 \item If $f$ has the $\mbf{left\ lifting\ property}$ against $p$, then $f$ is a $\mbf{retract}$ of $i$ in $\Arr(\mcC)$.
@@ -1171,7 +1171,7 @@
             Motivation of $\mbf{small\ object\ argument}$:
             \par Given a $\mbf{Set}$ of morphisms $C \in \Mor(\mcC)$ in some category $\mcC$,
             a \emph{natual} question is how to factor a morphism $f : X \to Y$ through a relative $C$-cell complex followed by a $C$-injective morphism.
-            $$ f : X \overset{\in C \text{-cell}}{\longrightarrow} \hat{X} \overset{\in C \Inj}{\longrightarrow} Y $$
+            $$ f : X \xrightarrow{\in C \text{-cell}}  \hat{X} \xrightarrow{\in C \Inj} Y $$
 
             \par A first approximation is attaching all \textbf{possible} $C$-cells to $X$,
             where possible $C$-cells is just an object in $C/f := (C \cap \Arr(\mcC))/f$:
@@ -1282,7 +1282,7 @@
             Let $\mcC$ be a locally small category with all small colimits.
             If a set $ C \subseteq  \Mor(\mcC)$ of morphisms has \textbf{small domains},
             then every morphism $f : X \rightarrow Y$ in $\mcC$ factors through a relative $C$-cell complex followed by a $C$-injective morphism:
-            $$ f : X \overset{\in C \text{-cell}}{\longrightarrow} \hat{X} \overset{\in C \Inj}{\longrightarrow} Y $$
+            $$ f : X \xrightarrow{\in C \text{-cell}}  \hat{X} \xrightarrow{\in C \Inj} Y $$
         \end{prop}
 
         \begin{note}
@@ -1295,11 +1295,16 @@
         We discuss how the concept of homotopy is abstractly realized in model categories
 
         \begin{defn}
-            Let $\mcC$ be a model category, $X \in \Obj(C)$.
+            Let $\mcC$ be a model category, $X \in \Obj(C)$.\\
             \begin{enumerate}
-                \item A \textbf{path space object} $Path(X)$ for XX is a factorization of the diagonal Δ X:X→X×X\Delta_X \;\colon\; X \to X \times X as
+                \item A \textbf{path space object} $\Path(X)$ for $X$ is a factorization of the diagonal $\Delta_X : X \to X \times X$ as
+                    $$ \Delta_X : X \xrightarrow[\in W]{i} \Path(X) \xrightarrow[\in \Fib]{(p_0,p_1)} X \times X $$
+                \item A \textbf{cylinder object} $\Cyl(X)$ for $X$ is a factorization of the codiagonal $\nabla_X : X \sqcup X \to X$ as
+                    $$ \nabla_X : X \sqcup  X \xrightarrow[\in \Cof]{(i_0, i_1)} \Cyl(X) \xrightarrow[\in W]{p} X $$
             \end{enumerate}
         \end{defn}
+
+
 
     
     
