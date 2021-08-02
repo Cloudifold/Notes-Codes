@@ -2,6 +2,7 @@
 \usepackage[dvipsnames, svgnames, x11names]{xcolor}
 \usepackage{tikz-cd}
 \tikzcdset{row sep/normal=1cm}
+\tikzcdset{column sep/normal=1cm}
 \usepackage{amsfonts}
 \usepackage{hyperref}
 \usepackage{amsthm}
@@ -18,21 +19,28 @@
 \usepackage{multirow}
 \usepackage{mathtools}
 \usepackage{mathrsfs}
-\usepackage{bussproofs}
+\usepackage{ebproof}
 \usepackage{graphicx}
 \usepackage{epigraph}
 \usepackage{enumitem}
+\usepackage{indentfirst}
+
+\usepackage{quiver}
+
+
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{prop}[thm]{Proposition}
-\newtheorem{cor}[thm]{Corollary}
+\newtheorem*{cor}{Corollary}
 
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[section]
 \newtheorem{conj}{Conjecture}[section]
 \newtheorem{exmp}{Example}[section]
+\newtheorem{intro}[defn]{Introduction}
 
+\newtheorem*{prf}{Proof}
 
 \theoremstyle{remark}
 \newtheorem*{rem}{Remark}
@@ -40,9 +48,10 @@
 \newtheorem{ex}{Exercise}[section]
 \newtheorem{sol}{Solution}[section]
 
-
 \definecolor{background}{RGB}{255,230,230}
 \pagecolor{background}
+
+\tikzcdset{background color = background}
 
 \definecolor{TextColor}{RGB}{255,122,162}
 
@@ -61,6 +70,18 @@
 % \; : 2/7
 % \, : 1/6
 % \! : -1/6
+
+% \addtocounter{<envname>}{nubmer}
+% Expl. \addtocounter{thm}{2}
+% \setcounter{<envname>}{nubmer}
+% Expl. \setcounter{ex}{3}
+% -->  Exercise 1.4
+
+\newcommand{\setexcounter}[1]{
+    \setcounter{ex}{#1}
+    \setcounter{sol}{#1}
+}
+\newcommand{\setsubsectcounter}[1]{\setcounter{subsection}{#1}}
 
 \newcommand{\bb}[1]{\mathbb{#1}}
 \newcommand{\mc}[1]{\mathcal{#1}}
@@ -224,20 +245,23 @@
 \newcommand{\mbfY}{\mathbf Y}
 \newcommand{\mbfZ}{\mathbf Z}
 \newcommand{\bs}{\backslash}
-\newcommand{\id}{\mathrm{id}}
 \newcommand{\bbRn}{\mathbb R^n}
 \newcommand{\ecyc}[1]{\langle #1\rangle}
+\newcommand{\interior}[1]{\overset{\circ}{#1}}
 \newcommand{\ol}[1]{\overline{#1}}
 \newcommand{\unitgrp}[1]{#1^{\mspace{-4mu}\times}}
 \newcommand{\grad}{\triangledown}
 \newcommand{\normal}{\trianglelefteq}
 \newcommand{\nnormal}{\ntrianglelefteq}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-\newcommand{\abs}[1]{|#1|}
 \newcommand{\gen}[1]{\langle #1 \rangle}
-\newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\nilradical}[1]{\sqrt{\gen{0}}_{#1}}
+\newcommand{\inv}[1]{#1^{\text{-}1}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\unitcell}[1]{\overset{\!\!\!\! \circ}{\bbD^{#1}}}
 \newcommand{\E}{\exists}
 \newcommand{\A}{\forall}
+\newcommand{\Fct}{\mathrm{Funct}}
 
 \DeclareMathOperator{\GL}{\rm{GL}}
 \DeclareMathOperator{\SL}{\rm{SL}}
@@ -250,6 +274,7 @@
 \DeclareMathOperator{\Res}{\rm{Res}}
 \DeclareMathOperator{\Spec}{\rm{Spec}}
 \DeclareMathOperator{\Proj}{\rm{Proj}}
+\DeclareMathOperator{\Inj}{\rm{Inj}}
 \DeclareMathOperator{\Supp}{\rm{Supp}}
 \DeclareMathOperator{\Ker}{\rm{Ker}}
 \DeclareMathOperator{\Nil}{\rm{Nil}}
@@ -259,6 +284,7 @@
 \DeclareMathOperator{\Frac}{\rm{Frac}}
 \DeclareMathOperator{\Rad}{\rm{Rad}}
 \DeclareMathOperator{\Ann}{\rm{Ann}}
+\DeclareMathOperator{\Arr}{\rm{Arr}}
 \DeclareMathOperator{\Disc}{\rm{Disc}}
 \DeclareMathOperator{\Lcm}{\rm{lcm}}
 \DeclareMathOperator{\Gcd}{\rm{gcd}}
@@ -276,62 +302,19 @@
 \DeclareMathOperator{\Card}{Card}
 \DeclareMathOperator{\OPT}{OPT}
 \DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Cod}{Cod}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\Path}{Path}
+\DeclareMathOperator{\Cyl}{Cyl}
 \DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\Th}{Th}
+\DeclareMathOperator{\Jac}{\rm{Jac}}
+\DeclareMathOperator{\Iso}{\rm{Iso}}
+\DeclareMathOperator{\Rel}{\mathrm{rel}}
+\DeclareMathOperator{\Specmax}{\rm{Spec_{max}}}
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
 \DeclareMathOperator{\Adj}{Adj}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
-
-
-\begin{document}
-    \title{Notes of Categories 0}
-    \author{{\color{pink}{Cloudi}}{\color{Aquamarine}{fold}}}
-    \maketitle
-    \newpage
-
-    \setcounter{section}{-1}
-
-        \section{Notations}
-
-    \vspace*{0.9cm}
-
-    \begin{flushleft}
-        Category of all small categories : $\mbf{Cat}$\\
-        Terminal object of $\msC$: $\mbf{1}_{\msC}$\\
-    \end{flushleft}
-
-    \section{2-Categories}
-
-    \vspace*{0.9cm}
-
-    \begin{defn}
-        A 2-Cat  $\msA$  consists of :
-
-        \begin{enumerate}
-            \item A class $\abs{\msA}$
-            \item for each $ X,Y \in \abs{\msA} $, a (small) category $ \Hom(X,Y) $
-            \item for each $ X,Y,Z \in \abs{\msA} $, a bifunctor $ c_{X,Y,Z} : \Hom(X,Y) \times \Hom(Y,Z) \to \Hom(X,Z) $
-            \item for each $ X \in \abs{\msA} $, a functor $ u_A : \mbf{1}_{\mbf{Cat}} \to \Hom(A,A) $
-        \end{enumerate}
-
-    \end{defn}
-
-
-    \begin{flushleft}
-    These data are required to satisfy following axioms:\\
-    \end{flushleft}
-
-    \begin{enumerate}
-        \item Associativity axiom: for $ X, Y, Z, W \in \abs{\msA}$, \\$ c_{X,Z,W} \circ ( c_{X,Y,Z} \times \id_{\Hom(Z,W)} ) = c_{X,Y,W} \circ (\id_{\Hom(X,Y)} \times c_{Y,Z,W} )$
-        \item Unit axiom : for $X, Y \in \abs{\msA}$, \\$ c_{X,X,Y} \circ (u_X \times \id_{\Hom(X,Y)}) = \id_{\Hom(X,Y)} = c_{X,Y,Y} \circ (\id_{\Hom(X,Y)} \times u_Y)$
-    \end{enumerate}
-
-    
-
-    % # TODO : Diagram 
-
-
-
-\end{document}
