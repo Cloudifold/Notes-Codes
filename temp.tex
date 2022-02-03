@@ -45,8 +45,8 @@
 \theoremstyle{remark}
 \newtheorem*{rem}{Remark}
 \newtheorem*{note}{Note}
-\newtheorem{ex}{Exercise}[section]
-\newtheorem{sol}{Solution}[section]
+\newtheorem{exercise}{Exercise}[section]
+\newtheorem{solution}{Solution}[section]
 
 \definecolor{background}{RGB}{255,230,230}
 \pagecolor{background}
@@ -244,8 +244,12 @@
 \newcommand{\mbfX}{\mathbf X}
 \newcommand{\mbfY}{\mathbf Y}
 \newcommand{\mbfZ}{\mathbf Z}
+
+% common math symbols
+
 \newcommand{\bs}{\backslash}
 \newcommand{\bbRn}{\mathbb R^n}
+\newcommand{\bbCn}{\mathbb R^n}
 \newcommand{\ecyc}[1]{\langle #1\rangle}
 \newcommand{\interior}[1]{\overset{\circ}{#1}}
 \newcommand{\ol}[1]{\overline{#1}}
@@ -263,6 +267,8 @@
 \newcommand{\A}{\forall}
 \newcommand{\Fct}{\mathrm{Funct}}
 
+% Operators
+
 \DeclareMathOperator{\GL}{\rm{GL}}
 \DeclareMathOperator{\SL}{\rm{SL}}
 \DeclareMathOperator{\Mod}{\rm{Mod}}
@@ -274,7 +280,6 @@
 \DeclareMathOperator{\Res}{\rm{Res}}
 \DeclareMathOperator{\Spec}{\rm{Spec}}
 \DeclareMathOperator{\Proj}{\rm{Proj}}
-\DeclareMathOperator{\Inj}{\rm{Inj}}
 \DeclareMathOperator{\Supp}{\rm{Supp}}
 \DeclareMathOperator{\Ker}{\rm{Ker}}
 \DeclareMathOperator{\Nil}{\rm{Nil}}
@@ -284,14 +289,13 @@
 \DeclareMathOperator{\Frac}{\rm{Frac}}
 \DeclareMathOperator{\Rad}{\rm{Rad}}
 \DeclareMathOperator{\Ann}{\rm{Ann}}
-\DeclareMathOperator{\Arr}{\rm{Arr}}
 \DeclareMathOperator{\Disc}{\rm{Disc}}
 \DeclareMathOperator{\Lcm}{\rm{lcm}}
 \DeclareMathOperator{\Gcd}{\rm{gcd}}
 \DeclareMathOperator{\Conv}{Conv}
 \DeclareMathOperator{\Cone}{Cone}
 \DeclareMathOperator{\Int}{Int}
-\DeclareMathOperator{\Ord}{Ord}
+\DeclareMathOperator{\Ord}{ord}
 \DeclareMathOperator{\Ass}{Ass}
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Sym}{Sym}
@@ -302,19 +306,71 @@
 \DeclareMathOperator{\Card}{Card}
 \DeclareMathOperator{\OPT}{OPT}
 \DeclareMathOperator{\Dom}{Dom}
-\DeclareMathOperator{\Cod}{Cod}
-\DeclareMathOperator{\dom}{dom}
-\DeclareMathOperator{\cod}{cod}
-\DeclareMathOperator{\Path}{Path}
-\DeclareMathOperator{\Cyl}{Cyl}
 \DeclareMathOperator{\Var}{Var}
 \DeclareMathOperator{\Th}{Th}
-\DeclareMathOperator{\Jac}{\rm{Jac}}
-\DeclareMathOperator{\Iso}{\rm{Iso}}
-\DeclareMathOperator{\Rel}{\mathrm{rel}}
-\DeclareMathOperator{\Specmax}{\rm{Spec_{max}}}
+\DeclareMathOperator{\Frob}{Frob}
+\DeclareMathOperator{\Red}{Red}
+\DeclareMathOperator{\Aff}{Aff}
+\DeclareMathOperator{\Epi}{Epi}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator*{\Argmin}{Argmin}
+\DeclareMathOperator{\Zer}{Zer}
+\DeclareMathOperator{\Ri}{Ri}
+\DeclareMathOperator{\Prox}{Prox}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Fix}{Fix}
+\DeclareMathOperator{\Gal}{Gal}
 \renewcommand{\Re}{\operatorname{Re}}
 \renewcommand{\Im}{\operatorname{Im}}
 \DeclareMathOperator{\Adj}{Adj}
-\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
-\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\renewcommand{\div}{\mathrm{div}}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\CDiv}{CDiv}
+\DeclareMathOperator{\Bl}{Bl}
+\DeclareMathOperator{\codim}{codim}
+\DeclareMathOperator{\Sing}{Sing}
+\DeclareMathOperator{\Nef}{Nef}
+\DeclareMathOperator{\NE}{NE}
+\DeclareMathOperator{\Mult}{Mult}
+\DeclareMathOperator{\Pic}{Pic}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Grass}{Grass}
+\DeclareMathOperator{\LinSub}{LinSub}
+\DeclareMathOperator{\Eq}{Eq}
+\DeclareMathOperator{\can}{can}
+\DeclareMathOperator{\Rat}{Rat}
+\DeclareMathOperator{\trdeg}{trdeg}
+\DeclareMathOperator{\QSym}{QSym}
+\DeclareMathOperator{\ASym}{ASym}
+\DeclareMathOperator{\des}{des}
+\DeclareMathOperator{\exc}{exc}
+\DeclareMathOperator{\maj}{maj}
+\DeclareMathOperator{\wt}{wt}
+\DeclareMathOperator{\SST}{SST}
+\DeclareMathOperator{\ASST}{\mfA SST}
+\DeclareMathOperator{\SSYT}{SSYT}
+\DeclareMathOperator{\ST}{ST}
+\DeclareMathOperator{\SYT}{SYT}
+\DeclareMathOperator{\SV}{SV}
+\DeclareMathOperator{\ex}{ex}
+\DeclareMathOperator{\sort}{sort}
+\DeclareMathOperator{\sq}{sq}
+\DeclareMathOperator{\invcode}{invcode}
+\DeclareMathOperator{\Ess}{Ess}
+\DeclareMathOperator{\Flag}{Flag}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\Orb}{Orb}
+\DeclareMathOperator{\pl}{pl}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\pt}{pt}
+\DeclareMathOperator{\depth}{depth}
+\DeclareMathOperator{\cyc}{cyc}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\length}{lg}
+\DeclareMathOperator{\Quot}{Quot}
+\DeclareMathOperator{\Hilb}{Hilb}
+\DeclareMathOperator{\PGL}{PGL}
+\DeclareMathOperator{\PSL}{PSL}
+\newcommand{\Cat}[1]{(\textrm{#1})}
