@@ -8,9 +8,9 @@
 
     \setcounter{section}{-1}
 
-    \section{Constructions and Definitions}
+    \section{Basic Definitions and Lemmas}
     \begin{defn}
-        A CW-complex is A space Constructed by Successively attaching cells:\\
+        A CW-complex is a space constructed by successively attaching cells:\\
         For $n \in \bbN, n \geq 1$, there are maps $\{ \varphi_i : S^{n-1} \to X^{n-1} \}_{i \in I_n}$
         (called characteristic maps). The way to construct $X^n$ (called $n$-skeleton of $X$) is :\\
         (starting from $X^0 = \prod_{I_0} \ast $)
@@ -29,7 +29,7 @@
     \end{defn}
 
     \begin{defn}
-        $A$ is a subcomplex of CW-complex $X$ iff for any open cell $e^n_i$ of $X$ satisfy:
+        $A$ is a subcomplex of CW-complex $X$ iff for any open cell $e^n_i$ of $X$, $A$ satisfy:
         $A \cap e^n_i \neq \emptyset \implies \bar{e^n_i} \subseteq A $.\\
         Pair of $X$ and subcomplex $A$ : $(X,A)$ is called a CW-pair.
     \end{defn}
@@ -42,6 +42,141 @@
             \{x_1, \dots, x_n\} & \mapsto \{x_0, x_1, \dots, x_n\}    
         \end{align*}
     \end{defn}
+
+    \begin{defn}
+        For topological spaces $A \hookrightarrow X$, 
+        $A$ is a \textbf{strong deformation retract} of a neighborhood $V$
+        if:\\
+        $\exists h : V \times I \to X$ such that\\
+        $\forall x \in V,\ h(x,0) = x$\\
+        $h(V,1) \subseteq A$\\
+        $\forall (a,t) \in A \times I,\ h(a,t) = a$
+    \end{defn}
+
+    \begin{defn}
+        For topological spaces $i : A \hookrightarrow X$, 
+        $A$ is a \textbf{deformation retract} of $X$
+        if:\\
+        $\exists h : X \times I \to X$ such that\\
+        $\forall x \in X,\ h(x,0) = x$\\
+        $h(X,1) = A$\\
+        $\forall (a,t) \in A \times I,\ h(a,t) = a$\\
+        (That is, there are retraction $r : X \to A$ and homotopy $h : \id_X \simeq i \circ r \rel A$)\\
+        And $r := h(-,1)$ is called a \tbf{deformation retraction}.
+    \end{defn}
+
+    \begin{defn}
+        For topological spaces $A \hookrightarrow X$, 
+        a neighborhood $V$ of $A$ is \textbf{deformable}\label{hyp:deformable} to $A$ if:\\
+        $\exists h : X \times I \to X$ such that\\
+        $\forall x \in X,\ h(x,0) = x$\\
+        $h(A \times I) \subseteq A$, $h(V \times I) \subseteq V$.\\
+        $h(V,1) \subseteq A$
+    \end{defn}
+
+    A criterion of weak homotopy equivalence:
+    \begin{lem}
+        \label{hyp:criterion-HELP-Dn+1,Sn}
+        The following on a map $e : Y \to Z$ and any fixed $n \in \bbN$ are equivalent:\\
+        \begin{enumerate}
+            \item For any $y \in Y$ , $e_* : \pi_q(Y,y) \to \pi_q(Z,e(y))$
+                is monomorphism for $q = n$ and is epimorphism for $q = n+1$.
+            \item (HELP of $(D^{n+1},S^n)$) Given maps $f : D^{n+1} \to Z$, $g : S^n \to Y$
+            and homotopy $h : f \circ i \simeq e \circ g $:
+            \[\begin{tikzcd}
+                {S^n} & {D^{n+1}} \\
+                Y & Z
+                \arrow["g"', from=1-1, to=2-1]
+                \arrow["e"', from=2-1, to=2-2]
+                \arrow["i", hook, from=1-1, to=1-2]
+                \arrow["f", from=1-2, to=2-2]
+                \arrow["h"', shorten <=8pt, shorten >=8pt, Rightarrow, from=1-2, to=2-1]
+            \end{tikzcd}\]
+            then we have extension $g^+ : D^{n+1} \to Y$ of $g$
+            and $h^+ : f \simeq e \circ g^+$:
+            \[\begin{tikzcd}
+                S^n & D^{n+1} \\
+                Y & Z
+                \arrow["g"', from=1-1, to=2-1]
+                \arrow[hook, from=1-1, to=1-2]
+                \arrow[""{name=0, anchor=center, inner sep=0}, "f", from=1-2, to=2-2]
+                \arrow["e"', from=2-1, to=2-2]
+                \arrow["{g^+}"', from=1-2, to=2-1]
+                \arrow["{h^+}", shorten <=10pt, shorten >=10pt, Rightarrow, from=0, to=2-1]
+            \end{tikzcd}\]
+            \item Conclusion above holds when the given $h$ is $id_{f \circ i}$.
+        \end{enumerate}
+    \end{lem}
+
+    \begin{prf}
+        Trivially \tit{2.} implies \tit{3.}\\
+
+        Our first goal : \tit{3.} implies \tit{1.}\\
+
+        Fix $n\in \bbN$. $\pi_n(e)$ is monomorphism:\\
+        For $n = 0$, \tit{3.} says if we have path $e(y) \simeq e(y') $
+        then we have path $y \simeq y'$.That is to say
+        $e$ can not map two path-connected component to one.\\
+        For $n > 0$, \tit{3.} says if $e \circ g$ is nullhomotopic,
+        then $g : S^n \to Y$ could be extend to $g^+ : D^{n+1} \to Y$,
+        which can be used to construct nullhomotopy of $g$.\\
+
+        Fix $n \in \bbN$. $\pi_{n+1}(e)$ is epimorphism:\\
+        For $[f] \in \pi_{n+1}(Z,e(y)) \cong [D^{n+1},S^n; Z,e(y)]$,
+        let $g := s \mapsto y$, the extension $g^+$ satisfy
+        $e_* ([g^+]) = [f]$, that proves $e_*$ is epimorphism.\\
+
+        Second goal : \tit{1.} implies \tit{2.}\\
+
+        Fix $g, f, h$ in the condition of \tit{2.} first.
+        And observe that
+        $\pi_n(Y,y) = [S^n,\ast; Y,y]$, $\pi_{n+1}(Y,y) = [D^{n+1},S^n; Y,y]$.\\
+        There is a map $f' : (D^{n+1},S^n) \to Z$ homotopic to $f$
+        defined by $f' = f \circ b(-,1)$
+        where
+        \begin{align*}
+            b : CS^n \times I & \to CS^n\\
+                (\ol{(x,t)} , s)  & \mapsto
+                \begin{cases}
+                    \ol{(x,1-2t)} \quad t \leq \frac{s}{2}  \\
+                    \ol{(x,\frac{t-s/2}{1-s/2})} \quad t \geq \frac{s}{2}
+                \end{cases}
+        \end{align*}
+        (recall that $D^{n+1} \simeq CS^n $)
+        Therefore we can replace $f$ with $f'$.
+        Using the epimorphism leads to $h' : e \circ {g^+}' \simeq f'$,
+        using the monomorphism leads to $r : {g^+}' \circ i \simeq g $.
+        Construct $g^+ := a(-,1) $ using
+        \begin{align*}
+            a : CS^n \times I & \to Z\\
+                (\ol{(x,t)} , s)  & \mapsto
+                \begin{cases}
+                    r(x, s-2t) \quad t \leq \frac{s}{2}  \\
+                    {g^+}'(x,\frac{t-s/2}{1-s/2}) \quad t \geq \frac{s}{2}
+                \end{cases}
+        \end{align*}
+
+        And that is the end of the proof:
+
+        \[\begin{tikzcd}
+            {S^n} && {D^{n+1}} \\
+            \\
+            Y && Z
+            \arrow[from=1-1, to=3-1]
+            \arrow[from=1-1, to=1-3]
+            \arrow[from=3-1, to=3-3]
+            \arrow[""{name=0, anchor=center, inner sep=0}, "f", curve={height=-12pt}, from=1-3, to=3-3]
+            \arrow[""{name=1, anchor=center, inner sep=0}, curve={height=-12pt}, from=1-3, to=3-1]
+            \arrow[""{name=2, anchor=center, inner sep=0}, curve={height=12pt}, from=1-3, to=3-1]
+            \arrow[""{name=3, anchor=center, inner sep=0}, "{f'}"', curve={height=12pt}, from=1-3, to=3-3]
+            \arrow["b", shorten <=4pt, shorten >=4pt, Rightarrow, from=1, to=2]
+            \arrow[shorten <=5pt, shorten >=5pt, Rightarrow, from=0, to=3]
+            \arrow["{h'}", shift left=5, shorten <=4pt, shorten >=0pt, Rightarrow, from=3, to=1]
+        \end{tikzcd}\]
+        \qed
+        
+
+    \end{prf}
 
 
 
@@ -103,7 +238,7 @@
     \end{prf}
 
     \begin{note}
-        In HELP\ref{hyp:HELP}, at condition $Y=Z$ and $e = \id$,
+        In HELP, at condition $Y=Z$ and $e = \id$,
         HELP says $(X,A)$ have HEP
     \end{note}
 
@@ -153,14 +288,17 @@
         then $e_{\ast} : [X,Y] \to [X,Z]$ is bijection.
     \end{cor}
 
+    
+
     \subsection{CW-approximation}
 
     \begin{defn}
-        A \textbf{CW-approximation} of $(X,A) \in Top(2)$ is a CW-pair $(\widetilde{X}, \widetilde{A})$ and a
+        A \textbf{CW-approximation} of $(X,A) \in \mbf{Top(2)}$ is a CW-pair $(\widetilde{X}, \widetilde{A})$ and a
         weak homotopy equivalence of pairs $\varphi : (\widetilde{X}, \widetilde{A}) \to (X,A)$.
     \end{defn}
 
     \begin{lem}
+        \label{hyp:funCWapprox}
         $\varphi, \psi$ are CW-approximations of $X,Y$,
         $f : X \to Y$, then 
         \[\begin{tikzcd}
@@ -174,10 +312,10 @@
         and $\widetilde{f}$ is unique up to homotopy.
     \end{lem}
 
-    \begin{proof}
+    \begin{prf}
         Directly from $\psi_{\ast} : [\widetilde{X},\widetilde{Y}] \to [\widetilde{X},Y]$ is bijection.
         \qed
-    \end{proof}
+    \end{prf}
 
     \begin{thm}
         $\varphi, \psi$ are CW-approximations of $(X,A), (Y,B)$,
@@ -194,7 +332,7 @@
     \end{thm}
 
     \begin{prf}
-        Apply \textbf{Lemma 1.3} to obtain map $\widetilde{f}_A : \widetilde{A} \to \widetilde{B}$
+        Apply Lemma \ref{hyp:funCWapprox} to obtain map $\widetilde{f}_A : \widetilde{A} \to \widetilde{B}$
         and homotopy $h : \psi |_{\widetilde{B}} \circ \widetilde{f}_A \simeq f \circ \varphi|_{\widetilde{A}}$
         Use HELP of $(\widetilde{X}, \widetilde{A})$ to extend it:
         \[\begin{tikzcd}
@@ -274,7 +412,7 @@
         \end{tikzcd}\]
         Glue all $g_{n+1,i}$ and $ h_{n+1,i}$ to produce $g_{n+1}$ and $h_{n+1} : f|_{A \cup X^{n+1}} \simeq g_{n+1}$.\\
         Final stage:\\
-        Maps $g_n$ determine a cellular map $g : X \to Y$ since $X$ has the weak topology determined by skeletons.
+        Maps $g_n$ determine a cellular map $g : X \to Y$ since $X$ has the final topology determined by skeletons.
         \qed
     \end{prf}
 
@@ -283,7 +421,7 @@
     Product of CW-complexes:
 
     \begin{exmp}
-        Product topology of two CW-complexes does not coincide with weak topology:\\
+        Product topology of two CW-complexes does not coincide with the final topology (union topology):\\
         $X$ (star of countably many edges) :
         $X = X^1 = \bigvee_{n\in \omega} I_n $\\
         $Y$ (star of $\omega^{\omega}$ many edges) :
@@ -291,7 +429,7 @@
         ( $(I_n,0) \cong (I_f,0) \cong (I,0) $ )\\
         Consider subset $H$ of $X \times Y$:
         $H := \{ (\frac{1}{f(n)+1} , \frac{1}{f(n)+1}) \in I_n \times I_f \mid n \in \omega, f \in \omega^{\omega} \}$.\\
-        $H$ is closed under the weak topology
+        $H$ is closed under the final topology
         since every cell of $X \times Y$ contains at most one point of $H$.
         But closure of $H$ contains $(0,0)$ at product topology:\\
         Let $U \times V$ be an open neighborhood (at product topology) of $(0,0)$,
@@ -301,6 +439,11 @@
         then $(\frac{1}{g(k)+1} , \frac{1}{g(k)+1}) \in U \times V \cap H$.
 
     \end{exmp}
+
+    \begin{note}
+        Another way to realize $X \times Y$ as CW-complex
+        is to change its topology to the compactly generated topology $k(X \times Y)$.
+    \end{note}
 
     \begin{prop}
         $X$ and $Y$ are CW-complexes, $X \times Y$ is CW-complex if\\
@@ -404,6 +547,13 @@
     Which induces map $\SP f : \SP X \to \SP Y$.
     And Functorial properties are directly from the constructions above.\\
 
+    \label{hyp:SP-commute-with-directed-colimit} Commute with directed colimit:\\
+    Suppose $P$ is a directed poset (that is $\A x,y \in P, \ \E z \in P, \ x \leq z , y \leq z$)
+    and $X_i$ are pointed spaces indexed by $P$ satisfying $i \leq j \implies X_i \subseteq X_j$.\\
+    Then $\SP^n (\Colim_{i} X_i) \approx \Colim_{i} (\SP^n X_i)$\\
+    (Proof is obtained by showing that $ \SP^n f $ is continuous iff $f$ is,
+    which implies final topology on $\Colim_{i} (\SP^n X_i)$ agree on $\SP^n (\Colim_i X_i)$)\\
+
     Suppose $i : A \hookrightarrow X$ is an pointed inclusion,
     then $\SP i : \SP A \hookrightarrow \SP X$ is also inclusion.
     Furthermore, if $A$ is open (or closed) in $X$, then $\SP A$ is open (or closed) in $\SP X$.\\
@@ -413,7 +563,6 @@
         h_n : \SP^n X \times I & \to \SP^{n}Y\\
             (\{x_1, \dots, x_n\} , t) & \mapsto \{h(x_1,t), \dots, h(x_n,t)\}
     \end{align*}
-    
     which induces $\SP h : \SP X \times I \to \SP Y$.\\
 
 
@@ -421,5 +570,575 @@
     $f \simeq g$ implies $\SP f \simeq \SP g$,\\
     $e : X \to Y$ is homotopy equivalence implies $\SP e : \SP X \to \SP Y$ is,\\
     $X$ is contractible implies $\SP^n X$ and $\SP X$ is.
+
+
+    \begin{thm}
+        (Dold-Thom Theorem)\label{hyp:Dold-Thom}\\
+        If $X$ is $T_2$ space and $A$ is closed path-connected subspace of $X$,
+        and there is neighborhood $V$ \hyperref[hyp:deformable]{deformable} to $A$ in $X$.\\
+        Then the quotient map $q : X \to X/A$ induces quasi-fibration
+        $\SP q : \SP X \to \SP (X/A)$, which satisfy
+        $\forall x \in \SP (X/A), \ \inv{(\SP q)} \{x\} \simeq  \SP A $.
+
+    \end{thm}
+
+    \begin{cor}
+        If $X$ , $Y$ are $T_2$ spaces and $Y$ is connected, $f : X \to Y$.
+        Then consider $X \to Y \to C_f \to \Sigma X$,
+        the map $p : C_f \to \Sigma X$ induces quasi-fibration
+        $\SP p : \SP C_f \to \SP (\Sigma X)$ with fiber $\SP Y$.
+    \end{cor}
+
+    \begin{cor}
+        If $X$ is $T_2$ and path-connected, then for any $q\geq 0$,
+        there is $\pi_{q+1}(\SP (\Sigma X)) \cong \pi_q (\SP X)$.
+    \end{cor}
+
+    \begin{prf}
+        $CX$ is contractible implies $\SP CX$ is contractible,
+        use the exat homotopy sequence of quasi-fibration to see:
+        \[\begin{tikzcd}
+            {} & {\pi_{q+1}(\SP CX)} & {\pi_{q+1}(\SP \Sigma X)} & {\pi_q (\SP X)} & {\pi_q(\SP CX)} & {}
+            \arrow[from=1-2, to=1-3]
+            \arrow["\partial"', "\cong", from=1-3, to=1-4]
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=1-4, to=1-5]
+            \arrow[from=1-5, to=1-6]
+        \end{tikzcd}\]
+
+        \qed
+    \end{prf}
+
+    \begin{note}
+        The inverse of the isomorphism $\partial$ above is given by
+        $$
+        [S^q , \SP X] \ni [g] \mapsto [\Sigma g] \in [S^{q+1}, \Sigma \SP X]
+        $$
+        ($\Sigma \SP X \cong \SP \Sigma X$).
+        Because $\partial$ is given by:
+        \[\begin{tikzcd}
+            {\pi_q(\SP \Sigma X)} & {\pi_q(\SP CX, \SP X)} & {\pi_{q-1}(\SP X)} \\
+            {[f]} & {[\hat{f}]} & {[\hat{f}|_{S^{q-1}}]} \\
+            {[p \circ Cg] = [\Sigma g]} & {[Cg]} & {[g]}
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=1-2, to=1-3]
+            \arrow[maps to, from=2-1, to=2-2]
+            \arrow[maps to, from=2-2, to=2-3]
+            \arrow["\ni"{marking}, draw=none, from=1-1, to=2-1]
+            \arrow["\ni"{marking}, draw=none, from=1-2, to=2-2]
+            \arrow["\ni"{marking}, draw=none, from=1-3, to=2-3]
+            \arrow[maps to, from=3-3, to=3-2]
+            \arrow[maps to, from=3-2, to=3-1]
+        \end{tikzcd}\].
+        \qed
+    \end{note}
+
+    \begin{cor}
+        \label{hyp:quasi-fibration-SP(XUAxI)-to-SP(XUCA)}
+        If $X$ is $T_2$ space and $A$ is path-connected subspace of $X$,
+        then the canonical map
+        $\SP (X \cup (A \times I)) \to \SP (X \cup C A)$ 
+        is a quasi-fibration with fiber $\SP A$.
+    \end{cor}
+
+    \begin{thm}
+        \label{hyp:quasi-fibration-SPX-to-SP(X/A)}
+        If $X$ is $T_2$ space and $A$ is path-connected subspace of $X$,
+        and $A \hookrightarrow X$ is a cofibration.\\
+        Then the quotient map $q : X \to X/A$ induces quasi-fibration
+        $\SP q : \SP X \to \SP (X/A)$, which satisfy
+        $\forall x \in \SP (X/A), \ \inv{(\SP q)} \{x\} \simeq  \SP A $.
+    \end{thm}
+
+    \begin{prf}
+        If $A \hookrightarrow X$ is cofibration,
+        then $X \cup C A \simeq X/A $ and $X \cup (A \times I) \simeq X$.
+        \qed
+    \end{prf}
+
+    \begin{prop}
+        The inclusion $S^1 \to \SP S^1$ is homotopy equivalence,
+        therefore $\pi_q(S^1) \cong \pi_q(\SP S^1)$.
+    \end{prop}
+    \begin{prf}
+        $S^1 \simeq S^2 - \{0,\infty\}$\\
+        $\SP^n S^2 = \{\{a_1,\dots, a_n\} \mid a_i \in \bbC \cup \{\infty\}\} = \{\prod_{\{a_1,\dots, a_n\}} (z-a_i) \mid a_i \in \bbC \cup \{\infty\} \}$
+        where $(z - \infty) := 1$
+        $\SP^n S^2 = \{f \in \bbC [z] - \{ 0 \} \mid \deg(f) \leq n \} = \bbC \bbP ^n$\\
+        $$
+        \SP^n (S^2 - \{0,\infty\}) = \{f \in \bbC [z] - \{ 0 \} \mid \deg(f) \leq n, f_n \neq 0, f_0 \neq 0 \} = 
+        \bbC^n - \bbC^{n-1} \times 0 = \bbC^{n-1} \times (\bbC - 0)
+        $$
+        it have the same homotopy type of $S^1$
+    \end{prf}
+
+    \begin{cor}
+        \label{hyp:SP-Sn-is-K(Z,n)}
+        $\pi_q(\SP S^n) = \bbZ $ if $q = n$, otherwise $\pi_q(\SP S^n) = 0$.
+        (use corollary of \ref{hyp:Dold-Thom} to see $\pi_{q+1}(\SP \Sigma X) \cong \pi_q (\SP X)$)
+    \end{cor}
+
+
+    \section{Homology Groups}
+
+    \subsection{Reduced Homology Groups}
+
+    \begin{defn}
+        For a path-connected pointed CW-complex $X$,
+        define its \textbf{$n$-th reduced homology group} for $n \geq 0$:\\
+        $$
+        \waveH_n(X) := \pi_n(\SP X)
+        $$
+    \end{defn}
+
+    \begin{note}
+        All reduced homology groups are abelian since
+        $\waveH_n(X) \cong \waveH_{n+1}(\Sigma X)$.
+        Thus, we can extend the definition above
+        to those $X$ which does not necessarily be path-connected.\\
+    \end{note}
+
+    As $\SP$, $\waveH_n$ also satisfy functoriality.
+    Furthermore, $\waveH_n$ maps homotopic maps $f \simeq g$ to identical maps $f_* = g_*$.
+    ($\SP$ maps homotopic maps to homotopic maps)\\
+
+    Exact Property:
+    \begin{prop}
+        For any pointed map between CW-complexes $f : X \to Y$,
+        we have an exact sequence:
+        $$
+        \waveH_n(X) \xrightarrow{f_*} \waveH_n(Y) \xrightarrow{i_*} \waveH_n(C_f)
+        $$
+        where $C_f$ is the mapping cone of $f$, $i : Y \hookrightarrow C_f$.
+    \end{prop}
+
+    \begin{prf}
+        $Z_f$ := $Y \cup_f (X \times I) / \{ x_0 \} \times I$ is the \textbf{reduced mapping cylinder}
+        of $f$.\\
+        $q : Z_f \to C_f $ is defined by
+        \begin{align*}
+            y & \mapsto y\\
+            \overline{(x,t)}^{Z_f} & \mapsto \overline{(x,t)}^{C_f}
+        \end{align*}
+        By \hyperref[hyp:Dold-Thom]{Dold-Thom theorem},
+        the induced map $\SP q$ is quasi-fibration $\SP Z_f \to \SP C_f $ with fiber $\SP X$.
+        By definition of quasi-fibration, we have
+        $$
+        \pi_n(\SP X) \cong \waveH_n(X) \xrightarrow{f_*} \pi_n(\SP Z_f) \cong \waveH_n(Y) \xrightarrow{i_*} \pi_n(\SP C_f) = \waveH_n(C_f)
+        $$
+        \qed
+    \end{prf}
+
+    \begin{prop}
+        \label{hyp:Sn-is-not-retract-of-Dn+1} There does not exist retraction $r : \bbD^n \to S^{n-1} $.
+    \end{prop}
+
+    \begin{prf}
+        $id = r \circ i : \bbS^{n-1} \to \bbD^n \to \bbS^{n-1}$
+        induces
+        $$
+        id_* = r_* \circ i_* : \bbZ \cong \waveH_{n-1}\bbS^{n-1} \to \waveH_{n-1}\bbD^n  \cong 0 \to \waveH_{n-1}\bbS^{n-1} \cong \bbZ
+        $$
+        which lead to contradiction.
+        \qed
+    \end{prf}
+
+    \begin{thm}
+        Fix-point theorem:\\
+        If $f : \bbD^n \to \bbD^n$ is continuous,
+        then exist $x_0 \in \bbD^n$ such that
+        $x_0 = f(x_0)$.
+    \end{thm}
+
+    \begin{prf}
+        (non-constructive)
+        No such $x_0$ implies $\forall x \in \bbD^n , f(x) \neq x$
+        therefore, we can construct continuous retraction $r : \bbD^n \to \bbS^{n-1}$
+        by\\ $r(x)$:= the intersection of ``ray starting from $f(x)$ to $x$'' and $\bbS^{n-1}$.
+        Contradict to \ref{hyp:Sn-is-not-retract-of-Dn+1}.
+    \end{prf}
+
+    \begin{defn}
+        \label{hyp:homology-group-defined-using-SP}
+        Let $(X,A)$ be an CW-pair, define the
+        \textbf{$n$-th homology group} for $n \in \bbN$ of $(X,A)$ be:\\
+        $$
+        H_n(X,A)  :=  \waveH_n(X \cup CA)
+        $$
+        And for single space:\\
+        $$
+        H_n(X) := H_n(X, \emptyset) = \waveH(X + 1)
+        $$
+        where $X + 1 := X \sqcup *$.
+    \end{defn}
+
+    \begin{note}
+        Map between CW-pair $f : (X,A) \to (Y,B)$,
+        induces map $\bar{f} : X \cup CA \to Y \cup CB$
+        defined by $(x,t) \mapsto (f(x),t)$,
+        which induces $f_* : \waveH_n(X \cup CA) \to \waveH_n(Y \cup CB)$ for any $n \in \bbN$.
+    \end{note}
+
+    \subsection{Axioms for Homology}
+
+    \begin{defn}
+        \label{hyp:Ordinary-Homology-Theory}
+        A (Ordinary) Homology Theory (on $\mbf{TOP}$ with coefficient $G \in \mbf{Ab}$) is
+        functors $\{H_n(-,-;G) : \mbf{TOP(2)} \to \mbf{Ab}\}_{n \in \bbN}$,
+        with natural transformations ${\partial_{n,(X,A)} : H_n(X,A;G) \to H_n(A,\emptyset;G)}$
+        (called connecting homomorphism)\\
+        satisfying following axioms:\\
+        \begin{itemize}
+            \item \textbf{Dimension}:\\
+                $H_0 (\ast, \emptyset;G) = G$,
+                for any $n > 0$, $H_n (\ast, \emptyset;G) = 0$.\\
+            \item \textbf{Weak Equivalence}:\\
+                Weak equivalence $f : (X,A) \to (Y,B)$
+                induces isomorphism
+                $$
+                f_* : H_*(X,A;G) \to H_*(Y,B;G)
+                $$
+            \item \textbf{Long Exact Sequence}:\\
+                For any $(X,A) \in \mbf{TOP(2)}$, maps $A \hookrightarrow X$
+                and $(X,\emptyset) \to (X,A)$ induce a long exact sequence together
+                with $\partial$:
+                $$
+                \cdots \to H_{q+1}(A;G) \to H_{q+1}(X;G) \to H_{q+1}(X,A;G) \to H_q(A;G) \to \cdots
+                $$
+                where $H_n(X;G) := H_n(X,\emptyset;G)$.\\
+            \item \textbf{Additivity}:\\
+                If $(X,A) = \coprod_\lambda (X_\lambda, A_\lambda) $ in $\mbf{TOP(2)}$,
+                then inclusions $i_\lambda : (X_\lambda, A_\lambda) \to (X,A)$
+                induces isomorphism
+                $$
+                (\bigoplus i_{\ast ,\lambda})  : \bigoplus_{\lambda} H_*(X_\lambda,A_\lambda;G) \cong H_*(X,A;G)
+                $$
+            \item \textbf{Excision}:\\
+                If $(X;A,B)$ is an \textbf{excisive triad} (that is, $X = \interior{A} \cup \interior{B}$),
+                then inclusion $(A,A \cap B) \hookrightarrow (X,B)$
+                induces isomorphism
+                $$
+                H_*(A,A\cap B ; G) \cong H_*(X,B;G)
+                $$\\
+        \end{itemize}
+
+    \end{defn}
+
+    \begin{note}
+        An equivalent form of Excision  Axiom:\\
+        If $(X,A) \in \mbf{TOP(2)}$, $U$ is subspace of $A$ and $\ol{U} \subseteq \interior{A}$,
+        then inclusion $ i : (X - U, A - U) \hookrightarrow (X,A) $
+        induces isomorphism
+        $$
+        i_* : H_*(X-U, A-U;G) \to H_*(X,A;G)
+        $$\\
+    \end{note}
+
+    There is a critical criterion about weak homotopy equivalence between excisive triads,
+    we prove lemmas first:
+
+    \begin{lem}
+        \label{hyp:pushout-preserve-dr}
+        For
+        \[\begin{tikzcd}
+            Z & Y \\
+            X & {X \cup_Z Y}
+            \arrow["i"', from=1-1, to=2-1]
+            \arrow["f", from=1-1, to=1-2]
+            \arrow["{i_*}", from=1-2, to=2-2]
+            \arrow["{f_*}"', from=2-1, to=2-2]
+            \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+        \end{tikzcd}\]
+        if $D$ is deformation retract of X and $Z \subseteq D \subseteq X $,
+        then $D \cup_Z Y $ is deformation retract of $X \cup_Z Y$.
+    \end{lem}
+
+    \begin{prf}
+        Let $h : \id_X \simeq r \circ i$ where $r$ is the deformation retraction
+        $X \to D$.
+        Define $h_* : \id_{X \cup_Z Y} \simeq (i \cup_Z \id_Y) \circ (r \cup_Z \id_Y)$
+        \begin{align*}
+            h_* : (X \cup_Z Y) \times I & \to X \cup_Z Y\\
+            (x,t) & \mapsto f_*(h(x,t))\\
+            (y,t) & \mapsto i_*(y)
+        \end{align*}
+
+        Observe that $(X \cup_Z Y) \times I = (X \times I) \cup_{Z \times I} (Y \times I)$,
+        check that $h^*$ is continuous:
+
+        \[\begin{tikzcd}
+            {Z \times I} & {Y \times I} \\
+            {X \times I} & {(X\cup_Z Y) \times I} & Y \\
+            & X & {X \cup_Z Y}
+            \arrow[from=1-1, to=2-1]
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=2-1, to=2-2]
+            \arrow[from=1-2, to=2-2]
+            \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+            \arrow["{\id_{\id_Y}}", from=1-2, to=2-3]
+            \arrow["h"', from=2-1, to=3-2]
+            \arrow["{i_*}"', from=2-3, to=3-3]
+            \arrow["{f_*}"', from=3-2, to=3-3]
+            \arrow["{h_*}"', from=2-2, to=3-3]
+        \end{tikzcd}\]
+        \qed
+    \end{prf}
+
+    \begin{lem}
+        \label{hyp:double-mapping-cylinder-homotopy-pushout}
+        For maps $i : C \to A$, $j : C \to B$
+        define the double mapping cylinder
+        $M(i,j) := A \cup_{C \times \{0\}} C \times I \cup_{C \times \{1\}} B$.
+        If $i$ is cofibration,
+        then the quotient map
+        \begin{align*}
+            q : M(i,j) & \to A \cup_C B\\
+            a & \mapsto a\\
+            b & \mapsto b\\
+            (c,t) &  \mapsto c\\
+        \end{align*}
+        is a homotopy equivalence.
+    \end{lem}
+
+    \begin{prf}
+        \[\begin{tikzcd}
+            C & B \\
+            A & {A \cup_C B}
+            \arrow["i"', hook, from=1-1, to=2-1]
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=1-2, to=2-2]
+            \arrow["{i_A}"', from=2-1, to=2-2]
+        \end{tikzcd}\]
+        The canonical quotient $r : M_{i_A} \to A \cup_C B$ is a deformation retraction with homotopy:
+        \begin{align*}
+            h : (B \cup_{C \times 0} (A \times I)) \times I & \to B \cup_{C \times 0} (A \times I) = M_{i_A}\\
+                (a,t,s) & \mapsto (a,(1-s)t)\\
+                (b,s) & \mapsto b
+        \end{align*}
+        Observe that $C \times I \cup_C A \times \{1\}$ is a deformation retract of $A \times I$,
+        since $i : C \to A$ is cofibration.\\
+        Then we have $ M(i,j) =  B \cup_{C \times \{0\}}  (C \times I \cup_{C \times \{1\}} A \times \{1\})$
+        is a deformation retract of $ B \cup_{C \times \{0\}} A\times I = M_{i_A}$.
+        (use lemma \ref{hyp:pushout-preserve-dr})\\
+        Finally, an easy check shows that $M(i,j) \to M_{i_A} \xrightarrow{r} A \cup_C B $
+        is identical to $q$.\\
+        \qed
+    \end{prf}
+
+    \begin{thm}
+        \label{hyp:excisive-triads-weak-equivalence}
+        For excisive triads $(X;X_1,X_2)$, $(X';X'_1,X'_2)$
+        and map $e : X \to X'$,
+        if
+        \begin{align*}
+            e|_{X_1} : X_1 & \to X'_1\\
+            e|_{X_2} : X_2 & \to X'_2\\
+            e|_{X_3} : X_3 & \to X'_3
+        \end{align*}
+        
+        are weak equivalences, (where $X_3 := X_1 \cap X_2,\  X'_3 := X'_1 \cap X'_2$)
+        then $e$ is.
+    \end{thm}
+
+    \begin{prf}
+        Use an important \hyperref[hyp:criterion-HELP-Dn+1,Sn]{criterion} of 
+        weak homotopy equivalence,
+        it suffices to show forall $n \in \bbN$,
+        any commutative diagram below:
+        \[\begin{tikzcd}
+            {S^n} & {D^{n+1}} \\
+            X & {X'}
+            \arrow["i", hook, from=1-1, to=1-2]
+            \arrow["g"', from=1-1, to=2-1]
+            \arrow["e"', from=2-1, to=2-2]
+            \arrow["f", from=1-2, to=2-2]
+        \end{tikzcd}\]
+        can be filled like:
+        \[\begin{tikzcd}
+            {S^n} & {D^{n+1}} \\
+            {X} & {X'}
+            \arrow["i", hook, from=1-1, to=1-2]
+            \arrow["g"', from=1-1, to=2-1]
+            \arrow["e"', from=2-1, to=2-2]
+            \arrow[""{name=0, anchor=center, inner sep=0}, "f", from=1-2, to=2-2]
+            \arrow["{g^+}"', from=1-2, to=2-1]
+            \arrow["h", shorten <=8pt, shorten >=14pt, Rightarrow, from=0, to=2-1]
+        \end{tikzcd}\]
+        whose upper triangle commutes.\\
+
+        Let
+        \begin{align*}
+            A_1:= g^{-1}(X-\interior{X_1}) & \cup f^{-1}(X' - \interior{X'_1})\\
+            A_2:= g^{-1}(X-\interior{X_2}) & \cup f^{-1}(X' - \interior{X'_2})
+        \end{align*}
+        which are disjoint closed subsets of $D^{n+1}$.
+        Choose CW-complex structure on $D^{n+1}$ 
+        such that for each $n$-cell $\sigma_i$,
+        $\ol{\sigma_i} \cap (A_1 \cup A_2) = \ol{\sigma_i} \cap A_1 \text{ or } \ol{\sigma_i} \cap A_2$.
+        Now define
+        \begin{align*}
+            K_1:= \bigcup \{ \ol{\sigma_i} \mid g(\ol{\sigma_i} \cap S^n) \subseteq \interior{X_1} \text{ and } f(\ol{\sigma_i}) \subseteq \interior{X'_1} \} & = \bigcup \{ \ol{\sigma_i} \mid \ol{\sigma_i} \cap A_1 = \emptyset \}\\
+            K_2:= \bigcup \{ \ol{\sigma_i} \mid g(\ol{\sigma_i} \cap S^n) \subseteq \interior{X_2} \text{ and } f(\ol{\sigma_i}) \subseteq \interior{X'_2} \} & = \bigcup \{ \ol{\sigma_i} \mid \ol{\sigma_i} \cap A_2 = \emptyset \}
+        \end{align*}
+        which are subcomplexes of $D^{n+1}$ and satisfy $K_1 \cup K_2 = D^{n+1}$.
+        By \hyperref[hyp:HELP]{HELP}, we have:
+        \[\begin{tikzcd}
+            {S^n \cap K_1 \cap K_2} & {K_1 \cap K_2} \\
+            {X_1 \cap X_2} & {X'_1 \cap X'_2}
+            \arrow["i", from=1-1, to=1-2]
+            \arrow["{g|_{K_1 \cap K_2}}"', from=1-1, to=2-1]
+            \arrow[""{name=0, anchor=center, inner sep=0}, "{f|_{K_1\cap K_2}}", from=1-2, to=2-2]
+            \arrow["{e|_{X_1 \cap X_2}}"', from=2-1, to=2-2]
+            \arrow["{g_0}"', from=1-2, to=2-1]
+            \arrow["{h_0}", shorten <=13pt, shorten >=13pt, Rightarrow, from=0, to=2-1]
+        \end{tikzcd}\]
+        such that $h_0$ is $f|_{K_1 \cap K_2} \simeq e \circ g_0 \rel (S^n \cap K_1 \cap K_2)$.
+        Apply HELP to:
+        \[\begin{tikzcd}
+            {(S^n \cup K_1) \cap K_2} & {K_2} && {(S^n \cup K_2) \cap K_1} & {K_1} \\
+            {X_2} & {X'_2} && {X_1} & {X'_1}
+            \arrow["i_2", from=1-1, to=1-2]
+            \arrow["{f|_{K_2}}", from=1-2, to=2-2]
+            \arrow[from=2-1, to=2-2]
+            \arrow["{g_{K_2}}"', from=1-1, to=2-1]
+            \arrow["{h_{K_2}}", shorten <=10pt, shorten >=10pt, Rightarrow, from=1-2, to=2-1]
+            \arrow["i_1", from=1-4, to=1-5]
+            \arrow["{g_{K_1}}"', from=1-4, to=2-4]
+            \arrow["{f|_{K_1}}", from=1-5, to=2-5]
+            \arrow[from=2-4, to=2-5]
+            \arrow["{h_{K_1}}", shorten <=10pt, shorten >=10pt, Rightarrow, from=1-5, to=2-4]
+        \end{tikzcd}\]
+        where\\
+        $g_{K_i}$ are defined by $g_{K_i}|_{S^n \cap K_i} :=  g|_{{S^n \cap K_i}} $
+        and $g_{K_i}|_{K_1 \cap K_2} :=  g_0 $,\\
+        $h_{K_2}$ are defined by ($h_{K_1}$ is similar):
+        \begin{align*}
+        h_{K_2} : ((S^n \cup K_1) \cap K_2 ) \times I & \to X'_2\\
+            (x,t) & \mapsto
+            \begin{cases}
+                e(g(x)) \quad x \in S^n \cap K_2 \\
+                h_0(x,t) \quad x \in K_1 \cap K_2
+            \end{cases}
+        \end{align*}
+        We get:
+        \[\begin{tikzcd}
+            {(S^n \cup K_1)\cap K_2} & {K_2} && {(S^n \cup K_2) \cap K_1} & {K_1} \\
+            {X_2} & {X'_2} && {X_1} & {X'_1}
+            \arrow[from=1-1, to=1-2]
+            \arrow["{g_{K_2}}"', from=1-1, to=2-1]
+            \arrow[""{name=0, anchor=center, inner sep=0}, "{f|_{K_2}}", from=1-2, to=2-2]
+            \arrow["{e|_{X_2}}"', from=2-1, to=2-2]
+            \arrow["{g_2}"', from=1-2, to=2-1]
+            \arrow[from=1-4, to=1-5]
+            \arrow[""{name=1, anchor=center, inner sep=0}, from=1-5, to=2-5]
+            \arrow["{g_{K_1}}"', from=1-4, to=2-4]
+            \arrow["{e|_{X_1}}"', from=2-4, to=2-5]
+            \arrow["{g_1}"', from=1-5, to=2-4]
+            \arrow["{h_2}", shorten <=13pt, shorten >=19pt, Rightarrow, from=0, to=2-1]
+            \arrow["{h_1}", shorten <=13pt, shorten >=19pt, Rightarrow, from=1, to=2-4]
+        \end{tikzcd}\]
+        
+        Define $g^+$ and $h : f \simeq g \rel {S^n}$ by $g^+|_{K_i} := g_i$
+        and $h|_{K_i \times I} := h_i$.\\
+        $h|_{S^n \times I} = (e \circ g) \times \id_I$ ($h$ is $\rel S^n$)
+        since $h_i(-,t)|_{S^n \cap K_i} = h_{K_i}(-,t)|_{S^n \cap K_i} = e \circ g|_{S^n \cap K_i}$.\\
+        \qed
+    \end{prf}
+
+    \begin{note}
+        The proof above can be easily modified to case each weak equivalence appear in the statement is an $n$-equivalence.\\
+    \end{note}
+
+    Following theorem allow us to use CW-triads to approximate excisive triads:
+
+    \begin{thm}
+        For any excisive triad $(X;A,B)$,
+        there is a CW-triad $(\widetilde{X}; \widetilde{A}, \widetilde{B})$
+        (A CW-triad $(X;A,B)$ is $X$ and its subcomplex $A,B$ such that $A \cup B = X$)
+        and a map $r : \widetilde{X} \to X$
+        such that
+        \begin{align*}
+            r|_{\wtl{A}} : \wtl{A} & \to A\\
+            r|_{\wtl{B}} :  \wtl{B} & \to B \\
+            r|_{\wtl{C}} : \wtl{C} & \to C\\
+            r  : \wtl{X} & \to X
+        \end{align*}
+        are all weak homotopy equivalences (where $\wtl{C} := \wtl{A} \cap \wtl{B}$, $C := A \cap B$).
+        Furthermore, such $r$ is natural up to homotopy.
+    \end{thm}
+
+    \begin{prf}
+        Choose a CW-approximation $r_C : \wtl{C} \to C$
+        and extend it to $r_A : \wtl{A} \to A$, $r_B : \wtl{B} \to B$.
+        $\wtl{X} := \wtl{A} \cup_{\wtl{C}} \wtl{B}$.
+        $i : \wtl{C} \to \wtl{A} $ and $j : \wtl{C} \to \wtl{B}$
+        are cofibrations,
+        by lemma \ref{hyp:double-mapping-cylinder-homotopy-pushout}
+        we have homotopy equivalence $q : M(i,j) \to \wtl{X}$,
+        which induces homotopy equivalence of triads:
+        \begin{align*}
+            q : M(i,j) & \to \wtl{X}\\
+            q| : \wtl{A} \cup (\wtl{C} \times [0,\frac{2}{3})) & \to \wtl{A}\\
+            q| : \wtl{B} \cup (\wtl{C} \times (\frac{1}{3},1]) & \to \wtl{B}\\
+        \end{align*}
+        then we can deduce that
+        $r \circ q$
+        is a weak homotopy equivalence by theorem \ref{hyp:excisive-triads-weak-equivalence}.
+        Consquently, $r$ is weak homotopy equivalence.
+        $r$ is natural up to homotopy since each CW-approximation $r_C, r_A, r_B$ is.\\
+        \qed
+    \end{prf}
+    
+    Then we have:
+    \begin{defn}
+        A (Ordinary) Homology Theory on  CW-complexes with coefficient $G \in \mbf{Ab}$ is
+        functors $\{H_n(-,-;G) : \textbf{CW-pairs} \to \mbf{Ab}\}_{n \in \bbN}$,
+        with natural transformations ${\partial_{n,(X,A)} : H_n(X,A;G) \to H_n(A,\emptyset;G)}$
+        (called connecting homomorphism)\\
+        satisfying \hyperref[hyp:Ordinary-Homology-Theory]{axioms}
+        with the excision axiom changed to:
+        \begin{itemize}
+            \item \tbf{Excision}:\\ 
+                If (X;A,B) is an \tbf{CW-triad} (that is $X = A \cup B$ for subcomplexes $A$ and $B$)
+                then the inclusion $(A,A \cap B) \hookrightarrow (X,B)$
+                induces isomorphism
+                $$
+                H_*(A,A\cap B ; G) \cong H_*(X,B;G)
+                $$\\
+        \end{itemize}
+    \end{defn}
+
+    \begin{prop}
+        The homology groups defined in definition \ref{hyp:homology-group-defined-using-SP}
+        is a ordinary homology theory with coefficient $\bbZ$ on CW-complexes.
+    \end{prop}
+
+    \begin{prf}
+        \text{ }\\
+        \begin{itemize}
+            \item Dimension: by \hyperref[hyp:SP-Sn-is-K(Z,n)]{a corollary}, $H_q(\ast, \emptyset) = \pi_q(\SP S^0) =
+            \begin{cases}
+                \bbZ \quad q = 0\\
+                0  \quad q \geq 1
+            \end{cases}$.
+            \item Weak Equivalence: $\SP$ preserves weak equivalence.
+            \item Long Exact Sequence: use a \hyperref[hyp:quasi-fibration-SP(XUAxI)-to-SP(XUCA)]{corollary}
+                of Dold-Thom theorem.
+            \item Additivity:
+                For index set $\Lambda$, $P := \{S \mid S \subseteq \Lambda \}$.\\
+                Then define $Y_S := \bigvee_{\lambda \in S} X_\lambda \cup CA_\lambda = (\coprod_{\lambda \in S} X_\lambda) \cup C (\coprod_{\lambda \in S} A_\lambda)$,\\
+                and use fact that \hyperref[hyp:SP-commute-with-directed-colimit]{$\SP$ commutes with directed colimit}, we have\\
+                $\bigvee_{\lambda \in \Lambda} \SP (X_\lambda \cup CA_\lambda) = \Colim_{S \in P} \SP Y_S \approx  \SP (\Colim_{S \in P} Y_S) = \SP ((\coprod_{\lambda \in \Lambda} X_\lambda) \cup C (\coprod_{\lambda \in \Lambda} A_\lambda)) = \SP ( X \cup CA)$.\\
+                Which induces $\bigoplus_{\lambda \in \Lambda} \waveH_n(X_\lambda \cup C A_\lambda) \cong \pi_n (\bigvee_{\lambda \in \Lambda} \SP (X_\lambda \cup CA_\lambda)) \cong \pi_n(\SP (X \cup CA)) = \waveH_n(X \cup CA)$.
+            \item Excision: For CW-triad $(X;A,B)$,
+                $A/(A \cap B) \approx X/B$.
+                Apply theorem \ref{hyp:quasi-fibration-SPX-to-SP(X/A)} to $(Y \cup CZ, CZ)$ to show that
+                $H_n(Y,Z) \cong \waveH_n(Y/Z)$.\\
+        \end{itemize}
+        \qed
+    \end{prf}
+
+
+
 
 \end{document}
