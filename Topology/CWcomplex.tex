@@ -44,8 +44,28 @@
     \end{defn}
 
     \begin{defn}
+        For $n \geq 1$, a map between pairs $f : (X,A) \to (Y,B)  $ is an $n$-equivalence
+        if:
+        \begin{itemize}
+            \item $f_*^{-1}(\Im (\pi_0 B \to \pi_0 Y)) = \Im (\pi_0 A \to \pi_0 X)$
+            \item For all choices of basepoint $a$ in $A$,
+                $$
+                f_* : \pi_q(X,A,a) \to \pi_q(Y,B,f(a))
+                $$
+                is isomorphism for $ 1 \leq q \leq n -1$ and epimorphism for $q = n$.
+        \end{itemize}
+        
+    \end{defn}
+
+    \begin{defn}
+        A pair $(X,A)$ of topological spaces is \tbf{$n$-connected}
+        if $\pi_0(A) \to \pi_0(X)$ is surjection and $\pi_q(X,A) = 0$ for
+        $1 \leq q \leq n$.
+    \end{defn}
+
+    \begin{defn}
         For topological spaces $A \hookrightarrow X$, 
-        $A$ is a \textbf{strong deformation retract} of a neighborhood $V$
+        $A$ is a \textbf{strong deformation retract} of a neighborhood $V$ in $X$
         if:\\
         $\exists h : V \times I \to X$ such that\\
         $\forall x \in V,\ h(x,0) = x$\\
@@ -362,10 +382,6 @@
         $[f] = e_{\ast}^{-1} [\id_Z]$ implies $[e \circ f] = [\id_Z]$ and $[e \circ f \circ e] = [e]$ ($[f \circ e] = e_{\ast}^{-1}[e] = [\id_Y]$).\\
         \qed
     \end{prf}
-
-    \begin{thm}
-        Every weak homotopy equivalences between CW-pairs is a homotopy equivalence.
-    \end{thm}
 
     \begin{cor}
         CW-approximation is unique up to homotopy.
@@ -1052,6 +1068,7 @@
     Following theorem allow us to use CW-triads to approximate excisive triads:
 
     \begin{thm}
+        \label{hyp:CW-triad-approx-excisive-triad}
         For any excisive triad $(X;A,B)$,
         there is a CW-triad $(\widetilde{X}; \widetilde{A}, \widetilde{B})$
         (A CW-triad $(X;A,B)$ is $X$ and its subcomplex $A,B$ such that $A \cup B = X$)
@@ -1110,7 +1127,7 @@
 
     \begin{prop}
         The homology groups defined in definition \ref{hyp:homology-group-defined-using-SP}
-        is a ordinary homology theory with coefficient $\bbZ$ on CW-complexes.
+        is a ordinary homology theory on CW-complexes with coefficient $\bbZ$.
     \end{prop}
 
     \begin{prf}
@@ -1128,7 +1145,7 @@
                 For index set $\Lambda$, $P := \{S \mid S \subseteq \Lambda \}$.\\
                 Then define $Y_S := \bigvee_{\lambda \in S} X_\lambda \cup CA_\lambda = (\coprod_{\lambda \in S} X_\lambda) \cup C (\coprod_{\lambda \in S} A_\lambda)$,\\
                 and use fact that \hyperref[hyp:SP-commute-with-directed-colimit]{$\SP$ commutes with directed colimit}, we have\\
-                $\bigvee_{\lambda \in \Lambda} \SP (X_\lambda \cup CA_\lambda) = \Colim_{S \in P} \SP Y_S \approx  \SP (\Colim_{S \in P} Y_S) = \SP ((\coprod_{\lambda \in \Lambda} X_\lambda) \cup C (\coprod_{\lambda \in \Lambda} A_\lambda)) = \SP ( X \cup CA)$.\\
+                $\bigvee_{\lambda \in \Lambda} \SP (X_\lambda \cup CA_\lambda) = \Colim_{S \in P} \SP Y_S \approx  \SP (\Colim_{S \in P} Y_S) = \SP ((\coprod_{\lambda \in \Lambda} X_\lambda) \ \cup \ C (\coprod_{\lambda \in \Lambda} A_\lambda)) = \SP ( X \cup CA)$.\\
                 Which induces $\bigoplus_{\lambda \in \Lambda} \waveH_n(X_\lambda \cup C A_\lambda) \cong \pi_n (\bigvee_{\lambda \in \Lambda} \SP (X_\lambda \cup CA_\lambda)) \cong \pi_n(\SP (X \cup CA)) = \waveH_n(X \cup CA)$.
             \item Excision: For CW-triad $(X;A,B)$,
                 $A/(A \cap B) \approx X/B$.
@@ -1138,7 +1155,396 @@
         \qed
     \end{prf}
 
+    \section{Homotopy and Eilenberg-Mac Lane Spaces}
 
+    \begin{thm}
+        \label{hyp:Homotopy-Excision-Theorem}
+        (Blakers–Massey) Homotopy Excision Theorem:\\
+        For pointed CW-triad $(X;A,B)$
+        such that $C := A \cap B \neq \emptyset$,
+        if $(A,C)$ is $(m-1)$-connected and
+        $(B,C)$ is $(n-1)$-connected
+        where $m \geq 2$, $n \geq 1$.
+        Then $i : (A,C) \to (X,B)$ is an $(m+n-2)$-equivalence for pairs.
+    \end{thm}
 
+    \begin{note}
+        We can replace the "CW-triad" with "excisive triad" in condition
+        by theorem \ref{hyp:CW-triad-approx-excisive-triad}.
+    \end{note}
+
+    \begin{prf}
+        Define (pointed) the triad homotopy group for $q \geq 2$:\\
+        $$
+        \pi_q(X;A, B) := \pi_{q-1}(P_{i_{B,X}}, P_{i_{C,A}})
+        $$
+        where $i_{B,X} : B \hookrightarrow X$, $i_{C,A} : C \hookrightarrow A$
+        and $P_{f}$ is the homotopy fiber\\
+        $$
+        \{ (y,\gamma) \in Y \times M(I,Z)_* \mid \gamma(1) = f(y) \}
+        $$
+        of pointed map $f : Y \to Z$.
+        Use long exact sequence of pairs:
+        \begin{align*}
+            & \cdots \to \pi_{q}(P_{i_{B,X}}, P_{i_{C,A}}) \to \pi_{q-1}(P_{i_{C,A}})
+            \to \pi_{q-1} (P_{i_{B,X}}) \to \pi_{q-1}(P_{i_{B,X}}, P_{i_{C,A}})
+            \to \pi_{q-2}(P_{i_{C,A}}) \to \cdots \\
+            & \cdots \to
+            \pi_{1}(P_{i_{B,X}}, P_{i_{C,A}}) \to \pi_{0}(P_{i_{C,A}})
+            \to \pi_{0} (P_{i_{B,X}}) 
+        \end{align*}
+        and observe that $\pi_{q}(P_{i_{X,B}}) \cong \pi_{q+1}(X,B)$
+        since for any $f : S^q \to P_{i_{X,B}}$
+        we have:
+        \[\begin{tikzcd}
+            {S^q} \\
+            & {P_{i_{B,X}}} & {M(I,X)_*} \\
+            & B & X
+            \arrow[from=2-2, to=3-2]
+            \arrow[from=3-2, to=3-3]
+            \arrow[from=2-2, to=2-3]
+            \arrow[from=2-3, to=3-3]
+            \arrow["f", from=1-1, to=2-2]
+            \arrow["{f'}"', curve={height=-12pt}, from=1-1, to=2-3]
+            \arrow["g", curve={height=12pt}, from=1-1, to=3-2]
+            \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-2, to=3-3]
+        \end{tikzcd}\]
+        use the fact $f' \in M(S^q,M(I,X)_*)_* \cong M(S^q \wedge I, X)_* \ni f'' $
+        and $S^q \wedge I \approx D^{q+1}$ with
+        \begin{align*}
+            S^q & \hookrightarrow S^q \wedge I \approx D^{q+1}\\
+            s  & \mapsto (s,1)
+        \end{align*}
+        the condition $f'(s)(1) = g(s)$ is equivalent to $f''((s,1)) = g(s)$,
+        that is have a map $f$ is equivalent to have a map $f'' : (D^{q+1},S^q) \to (X,B)$.
+        With the analogue statement also valid for homotopies $S^q \times I \to P_{i_{X,B}}$,
+        we have $\pi_q(P_{i_{B,X}}) = [S^q,\ast; P_{i_{B,X}}, \ast] \cong [D^{q+1},S^q;X,B] = \pi_{q+1}(X,B)$.\\
+        Rewrites the long exact sequence of pairs above to:
+        \begin{align*}
+            & \cdots \to \pi_{q+1}(X;A,B) \to \pi_{q}(A,C)
+            \to \pi_{q} (X,B) \to \pi_{q}(X;A,B)
+            \to \pi_{q-1}(A,C) \to \cdots \\
+            & \cdots \to
+            \pi_{2}(X;A,B) \to \pi_{1}(A,C)
+            \to \pi_{1}(X,B) 
+        \end{align*}
+        Conditions $m \geq 1, n \geq 1$ guarantees
+        $\pi_0(C) \to \pi_0 (A)$ and $\pi_0(C) \to \pi_0(B)$
+        are surjections.\\
+        $m \geq 2$ is equivalent to $\pi_1(A,C) = 0$, which implies $\pi_0(C) \to \pi_0 (A)$ is bijection.\\
+        For $x \in \pi_0(A \cap_C B)$, we can always find
+        $b \in \pi_0(B), i_{B,X\ *} (b) = x$ or $a \in \pi_0(A), i_{A,X\ *} (a) = x$
+        which becomes $b \in \pi_0(B), i_{B,X\ *} (b) = x$ or $c \in \pi_0(C), i_{C,X\ *} (c) = x$
+        when  $\pi_0(C) \to \pi_0 (A)$ is bijection.
+        That is equivalent to $\pi_0(B) \to \pi_0(X) $ is bijection,
+        which means $\pi_1(X,B) = 0$.\\
+
+        We only need to show that for $2 \leq q \leq m+n-2$,
+        $\pi_q(X;A,B) = 0$.\\
+
+        With $J^{q-1} := (\partial I^{q-1} \times I) \cup (I^{q-1} \times \{ 0 \})$,
+        we have:
+
+        \begin{align*}
+            \pi_{q}(P_{i_{B,X}}, P_{i_{C,A}})
+            & = [I^{q}, \partial I^{q}, J^{q-1}; P_{i_{B,X}}, P_{i_{C,A}},*]\\
+            & = [I^{q} \wedge I;\ I^q, \ \partial I^{q} \wedge I,\ J^{q-1} \wedge I \to X; B, A, \ast]\\
+            & := \text{relative homotopy classes of pointed maps $f : I^q \wedge I \to X$ who satisfy:}
+            \quad \quad \begin{cases}
+                f(I^q) & \subseteq B\\
+                f(\partial I^{q} \wedge I) & \subseteq A\\
+                f(\partial I^{q}) & \subseteq C\\
+                f(J^{q-1} \wedge I) & = *
+            \end{cases}\\
+            & \quad \quad \text{``relative'' means the homotopy $h$ determine the classes satisfy:}
+            \quad \quad \begin{cases}
+                h(I^q \times I) & \subseteq B\\
+                h((\partial I^{q} \wedge I) \times I) & \subseteq A \\
+                h(\partial I^{q} \times I) & \subseteq C\\
+                h((J^{q-1} \wedge I) \times I) & = *
+            \end{cases}\\
+            & \quad \quad \text{(notice that $\partial I^{q} \wedge I \cap I^q = \partial I^q$, therefore $f(\partial I^q) \subseteq A \cap B = C$)}\\
+            & \quad \quad \quad \text{(this is called (relative) homotopy class of maps of tetrads)}\\
+            & \quad \\
+            & = [(I^{q} \times I)/ K;\ I^q \times \{1\},\ (\partial I^{q} \times I) / K,\  (J^{q-1} \times I)  / K \to X; B, A, \ast]\\
+            & \quad \quad \text{($K := I^q \times \{0\} \cup \{i_0\} \times I$)}\\
+            & = [I^{q+1};\ (I^q \times \{1\}) \cup K,\ (\partial I^{q} \times I) \cup K,\  J^{q-1} \times I \cup K \to X; B, A, \ast]\\
+            & \quad \\
+            & = [I^{q+1};\ I^q \times \{1\},\ I^{q-1} \times \{1\} \times I,\  J^{q-1} \times I \cup I^q \times \{0\} \to X; B, A, \ast]\\
+            & \quad \quad \text{(notice that $\partial I^q = \partial I^{q-1} \times I \cup I^{q-1} \times \{ 0 , 1\} $)}
+        \end{align*}
+
+        We can assume that $(A,C)$ have no relative $q<m$-cells and
+        $(B,C)$ have no relative $q<n$-cells.\\
+        And we can assume that $X$ has finite many cells
+        since $I^q$ is compact.\\
+        For subcomplexes $C \subseteq A' \subseteq A$,
+        where $A = e^m \cup A'$ (attaching one cell from $A'$).\\
+        Let $X' := A' \cup_C B$,
+        if the results hold for $(X';A',B)$ and $(X;A,X')$,
+        then it hold for $(X;A,B)$ since we have
+        map between exact homotopy sequences of triples
+        $(A,A',C)$ and  $(X,X',B)$:
+        \[\begin{tikzcd}
+            {\pi_{q+1}(A,A')} & {\pi_q(A',C)} & {\pi_q(A,C)} & {\pi_q(A,A')} & {\pi_{q-1}(A',C)} \\
+            {\pi_{q+1}(X,X')} & {\pi_q(X',B)} & {\pi_q(X,B)} & {\pi_q(X,X')} & {\pi_{q-1}(X',B)}
+            \arrow["{i_{2,q+1}}"', from=1-1, to=2-1]
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=2-1, to=2-2]
+            \arrow[from=2-2, to=2-3]
+            \arrow[from=1-2, to=1-3]
+            \arrow[from=1-3, to=1-4]
+            \arrow[from=2-3, to=2-4]
+            \arrow[from=1-4, to=1-5]
+            \arrow[from=2-4, to=2-5]
+            \arrow["{i_{1,q-1}}"', from=1-5, to=2-5]
+            \arrow["{i_{2,q}}"', from=1-4, to=2-4]
+            \arrow["{i_{3,q}}"', from=1-3, to=2-3]
+            \arrow["{i_{1,q}}"', from=1-2, to=2-2]
+        \end{tikzcd}\]
+        induced by inclusion $(A,A',C) \hookrightarrow (X,X',B)$.
+        If the result hold for $(X';A',B)$ and $(X;A,X')$,
+        maps  $i_{1,q},\ i_{2,q}$
+        are isomorphisms when $1 \geq q \geq m+n-3$,
+        are epimorphisms when $q = m+n-2$.
+        Notice the $5$-lemma says that\\
+        if $i_{1,q}$ and $i_{2,q}$ are epimorphisms, $i_{1,q-1}$ are monomorphism, then $i_{3,q}$ is epimorphism.\\
+        if $i_{1,q}$ and $i_{2,q}$ are monomorphisms, $i_{2,q+1}$ are epimorphism, then $i_{3,q}$ is monomorphism.\\
+        We also have if $C \subseteq B' \subseteq B$ with $B = B' \cup e^n$,
+        the result hold for CW-triads $(X';A,B')$ and $(X;X',B)$
+        where $X' = A \cup_C B'$,
+        since $(A,C) \hookrightarrow (X,B)$ factors as
+        $(A,C) \hookrightarrow (X',B') \hookrightarrow (X,B)$.\\
+
+        Now we can assume that $A = C \cup D^m$ and $B = C \cup D^n$.\\
+
+        The current goal of proof is to prove any
+        $$
+        f : (I^{q+1};\ I^q \times \{1\},\ I^{q-1} \times \{1\} \times I,\  J^{q-1} \times I \cup I^q \times \{0\}) \to (X; B, A, \ast)
+        $$
+        is nullhomotopic for any $q+1$ with $2 \leq q+1 \leq m+n-2$.\\
+        For $a \in \interior{D^m}$, $b\in \interior{D^n}$ We have inclusions of based triads:
+        $$
+            (A;A,A-\{a\}) \hookrightarrow (X - \{b\};X -\{b\}, X - \{a,b\})
+            \hookrightarrow (X;X-\{b\},X-\{a\}) \hookleftarrow (X;A,B)
+        $$
+        The first and the third induces
+        isomorphisms on homotopy groups of triads
+        since $B$ is a strong deformation retract of $X - \{a\}$ in $X$
+        and $A$ is a strong deformation retract of $X - \{b\}$ in $X$.
+        $\pi_{*}(A;A,A - \{a\}) = 0$ since
+        $\pi_*(A,A - \{a\}) \to \pi_*(A,A \cap (A - \{a\}) )$
+        are isomorphisms.\\
+        
+        Current goal : choose good $a,b$ to show $f$ regarded as a pointed traid map to $(X;X-\{b\},X-\{a\})$
+        is homotopic to a map
+        $$
+        f' : (I^{q+1};\ I^{q-1} \times \{1\} \times I,\ I^q \times \{1\},\  J^{q-1} \times I \cup I^q \times \{0\}) \to (X - \{b\}; X-\{b\}, X-\{a,b\}, \ast)
+        $$
+        if $2 \leq q+1 \leq m+n-2$.\\
+
+        \begin{note}
+            We want to homotopically remove some point $f^{-1}(b)$,
+        first we may want to construct some Uryssohn function $u$
+        separating $f^{-1}(a) \cup J^{q-1} \times I \cup I^q \times \{0\}$ and $f^{-1}(b)$ 
+        and construct homotopy of cube $h^+: (r,s,t) \mapsto (r,(1-u(r,s)t)s)$
+        wishing that $f(h^+(r,s,1))$ would miss $b$.
+        The problem in this method is that
+        points $f^{-1}(b)$ in the cube would be homotopically
+        replaced by other points.
+        Since our desire homotopy does not change the first $q$
+        coordinates of the cube, we want to separate
+        $p^{-1}(p(f^{-1}(a))) \cup J^{q-1} \times I$
+        and
+        $p^{-1}(p(f^{-1}(b)))$
+        (where $p : I^q \times I \to I^q$).
+        Our problem is to find suitable $a$, $b$ such that
+        $p(f^{-1}(a)) \cap p(f^{-1}(b)) = \emptyset$.\\
+        \end{note}
+        
+        We use manifold structure on $D^m$ and $D^n$ to achieve it,
+        now we homotopically approximate $f$ by a map $g$ which 
+        smooth on $f^{-1}(D^m_{<1/2} \cup D^n_{<1/2})$.\\
+
+        Let $U_{<r} := f^{-1}(D^m_{<r} \cup D^n_{<r})$,
+        Use smooth deformation theorem to construct smooth map (for any $0 < \epsilon$)
+        $g' : U_{<3/4} \to D^m_{<3/4} \cup D^n_{<3/4}$ with homotopy
+        $h_1 : g' \simeq f|_{U_{<3/4}}$ (and bound $|g'(x) - f(x)| < \epsilon$ for any $x \in U_{<1}$)
+        and take partition of unity
+        $\{\rho, \rho'\}$ with subcoordinates $\{I^{q+1} - \ol{U_{<1/2}},\ U_{<3/4}\}$,
+        we have:
+        \begin{align*}
+            g & := \rho f + \rho' g' \\
+            h_2 & : g \simeq f \rel (I^{q+1} - U_{<3/4}) \\
+            h_2 & : I^{q+1} \times I \to X\\
+            & \quad (x,t) \mapsto \rho(x)f(x) + \rho'(x)h_1(x,t)\\
+        \end{align*}
+        with scalar multiplication and addition is already defined on smooth structure on $D^m_{<3/4} \cup D^n_{<3/4}$.\\
+        We could assmue that $g(I^{q-1} \times \{1\} \times I) \cap D^n_{<1/2} = \emptyset$
+        (which implies $g$ is a map of tetrads to $(X;X-\{b\},X-\{a\},\ast)$)
+        and $g(I^{q} \times \{1\}) \cap D^m_{<1/2} = \emptyset$
+        since $f(I^{q-1} \times \{1\} \times I) \subseteq A$ and $f(I^q\times \{1\}) \subseteq B$
+        and we can always tighten the bound $\epsilon$,
+        (Similar argument also hold for $h_2$,
+        then we have $h_2 : g \simeq f$ as homotopy between maps of tetrads.)\\
+
+        Use the manifold structure to find good $(a,b)$:\\
+        $V := g^{-1}(D^m_{<1/2}) \times g^{-1}(D^n_{<1/2})$
+        is a sub-manifold of $I^{2(q+1)}$.
+        Consider $W := \{ (v,v') \in V \mid p(v)=p(v') \}$,
+        which is the zero set of smooth submersion
+        $(v,v') \mapsto p(v) - p(v')$.
+        $W$ is smooth manifold with codimension $q$.
+        Therefore the map $(g,g) : W \to D^m_{<1/2} \times D^n_{<1/2}$
+        is smooth map between manifolds of dimension $q+2$ and $m+n$.
+        The map is not surjection since $q+2 < m+n$.
+        Then we have $(a,b) \notin (g,g)(W)$
+        (that is, $p(g^{-1}(a)) \cap p(g^{-1}(b))$).\\
+
+        Since $g(I^{q-1} \times \{1\} \times I) \cap D^n_{<1/2} = \emptyset$
+        and $g(J^{q-1} \times I) \cap D^n_{<1/2} = \emptyset$,
+        we have $g(\partial I^q \times I) \cap D^n_{<1/2} = \emptyset$.
+        By Uryssohn's lemma, we have $u : I^{q} \to I$ separating
+        $p(g^{-1}(a)) \cup \partial I^q$ and $p(g^{-1}(b))$.
+        Finally we have:
+        \begin{align*}
+            h' : I^q \times I \times I & \to I^q \times I\\
+            (r,s,t) & \mapsto (r,(1-u(r)t)s)
+        \end{align*}
+        and $h := g \circ h'$, $f' := h(-,1)$.
+        $f'(I^{q+1}) \cap \{b\} = \emptyset$ since if
+        $\E (r,s) \in I^q \times I, \ f'(r,s)=b$, then
+        $b = g(r,(1-u(r))s) = g(r,0) = \ast$ leads to contradiction.\\
+        Last step is to check that $h$ is a homotopy between maps 
+        $$
+        (I^{q+1};\ I^{q-1} \times \{1\} \times I,\ I^q \times \{1\},\  J^{q-1} \times I \cup I^q \times \{0\}) \to (X; X-\{b\}, X-\{a\}, \ast)
+        $$
+        Since $g$ is, $g \circ h'$ is too.\\
+        \qed
+
+    \end{prf}
+
+    \begin{cor}
+        Suppose that $Y_0 \hookrightarrow Y$ is cofibration,
+        $(Y,Y_0)$ is $(r-1)$-connected and $Y_0$ is $(s-1)$-connected,
+        then $(Y,Y_0) \to (Y/Y_0 , \ast)$ is $(r+s-1)$-equivalence.
+        ($r \geq 2,\ s \geq 1$)
+    \end{cor}
+
+    \begin{prf}
+        $Y_0 \hookrightarrow C Y_0$ is cofibration and $(C Y_0 , Y_0)$
+        is $s$-connected.
+        Use \hyperref[hyp:Homotopy-Excision-Theorem]{homotopy excision theorem} (with
+        $X= Y \cup C Y_0,\ A = Y,\ B=C Y_0,\ C = Y_0$)
+        to see $(Y,Y_0) \to (Y \cup C Y_0, C Y_0)$
+        is $(r+s-1)$-equivalence.
+        And $(Y \cup C Y_0, C Y_0) \to (Y/Y_0, \ast)$ is homotopy equivalence
+        since $Y_0 \hookrightarrow Y$ is cofibration.\\
+        \qed
+    \end{prf}
+
+    \begin{cor}
+        For $n \geq 2$, $f : X \to Y$ is $(n-1)$-equivalence
+        between $(s-1)$-connected spaces,
+        then $(M_f,X) \to (C^+_f, \ast)$ is $(n+s-1)$-equivalence.
+        Where $C^+_f := Y \cup_f C^+X $, $C^+X := (X \times I) / (X \times \{1\})$.
+        is the unreduced mapping cone and the unreduced cone.
+    \end{cor}
+
+    \begin{prf}
+        $f$ is $(n-1)$-equivalence implies $(M_f,X)$ is $(n-1)$-connected.
+        Use corollary above.\\
+        \qed
+    \end{prf}
+
+    \begin{cor}
+        For $n\geq 2$,
+        if $f : X \to Y$ is pointed map between
+        $(n-1)$-connected well-pointed spaces
+        (that is, pointed space whose inclusion of the base point is cofibration).
+        Then $C_f$ is $(n-1)$-connected and $\pi_n(M_f,X) \to \pi_n(C_f, \ast)$
+        is isomorphism.
+    \end{cor}
+
+    \begin{prf}
+        Use homotopy extension property to extend to unreduced case.
+        $f$ is map between $(n-1)$-connected space
+        implies $f$ is at least a $(n-1)$-equivalence.
+        Therefore $(M_f,X) \to (C_f,\ast)$ is $(2n-1)$-equivalence,
+        Since we have $n < 2n-1$ for any $n \geq 2$,
+        $\pi_n(M_f,X) \to \pi_n(C_f, \ast)$ is isomorphism.\\
+        \qed
+    \end{prf}
+
+    \begin{thm}
+        (Freudenthal Suspension Theorem)
+        If $X$ is well-pointed and $(n-1)$-connected ($n \geq 1$),
+        then the map:
+        \begin{align*}
+            \sigma : \pi_q(X) & \to \pi_{q+1}(\Sigma X) \\
+            f & \mapsto \Sigma f
+        \end{align*}
+        is isomorphism if $q < 2n-1$
+        and epimorphism if $q = 2n-1$.
+    \end{thm}
+
+    \begin{prf}
+        If we have $f : (I^q, \partial I^q) \to (X, \ast)$
+        then $f\times \id_I : I^{q+1} \to X \times I$
+        will give a map
+        $\ol{f \times \id_I} : (I^{q+1},\ \partial I^{q+1},\ \partial I^q \times I \cup \partial I \times \{1\}) \to (CX,X,\ast)$
+        since $J^q = \partial I^q \times I \cup \partial I \times \{0\}$,
+        it does not give a map in $\pi_{q+1}(CX,X)$.
+        we should change $\ol{f \times \id_I}$ into $\ol{f \times -\id_I}$.
+        we have commutative diagram:
+        \[\begin{tikzcd}
+            {\pi_{q+1}(CX,X)} & {\pi_{q+1}(CX/X,\ast)} && {[\ol{f \times -\id_I}]} & {[p \circ (\ol{f \times -\id_I})]} \\
+            {\pi_{q}(X)} & {\pi_{q+1}(\Sigma X)} && {[f]} & {[- \Sigma f]}
+            \arrow["{p_*}", from=1-1, to=1-2]
+            \arrow[Rightarrow, no head, from=1-2, to=2-2]
+            \arrow["\partial"', curve={height=6pt}, from=1-1, to=2-1]
+            \arrow["{-\sigma}"', from=2-1, to=2-2]
+            \arrow[curve={height=6pt}, maps to, from=1-4, to=2-4]
+            \arrow[maps to, from=2-4, to=2-5]
+            \arrow[maps to, from=1-4, to=1-5]
+            \arrow[Rightarrow, no head, from=1-5, to=2-5]
+            \arrow["i"', curve={height=6pt}, from=2-1, to=1-1]
+            \arrow[curve={height=6pt}, maps to, from=2-4, to=1-4]
+        \end{tikzcd}\]
+        Where $p : (CX,X) \to (CX/X, \ast)$
+        is the canonical quotient map and 
+        $i : [f] \to [\ol{f \times -\id_{I}}]$
+        makes $\pi_{q+1}(CX) \to \pi_{q+1}(CX,X) \to \pi_q(X) \to \pi_q(CX)$
+        split in middle
+        (that is, $i$ is inverse of the connecting homomorphism $\partial$).
+        We verify the commutativity:
+        \begin{align*}
+            -\Sigma f : (I^{q+1}, \partial I^{q+1}) & \to (CX/X, \ast)\\
+            (s,t) & \mapsto f(s) \wedge (1-t)\\
+            p \circ (\ol{f \times -\id_I}) : (I^{q+1}, \partial I^{q+1}) & \to (CX/X, \ast)\\
+            (s,t) & \mapsto f(s) \wedge (1-t)
+        \end{align*}
+        Since $X \hookrightarrow CX$ is cofibration
+        and $n$-equivalence between $(n-1)$-connected spaces,
+        $p$ is an $2n$-equivalence.
+        Therefore, $q+1 < 2n$ implies $-\sigma$ is isomorphism,
+        $q+1 = 2n$ implies $-\sigma$ is epimorphism,
+        and we have $-\sigma$ is iff $\sigma$ is.\\
+        \qed
+        
+    \end{prf}
+
+    \begin{defn}
+        We now define the $q$-th stable homotopy group:
+        $$
+        \pi^s_k(X) := \Colim_{r} \pi_{k+r} (\Sigma^r X) \cong \pi_{2k+2} (\Sigma^{k+2} X) \cong \pi_{k+n} (\Sigma^{n} X) \quad \quad (n-1 > k)
+        $$
+        The relation right side is directly from $\Sigma^n X$ is $(n-1)$-connected.
+    \end{defn}
+
+    \begin{note}
+        We'll see later that $\{\pi^s_n\}_{n \in \bbN}$ defines a
+        generalized homology theory.
+    \end{note}
 
 \end{document}
