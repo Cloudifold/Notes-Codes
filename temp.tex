@@ -32,7 +32,7 @@
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{lem}[thm]{Lemma}
 \newtheorem{prop}[thm]{Proposition}
-\newtheorem*{cor}{Corollary}
+\newtheorem{cor}[thm]{Corollary}
 
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[section]
@@ -270,6 +270,8 @@
 \newcommand{\unitcell}[1]{\overset{\!\!\!\! \circ}{\bbD^{#1}}}
 \newcommand{\E}{\exists}
 \newcommand{\A}{\forall}
+\newcommand{\colim}{\varinjlim}
+\renewcommand{\lim}{\varprojlim}
 \newcommand{\waveH}{\tilde{H}}
 \newcommand{\wtl}[1]{\widetilde{#1}}
 \newcommand{\Fct}{\mathrm{Funct}}
@@ -289,10 +291,9 @@
 \DeclareMathOperator{\Spec}{\rm{Spec}}
 \DeclareMathOperator{\Proj}{\rm{Proj}}
 \DeclareMathOperator{\Supp}{\rm{Supp}}
-\DeclareMathOperator{\Ker}{\rm{Ker}}
 \DeclareMathOperator{\Nil}{\rm{Nil}}
 \DeclareMathOperator{\sh}{\rm{sh}}
-\DeclareMathOperator{\Coker}{\rm{Coker}}
+\DeclareMathOperator{\coker}{\rm{coker}}
 \DeclareMathOperator{\Rank}{\rm{Rank}}
 \DeclareMathOperator{\Frac}{\rm{Frac}}
 \DeclareMathOperator{\Rad}{\rm{Rad}}
@@ -382,6 +383,7 @@
 \DeclareMathOperator{\PGL}{PGL}
 \DeclareMathOperator{\PSL}{PSL}
 \DeclareMathOperator{\SP}{SP}
+\DeclareMathOperator{\Fin}{Fin}
 \DeclareMathOperator{\Lim}{Lim}
 \DeclareMathOperator{\Colim}{Colim}
 \newcommand{\Cat}[1]{(\textrm{#1})}

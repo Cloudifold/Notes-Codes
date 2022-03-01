@@ -10,21 +10,22 @@
 
     \section{Basic Definitions and Lemmas}
     \begin{defn}
-        A CW-complex is a space constructed by successively attaching cells:\\
-        For $n \in \bbN, n \geq 1$, there are maps $\{ \varphi_i : S^{n-1} \to X^{n-1} \}_{i \in I_n}$
+        A \tbf{CW-complex} is a space constructed by successively attaching cells:\\
+        For $n \in \bbN, n \geq 0$, there are maps $\{ \varphi_i : S^{n-1} \to X^{n-1} \}_{i \in I_n}$
         (called characteristic maps). The way to construct $X^n$ (called $n$-skeleton of $X$) is :\\
-        (starting from $X^0 = \prod_{I_0} \ast $)
+        (starting from $X^{-1} = \emptyset$, if we start from $X^{-1} = A$, we 
+        say $(X,A)$ is a \tbf{relative CW-complex})
 
         \[\begin{tikzcd}
-            {\prod_{i \in I_n}S^{n-1}} & {X^{n-1}} \\
-            {\prod_{i\in I_n}D^n} & {X^n}
+            {\coprod_{i \in I_n}S^{n-1}} & {X^{n-1}} \\
+            {\coprod_{i\in I_n}D^n} & {X^n}
             \arrow[hook, from=1-1, to=2-1]
             \arrow[from=2-1, to=2-2]
-            \arrow["{\prod_{i \in I_n}\varphi_i}", from=1-1, to=1-2]
+            \arrow["{\coprod_{i \in I_n}\varphi_i}", from=1-1, to=1-2]
             \arrow[hook, from=1-2, to=2-2]
             \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
         \end{tikzcd}(pushout)\]\\
-        and the resulting CW-complex $X$ is $\Colim \{X^0 \to \cdots \to X^n \to X^{n+1} \to \cdots \}$.
+        and the resulting CW-complex $X$ is $\colim \{X^0 \to \cdots \to X^n \to X^{n+1} \to \cdots \}$.
         The images of $\interior{D^n_i}$ in $X$ is called open cell $e^n_i$ of $X$.
     \end{defn}
 
@@ -38,7 +39,7 @@
         The Infinite Symmetric Product of a pointed space $(X,x_0)$ is colimit of its $n$-th Symmetric Products
         ( $\SP^n X := (\prod_{\{0,1,\dots , n-1\}} X ) / S_n$ ) :\\
         \begin{align*}
-            \Colim \{\dots \hookrightarrow \SP^{n} X & \hookrightarrow \SP^{n+1} X \hookrightarrow \cdots \} \\
+            \colim \{\dots \hookrightarrow \SP^{n} X & \hookrightarrow \SP^{n+1} X \hookrightarrow \cdots \} \\
             \{x_1, \dots, x_n\} & \mapsto \{x_0, x_1, \dots, x_n\}    
         \end{align*}
     \end{defn}
@@ -92,6 +93,31 @@
         $\forall x \in X,\ h(x,0) = x$\\
         $h(A \times I) \subseteq A$, $h(V \times I) \subseteq V$.\\
         $h(V,1) \subseteq A$
+    \end{defn}
+
+    \begin{defn}
+        For a topological group $G$, a \tbf{relative $G$-(equivariant) CW-complex} $(X,A)$ is a space constructed by successively attaching
+        \tbf{$G$-equivariant cells} $G/H \times D^n$ on a $G$-space $A$:\\
+        For $n \in \bbN, n \geq 0$, there are maps $\{ \varphi_i : G/H_i \times S^{n-1} \to X^{n-1} \}_{i \in I_n}$
+        (called characteristic maps)
+        where each $H_i$ is closed subgroup of $G$
+        and $G$ acts trivially on $D^n$, $S^{n-1}$. 
+        The way to construct $X^n$ (called $n$-skeleton of $X$) is:\\
+        (starting from $X^{-1} = A$ where $A$ is an $G$-space)
+        \[\begin{tikzcd}
+            {\coprod_{i \in I_n} (G/H_i \times S^{n-1})} & {X^{n-1}} \\
+            {\coprod_{i\in I_n}(G/H_i \times D^n)} & {X^n}
+            \arrow[hook, from=1-1, to=2-1]
+            \arrow["{\coprod_{i \in I_n}\phi_i}", from=2-1, to=2-2]
+            \arrow["{\coprod_{i \in I_n}\varphi_i}", from=1-1, to=1-2]
+            \arrow[hook, from=1-2, to=2-2]
+            \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+        \end{tikzcd}\text{(pushout in category of $G$-spaces)}\]\\
+        The resulting $X$ is $\colim \{X^{-1} \to X^0 \to \cdots \to X^n \to X^{n+1} \to \cdots \}$.
+        The images of $G/H_i \times \interior{D^n_i}$ in $X$ is called open $n$-cell of type $G/H_i$.
+        $\phi_i$ is called the attaching map and
+        $\varphi_i(G/H_i \times S^{n-1})$ is called the boundary of $\phi_i(G/H_i \times D^{n})$.
+        If $A = \emptyset$, then $X$ is called a \tbf{$G$-(equivariant) CW-complex}.
     \end{defn}
 
     A criterion of weak homotopy equivalence:
@@ -317,6 +343,79 @@
         weak homotopy equivalence of pairs $\varphi : (\widetilde{X}, \widetilde{A}) \to (X,A)$.
     \end{defn}
 
+    \begin{thm}
+        \label{hyp:Existence-of-CW-approximation}
+        (Existence of CW-approximation)
+        If $X$ is path-connected pointed space ($0$-connected),
+        then there is a CW-approximation $(\wtl{X},\ast) \xrightarrow{\phi} (X,\ast)$.
+        If $X$ is $n$-connected then $\wtl{X}$ could be chosen to satisfy
+        $\wtl{X}^n = \ast $.
+        (Moreover, each characteristic map of $X$ is pointed)
+    \end{thm}
+
+    \begin{prf}
+        If $X$ is $n$-connected,
+        then $\phi_n : Y^n := \ast \to X$ is $n$-equivariance.
+        Assmue inductively that we already have $m$-equivalence 
+        $Y^m \xrightarrow{\phi_m} X$ ($m \geq n$),
+        Our goal is construct $Y^{m+1}$ and $\phi_{m+1} : Y^{m+1} \to X$.\\
+        Let
+        $$
+        f^+_m : \bigoplus_{a \in A} \bbZ_a \twoheadrightarrow \ker( \phi_{m*} ) \subseteq \pi_m(Y^m)
+        $$
+        be a free resolution of $\ker( \phi_{m*} )$
+        ($\coprod_{a \in A} \bbZ_a$ if $m=1$),
+        and obtain a (unique up to homotopy)
+        map $f_m : \bigvee_{a \in A} S^m_a \to Y^m$
+        defined by $f_m|_{S^m_a} := k_a$ where $[k_a] = f^+_m(1_a) \in [S^m,Y^m]_* $.
+        We have: (since $[\phi_m \circ f_m] = 0$)
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCIgXFxiaWd2ZWVfe2EgXFxpbiBBfSBTXm1fYSJdLFsxLDAsIllebSJdLFsyLDEsIlgiXSxbMiwwLCJDX3tmX219Il0sWzAsMSwiZl9tIl0sWzEsMiwiXFxwaGlfbSIsMl0sWzEsM10sWzMsMiwiXFx2YXJwaGlfe20rMX0iLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+        \[\begin{tikzcd}
+            { \bigvee_{a \in A} S^m_a} & {Y^m} & {C_{f_m}} \\
+            && X
+            \arrow["{f_m}", from=1-1, to=1-2]
+            \arrow["{\phi_m}"', from=1-2, to=2-3]
+            \arrow[from=1-2, to=1-3]
+            \arrow["{\varphi_{m+1}}", dashed, from=1-3, to=2-3]
+        \end{tikzcd}\]
+        $C_{f_m}$ is a CW-complex with $\dim = n+1$ with $m$-skeleton $Y^m$.
+        $\varphi_{m+1*} : \pi_m(C_{f_m}) \to \pi_m(X)$ is isomorphism,
+        but $\varphi_{m+1*} : \pi_{m+1}(C_{f_m}) \to \pi_{m+1}(X)$
+        is not necessarily an epimorphism.\\
+        Define the set $B := \pi_{m+1}(X) - \varphi_{m+1*} ( \pi_{m+1}(C_{f_m})) $
+        and
+        $Y^{m+1} := C_{f_m} \vee (\bigvee_{b \in B} S^{m+1}_b)$.\\
+        Define
+        $\phi^{m+1}$ by 
+        $\phi^{m+1}|_{C_{f_m}} := \varphi_{m+1}$
+        and $\phi^{m+1}|_{S^{m+1}_b} := r_b$ where $[r_b] = b \in [S^{m+1},X]_*$.\\
+        $\wtl{X} := \colim_m \{ Y^0 \hookrightarrow \cdots \hookrightarrow Y^m \hookrightarrow Y^{m+1} \hookrightarrow \cdots \}$,
+        and $\phi = \colim_m \phi_m$\\
+        If $X$ is not path-connected, construct CW-approximation for each path-connected component.\\
+        \qed
+
+    \end{prf}
+
+    \begin{note}
+        The proof of existence of CW-approximation
+        uses \hyperref[hyp:Homotopy-Excision-Theorem]{homotopy excision theorem}
+        (CW-triad version).
+        Proof of CW-traid version does not need CW-approximation.
+        There is no circular argument.
+    \end{note}
+
+    \begin{prop}
+        For any pair $(X,A)$, there exists CW-approximation
+        $\phi : (\wtl{X}, \wtl{A}) \to (X,A)$.
+    \end{prop}
+
+    \begin{prf}
+        Construct $\phi_A : \wtl{A} \to A $ first
+        and use analogue method in proof of theorem \ref{hyp:Existence-of-CW-approximation}
+        with $Y^0 := \wtl{A}$.
+        \qed
+    \end{prf}
+
     \begin{lem}
         \label{hyp:funCWapprox}
         $\varphi, \psi$ are CW-approximations of $X,Y$,
@@ -398,6 +497,7 @@
     \end{defn}
 
     \begin{thm}
+        \label{hyp:cellular-approximation-lemma}
         For any map between CW-pairs $f : (X,A) \to (Y,B)$ there exists
         a cellular map $g$ such that $g \simeq f \rel A$
     \end{thm}
@@ -432,6 +532,49 @@
         \qed
     \end{prf}
 
+    \begin{cor}
+        \label{hyp:cellularity-of-homotopy-group}
+        If $X$ is a pointed CW-complex,
+        then the inclusions $X^{n+1} \hookrightarrow X^{n+2} \hookrightarrow \cdots \hookrightarrow X$
+        induce $\pi_n(X^{n+1}) \cong \pi_n(X^{n+2}) \cong \cdots \cong \pi_n(X)$.
+    \end{cor}
+
+    \begin{prf}
+        For $k \geq 1$,
+        $X^{n+k} \hookrightarrow X^{n+k+1}$
+        induces epimorphism
+        $\pi_n(X^{n+k}) \twoheadrightarrow \pi_n(X^{n+k+1})$\\
+        since every $f : (S^n, \ast) \to (X^{n+k+1},\ast)$
+        is homotopic ($\rel \ast$) to an $g : (S^n, \ast) \to (X^n,\ast) \hookrightarrow (X^{n+k},\ast)$.\\
+        Now we want to prove it is monomorphism,
+        that is, $i_* [f] = 0 \implies [f] = 0$\\
+        If $h : (S^n, \ast) \times I \to X^{n+k+1}$
+        is a nullhomotopy in $X^{n+k+1}$\\
+        of a map
+        $f : (S^n, \ast) \to (X^{n+k}, \ast) \hookrightarrow (X^{n+k+1},\ast)$,\\
+        then $h : (CS^n, S^n) \to (X^{n+k+1}, X^{n+k})$
+        is homotopic ($\rel S^n$) to an
+        $h' : (CS^n, S^n) \to (X^{n+k},X^{n+k})$,
+        which is equivalent to $h' : S^n \times I \to X^{n+k} $
+        with $h(S^n,1) = \ast$, $h(\ast,t) = \ast$, $h|_{S^n \times \{0\}} = f$.\\
+        \qed
+    \end{prf}
+
+    \begin{lem}
+        \label{hyp:dim-of-X-A-great-than-n-to-X,A-n-connected}
+        If $(X,A)$ is CW-pair and all cells of $X-A$
+        have $\dim > n$,
+        then $(X,A)$ is $n$-connected.
+    \end{lem}
+
+    \begin{prf}
+        For each $q \leq n$, and each $[f] \in \pi_q(X,A)$,
+        $f \simeq g \rel S^{q-1} $ where $g$ is an cellular map.
+        (use theorem \ref{hyp:cellular-approximation-lemma})
+        $\pi_q(X,A) \ni [g] = 0$ since $g(S^{n-1} \cup e^n) = g(D^n) \subseteq A \cup X^n = A$.\\
+        \qed
+    \end{prf}
+
     \subsection{Operation of CW-complexes}
 
     Product of CW-complexes:
@@ -456,17 +599,81 @@
 
     \end{exmp}
 
-    \begin{note}
-        Another way to realize $X \times Y$ as CW-complex
-        is to change its topology to the compactly generated topology $k(X \times Y)$.
-    \end{note}
-
     \begin{prop}
         $X$ and $Y$ are CW-complexes, $X \times Y$ is CW-complex if\\
         $X$ or $Y$ is locally compact\\
         or\\
-        both $X$ and $Y$ have countably many cells.
+        both $X$ and $Y$ have countably many cells.\\
     \end{prop}
+
+    Another way to realize $X \times Y$ as CW-complex
+    is to change its topology to the compactly generated topology $k(X \times Y)$:
+
+    
+    \begin{defn}
+        For subspace $A$ of $X$, $A$ is compactly closed if
+        \begin{align*}
+            \forall & \text{ compact space } K \\
+                &\forall \text{ continuous } g : K \to X \\
+                & \quad \! g^{-1}(A) \text{ is closed in } K
+        \end{align*}
+    \end{defn}
+    
+    \begin{defn}
+        $X$ is $k$-space if any compactly closed subset is closed.
+    \end{defn}
+
+    \begin{defn}
+        $X$ is weak Hausdorff if
+        \begin{align*}
+            \forall & \text{ compact space } K \\
+                &\forall \text{ continuous } g : K \to X \\
+                & \quad \! g(K) \text{ is closed in } K
+        \end{align*}
+    \end{defn}
+
+    \begin{defn}
+        The $k$-ification of a space $X$ is defined by:
+        $k(X) := (X,\tau)$\\
+        where $\tau = \{X - A \mid A \text{ is compactly closed set}\}$
+    \end{defn}
+
+    \begin{defn}
+        $X$ is compactly generated space if it is $k$-space and weak Hausdorff. 
+    \end{defn}
+
+    \begin{note}
+        If $X$ is weak Hausdorff,
+        then $A \subseteq X$ is compactly closed iff
+        \begin{align*}
+            & \forall \text{ compact subspace } K \subseteq X \\
+                & \quad \! A \cap K \text{ is closed in } X
+        \end{align*}
+        If $X$ is a CW-complex, then the topology defined on $k(X)$
+        automatically coincide with the final topology induced by its CW-complex structure.
+        We have CW-complex structure of $k(X \times Y)$
+        is given by:
+        \[\begin{tikzcd}
+            {\partial I^n \times I^m \cup I^n \times \partial I^m} & {X^{n-1} \times Y^{m} \cup X^n \times Y^{m-1}} \\
+            {I^n \times I^m} & {X^n \times Y^m}
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=1-2, to=2-2]
+            \arrow[from=2-1, to=2-2]
+            \arrow[from=1-1, to=2-1]
+        \end{tikzcd}\]
+        Furthermore, the $k$-ification is right adjoint of the inclusion functor 
+        $i$:
+        \[\begin{tikzcd}
+            {\mathbf{TOP_{CptGen}}} && {\mathbf{TOP_{weakHaus}}}
+            \arrow[""{name=0, anchor=center, inner sep=0}, hook, "i", curve={height=-12pt}, from=1-1, to=1-3]
+            \arrow[""{name=1, anchor=center, inner sep=0}, "{k(-)}", curve={height=-12pt}, from=1-3, to=1-1]
+            \arrow["\dashv"{marking}, Rightarrow, draw=none, from=0, to=1]
+        \end{tikzcd}\]
+        This allows us to define the CW-complex structure on any limit of
+        CW-complexes:
+        $\lim_{i} X_i \approx \lim_i k(X_i) \approx k(\lim_i X_i)$
+        ($X \approx k(X)$ and right adjoint preserve limits).
+    \end{note}
 
     Quotient of CW-pair:
 
@@ -563,16 +770,207 @@
     Which induces map $\SP f : \SP X \to \SP Y$.
     And Functorial properties are directly from the constructions above.\\
 
+    \label{hyp:SP-of-wedge-is-product-of-SP}
+    $\SP(X_1 \vee X_2) \approx \SP(X_1) \times \SP(X_2)$, the homeomorphism
+    is given by:
+    \begin{align*}
+    \SP(X_1) \times \SP(X_2) & \leftrightarrows \SP(X_1 \vee X_2)\\
+    (\{a_1, a_2, \cdots , a_k\}, \{b_1, b_2, \cdots , b_m\}) & \mapsto \{a_1, a_2, \cdots , a_k, b_1, b_2, \cdots , b_m\}
+    \end{align*}
+
+
     \label{hyp:SP-commute-with-directed-colimit} Commute with directed colimit:\\
     Suppose $P$ is a directed poset (that is $\A x,y \in P, \ \E z \in P, \ x \leq z , y \leq z$)
     and $X_i$ are pointed spaces indexed by $P$ satisfying $i \leq j \implies X_i \subseteq X_j$.\\
-    Then $\SP^n (\Colim_{i} X_i) \approx \Colim_{i} (\SP^n X_i)$\\
+    Then $\SP^n (\colim_{i} X_i) \approx \colim_{i} (\SP^n X_i)$\\
     (Proof is obtained by showing that $ \SP^n f $ is continuous iff $f$ is,
-    which implies final topology on $\Colim_{i} (\SP^n X_i)$ agree on $\SP^n (\Colim_i X_i)$)\\
+    which implies final topology on $\colim_{i} (\SP^n X_i)$ agree on $\SP^n (\colim_i X_i)$)\\
 
     Suppose $i : A \hookrightarrow X$ is an pointed inclusion,
     then $\SP i : \SP A \hookrightarrow \SP X$ is also inclusion.
     Furthermore, if $A$ is open (or closed) in $X$, then $\SP A$ is open (or closed) in $\SP X$.\\
+
+    \label{hyp:CW-structure-on-SP}CW-complex structure:\\
+
+    We can have natural CW-complex structure on $\prod_n X$ by applying $k(-)$.
+    following theorems allows us to prove that $\SP^n X = \prod_n X/S_n$
+    have a CW-complex structure.
+
+    \begin{defn}
+        $G$ \tbf{acts cellularly} on a CW-complex $X$ if:
+        \begin{align*}
+            & \A  g \in G, e^n_i \text{ is open $n$-cell (of $X$)}\\
+            & \quad \quad g(e^n_i) = e^n_j \text{ is open $n$-cell (of $X$)}
+        \end{align*}
+        and $g(e^n_i) = e^n_i$ implies $g|_{e^n_i} = \id_{e^n_i}$.
+    \end{defn}
+
+    \begin{lem}
+        If $G$ is a discrete group, $X$ is CW-complex with $G$ cellularly act on $X$.
+        Then $X$ is a $G$-CW-complex with $n$-skeleton $X^n$.
+    \end{lem}
+
+    \begin{prf}
+        The goal is to show $X^n$ is obtained from $X^{n-1}$ by attaching $G$-equivariant cells.
+        Since $\coprod_{i \in I_n} Y  = I_n \times Y$ ($I_n$ with discrete topology).
+        We have:
+        \[\begin{tikzcd}
+            {I_n \times S^{n-1}} & {X^{n-1}} \\
+            {I_n \times D^n} & {X^n}
+            \arrow["\varphi", from=1-1, to=1-2]
+            \arrow[from=1-2, to=2-2]
+            \arrow["\phi"', from=2-1, to=2-2]
+            \arrow[hook, from=1-1, to=2-1]
+            \arrow["\lrcorner"{anchor=center, pos=0.125, rotate=180}, draw=none, from=2-2, to=1-1]
+        \end{tikzcd}\]
+        $G$ acts cellularly on open $n$-cells
+        implies $G$ acts on $I_n$.
+        Decomposite $I_n$ into disjoint unions of 
+        obrits $\coprod_{\alpha \in A} I_\alpha$
+        choose $G$-isomorphisms 
+        \begin{align*}
+            G/H_\alpha & \cong I_\alpha\\
+            g H_\alpha & \mapsto g i_\alpha
+        \end{align*}
+        And we have a well-defined $G$-map.
+        \begin{align*}
+            \phi_\alpha|_{e^n} : G/H_\alpha \times e^n \cong I_\alpha \times e^n & \to X^n\\
+            (g H_\alpha, x) \mapsto (g i_\alpha, x) & \mapsto \phi_{g i_\alpha}(x) = g \phi_{i_\alpha}(x)
+        \end{align*}
+        Since we have $e^n = \interior{D^n}$, we obtain the following (by continuity):
+        \begin{align*}
+            \phi_\alpha : G/H_\alpha \times D^n  & \to X^n\\
+            (g H_\alpha, x)  & \mapsto g \phi_{i_\alpha}(x)\\
+            \phi_\alpha|_{S^{n-1}} = \varphi_\alpha : G/H_\alpha \times S^{n-1}  & \to X^{n-1}\\
+            (g H_\alpha, s)  & \mapsto g \varphi_{i_\alpha}(s)\\
+        \end{align*}
+        Let $\varphi' := \coprod_{\alpha \in A} \varphi_\alpha$ and $\phi' := \coprod_{\alpha \in A} \phi_\alpha$
+        we have:
+        \[\begin{tikzcd}
+            {\coprod_{\alpha \in A} (G/H_\alpha \times S^{n-1})} & {X^{n-1}} \\
+            {\coprod_{\alpha \in A} (G/H_\alpha \times D^n)} & {X^n} \\
+            && Z
+            \arrow["{\varphi'}", from=1-1, to=1-2]
+            \arrow[from=1-2, to=2-2]
+            \arrow["{\phi'}"', from=2-1, to=2-2]
+            \arrow[hook, from=1-1, to=2-1]
+            \arrow["{\coprod f_\alpha}"', curve={height=18pt}, from=2-1, to=3-3]
+            \arrow["f", curve={height=-18pt}, from=1-2, to=3-3]
+            \arrow["{\exists ! f^+}", dashed, from=2-2, to=3-3]
+        \end{tikzcd}\]
+        Verify it is indeed a pushout of $G$-spaces:
+        $f^+$ (is already determined uniquely as map between $G$-sets)
+        is map between $G$-spaces.\\
+        Since $X$ have compactly generated topology, $f^+$ is continuous on each compact subspace of $X$ implies $f^+$ is continuous
+        on each compactly closed subspace of $X^n$, which implies $f^+$ is continuous on total $X^n$.\\
+        $f^+$ is continuous on each closed $n$-cell $\{g H_\alpha \} \times D^n$
+        and $f^+$ is continuous on $X^{n-1}$ implies $f^+$ is continuous on each compact subspace.
+        (since each compact subspace intersect finitely with $n$-cells and $X^{n-1}$ (We use $X^n$ is $T_2$ to construct open cover))\\
+        \qed
+    \end{prf}
+
+    \begin{thm}
+        For any topological group morphism
+        $\phi : H \to G$
+        we have induced functors:\\
+        pullback action:
+        \begin{align*}
+            G\mbf{-TOP} & \xrightarrow{\phi^*} H\mbf{-TOP}\\
+            \left( \alpha(-,-)  : G \times X \to X \right) & \longmapsto \left(  \alpha(\phi(-),-) : H \times X \to X \right)\\
+            ( f : X \to Y ) & \longmapsto  ( f : X \to Y )
+        \end{align*}
+        induced action:
+        \begin{align*}
+            H\mbf{-TOP} & \xrightarrow{G \times_H -} G\mbf{-TOP}  \\
+            X & \longmapsto G \times_H X := (G \times X)/[ \ (g \phi(h), x) \sim (g, h x) \mid h \in H] \\
+            ( f : X \to Y ) & \longmapsto  ( \id_G \times_H f : G \times_H X \to G \times_H Y )
+        \end{align*}
+        Which are adjunctions:
+        \[\begin{tikzcd}
+            {H\mathbf{-TOP}} & {} & {G\mathbf{-TOP}}
+            \arrow[""{name=0, anchor=center, inner sep=0}, "{G\times_H-}", curve={height=-12pt}, from=1-1, to=1-3]
+            \arrow[""{name=1, anchor=center, inner sep=0}, "{\phi^*}", curve={height=-12pt}, from=1-3, to=1-1]
+            \arrow["\dashv"{anchor=center, rotate=-90}, draw=none, from=0, to=1]
+        \end{tikzcd}\]
+
+    \end{thm}
+
+    \begin{prf}
+        By $G$-equivariance, $f$ is determined uniquely by its restriction $f|_{\phi(H) \times_H X}$.
+        And $\tilde{f} : X \to \phi^*(Y)$ uniquely determine a map $\phi(H) \times_H X \to Y$.
+        \[\begin{tikzcd}
+            {(G \times_H X} && {Y)} && {(X = \phi(H) \times_H X} && {Y)} \\
+            {(g\phi(h),x)} && {g\phi(h)f(x)} && {(\phi(h),x)=(e ,hx)} && {\phi(h)x} \\
+            &&&& X && {\phi^*(Y)} \\
+            &&&& {}
+            \arrow["f", from=1-1, to=1-3]
+            \arrow["{f|_{H \times_H X}}", from=1-5, to=1-7]
+            \arrow[maps to, from=2-1, to=2-3]
+            \arrow["\in"{marking}, draw=none, from=2-1, to=1-1]
+            \arrow["\in"{marking}, draw=none, from=2-3, to=1-3]
+            \arrow["\in"{marking}, draw=none, from=2-5, to=1-5]
+            \arrow["\in"{marking}, draw=none, from=2-7, to=1-7]
+            \arrow[maps to, from=2-5, to=2-7]
+            \arrow["\tilde{f}", from=3-5, to=3-7]
+            \arrow[shorten <=11pt, shorten >=11pt, maps to, from=1-3, to=1-5]
+            \arrow[shift right=18, shorten <=20pt, shorten >=20pt, Rightarrow, no head, from=1-7, to=3-7]
+        \end{tikzcd}\]
+        Naturality:
+        \[\begin{tikzcd}
+            & {(G \times_H X'} & {G \times_H X} & Y & {Y')} & {} \\
+            & {(g,hx')} & {(g,hf'(x))} & {g\phi(h)f(f'(x))} & {g\phi(h)f''(f(f'(x)))} \\
+            {} && \leftrightarrows &&& {} \\
+            & {(X'} & {X = \phi(H) \times_H X} & {\phi^*(Y)} & {\phi^*(Y'))} \\
+            & {(hx')} & {(\phi(h),f'(x'))=(e ,hf'(x'))} & {\phi(h)f(f'(x))} & {\phi(h)f''(f(f'(x)))} &&& {}
+            \arrow["f", from=1-3, to=1-4]
+            \arrow["{f|_{H \times_H X}}", from=4-3, to=4-4]
+            \arrow[maps to, from=2-3, to=2-4]
+            \arrow["\in"{marking}, draw=none, from=2-3, to=1-3]
+            \arrow["\in"{marking}, draw=none, from=2-4, to=1-4]
+            \arrow["\in"{marking}, draw=none, from=5-3, to=4-3]
+            \arrow["\in"{marking}, draw=none, from=5-4, to=4-4]
+            \arrow[maps to, from=5-3, to=5-4]
+            \arrow["{\id_G \times_H f'}", from=1-2, to=1-3]
+            \arrow["\in"{marking}, draw=none, from=2-2, to=1-2]
+            \arrow[maps to, from=2-2, to=2-3]
+            \arrow["{f''}", from=1-4, to=1-5]
+            \arrow["\in"{marking}, draw=none, from=2-5, to=1-5]
+            \arrow[maps to, from=2-4, to=2-5]
+            \arrow["{f'}", from=4-2, to=4-3]
+            \arrow["\in"{marking}, draw=none, from=5-2, to=4-2]
+            \arrow[maps to, from=5-2, to=5-3]
+            \arrow["{\phi^*(f'')}", from=4-4, to=4-5]
+            \arrow[from=5-4, to=5-5]
+            \arrow["\in"{marking}, draw=none, from=5-5, to=4-5]
+        \end{tikzcd}\]
+        \qed
+    \end{prf}
+
+    \begin{prop}
+        If $(X,A)$ is relative $G$-equivariant CW-complex,
+        then $(X/G , A/G)$ is relative CW-complex with $n$-skeleton $X^n/G$.
+    \end{prop}
+
+    \begin{prf}
+        \[\begin{tikzcd}
+            {\coprod_{i\in I_n} S^{n-1}} & {X^{n-1}/G} \\
+            {\coprod_{i\in I_n} D^n} & {X^n/G}
+            \arrow[hook, from=1-1, to=2-1]
+            \arrow[from=2-1, to=2-2]
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=1-2, to=2-2]
+        \end{tikzcd}\]
+        Is still pushout since $-/G = 1 \times_G -$, and left adjoint preserves
+        colimits.\\
+        \qed
+    \end{prf}
+
+    Since $k(\prod_n X)$ have CW-complex structure,
+    and $S_n$ (as a discrete group) acts cellularly on it,
+    $k(\prod_n X)$ is an $S_n$-equivariant CW-complex.
+    Therefore $\SP^n X = k(\prod_n X)/S^n$ is CW-complex.
+    Since  $\SP X = \colim \{ \SP^1 X \hookrightarrow \cdots \hookrightarrow  \SP^n X \hookrightarrow \SP^{n+1} X \hookrightarrow \cdots \}$,
+    $\SP X$ is also a CW-complex.\\
 
     Pointed homotopy $h : X \times I \to Y$ induces
     \begin{align*}
@@ -585,7 +983,7 @@
     Then we observe:\\
     $f \simeq g$ implies $\SP f \simeq \SP g$,\\
     $e : X \to Y$ is homotopy equivalence implies $\SP e : \SP X \to \SP Y$ is,\\
-    $X$ is contractible implies $\SP^n X$ and $\SP X$ is.
+    $X$ is contractible implies $\SP^n X$ and then $\SP X$ is.
 
 
     \begin{thm}
@@ -800,14 +1198,14 @@
     \begin{defn}
         \label{hyp:Ordinary-Homology-Theory}
         A (Ordinary) Homology Theory (on $\mbf{TOP}$ with coefficient $G \in \mbf{Ab}$) is
-        functors $\{H_n(-,-;G) : \mbf{TOP(2)} \to \mbf{Ab}\}_{n \in \bbN}$,
+        functors $\{H_n(-,-;G) : \mbf{TOP(2)} \to \mbf{Ab}\}_{n \in \bbZ}$,\\
         with natural transformations ${\partial_{n,(X,A)} : H_n(X,A;G) \to H_n(A,\emptyset;G)}$
         (called connecting homomorphism)\\
         satisfying following axioms:\\
         \begin{itemize}
             \item \textbf{Dimension}:\\
                 $H_0 (\ast, \emptyset;G) = G$,
-                for any $n > 0$, $H_n (\ast, \emptyset;G) = 0$.\\
+                for any $n \neq 0$, $H_n (\ast, \emptyset;G) = 0$.\\
             \item \textbf{Weak Equivalence}:\\
                 Weak equivalence $f : (X,A) \to (Y,B)$
                 induces isomorphism
@@ -841,7 +1239,7 @@
     \end{defn}
 
     \begin{note}
-        An equivalent form of Excision  Axiom:\\
+        An equivalent form of Excision Axiom:\\
         If $(X,A) \in \mbf{TOP(2)}$, $U$ is subspace of $A$ and $\ol{U} \subseteq \interior{A}$,
         then inclusion $ i : (X - U, A - U) \hookrightarrow (X,A) $
         induces isomorphism
@@ -905,7 +1303,7 @@
         For maps $i : C \to A$, $j : C \to B$
         define the double mapping cylinder
         $M(i,j) := A \cup_{C \times \{0\}} C \times I \cup_{C \times \{1\}} B$.
-        If $i$ is cofibration,
+        If $i$ is closed cofibration,
         then the quotient map
         \begin{align*}
             q : M(i,j) & \to A \cup_C B\\
@@ -932,7 +1330,7 @@
                 (b,s) & \mapsto b
         \end{align*}
         Observe that $C \times I \cup_C A \times \{1\}$ is a deformation retract of $A \times I$,
-        since $i : C \to A$ is cofibration.\\
+        since $i : C \to A$ is closed cofibration.\\
         Then we have $ M(i,j) =  B \cup_{C \times \{0\}}  (C \times I \cup_{C \times \{1\}} A \times \{1\})$
         is a deformation retract of $ B \cup_{C \times \{0\}} A\times I = M_{i_A}$.
         (use lemma \ref{hyp:pushout-preserve-dr})\\
@@ -1089,7 +1487,7 @@
         and extend it to $r_A : \wtl{A} \to A$, $r_B : \wtl{B} \to B$.
         $\wtl{X} := \wtl{A} \cup_{\wtl{C}} \wtl{B}$.
         $i : \wtl{C} \to \wtl{A} $ and $j : \wtl{C} \to \wtl{B}$
-        are cofibrations,
+        are closed cofibrations,
         by lemma \ref{hyp:double-mapping-cylinder-homotopy-pushout}
         we have homotopy equivalence $q : M(i,j) \to \wtl{X}$,
         which induces homotopy equivalence of triads:
@@ -1109,7 +1507,7 @@
     Then we have:
     \begin{defn}
         A (Ordinary) Homology Theory on  CW-complexes with coefficient $G \in \mbf{Ab}$ is
-        functors $\{H_n(-,-;G) : \textbf{CW-pairs} \to \mbf{Ab}\}_{n \in \bbN}$,
+        functors $\{H_n(-,-;G) : \textbf{CW-pairs} \to \mbf{Ab}\}_{n \in \bbZ}$,\\
         with natural transformations ${\partial_{n,(X,A)} : H_n(X,A;G) \to H_n(A,\emptyset;G)}$
         (called connecting homomorphism)\\
         satisfying \hyperref[hyp:Ordinary-Homology-Theory]{axioms}
@@ -1127,6 +1525,7 @@
 
     \begin{prop}
         The homology groups defined in definition \ref{hyp:homology-group-defined-using-SP}
+        with $H_{-n}(X) := 0$
         is a ordinary homology theory on CW-complexes with coefficient $\bbZ$.
     \end{prop}
 
@@ -1145,7 +1544,7 @@
                 For index set $\Lambda$, $P := \{S \mid S \subseteq \Lambda \}$.\\
                 Then define $Y_S := \bigvee_{\lambda \in S} X_\lambda \cup CA_\lambda = (\coprod_{\lambda \in S} X_\lambda) \cup C (\coprod_{\lambda \in S} A_\lambda)$,\\
                 and use fact that \hyperref[hyp:SP-commute-with-directed-colimit]{$\SP$ commutes with directed colimit}, we have\\
-                $\bigvee_{\lambda \in \Lambda} \SP (X_\lambda \cup CA_\lambda) = \Colim_{S \in P} \SP Y_S \approx  \SP (\Colim_{S \in P} Y_S) = \SP ((\coprod_{\lambda \in \Lambda} X_\lambda) \ \cup \ C (\coprod_{\lambda \in \Lambda} A_\lambda)) = \SP ( X \cup CA)$.\\
+                $\bigvee_{\lambda \in \Lambda} \SP (X_\lambda \cup CA_\lambda) = \colim_{S \in P} \SP Y_S \approx  \SP (\colim_{S \in P} Y_S) = \SP ((\coprod_{\lambda \in \Lambda} X_\lambda) \ \cup \ C (\coprod_{\lambda \in \Lambda} A_\lambda)) = \SP ( X \cup CA)$.\\
                 Which induces $\bigoplus_{\lambda \in \Lambda} \waveH_n(X_\lambda \cup C A_\lambda) \cong \pi_n (\bigvee_{\lambda \in \Lambda} \SP (X_\lambda \cup CA_\lambda)) \cong \pi_n(\SP (X \cup CA)) = \waveH_n(X \cup CA)$.
             \item Excision: For CW-triad $(X;A,B)$,
                 $A/(A \cap B) \approx X/B$.
@@ -1155,7 +1554,156 @@
         \qed
     \end{prf}
 
+    \subsection{Cellular Homology}
+
+    \begin{lem}
+        \label{hyp:homology-of-suspension}
+        For an ordinary homology theory $H_*(-,-;G)$,
+        if $X$ is a CW-complex,
+        then for any $n \in \bbZ$
+        $H_n(X) \cong \waveH_{n+1}(\Sigma X)$.
+    \end{lem}
+
+    \begin{prf}
+        Apply long exact sequence axiom on $(CX,X)$:
+        ($H_*(CX) = 0$ due to  weak equivalence axiom):
+        $$
+            0 \cong H_{n+1}(CX) \to H_{n+1}(CX,X) \xrightarrow{\cong} H_n(X) \to H_n(CX) \cong 0
+        $$
+        Use excision axiom and weak equivalence axiom, we have:
+        $$
+        H_*(CX,X) \cong H_*(CX\cup CX, CX ) \cong H_*(\Sigma X,\ast)
+        $$
+        \qed
+    \end{prf}
+
+
+    \begin{prop}
+    For an ordinary homology theory $H_*(-,-;G)$,
+    if $X$ is a pointed CW-complex with $X^{-1} := \ast$,
+    then for any $n \geq 0$
+    \begin{align*}
+    H_q(X^n,X^{n-1}) \cong \waveH_q(X^n/X^{n-1}) \cong
+        \begin{cases}
+        \bigoplus_{i \in I_n} G \quad & q = n\\
+        0 \quad & q \neq n
+        \end{cases}
+    \end{align*}
+    where $I_n$ is set of all $q$-cells.
+    \end{prop}
+
+    \begin{prf}
+        Use additivity axiom and lemma \ref{hyp:homology-of-suspension} to see
+        that $H_n(\bigvee S^n) \cong \bigoplus G$
+        and
+        $H_q(\bigvee S^n) = 0$ for $q \neq n$.
+        Use excision axiom and weak equivalence axiom to see
+        $$
+        H_q(X^n, X^{n-1}) \cong H_q(X^n \cup CX^{n-1}, CX^{n-1}) \cong H_q(X^n/X^{n-1}, \ast) \cong \waveH_q(\bigvee_{i \in I_n} S^n)
+        $$
+        \qed
+    \end{prf}
+
+    \begin{cor}
+        \label{hyp:cellularity-of-homology}
+        If $H_*(-,-)$ is an ordinary homology theory,
+        then for a pointed CW-complex $X$ with $X^{-1} := \ast$, we have:
+        \begin{align*}
+            \waveH_q(X^n) & = 0  & \text{ for } q > n\\
+            H_q(X^n) & \cong H_q(X^{n+1}) \cong H_q(X) & \text{ for } q < n\\
+            H_n(X^n) & \xrightarrow{i_*} H_n(X^{n+1}) &  \text{ is epimorphism}
+        \end{align*}
+        for any $n \geq -1$.
+    \end{cor}
+
+    \begin{prf}
+        Use long exact sequence of $(X^{n+1},X^n)$:
+        \begin{align*}
+            \cdots & \to H_{q+1}(X^{n+1},X^n)  \xrightarrow{\partial_{q+1}} H_q(X^{n})
+            \xrightarrow{i_*} H_q(X^{n+1}) \to H_q(X^{n+1},X^n) \xrightarrow{\partial_{q}}  H_{q-1}(X^n) \to \cdots\\
+            \cdots & \to H_{1}(X^{n+1},X^n) \xrightarrow{\partial_{1}} H_0(X^{n})
+            \xrightarrow{i_*} H_0(X^{n+1}) \to H_0(X^{n+1},X^n) 
+        \end{align*}
+        For $q < n$, $H_q(X^n) \cong H_q(X^{n+1}) \cong \cdots \cong \colim_{i \in \bbN} H_q(X^i)$.\\
+        For $q > n$, if $n > -1$, $H_q(X^n) \cong H_q(X^{n-1}) \cong \cdots \cong H_q(X^{-1}) \cong 0$,\\
+        if $n = -1$, $\waveH_0(X^{-1}) \cong 0 \cong \waveH_q(X^{-1})$.\\
+        For $q = n$, we have following exact:
+        \begin{align*}
+            \to H_{n+1}(X^{n+1},X^n)  \xrightarrow{\partial_{n+1}} H_n(X^{n})
+            \xrightarrow{i_*} H_n(X^{n+1}) \to H_n(X^{n+1},X^n) \cong 0
+        \end{align*}
+        \qed
+    \end{prf}
+
+    \begin{defn}
+        For pointed CW-complex $X$ with $X^{-1} := \ast$
+        and a ordinary homology theory $H_*(-,-)$
+        the \tbf{cellular chain complex} $\{C_n(X), d_n\}$ of $X$
+        is defined by:
+        \begin{align*}
+            C_n(X) & := H_n(X^n,X^{n-1}) \\
+            d_n & : H_n(X^n,X^{n-1}) \xrightarrow{\partial_n} H_{n-1}(X^{n-1}) \xrightarrow{i_*} H_{n-1}(X^{n-1}, X^{n-2})
+        \end{align*}
+
+    \end{defn}
+
+    \begin{thm}
+        For any ordinary homology theory $H_*(-,-)$ and 
+        any pointed CW-complex $X$, (with $X^{-1} := \ast$)
+        the $n$-th homology of cellular chain complex is isomorphic to $H_n(X)$:
+        $$
+        H_n(C_*(X)) \cong H_n(X)
+        $$
+    \end{thm}
+
+    \begin{prf}
+        Notice that we have commutative diagram with each straight line exact:
+        (use long exact sequence of pairs)
+        % https://q.uiver.app/?q=WzAsOSxbMCwyLCJIX3tuKzF9KFhee24rMX0sWF5uKSJdLFsyLDIsIkhfbihYXm4sWF57bi0xfSkiXSxbNCwyLCJIX3tuLTF9KFhee24tMX0sWF57bi0yfSkiXSxbMSwzLCJIX24oWF5uKSA9IFxca2VyKFxccGFydGlhbF9uKSA9IFxca2VyKGRfbikiXSxbMywxLCJIX3tuLTF9KFhee24tMX0pIl0sWzIsMCwiSF97bi0xfShYXntuLTJ9KSBcXGNvbmcgMCJdLFswLDQsIkhfbihYXntuLTF9KVxcY29uZyAwIl0sWzIsNCwiSF9uKFhee24rMX0pID0gXFxjb2tlcihcXHBhcnRpYWxfe24rMX0pIl0sWzMsNSwiSF97bi0xfShYXntuKzF9LFhebilcXGNvbmcgMCJdLFszLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbMSw0LCJcXHBhcnRpYWxfbiJdLFs0LDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbNSw0XSxbMCwzLCJcXHBhcnRpYWxfe24rMX0iLDJdLFs2LDNdLFsxLDIsImRfbiJdLFswLDEsImRfe24rMX0iXSxbMyw3LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbNyw4XV0=
+        \[\begin{tikzcd}[cells={nodes={font=\small}}, column sep = 0cm, row sep = 0.6cm]
+            && {H_{n-1}(X^{n-2}) \cong 0} \\
+            &&& {H_{n-1}(X^{n-1})} \\
+            {H_{n+1}(X^{n+1},X^n)} && {H_n(X^n,X^{n-1})} && {H_{n-1}(X^{n-1},X^{n-2})} \\
+            & {H_n(X^n) = \ker(\partial_n) = \ker(d_n)} \\
+            {H_n(X^{n-1})\cong 0} && {H_n(X^{n+1}) = \coker(\partial_{n+1})} \\
+            &&& {H_{n-1}(X^{n+1},X^n)\cong 0}
+            \arrow[tail, from=4-2, to=3-3]
+            \arrow["{\partial_n}", from=3-3, to=2-4]
+            \arrow[tail, from=2-4, to=3-5]
+            \arrow[from=1-3, to=2-4]
+            \arrow["{\partial_{n+1}}"', from=3-1, to=4-2]
+            \arrow[from=5-1, to=4-2]
+            \arrow["{d_n}", from=3-3, to=3-5]
+            \arrow["{d_{n+1}}", from=3-1, to=3-3]
+            \arrow[two heads, from=4-2, to=5-3]
+            \arrow[from=5-3, to=6-4]
+        \end{tikzcd}\]
+        \qed
+    \end{prf}
+
+    \begin{note}
+        If the ordinary homology theory has coefficient $\bbZ$,
+        then the $d_n : C_n(X) \to C_{n-1}(X)$
+        is given by:
+        $$
+        \bbZ_i \ni 1_i = e^n_i \mapsto \sum_{j \in I_{n-1}} \alpha^j_{i} e^{n-1}_j
+        $$
+        where
+        $\alpha^j_i$
+        is degree of map
+        $$
+        \beta^j_{i} : S^n \approx \partial e^n_i \xrightarrow{\varphi_i}
+        X^{n-1} \to X^{n-1}/X^{n-2} \to \bigvee_{j' \in I_{n-1}} S^{n-1} \xrightarrow{p_j} S^{n-1}
+        $$
+        where $\varphi_i$ is the characteristic map,
+        $p_j$ maps every point not in $S^{n-1}_j$ to $\ast$.
+    \end{note}
+
+
+
     \section{Homotopy and Eilenberg-Mac Lane Spaces}
+
+    \subsection{Homotopy Excision Theorem and its Corollary}
 
     \begin{thm}
         \label{hyp:Homotopy-Excision-Theorem}
@@ -1249,15 +1797,17 @@
             \pi_{q}(P_{i_{B,X}}, P_{i_{C,A}})
             & = [I^{q}, \partial I^{q}, J^{q-1}; P_{i_{B,X}}, P_{i_{C,A}},*]\\
             & = [I^{q} \wedge I;\ I^q, \ \partial I^{q} \wedge I,\ J^{q-1} \wedge I \to X; B, A, \ast]\\
-            & := \text{relative homotopy classes of pointed maps $f : I^q \wedge I \to X$ who satisfy:}
-            \quad \quad \begin{cases}
+            & := \text{relative homotopy classes of pointed maps}\\
+            & \quad \quad f : I^q \wedge I \to X \text{ satisfying:}
+            \quad  \begin{cases}
                 f(I^q) & \subseteq B\\
                 f(\partial I^{q} \wedge I) & \subseteq A\\
                 f(\partial I^{q}) & \subseteq C\\
                 f(J^{q-1} \wedge I) & = *
             \end{cases}\\
-            & \quad \quad \text{``relative'' means the homotopy $h$ determine the classes satisfy:}
-            \quad \quad \begin{cases}
+            & \quad \quad \text{``relative'' means the homotopy $h$ determine the classes}\\
+            & \quad \quad \text{satisfy:}
+            \quad \begin{cases}
                 h(I^q \times I) & \subseteq B\\
                 h((\partial I^{q} \wedge I) \times I) & \subseteq A \\
                 h(\partial I^{q} \times I) & \subseteq C\\
@@ -1425,6 +1975,7 @@
     \end{prf}
 
     \begin{cor}
+        \label{hyp:cofib-induce-r+s-1-equiv-use-r-1-conn-pair-s-1-conn-snd}
         Suppose that $Y_0 \hookrightarrow Y$ is cofibration,
         $(Y,Y_0)$ is $(r-1)$-connected and $Y_0$ is $(s-1)$-connected,
         then $(Y,Y_0) \to (Y/Y_0 , \ast)$ is $(r+s-1)$-equivalence.
@@ -1461,7 +2012,7 @@
         For $n\geq 2$,
         if $f : X \to Y$ is pointed map between
         $(n-1)$-connected well-pointed spaces
-        (that is, pointed space whose inclusion of the base point is cofibration).
+        (that is, pointed space whose inclusion of the base point is (closed) cofibration).
         Then $C_f$ is $(n-1)$-connected and $\pi_n(M_f,X) \to \pi_n(C_f, \ast)$
         is isomorphism.
     \end{cor}
@@ -1477,7 +2028,7 @@
     \end{prf}
 
     \begin{thm}
-        (Freudenthal Suspension Theorem)
+        \label{hyp:Suspension-Theorem}(Freudenthal Suspension Theorem)
         If $X$ is well-pointed and $(n-1)$-connected ($n \geq 1$),
         then the map:
         \begin{align*}
@@ -1537,7 +2088,7 @@
     \begin{defn}
         We now define the $q$-th stable homotopy group:
         $$
-        \pi^s_k(X) := \Colim_{r} \pi_{k+r} (\Sigma^r X) \cong \pi_{2k+2} (\Sigma^{k+2} X) \cong \pi_{k+n} (\Sigma^{n} X) \quad \quad (n-1 > k)
+        \pi^s_k(X) := \colim_{r} \pi_{k+r} (\Sigma^r X) \cong \pi_{2k+2} (\Sigma^{k+2} X) \cong \pi_{k+n} (\Sigma^{n} X) \quad \quad (n-1 > k)
         $$
         The relation right side is directly from $\Sigma^n X$ is $(n-1)$-connected.
     \end{defn}
@@ -1546,5 +2097,626 @@
         We'll see later that $\{\pi^s_n\}_{n \in \bbN}$ defines a
         generalized homology theory.
     \end{note}
+
+    \subsection{Hurewicz Theorem}
+
+    First, we use homotopy excision theorem to prove
+    following lemmas:
+
+    \begin{lem}
+        \label{hyp:pi-n-of-wedge-of-spheres-is-free}
+        (every $S^n_a \approx S^n$)
+        We have canonical $i_a : S^n_a \hookrightarrow \bigvee_{a \in A} S^n_a$
+        and for $n > 1$:\\
+        $$
+        \pi_n (\bigvee_{a \in A} S^n_a) \cong \bigoplus_{a \in A} \bbZ_a
+        $$ 
+        where $[i_a] = 1 \in \bbZ_a \subseteq \bigoplus_{a \in A} \bbZ_a$ and every $\bbZ_a \cong \bbZ$.\\
+        For $n = 1$:
+        $$
+        \pi_n (\bigvee_{a \in A} S^1_a) \cong \coprod_{a \in A} \bbZ_a
+        $$
+        where $\coprod$ is taken in category $\mbf{Grp}$,
+        $[i_a] = 1 \in \bbZ_a \subseteq \coprod_{a \in A} \bbZ_a$ and every $\bbZ_a \cong \bbZ$.
+
+    \end{lem}
+
+    \begin{prf}
+        \text{ } \\
+        Case $n = 1$:\\
+        Apply the Seifert-van Kampen theorem.\\
+        Case $n > 1$:\\
+        Suppose each $S^n_a$ have CW-complex structure
+        with one $0$-cell and one $n$-cell.
+        Consider finite product $\prod_{1 \leq i \leq k} S^n_i$
+        and its subcomplex, finite wedge product 
+        $\bigvee_{1 \leq i \leq k} S^n_i$.\\
+        The inclusion
+        $$
+        \bigvee_{1 \leq i \leq k} S^n_i \hookrightarrow \prod_{1 \leq i \leq k} S^n_i
+        $$
+        is $(2n-1)$-equivalence since
+        $\prod_{1 \leq i \leq k} S^n_i - \bigvee_{1 \leq i \leq k} S^n_i$
+        only have cells of $\dim \geq 2n$.
+        (use lemma \ref{hyp:dim-of-X-A-great-than-n-to-X,A-n-connected})\\
+        Use exact homotopy sequence of pair,
+        we deduce that $\pi_q(\bigvee_{1 \leq i \leq k} S^n_i) \to \pi_q(\prod_{1 \leq i \leq k} S^n_i) \cong \bigoplus_{1 \leq i \leq k} \bbZ$
+        is an isomorphism for $q \leq 2n-2$.
+        And $S^n_i \hookrightarrow \bigvee_{1 \leq i \leq k} S^n_i \hookrightarrow \prod_{1 \leq i \leq k} S^n_i$
+        is just the $i$-th inclusion $S^n_i \hookrightarrow \prod_{1 \leq i \leq k} S^n_i$ which
+        represents $1 \in \bbZ_i \hookrightarrow \bigoplus_{1 \leq i \leq k} \bbZ_i$.
+        Infinite wedge case:
+        \[\begin{tikzcd}
+            {\bigoplus_{1\leq i \leq k} \pi_q (S^n_i)} & {\pi_q(\bigvee_{1 \leq i \leq k } S^n_i )} \\
+            {\bigoplus_{a \in A}\pi_q(S^n_a)} & {\pi_q(\bigvee_{a \in A} S^n_a)}
+            \arrow["{\bigoplus_{a \in A} i_{a*}}"', tail, two heads, from=2-1, to=2-2]
+            \arrow[tail, from=1-1, to=2-1]
+            \arrow["\cong", from=1-1, to=1-2]
+            \arrow[from=1-2, to=2-2]
+        \end{tikzcd}\]
+        $\bigoplus_{a \in A} i_{a*}$ is monomorphism since every homotopy
+        $S^n \times I \to \bigvee_{a \in A} S^n_a$ has a compact image,
+        and $\bigoplus_{a \in A} i_{a*}$ is epimorphism since every map
+        $S^n \times I \to \bigvee_{a \in A} S^n_a$ has a compat image.\\
+        \qed
+
+    \end{prf}
+
+    \begin{lem}
+        \label{hyp:free-group-morphism-give-wedge-of-spheres-morphism}
+        For $n \geq 1$, if we have a map $f : \coprod_{a \in A} \bbZ_a \to  \coprod_{b \in B} \bbZ_b$ (case $n = 1$)\\
+        or a map
+        $f : \bigoplus_{a \in A} \bbZ_a \to \bigoplus_{b \in B} \bbZ_b$ (case $n > 1$).\\
+        Then there exists a map
+        $\phi : \bigvee_{a \in A} S^n_a \to \bigvee_{b \in B} S^n_b$
+        unique up to homotopy
+        and satisfy $\pi_n(\phi) = f$.
+    \end{lem}
+
+    \begin{prf}
+        Suppose $f(1_a) = [\phi_a] \in [S^n, \bigvee_{b \in B} S^n_b]_*$,
+        then $\phi_a$ is indeed a map $S^n_a \to \bigvee_{b \in B} S^n_b$.
+        Now we define $\phi := \bigvee_a \phi_a : \bigvee_{a \in A} S^n_a \to \bigvee_{b \in B} S^n_b$.
+        For any $a \in A$, $\phi|_{S^n_a} = \phi_a$,
+        we have
+        $$
+        \pi_n(\phi) (1_a) = [\phi|_{S^n_a} \circ \id_{S^n_a}] = [\phi_a] = f(1_a)
+        $$
+        which implies $\pi_n(\phi)  = f$ since they are group homomorphisms.
+
+        Uniqueness up to homotopy:
+        $\pi_n(\phi)[1_a] = \pi_n(\phi')[1_a] $ implies $\phi|_{S^n_a} \simeq \phi'|_{S^n_a} \rel \ast$.
+        Therefore $\phi \simeq \phi' \rel \ast$.\\
+        \qed
+
+    \end{prf}
+
+    \begin{defn}
+        If $H_n$ is a ordinary homology theory
+        with coefficient $\bbZ$,\\
+        then
+        the map
+        \begin{align*}
+            h_X : \pi_n(X) & \to \waveH_n(X) := H_n(X,\ast)\\
+                [f] & \mapsto f_*(1) 
+                    &  (\ f_* : \waveH_n(S^n) \to \waveH_n(X)\ )
+        \end{align*}
+        is called \tbf{Hurewicz Homomorphism}.
+        
+    \end{defn}
+
+    \begin{note}
+        $h_{(-)}$ is natural transformation
+        since we have
+        % https://q.uiver.app/?q=WzAsOCxbMCwwLCJcXHBpX24oWCkiXSxbMCwxLCJcXHBpX24oWSkiXSxbMSwwLCJcXHdhdmVIX24oWCkiXSxbMSwxLCJcXHdhdmVIX24oWSkiXSxbMywwLCJbZl0iXSxbMywxLCJbZyBcXGNpcmMgZl0iXSxbNCwwLCJmXyooMSkiXSxbNCwxLCIoZ1xcY2lyYyBmKV8qICgxKSA9IChnXyogXFxjaXJjIGZfKikoMSkiXSxbMCwxLCJnXyoiLDJdLFswLDIsImhfWCJdLFsxLDMsImhfWSIsMl0sWzIsMywiZyoiXSxbNCw1LCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzQsNiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFs1LDcsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbNiw3LCIiLDIseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV1d
+        \[\begin{tikzcd}
+            {\pi_n(X)} & {\waveH_n(X)} && {[f]} & {f_*(1)} \\
+            {\pi_n(Y)} & {\waveH_n(Y)} && {[g \circ f]} & {(g\circ f)_* (1) = (g_* \circ f_*)(1)}
+            \arrow["{g_*}"', from=1-1, to=2-1]
+            \arrow["{h_X}", from=1-1, to=1-2]
+            \arrow["{h_Y}"', from=2-1, to=2-2]
+            \arrow["{g_*}", from=1-2, to=2-2]
+            \arrow[maps to, from=1-4, to=2-4]
+            \arrow[maps to, from=1-4, to=1-5]
+            \arrow[maps to, from=2-4, to=2-5]
+            \arrow[maps to, from=1-5, to=2-5]
+        \end{tikzcd}\]
+        commutes.
+    \end{note}
+
+    \begin{lem}
+        If $X = \bigvee_{a \in A} S^n $, $h_X : \pi_n(X) \to \waveH_n(X)$
+        is abelianization if $n=1$, isomorphism if $n \geq 2$.
+    \end{lem}
+
+    \begin{prf}
+        Directly from lemma \ref{hyp:free-group-morphism-give-wedge-of-spheres-morphism}.
+        (we used homotopic properties of spheres only in proving is lemma)
+        \qed
+    \end{prf}
+    
+    \begin{thm}
+        (Hurewicz)
+        If $X$ is $(n-1)$-connected,
+        then $h_X : \pi_n(X) \to \waveH_n(X)$
+        is abelianization if $n=1$, isomorphism if $n \geq 2$.
+    \end{thm}
+
+    \begin{prf}
+        We can assume $X$ is CW-complex with $X^{n-1} = \ast$
+        and each characteristic map is pointed.
+        (since we have theorem \ref{hyp:Existence-of-CW-approximation})\\
+        For CW-complex $X$,
+        $\pi_{n}(X^{n+1}) \cong \pi_n(X)$ and $H_n(X^{n+1}) \cong H_n(X)$,
+        Since we have \hyperref[hyp:cellularity-of-homotopy-group]{cellularity of homotopy group}
+        and \hyperref[hyp:cellularity-of-homology]{cellularity of homology}.\\
+        Then we have $X^n = \bigvee_{b \in B} S^n_b$,
+        $X^{n+1} = C_\phi$ where $\phi : \bigvee_{a \in A} S^n_a \to X^n$
+        are the characteristic maps.
+        Use naturality of $h_{(-)}$, we have maps between exact sequence:
+        % https://q.uiver.app/?q=WzAsOCxbMCwwLCJcXHBpX24oXFxiaWd2ZWVfe2EgXFxpbiBBfSBTXm5fYSkiXSxbMSwwLCJcXHBpX24oWF5uKSJdLFswLDEsIlxcd2F2ZUhfbihcXGJpZ3ZlZV97YSBcXGluIEF9IFNebikiXSxbMSwxLCJcXHdhdmVIX24oWF5uKSJdLFsyLDAsIlxccGlfbihDX1xccGhpKSJdLFsyLDEsIlxcd2F2ZUhfbihDX1xccGhpKSJdLFszLDAsIjAiXSxbMywxLCIwIl0sWzAsMSwiXFxwaGlfKiJdLFswLDIsImhfe1xcYmlndmVlX3thIFxcaW4gQX0gU15uX2F9Il0sWzEsMywiaF97WF5ufSJdLFsyLDMsIlxccGhpXyoiLDJdLFsxLDRdLFszLDVdLFs0LDUsImhfe0NfXFxwaGl9Il0sWzQsNl0sWzUsN11d
+        \[\begin{tikzcd}
+            {\pi_n(\bigvee_{a \in A} S^n_a)} & {\pi_n(X^n)} & {\pi_n(C_\phi)} & 0 \\
+            {\waveH_n(\bigvee_{a \in A} S^n)} & {\waveH_n(X^n)} & {\waveH_n(C_\phi)} & 0
+            \arrow["{\phi_*}", from=1-1, to=1-2]
+            \arrow["{h_{\bigvee_{a \in A} S^n_a}}", from=1-1, to=2-1]
+            \arrow["{h_{X^n}}", from=1-2, to=2-2]
+            \arrow["{\phi_*}"', from=2-1, to=2-2]
+            \arrow[from=1-2, to=1-3]
+            \arrow[from=2-2, to=2-3]
+            \arrow["{h_{C_\phi}}", from=1-3, to=2-3]
+            \arrow[from=1-3, to=1-4]
+            \arrow[from=2-3, to=2-4]
+        \end{tikzcd}\]
+        If $n> 1$, exactness of top row is directly
+        from lemma \ref{hyp:cofib-induce-r+s-1-equiv-use-r-1-conn-pair-s-1-conn-snd}.
+        ($(M_\phi, \bigvee_{a \in A} S^n_a)$ is $(n-1)$-connected since we have lemma \ref{hyp:dim-of-X-A-great-than-n-to-X,A-n-connected})
+        $5$-lemma shows that $h_{C_\phi}$ is isomorphism. \\
+        If $n=1$, Seifert-van Kampen theorem shows that
+        $\pi_1(C_\phi) = \pi_1(X^n) / \gen{\Im \phi_*}_{nor}$.
+        (where for $A \subseteq $ a group $G$, $\gen{A}_{nor} := \{gA\inv{g} \mid g \in G \}$).
+        The top row is not exact, but top row's abelianization is exact since
+        $\gen{\Im f}_{nor} / [B,B] = \Im f / [B,B]$
+        for any group morphism $f : A \to B$.
+        Therefore we have diagram below with the middle row and the bottom row exact:
+        % https://q.uiver.app/?q=WzAsMTUsWzAsMCwiQSJdLFsxLDAsIkIiXSxbMiwwLCJHIl0sWzMsMCwiMCJdLFszLDEsIjAiXSxbMiwxLCJHXlxcbWF0aHJte2FifSJdLFsxLDEsIkJeXFxtYXRocm17YWJ9Il0sWzAsMSwiQV57XFxtYXRocm17YWJ9fSJdLFs0LDAsIjAiXSxbNCwxLCIwIl0sWzAsMiwiQSciXSxbMSwyLCJCJyJdLFsyLDIsIkcnIl0sWzMsMiwiMCJdLFs0LDIsIjAiXSxbMCwxLCJmIl0sWzEsMiwicSJdLFsyLDNdLFszLDRdLFsyLDVdLFsxLDZdLFswLDddLFs2LDUsInFeXFxtYXRocm17YWJ9Il0sWzUsNF0sWzcsNiwiZl5cXG1hdGhybXthYn0iXSxbMyw4XSxbNCw5XSxbOCw5XSxbMTAsMTFdLFsxMSwxMl0sWzEyLDEzXSxbMTMsMTRdLFs3LDEwLCJcXGNvbmciLDJdLFs2LDExLCJcXGNvbmciLDJdLFs0LDEzLCJcXGNvbmciXSxbOSwxNCwiXFxjb25nIl0sWzUsMTJdXQ==
+        \[\begin{tikzcd}
+            A & B & G = B/\gen{\Im f}_{nor} & 0 & 0 \\
+            {A^{\mathrm{ab}}} & {B^\mathrm{ab}} & {G^\mathrm{ab}} & 0 & 0 \\
+            {A'} & {B'} & {G'} & 0 & 0
+            \arrow["f", from=1-1, to=1-2]
+            \arrow["q", from=1-2, to=1-3]
+            \arrow[from=1-3, to=1-4]
+            \arrow[from=1-4, to=2-4]
+            \arrow[from=1-3, to=2-3]
+            \arrow[from=1-2, to=2-2]
+            \arrow[from=1-1, to=2-1]
+            \arrow["{q^\mathrm{ab}}", from=2-2, to=2-3]
+            \arrow[from=2-3, to=2-4]
+            \arrow["{f^\mathrm{ab}}", from=2-1, to=2-2]
+            \arrow[from=1-4, to=1-5]
+            \arrow[from=2-4, to=2-5]
+            \arrow[from=1-5, to=2-5]
+            \arrow[from=3-1, to=3-2]
+            \arrow[from=3-2, to=3-3]
+            \arrow[from=3-3, to=3-4]
+            \arrow[from=3-4, to=3-5]
+            \arrow["\cong"', from=2-1, to=3-1]
+            \arrow["\cong"', from=2-2, to=3-2]
+            \arrow["\cong", from=2-4, to=3-4]
+            \arrow["\cong", from=2-5, to=3-5]
+            \arrow[from=2-3, to=3-3]
+        \end{tikzcd}\]
+        Finally apply $5$-lemma on the middle row and the bottom row.\\
+        \qed
+    \end{prf}
+
+    \subsection{Moore Spaces}
+
+    \begin{defn}
+        A space $X$ is \tbf{Eilenberg-Mac Lane space} of
+        \tbf{type} $K(G,n)$ (where $G$ is group and is abelian for $n \geq 2$)
+        if
+        \begin{align*}
+            \pi_q(X) \cong \begin{cases}
+                G \quad &  n = q\\
+                0 \quad &  n \neq q
+            \end{cases}
+        \end{align*}
+    \end{defn}
+
+    We see that \hyperref[hyp:SP-Sn-is-K(Z,n)]{$\SP S^n$ is a $K(\bbZ,n)$}.
+    Now we use this to construct other $K(G,n)$.
+
+    \begin{note}
+        In order to construct $K(G,n)$,
+        we construct a space $M(G,n)$ which have $\pi_n(M(G,n)) = G$,
+        $\pi_q(M(G,n)) = 0$ for $q < n$
+        and we can apply $\SP$ on it to kill all $\dim > n$ homotopy group.
+    \end{note}
+
+    \begin{prop}
+        For any $k \in \bbZ$,
+        there is a map $a_k : S^1 \to S^1$
+        with $a_k$,
+        and $C_{a_k} = S^1 \cup_{a_k} e^2$ is the desired $M(\bbZ / k \bbZ,1)$
+        (that is $\SP (S^1 \cup_{a_k} e^2)$ is a $K(\bbZ / k \bbZ, 1)$).
+    \end{prop}
+
+    \begin{prf}
+        Consider sequence
+        $S^1 \xrightarrow{a_k} S^1 \hookrightarrow C_{a_k} \twoheadrightarrow  \Sigma S^1 = C_{a_k}/S^1$,
+        we apply an usual form of  \hyperref[hyp:quasi-fibration-SPX-to-SP(X/A)]{Dold-Thom Theorem}
+        to see that $\SP (C_{a_k}) \to \SP (S^2)$ 
+        is a quasi-fibration with fiber $\SP (S^1)$.
+        Then we have exact sequence:
+        \begin{align*}
+            \cdots & \to \pi_q(\SP S^1) \to \pi_q(\SP C_{a_k}) \to \pi_q(\SP S^2) \to \pi_{q-1}(\SP S^1) \to\\
+            \cdots & \to \pi_2(\SP S^1) \to \pi_2(\SP C_{a_k}) \to \pi_2(\SP S^2)\\
+            & \to \pi_1(\SP S^1) \to \pi_1(\SP C_{a_k}) \to \pi_1(\SP S^2) 
+        \end{align*}
+        We can conclude that $\pi_q(\SP C_{a_k}) = 0$ for any $q \neq 0,1$
+        and:
+        \begin{align*}
+            0 \to \pi_2(\SP C_{a_k}) \to \pi_2(\SP S^2) = \bbZ
+            \xrightarrow{\partial} \pi_1(\SP S^1) = \bbZ \to \pi_1(\SP C_{a_k}) \to 0
+        \end{align*}
+        exact. Where $\partial$ is defined by:
+        \begin{align*}
+            \pi_2(\SP S^2) \cong [D^2, S^1, \ast; \SP C_{a_k}, \SP S^1, \ast] \ni f \mapsto f|_{S^1} \in [S^1 , S^1]_*
+        \end{align*}
+        (Now we want to show that $\partial$ is multiplication by $k$)\\
+        The $1 \in \bbZ \cong \pi_2(\SP S^2)$ is represented by $[i_2 : S^2 \hookrightarrow \SP S^2]$.\\
+        Since $[D^2, S^1, \ast; \SP C_{a_k}, \SP S^1, \ast] \xrightarrow{p_*} [D^2,S^1; \SP S^2, \ast]$
+        is isomorphism,\\
+        and the map $\varphi : (D^2, S^1) \xrightarrow[]{\id_{e^2} \cup a_k} (C_{a_k}, S^1) \hookrightarrow (\SP C_{a_k}, \SP S^1) $
+        satisfy $p \circ \varphi = i_2$,\\
+        the $1 \in \bbZ \cong \pi_2(\SP C_{a_k}, \SP S^1)$ is represented by $\varphi$.
+        Then we have $\partial (1)$ is represented by $\varphi|_{S^1} = i_1 \circ a_k$
+        where $i_1 : S^1 \hookrightarrow \SP S^1$.\\
+        The map $\partial$ is $\bbZ \ni n \mapsto k n \in \bbZ$ since
+        $[i_1 \circ a_k] = k$.\\
+        Therefore $\pi_2(\SP C_{a_k}) = 0$ and $\pi_1(\SP C_{a_k}) = \bbZ / k \bbZ$.\\
+        \qed
+        
+    \end{prf}
+
+    \begin{prop}
+        For each $n \geq 1$, $k \in Z$, $\SP (S^n \cup_{\Sigma^{n-1} a_k} e^{n+1})$ is a $K(\bbZ/ k \bbZ,n)$.
+    \end{prop}
+
+    \begin{prf}
+        For $q \geq 1$, $\Sigma (S^q \cup_{\Sigma^{q-1} a_k} e^{q+1}) \approx \Sigma S^{q} \cup_{\Sigma^q a_k} \Sigma e^{q+1} = S^{q+1} \cup_{\Sigma^q a_k} e^{q+2}$
+        since $\Sigma$ is left adjoint of $\Omega$ in $\mbf{TOP_*}$
+        and the pushout is took in $\mbf{TOP_*}$.
+        Observe that $\pi_{q}(\SP X) \cong \pi_{q+1}(\SP \Sigma X)$,
+        now we have done.\\
+        \qed
+    \end{prf}
+
+    Since $\waveH_n(X) \cong \waveH_n(X \cup C\ast) \cong H_n(X,\ast)$, we have
+    $$
+    \pi_n(\SP (\bigvee_{i\in I} X_i)) = \waveH_n(\bigvee_{i\in I} X_i) \cong H_n(\bigvee_{i\in I} X_i, \ast) \cong H_n(\coprod_{i\in I} X_i, \coprod_{i\in I} \ast) \cong \bigoplus_{i\in I} H_n(X_i,\ast) \cong \bigoplus_{i\in I} \pi_n(\SP X_i)
+    $$
+    We can deduce the following proposition immediately:
+
+    \begin{prop}
+        For finitely generated abelian group $G \cong (\bigoplus_{r} \bbZ) \oplus (\bigoplus_{1 \leq i \leq k}\bbZ / d_i \bbZ)$,
+        (where $r \in \bbN$, each $d_i \in \bbZ$)
+        we have $\SP ((\bigvee_{r} S^n) \vee (\bigvee_{1 \leq i \leq k} (S^n \cup_{a_{d_i}} e^{n+1} ) ) )$
+        is a $K(G,n)$.
+    \end{prop}
+
+    Since every abelian group $G$ have a free resolution sequence:
+    $$
+    0 \to \bigoplus_{a \in A} \bbZ \xrightarrow{f} \bigoplus_{b \in B} \bbZ \twoheadrightarrow G \to 0
+    $$
+    exact.
+    And for every group $G = F(X)/\gen{Y}_{nor} $
+    (where $F(X) := \coprod_{x \in X} \bbZ_x$ is the free group functor and $\gen{Y}_{nor}$
+    is the normal subgroup generated by $Y$),
+    we have:
+    $$
+    1 \to \coprod_{y \in \gen{Y}_{nor}} \bbZ_y \xrightarrow{f : 1_y \mapsto y} \coprod_{x \in X} \bbZ_x \twoheadrightarrow G \to 1
+    $$
+    exact.
+
+    Next proposition allows to construct spaces
+    $M(\bigoplus_{a \in A} \bbZ,n)$
+    and $M(\coprod_{a \in A} \bbZ,1)$:
+
+    
+
+    \begin{defn}\label{hyp:definition-of-Moore-space}
+        For $n > 1$, $G$ an abelian group, we have exact sequence
+        $$
+        0 \to \bigoplus_{a \in A} \bbZ \xrightarrow{f} \bigoplus_{b \in B} \bbZ \twoheadrightarrow G \to 0
+        $$
+        Then we have: (with $\phi$ is the map obtained using lemma \ref{hyp:free-group-morphism-give-wedge-of-spheres-morphism})
+        $$
+        \bigvee_{a \in A} S^n_a \xrightarrow{\phi} \bigvee_{b \in B} S^n_b \to C_\phi
+        $$
+        the \tbf{Moore space} of type $(G,n)$ is defined as
+        $M(G,n) := C_\phi$.\\
+
+        For $n = 1$, $G$ a group, we have exact sequence:
+        $$
+        1 \to \coprod_{y \in \gen{Y}_{nor}} \bbZ_y \xrightarrow{f : 1_y \mapsto y} \coprod_{x \in X} \bbZ_x \twoheadrightarrow G \to 1
+        $$
+        Then we have: (with $\phi$ is the map obtained using lemma \ref{hyp:free-group-morphism-give-wedge-of-spheres-morphism})
+        $$
+        \bigvee_{y \in \gen{Y}_{nor}} S^1_y \xrightarrow{\phi} \bigvee_{x \in X} S^1_x \to C_\phi
+        $$
+        the \tbf{Moore space} of type $(G,1)$ is defined as
+        $M(G,1) := C_\phi$.
+    \end{defn}
+
+    \begin{prop}
+        $\pi_n(M(G,n)) = G$
+    \end{prop}
+
+    \begin{prf}
+        For $n>1$, use diagram:
+        \[\begin{tikzcd}
+            {} & {M_\phi} \\
+            X & Y
+            \arrow["\phi"', from=2-1, to=2-2]
+            \arrow[""{name=0, anchor=center, inner sep=0}, "j", curve={height=-6pt}, from=2-2, to=1-2]
+            \arrow["i", from=2-1, to=1-2]
+            \arrow[""{name=1, anchor=center, inner sep=0}, "p", curve={height=-6pt}, from=1-2, to=2-2]
+            \arrow["\simeq"{marking}, Rightarrow, draw=none, from=0, to=1]
+        \end{tikzcd}\]
+        To see:
+        % https://q.uiver.app/?q=WzAsMTAsWzEsMCwiXFxwaV9uKFxcYmlndmVlX3thIFxcaW4gQX0gU15uX2EpIl0sWzIsMCwiXFxwaV9uKE1fXFxwaGkpIl0sWzMsMCwiXFxwaV9uKE1fXFxwaGksXFxiaWd2ZWVfe2EgXFxpbiBBfSBTXm5fYSkiXSxbNCwwLCJcXHBpX3tuLTF9KFxcYmlndmVlX3thIFxcaW4gQX0gU15uX2EpIl0sWzUsMCwiXFxjZG90cyJdLFswLDAsIlxcY2RvdHMiXSxbMSwyLCJcXGNvcHJvZF97YSBcXGluIEF9IFxcYmJaX2EiXSxbMiwyLCJcXGNvcHJvZF97YiBcXGluIEF9IFxcYmJaX2EiXSxbMiwxLCJcXHBpX24oXFxiaWd2ZWVfe2IgXFxpbiBCfSBTXm5fYikiXSxbMywyLCJcXHBpX24oTShHLG4pKSJdLFswLDEsImlfKiJdLFsxLDJdLFsyLDNdLFszLDRdLFs1LDBdLFs2LDAsIlxcY29uZyJdLFs2LDcsImYiLDJdLFs3LDgsIlxcY29uZyIsMl0sWzAsOCwiXFxwaGlfKiIsMl0sWzgsMSwial8qIFxcY29uZyIsMl0sWzIsOSwicV8qIl1d
+        \[\begin{tikzcd}
+            \cdots & {\pi_n(\bigvee_{a \in A} S^n_a)} & {\pi_n(M_\phi)} & {\pi_n(M_\phi,\bigvee_{a \in A} S^n_a)} & {\pi_{n-1}(\bigvee_{a \in A} S^n_a)} & \cdots \\
+            && {\pi_n(\bigvee_{b \in B} S^n_b)} \\
+            & {\bigoplus_{a \in A} \bbZ_a} & {\bigoplus_{b \in A} \bbZ_a} & {\pi_n(M(G,n))}
+            \arrow["{i_*}", from=1-2, to=1-3]
+            \arrow[from=1-3, to=1-4]
+            \arrow[from=1-4, to=1-5]
+            \arrow[from=1-5, to=1-6]
+            \arrow[from=1-1, to=1-2]
+            \arrow["\cong", from=3-2, to=1-2]
+            \arrow["f"', from=3-2, to=3-3]
+            \arrow["\cong"', from=3-3, to=2-3]
+            \arrow["{\phi_*}"', from=1-2, to=2-3]
+            \arrow["{j_* \cong}"', from=2-3, to=1-3]
+            \arrow["{q_*}", from=1-4, to=3-4]
+        \end{tikzcd}\]
+        Where $q_*$ is induced by $q : (M_\phi,\bigvee_{a \in A} S^n_a) \to (C_\phi , \ast)$.
+        $\bigvee_{a \in A} S^n_a$ is $(n-1)$-connected,
+        implies $\pi_{n-1}(\bigvee_{a \in A} S^n_a) = 0$.
+        $(M_\phi, \bigvee_{a \in A} S^n_a)$ is $(n-1)$-connected
+        due to lemma \ref{hyp:dim-of-X-A-great-than-n-to-X,A-n-connected}.
+        Therefore we have
+        $q_*$ is isomorphism using lemma \ref{hyp:cofib-induce-r+s-1-equiv-use-r-1-conn-pair-s-1-conn-snd}.
+        Diagram above reduces to:
+        $$
+        0 \to \bigoplus_{a \in A} \bbZ_a \xrightarrow{f} \bigoplus_{b \in B} \bbZ_b \twoheadrightarrow \pi_n(M(G,n)) \to 0
+        $$
+        For $n=1$, use Seifert-van Kampen theorem.\\
+        \qed
+    \end{prf}
+
+    \begin{prop}
+        For any $n \geq 1$ and any group morphism $f : G \to G'$
+        there exist
+        morphism $f_M : M(G,n) \to M(G',n)$
+        such that $f_{M*} = f $.
+    \end{prop}
+
+    \begin{prf}
+        We have following for $n > 1$: (since free $\bbZ$-module is projective)
+        % https://q.uiver.app/?q=WzAsMTAsWzEsMCwiXFxiaWdvcGx1c197YSBcXGluIEF9IFxcYmJaX2EiXSxbMiwwLCJcXGJpZ29wbHVzX3tiIFxcaW4gQn0gXFxiYlpfYiJdLFszLDAsIkciXSxbNCwwLCIwIl0sWzAsMCwiMCJdLFszLDEsIkcnIl0sWzQsMSwiMCJdLFsyLDEsIlxcYmlnb3BsdXNfe2InIFxcaW4gQid9IFxcYmJaX3tiJ30iXSxbMSwxLCJcXGJpZ29wbHVzX3thICdcXGluIEEnfSBcXGJiWl97YSd9Il0sWzAsMSwiMCJdLFswLDEsImkiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtb25vIn19fV0sWzEsMiwicSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFsyLDNdLFs0LDBdLFsyLDUsImYiXSxbNSw2XSxbNyw1LCJxJyIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFs4LDcsImknIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibW9ubyJ9fX1dLFs5LDhdLFsxLDcsInJfMCIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDgsInJfMSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+        \[\begin{tikzcd}
+            0 & {\bigoplus_{a \in A} \bbZ_a} & {\bigoplus_{b \in B} \bbZ_b} & G & 0 \\
+            0 & {\bigoplus_{a '\in A'} \bbZ_{a'}} & {\bigoplus_{b' \in B'} \bbZ_{b'}} & {G'} & 0
+            \arrow["i", tail, from=1-2, to=1-3]
+            \arrow["q", two heads, from=1-3, to=1-4]
+            \arrow[from=1-4, to=1-5]
+            \arrow[from=1-1, to=1-2]
+            \arrow["f", from=1-4, to=2-4]
+            \arrow[from=2-4, to=2-5]
+            \arrow["{q'}"', two heads, from=2-3, to=2-4]
+            \arrow["{i'}"', tail, from=2-2, to=2-3]
+            \arrow[from=2-1, to=2-2]
+            \arrow["{r_0}", dashed, from=1-3, to=2-3]
+            \arrow["{r_1}", dashed, from=1-2, to=2-2]
+        \end{tikzcd}\]
+        And we have following for $n = 1$: (where $i(1_{1_{a}1_b\inv{(1_{a \cdot b})}}) := 1_{a}1_b\inv{(1_{a \cdot b})}$)
+        % https://q.uiver.app/?q=WzAsMTAsWzMsMCwiRyJdLFszLDEsIkcnIl0sWzQsMSwiMSJdLFs0LDAsIjEiXSxbMiwwLCJcXGNvcHJvZF97ZyBcXGluIEd9IFxcYmJaX2ciXSxbMiwxLCJcXGNvcHJvZF97ZycgXFxpbiBHJ30gXFxiYlpfe2cnfSJdLFsxLDAsIlxcY29wcm9kX3soYSxiKVxcaW4gKEcsRyl9IFxcYmJaX3sxX2ExX2IoMV97YVxcY2RvdCBifSleey0xfX0gIl0sWzEsMSwiXFxjb3Byb2RfeyhhJyxiJylcXGluIChHJyxHJyl9IFxcYmJaX3sxX2EnMV9iJygxX3thJ1xcY2RvdCBiJ30pXnstMX19Il0sWzAsMCwiMSJdLFswLDEsIjEiXSxbMCwxLCJmIl0sWzEsMl0sWzAsM10sWzQsMCwicSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFs1LDEsInEnIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzQsNSwicl8wIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzYsNCwiaSIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbNyw1LCJpJyIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbNiw3LCJyXzEiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbOCw2XSxbOSw3XV0=
+        \[\begin{tikzcd}
+            1 & {\coprod_{(a,b)\in (G,G)} \bbZ_{1_a1_b\inv{(1_{a\cdot b})}} } & {\coprod_{g \in G} \bbZ_g} & G & 1 \\
+            1 & {\coprod_{(a',b')\in (G',G')} \bbZ_{1_a'1_b'(1_{a'\cdot b'})^{-1}}} & {\coprod_{g' \in G'} \bbZ_{g'}} & {G'} & 1
+            \arrow["f", from=1-4, to=2-4]
+            \arrow[from=2-4, to=2-5]
+            \arrow[from=1-4, to=1-5]
+            \arrow["q", two heads, from=1-3, to=1-4]
+            \arrow["{q'}"', two heads, from=2-3, to=2-4]
+            \arrow["{r_0}", dashed, from=1-3, to=2-3]
+            \arrow["i", tail, from=1-2, to=1-3]
+            \arrow["{i'}"', tail, from=2-2, to=2-3]
+            \arrow["{r_1}", dashed, from=1-2, to=2-2]
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=2-1, to=2-2]
+        \end{tikzcd}\]
+        We could obtain: (use lemma \ref{hyp:free-group-morphism-give-wedge-of-spheres-morphism})
+        % https://q.uiver.app/?q=WzAsNixbMCwwLCJcXGJpZ3ZlZV97YSBcXGluIEF9IFNebl9hIl0sWzEsMCwiXFxiaWd2ZWVfe2IgXFxpbiBCfSBTXm5fYiJdLFswLDEsIlxcYmlndmVlX3thJyBcXGluIEEnfSBTXm5fe2EnfSJdLFsxLDEsIlxcYmlndmVlX3tiJyBcXGluIEInfSBTXm5fe2InfSJdLFsyLDAsIkNfXFxwaGkiXSxbMiwxLCJDX3tcXHBoaSd9Il0sWzAsMSwiXFxwaGkiXSxbMCwyLCJcXGNoaV8xIiwyXSxbMiwzLCJcXHBoaSciLDJdLFsxLDMsIlxcY2hpXzAiXSxbMSw0XSxbMyw1XSxbNCw1LCJmX00iLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMiwxLCJcXHNpbWVxIiwzLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+        \[\begin{tikzcd}
+            {\bigvee_{a \in A} S^n_a} & {\bigvee_{b \in B} S^n_b} & {C_\phi} \\
+            {\bigvee_{a' \in A'} S^n_{a'}} & {\bigvee_{b' \in B'} S^n_{b'}} & {C_{\phi'}}
+            \arrow["\phi", from=1-1, to=1-2]
+            \arrow["{\chi_1}"', from=1-1, to=2-1]
+            \arrow["{\phi'}"', from=2-1, to=2-2]
+            \arrow["{\chi_0}", from=1-2, to=2-2]
+            \arrow[from=1-2, to=1-3]
+            \arrow[from=2-2, to=2-3]
+            \arrow["{f_M}", dashed, from=1-3, to=2-3]
+            \arrow["\simeq"{marking}, draw=none, from=2-1, to=1-2]
+        \end{tikzcd}\]
+        Finally we have: (use universal property of cokernel)
+        \[\begin{tikzcd}
+            0 & {\pi_n(\bigvee_{a \in A} S^n_a)} & {\pi_n(\bigvee_{b \in B} S^n_b)} & {\pi_n(C_\phi)} & 0 \\
+            0 & {\pi_n(\bigvee_{a' \in A'} S^n_{a'})} & {\pi_n(\bigvee_{b' \in B'} S^n_{b'})} & {\pi_n(C_{\phi'})} & 0
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=2-1, to=2-2]
+            \arrow["{\phi_* = i}", from=1-2, to=1-3]
+            \arrow["{\phi'_*=i'}"', from=2-2, to=2-3]
+            \arrow[from=1-3, to=1-4]
+            \arrow[from=2-3, to=2-4]
+            \arrow[from=2-4, to=2-5]
+            \arrow[from=1-4, to=1-5]
+            \arrow["{\chi_{1*} = r_1}", from=1-2, to=2-2]
+            \arrow["{\chi_{0*} = r_0}", from=1-3, to=2-3]
+            \arrow["{f_{M*} = f}", from=1-4, to=2-4]
+        \end{tikzcd}\]
+        \qed
+    \end{prf}
+
+    \begin{thm}
+        $\SP (M (G,n))$ is a $K(G,n)$ if $G$ is abelian.
+    \end{thm}
+
+    \begin{prf}
+        In the \hyperref[hyp:definition-of-Moore-space]{construction} of Moore spaces, we have:
+        (use notations in the construction)
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXGJpZ3ZlZV97YSBcXGluIEF9IFNebl9hIl0sWzEsMCwiXFxiaWd2ZWVfe2JcXGluIEJ9IFNebl9iIl0sWzEsMSwiTV9cXHBoaSJdLFsyLDEsIkNfXFxwaGkiXSxbMCwxLCJcXHBoaSJdLFsxLDIsIlxcc2ltZXEiXSxbMCwyXSxbMiwzXSxbMSwzXV0=
+        \[\begin{tikzcd}
+            {\bigvee_{a \in A} S^n_a} & {\bigvee_{b\in B} S^n_b} \\
+            & {M_\phi} & {C_\phi}
+            \arrow["\phi", from=1-1, to=1-2]
+            \arrow["\simeq", from=1-2, to=2-2]
+            \arrow[from=1-1, to=2-2]
+            \arrow[from=2-2, to=2-3]
+            \arrow[from=1-2, to=2-3]
+        \end{tikzcd}\]
+        which induces quasi-fibration
+        $\SP M_\phi \to \SP C_\phi$
+        with fiber $\SP \bigvee_{a \in A} S^n_a$.
+        Then we have long exact sequence:
+        \begin{align*}
+            \cdots
+            \to \pi_{q}(\SP \bigvee_{a \in A} S^n_a)
+            \xrightarrow{\phi_*} \pi_{q}(\SP M_\phi)
+            \to \pi_{q}(\SP C_\phi)
+            \to \pi_{q-1}(\SP \bigvee_{a \in A} S^n_a)
+            \to \cdots
+        \end{align*}
+        Sequence above says if $q \neq n \text{ and }  q \neq n+1$,
+        then $\pi_q(\SP C_\phi) = 0$.
+        If $q = n+1$, we have:
+        % https://q.uiver.app/?q=WzAsMTEsWzIsMCwiXFxwaV97bn0oXFxTUCBcXGJpZ3ZlZV97YSBcXGluIEF9IFNebl9hKSJdLFsxLDAsIlxccGlfe24rMX0oQ19cXHBoaSkiXSxbMCwwLCIwIl0sWzMsMCwiXFxwaV97bn0oXFxTUCBcXGJpZ3ZlZV97YiBcXGluIEJ9IFNebl9iKSJdLFs0LDAsIlxccGlfbihDX1xccGhpKSJdLFs1LDAsIjAiXSxbMiwxLCJcXGJpZ29wbHVzX3thIFxcaW4gQX0gXFxiYlpfYSJdLFszLDEsIlxcYmlnb3BsdXNfe2IgXFxpbiBCfSBcXGJiWl9iIl0sWzQsMSwiRyJdLFs1LDEsIjAiXSxbMSwxLCIwIl0sWzEsMF0sWzIsMV0sWzAsMywiXFxwaGlfKiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbMyw0LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbNCw1XSxbMCw2LCJcXGNvbmciLDMseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMyw3LCJcXGNvbmciLDMseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNiw3LCJmIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibW9ubyJ9fX1dLFs3LDgsIiIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dLFs0LDgsIlxcY29uZyIsMyx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs4LDldLFsxMCw2XV0=
+        \[\begin{tikzcd}
+            0 & {\pi_{n+1}(C_\phi)} & {\pi_{n}(\SP \bigvee_{a \in A} S^n_a)} & {\pi_{n}(\SP \bigvee_{b \in B} S^n_b)} & {\pi_n(C_\phi)} & 0 \\
+            & 0 & {\bigoplus_{a \in A} \bbZ_a} & {\bigoplus_{b \in B} \bbZ_b} & G & 0
+            \arrow[from=1-2, to=1-3]
+            \arrow[from=1-1, to=1-2]
+            \arrow["{\phi_*}", tail, from=1-3, to=1-4]
+            \arrow[two heads, from=1-4, to=1-5]
+            \arrow[from=1-5, to=1-6]
+            \arrow["\cong"{marking}, draw=none, from=1-3, to=2-3]
+            \arrow["\cong"{marking}, draw=none, from=1-4, to=2-4]
+            \arrow["f"', tail, from=2-3, to=2-4]
+            \arrow[two heads, from=2-4, to=2-5]
+            \arrow["\cong"{marking}, draw=none, from=1-5, to=2-5]
+            \arrow[from=2-5, to=2-6]
+            \arrow[from=2-2, to=2-3]
+        \end{tikzcd}\]
+        We have $\pi_{n+1} (C_\phi) = 0$ since $\phi_*$ is monomorphism.\\
+        \qed
+    \end{prf}
+
+    \begin{note}
+        Construction of Eilenberg Mac-Lane space
+        using Moore spaces is limited,
+        there is another construction of
+        $K(G,n)$ allows non-abelian group $G$ for $n = 1$.
+        (use geometric realization)
+    \end{note}
+
+    \begin{defn}
+        The \tbf{weak product} of pointed $\{ Z_i \}_{i \in Z}$ spaces is
+        \[
+        \interior{\prod}_{i \in \bbN} Z_i := \colim \limits_{S \in \Fin(\bbN)} (\prod_{i \in S} Z_i) \\
+        \]
+        whose underlying set is:
+        \[
+        \{ (a_i)_{i \in \bbN} \in \prod_{i \in \bbN} Z_i \mid \text{only finite $a_i$ is not $\ast$ } \}
+        \]
+    \end{defn}
+
+    Theorem following shows why $K(G,n)$ is important:
+
+    \begin{thm}
+        If $Y$ is a path-connected commutative
+        $H$-space with strict identity
+        ($1 \cdot y = y$),
+        then there is a weak equivalence
+        \[
+        \interior{\prod}_{n \geq 1} K(\pi_n(Y),n) \to Y
+        \]
+        Moreover, we have weak equivalence
+        \[
+        \prod_{n \geq 1} K(\pi_n(Y),n) \to Y
+        \]
+    \end{thm}
+    
+    \begin{prf}
+        Take free resolution of $\pi_n(Y)$:
+        \[
+        0 \to \bigoplus_{a \in A} \bbZ_a \xrightarrow{\gamma} \bigoplus_{b \in B} \bbZ_b \xrightarrow{q} \pi_n(Y) \to 0
+        \]
+        (for $n=1$, replace $\bigoplus$ with $\coprod$).
+        and obtain:
+        % https://q.uiver.app/?q=WzAsNixbMCwwLCJcXGJpZ3ZlZV97YSBcXGluIEF9IFNebl9hIl0sWzEsMCwiXFxiaWd2ZWVfe2IgXFxpbiBCfSBTXm5fYiJdLFswLDEsIlxcYXN0Il0sWzEsMSwiWSJdLFsyLDAsIkNfXFxwaGkgXFxjb25nIE0oXFxwaV9uKFksbikpIl0sWzIsMSwiQ197aX0gXFxzaW1lcSBZIl0sWzAsMSwiXFxwaGkiXSxbMCwyXSxbMiwzLCJpIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMSwzLCJcXGJpZ3ZlZV97YiBcXGluIEJ9IGYnX2IiXSxbMSw0XSxbMyw1XSxbNCw1LCJmX00iLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMiwxLCJcXHNpbWVxIiwzLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+        \[\begin{tikzcd}
+            {\bigvee_{a \in A} S^n_a} & {\bigvee_{b \in B} S^n_b} & {C_\phi \cong M(\pi_n(Y,n))} \\
+            \ast & Y & {C_{i} \simeq Y}
+            \arrow["\phi", from=1-1, to=1-2]
+            \arrow[from=1-1, to=2-1]
+            \arrow["i"', hook, from=2-1, to=2-2]
+            \arrow["{\bigvee_{b \in B} g'_b}", from=1-2, to=2-2]
+            \arrow[from=1-2, to=1-3]
+            \arrow[from=2-2, to=2-3]
+            \arrow["{f'_n}", dashed, from=1-3, to=2-3]
+            \arrow["\simeq"{marking}, draw=none, from=2-1, to=1-2]
+        \end{tikzcd}\]
+        where $[g'_b] = q(1_b)$.
+        We have
+        $f'_{n*} : \pi_n(M(\pi_n(Y),n)) \to \pi_n(Y)$ is an isomorphism.\\
+        Construct
+        $f'^k_n : \prod_k M(\pi_n(Y),n) \to Y$
+        by:
+        \begin{align*}
+            f'^k_n : \prod_k M(\pi_n(Y),n) & \to Y\\
+            (a_1, a_2, \dots, a_k) & \mapsto f(a_1) \cdot f(a_2) \cdots f(a_k)
+        \end{align*}
+        where $- \cdot - : Y \times Y \to Y$ is the $H$-multiplication on $Y$.\\
+        Strict identity,
+        commutativity and associativity says it is homotopically unique $\rel \ast$.\\
+        Therefore we have a well-defined map $f^k_n : \SP^k M(\pi_n(Y),n) \to Y$
+        (for each $k$)
+        which commutes with inclusion $\SP^k \hookrightarrow \SP^{k+1}$.\\
+        Directly from above,
+        we have $f_n : \SP M(\pi_n(Y),n) \to Y$
+        induces isomorphism on $\pi_n(-)$.
+        (in case $n=1$, $\pi_1(Y)$ is abelian since $Y$ is a commutative $H$-space)\\
+        Similarly we have $f : \SP (\bigvee_n M(\pi_n(Y),n) ) \to Y$
+        obtained from $\bigvee_n f'_n : \bigvee_n M(\pi_n(Y),n) \to Y$.\\
+        $\SP (\bigvee_n M(\pi_n(Y),n) ) \approx \interior{\prod}_n \SP M(\pi_n(Y),n)$
+        since we have \hyperref[hyp:SP-of-wedge-is-product-of-SP]{$\SP (X_1 \vee X_2) \approx \SP X_1 \times \SP X_2$}
+        and \hyperref[hyp:SP-commute-with-directed-colimit]{$\SP$ commute with directed colimit}.
+        We can deduce that $f|_{\SP M(\pi_n(Y),n)} = f_n$
+        from construction of the homeomorphism.\\
+        Last, $\interior{\prod}_n K(\pi_n(Y),n) \hookrightarrow \prod_n K(\pi_n(Y),n)$
+        is weak homotopy equivalence
+        since $S^n$ have compact image.
+        (is homotopy equivalence since they are CW-complexes)\\
+        \qed
+    \end{prf}
+
+
+
 
 \end{document}
