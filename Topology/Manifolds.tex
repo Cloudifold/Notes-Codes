@@ -1,0 +1,491 @@
+\input{../temp.tex}
+
+\begin{document}
+    \title{Manifolds}
+    \author{{\color{pink}{Cloudi}}{\color{Aquamarine}{fold}}}
+    \maketitle
+    \newpage
+
+    \setcounter{section}{-1}
+
+    \section{Manifolds and Maps}
+
+    \begin{defn}
+        A map $f : U \to \bbR^m$ (where $U$ is an open subset of $\bbR^n$)
+        is called $C^k$ if
+        the $k$-th derivative of $f$ exist and continuous.\\
+        $f$ is called $C^{\infty}$ or \tbf{smooth} if $f$ is $C^k$ for any $k \in \bbN$.\\
+        $f : U \to V$ is called $C^{\omega}$ or \tbf{analytic} if
+        $f$ is $C^\infty$ and
+        forall $ x \in U$, there exists open neighborhood $U_x$
+        such that the Taylor series expansion of $f$ at $x$
+        pointwise converges to $f$ on $U_x$
+    \end{defn}
+
+    \begin{defn}
+        For a $C^r$ ($r \geq 1$) map $f : U \to R^m$ (where $U$ is an open subset of $\bbR^n$),
+        $y \in f(U)$ is called a \tbf{regular value} of $f$
+        if for any $x \in f^{-1}(y)$,
+        the rank of the Jacobian matrix of $f$ at $x$
+        is $m$.
+    \end{defn}
+
+    \begin{note}
+        By \tbf{Weierstrass M-test},
+        the ``pointwise converges'' condition in the definition of $C^\omega$ function
+        can be replaced equivalently by ``uniform converges''.
+    \end{note}
+
+    \begin{defn}
+        An \tbf{$n$-dimensional $C^r$ manifold} (we assume $r \geq 1$)
+        $(M,A)$ is datas:
+        \begin{itemize}
+            \item A $T_2$ space $M$ whose topology have a countable basis
+            \item $A = \{(U_j,\varphi_j)\}_{j \in J}$,
+            which consists of open cover $\{U_j\}_{j \in J}$ of $M$
+            and homeomorphisms $\{\varphi_j : U_j \to O_j \}_{j \in J}$.
+            (where $O_j$ is an open subset of $\bbR^n$)\\
+        \end{itemize}
+        with condition:
+        \begin{itemize}
+            \item Forall $i,j \in J$,
+            the homeomorphism
+            $\varphi_j \circ \varphi_i^{-1} : \varphi_i(U_i \cap U_j) \to \varphi_j(U_i \cap U_j)$
+            is $C^r$. (these maps are called \tbf{transition maps})\\
+        \end{itemize}
+        A single $(U_j,\varphi_j)$ is called a \tbf{chart},
+        $A$ is called ($C^r$) \tbf{atlas} or \tbf{differential structure}.
+    \end{defn}
+
+    \begin{note}
+        Manifolds defined above are locally compact,
+        hence paracompact and  compactly generated Hausdorff.
+    \end{note}
+
+    \begin{defn}
+        Suppose $M,N$ are $C^r$ manifolds with dimensions $n,k$
+        and atlas $A = \{(U_j,\varphi_j)\}_{j \in J}, \ B = \{(V_i,\phi_i)\}_{i \in I}$.
+        The \tbf{product of two manifolds}
+        is a $(n+k)$-dimensional manifold
+        with underlying space $M \times N$
+        and atlas $A \times B := \{(U_j \times V_i,\varphi_j \times \phi_i)\}_{(j,i) \in J \times I}$.
+        
+    \end{defn}
+
+    \begin{defn}
+        Suppose $N$ is $C^r$ manifolds with dimension $n$
+        and atlas $A = \{(U_j,\varphi_j)\}_{j \in J}$,
+        $M$ is another manifold.
+        $h : M \hookrightarrow N$ is topological embedding.
+        The \tbf{induced atlas} on $M$
+        is atlas $h^* A := \{(h^{-1}(U_j),\varphi_j \circ h)\}_{j \in J}$.
+        
+    \end{defn}
+
+    \begin{defn}
+        Suppose $N$ is $C^r$ manifolds with dimension $n$
+        and atlas $A = \{(U_j,\varphi_j)\}_{j \in J}$,
+        $M$ is subspace of $N$.
+        $M$ is a $C^r$ \tbf{submanifold of dimension $k$} of $(N,A)$
+        if
+        for any $x \in M$
+        there exists a chart $(U_j,\varphi_j)$
+        such that $x \in U_j$ and 
+        \[
+            \varphi_j (M \cap U_j) = \phi_j(U_j) \cap \bbR^k
+        \]
+        Such charts combine together give a atlas of $M$.\\
+        We also say that $M$ is a submanifold of \tbf{codimension} $n-k$.
+
+    \end{defn}
+
+    \begin{note}
+        Open subset $U$ of a $n$-dimensional manifold $M$
+        is obviously a submanifold of dimension $n$.
+    \end{note}
+
+    \begin{exmp}
+        The \tbf{real general linear group}
+        $\GL_n(\bbR)$
+        is an open analytic submanifold
+        of $(n \times n)$-dimensional manifold $M_n(\bbR)$
+        since $ \GL_n(\bbR) = \det^{-1}(\bbR - \{0\}) $
+        and
+        the manifold structure (and topology) of $\Mat_{n \times n}(\bbR)$
+        is given by bijection in ($\mbf{Set}$)
+        $ \Mat_{n\times n}(\bbR) \leftrightarrows \bbR^{n \times n} $.
+    \end{exmp}
+
+    \begin{exmp}
+        The (non-compact) \tbf{real Stiefel manifold}
+        $\St_k(\bbR^n)$
+        is the set of $\bbR$-linear monomorphisms $\bbR^k \to \bbR^n$,
+        which is equivalent (in $\mbf{Set}$) to
+        the set of linearly independent elements
+        \[
+            (a_1, \dots , a_k) \in \bbR^n \times \cdots \times \bbR^n = \bbR^{n \times k}
+        \]
+        (also called set of $k$-frames in $\bbR^n$)\\
+        $\St_k(\bbR^n)$ is an open analytic submanifold of
+        $\bbR^{n \times k}$,
+        since $\St_k(\bbR^n) = \bigcap\limits_{1 \leq r \leq n-k+1} \det_{r}^{-1}(\bbR - \{0\})$.
+        Where $\det_r$ is defined by:
+        \[
+        \textstyle{\det_r}
+        \left( {\begin{bmatrix}
+            a_{1,1} & \cdots & a_{1,k} \\
+            a_{2,1} & \cdots & a_{2,k} \\
+            \vdots &   \ & \vdots \\
+            a_{n-1,1} & \cdots & a_{n-1,k} \\
+            a_{n,1} & \cdots & a_{n,k} \\
+        \end{bmatrix} } \right)
+        := \det \left({\begin{bmatrix}
+            a_{r,1} & \cdots & a_{r,k} \\
+            a_{r+1,1} & \cdots & a_{r+1,k} \\
+            \vdots &   \ & \vdots \\
+            a_{r+k-1,1} & \cdots & a_{r+k-1,k} \\
+        \end{bmatrix} } \right)
+        \]
+        
+    \end{exmp}
+
+    \begin{exmp}
+        The \tbf{Grassmann manifold}
+        $\Gr_k(\bbR^n) = \St_k (\bbR^n)/\GL_k(\bbR)$
+        is the set $k$-dimensional subspaces of $\bbR^n$.
+        Define $U_V := \{W \in \Gr_k(\bbR^n) \mid \rank(p_V|_{W} : W \to V) = k  \}$,
+        where
+        $p_V : \bbR^n \to V$
+        is the orthogonal projection.
+        Let $i_W : V \to W$ be inverse of $p_V|_W$,
+        define bijection:
+        \begin{align*}
+            U_V & \xrightarrow{\varphi_V} \Hom_{\bbR}(V,V^\bot) \approx \bbR^{k \times (n-k)}\\
+            W & \longmapsto p_{V^\bot} \circ i_{W}\\
+            \Im(\id_V \times M) & \longmapsfrom M
+        \end{align*}
+        Where $p_{V^\bot} : \bbR^n = V \oplus V^{\bot } \to V^{\bot}$.\\
+        Atlas  on $\Gr_k(\bbR^n)$ is given by $\{(U_V, \varphi_V)\}_{V \in \Gr_k(\bbR^n)}$.\\
+        We verify that the transition maps are analytic.
+        Suppose $E$ is spaned by $\mbfe_1, \cdots ,\mbfe_k$,
+        $V$ have orthonormal basis $[\mbfv_1, \cdots , \mbfv_k]$
+        and $V^\bot$ have orthonormal basis $[\mbfv_{k+1}, \cdots , \mbfv_{n}]$.
+        Let $\GL_n(\bbR) \ni T : E \oplus E^\bot \to V \oplus V^\bot$
+        be the transformation sends each $\mbfe_i$ to $\mbfv_i$.
+        Let $[T]$ be its matrix respect to $[\mbfe_1, \mbfe_2, \cdots, \mbfe_n]$,
+        and $[T^{-1}]$ is matrix of its inverse.
+        then $p_{V^\bot}$
+        is given by
+        \[
+        a = 
+        [\mbfe_1, \mbfe_2, \cdots, \mbfe_n]
+        \begin{bmatrix}
+            a_1 \\
+            a_2 \\
+            \vdots \\
+            a_n
+        \end{bmatrix}
+        \mapsto
+        [\mbfv_{k+1}, \mbfv_{k+2}, \cdots, \mbfv_n]
+        \begin{bmatrix}
+            T^{-1}
+        \end{bmatrix}_{i > k}
+        \begin{bmatrix}
+            a_1 \\
+            a_2 \\
+            \vdots \\
+            a_n
+        \end{bmatrix}
+        \]
+        Suppose $M \in \Hom_{\bbR}(E,E^\bot)$
+        satisfy $W := \Im(\id_E \times M) \in U_V$,
+        (that is $M \in \varphi_E^{-1} (U_E \cap U_V)$)
+        let $[m_{i,j}]_{k\leq i \leq n, 1 \leq j \leq k}$ be its matrix respect to $[\mbfe_1, \mbfe_2, \cdots, \mbfe_n]$.
+        Then $p_{V}|_{W}$ is given by:
+        \[
+        a = 
+        [\mbfe_1, \mbfe_2, \cdots, \mbfe_n]
+        \begin{bmatrix}
+            I_k \\
+            M
+        \end{bmatrix}
+        \begin{bmatrix}
+            a_1 \\
+            a_2 \\
+            \vdots \\
+            a_k
+        \end{bmatrix}
+        \longmapsto
+        [\mbfv_1, \mbfv_2, \cdots, \mbfv_k]
+        \begin{bmatrix}
+            T^{-1}
+        \end{bmatrix}_{i \leq k}
+        \begin{bmatrix}
+            I_k \\
+            M
+        \end{bmatrix}
+        \begin{bmatrix}
+            a_1 \\
+            a_2 \\
+            \vdots \\
+            a_k
+        \end{bmatrix}
+        \]
+        And $i_W$ is given by:
+        \[
+        b = 
+        [\mbfv_1, \mbfv_2, \cdots, \mbfv_k]
+        \begin{bmatrix}
+            b_1 \\
+            b_2 \\
+            \vdots \\
+            b_k
+        \end{bmatrix}
+        \longmapsto
+        [\mbfe_1, \mbfe_2, \cdots, \mbfe_n]
+        \begin{bmatrix}
+            I_k \\
+            M
+        \end{bmatrix}
+        \left(\begin{bmatrix}
+            T^{-1}
+        \end{bmatrix}_{i \leq k}
+        \begin{bmatrix}
+            I_k \\
+            M
+        \end{bmatrix}\right)^{-1}
+        \begin{bmatrix}
+            b_1 \\
+            b_2 \\
+            \vdots \\
+            b_k
+        \end{bmatrix}
+        \]
+        Finally, we see that $p_{V^\bot} \circ i_W$ is:
+        \[
+        b = 
+        [\mbfv_1, \mbfv_2, \cdots, \mbfv_k]
+        \begin{bmatrix}
+            b_1 \\
+            b_2 \\
+            \vdots \\
+            b_k
+        \end{bmatrix}
+        \longmapsto
+        [\mbfv_{k+1}, \mbfv_{k+2}, \cdots, \mbfv_n]
+        \begin{bmatrix}
+            T^{-1}
+        \end{bmatrix}_{i > k}
+        \begin{bmatrix}
+            I_k \\
+            M
+        \end{bmatrix}
+        \left(\begin{bmatrix}
+            T^{-1}
+        \end{bmatrix}_{i \leq k}
+        \begin{bmatrix}
+            I_k \\
+            M
+        \end{bmatrix}\right)^{-1}
+        \begin{bmatrix}
+            b_1 \\
+            b_2 \\
+            \vdots \\
+            b_k
+        \end{bmatrix}
+        \]
+        and it is an analytic function on $M$.
+
+        
+    \end{exmp}
+
+    \begin{defn}
+        Let $(M,A)$, $(N,B)$ be $C^r$-manifolds,
+        a continuous map $f : M \to N$
+        is said to be $C^k$ ($k \leq r$)
+        if for any charts $(U,\varphi_U) \in A,\ (V, \phi_V) \in B$,
+        map
+        \[
+            \phi_V \circ f \circ \varphi_U^{-1} : \varphi_U (U \cap f^{-1}(V)) \to \phi_V(V)
+        \]
+        is $C^k$.\\
+        A \tbf{$C^r$-diffeomorphism}
+        between two $C^r$-manifolds $M,N$
+        is a $C^r$-map $f : M \to N$
+        with its $C^r$-inverse $f^{-1} : N \to M$.\\
+        If $C^r$-diffeomorphism between $C^r$-manifolds $M,N$
+        exists, then $M,N$
+        are said to be \tbf{$C^r$-diffeomorphic}.\\
+        Set of $C^k$ maps from $M$ to $N$ is noted $\Hom_{C^r}(M,N)$.
+    \end{defn}
+
+    \begin{note}
+        A $C^r$ map which is a $C^1$-diffeomorphism is a $C^r$-diffeomorphism.
+    \end{note}
+
+    \begin{exmp}
+        $(-)^{\bot} : \Gr_{k}(\bbR^n) \to \Gr_{n-k}(\bbR^n)$
+        is a $C^{\omega}$-diffeomorphism.
+        \[
+        \varphi_{V^\bot} \circ (-)^\bot \circ \varphi_V^{-1} :  \Mat_{k\times (n-k)}(\bbR) \ni M \mapsto M^T \in \Mat_{(n-k) \times k}(\bbR)
+        \]
+    \end{exmp}
+
+    \begin{defn}
+        Let $(M,A)$ be a $C^{r}$-manifold, $x \in M$
+        the \tbf{tangency relation}
+        defined on $\Hom_{C^1}(\bbR|_{\sim 0},M)_x := \{ \gamma \in \Hom_{C^1} (O, M) \mid 0 \in O \in \tau_\bbR ,\ \gamma(0) = x\}$
+        ($\tau_X$ is set of all open sets of $X$)
+        is equivalence relation which have two equivalent definitions:
+        \begin{enumerate}
+            \item $\gamma_1(t) \sim_T \gamma_2(t) $ if there exists chart $(U,\varphi_U) \in A$
+            such that $x \in U$ and
+            \[
+            \dfrac{\d (\varphi_U \circ \gamma_1)}{\d t}|_{t = 0} = \dfrac{\d (\varphi_U \circ \gamma_2)}{\d t}|_{t = 0}
+            \]
+            \item $\gamma_1(t) \sim_T \gamma_2(t) $ if for any chart $(U,\varphi_U) \in A$
+            such that $x \in U$, we have
+            \[
+            \dfrac{\d (\varphi_U \circ \gamma_1)}{\d t}|_{t = 0} = \dfrac{\d (\varphi_U \circ \gamma_2)}{\d t}|_{t = 0}
+            \]
+        \end{enumerate}
+    \end{defn}
+
+    \begin{note}
+        $2. \implies 1.$ is obvious.\\
+        $1. \implies 2.$ because transition maps are $C^r$-diffeomorphisms,
+        whose derivatives are linear isomorphisms.
+    \end{note}
+
+    \begin{defn}
+        Let $(M,A)$ be a $n$-dimensional $C^r$-manifold, $x \in M$
+        the \tbf{space of tangent vectors} on $M$ at $x$
+        is defined by:
+        $T_x (M) := \Hom_{C^1}(\bbR|_{\sim 0}, M)_x / \sim_T$.
+    \end{defn}
+
+    \begin{note}
+        If $(U,\varphi_U)$ is a chart with $x \in U$,
+        then $\varphi_U$ defines a bijection
+        $\d( \varphi_U \circ - ) : T_x(M) \to \bbR^n$
+        by:
+        % https://q.uiver.app/?q=WzAsMTMsWzEsMSwiW1xcZ2FtbWFfe1xcbWJmdn1dX3tcXHNpbV9UfSJdLFswLDAsIlxcYmJSXm4iXSxbMSwwLCJUX3ggKE0pIl0sWzAsMSwiXFxtYmZ2Il0sWzMsMiwiXFx2YXJwaGlfVShVKSJdLFs0LDIsIlUiXSxbMiwyLCJcXGdhbW1hX3tcXG1iZnZ9IDpmX3tcXG1iZnZ9XnstMX0gKFxcdmFycGhpX1UoVSkpICJdLFsyLDEsIiB0Il0sWzMsMSwiXFx2YXJwaGlfVSAoeCkgKyB0XFxtYmZ2Il0sWzIsMCwiZl97XFxtYmZ2fSA6IFxcYmJSIl0sWzMsMCwiXFxiYlJebiJdLFsxLDIsIltcXGdhbW1hXV97XFxzaW1fVH0iXSxbMCwyLCJcXGRmcmFje1xcZCAoXFx2YXJwaGlfVSBcXGNpcmNcXGdhbW1hKX17XFxkIHR9Il0sWzEsMl0sWzEsMywiXFxuaSIsMyx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFszLDAsIiIsMyx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbNCw1LCJcXHZhcnBoaV9VXnstMX0iXSxbMiwwLCJcXG5pIiwzLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsNCwiZl97XFxtYmZ2fSJdLFs3LDgsIiIsMyx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbOSwxMF0sWzExLDEyLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzksNywiXFxuaSIsMyx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsxMCw4LCJcXG5pIiwzLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+        \[\begin{tikzcd}[row sep = 0.5cm, column sep = 0.5cm]
+            {\bbR^n} & {T_x (M)} & {f_{\mbfv} : \bbR} & {\bbR^n} \\
+            \mbfv & {[\gamma_{\mbfv}]_{\sim_T}} & { t} & {\varphi_U (x) + t\mbfv} \\
+            {\dfrac{\d (\varphi_U \circ\gamma)}{\d t}} & {[\gamma]_{\sim_T}} & {\gamma_{\mbfv} :f_{\mbfv}^{-1} (\varphi_U(U)) } & {\varphi_U(U)} & U
+            \arrow[from=1-1, to=1-2]
+            \arrow["\ni"{marking}, draw=none, from=1-1, to=2-1]
+            \arrow[maps to, from=2-1, to=2-2]
+            \arrow["{\varphi_U^{-1}}", from=3-4, to=3-5]
+            \arrow["\ni"{marking}, draw=none, from=1-2, to=2-2]
+            \arrow["{f_{\mbfv}}", from=3-3, to=3-4]
+            \arrow[maps to, from=2-3, to=2-4]
+            \arrow[from=1-3, to=1-4]
+            \arrow[maps to, from=3-2, to=3-1]
+            \arrow["\ni"{marking}, draw=none, from=1-3, to=2-3]
+            \arrow["\ni"{marking}, draw=none, from=1-4, to=2-4]
+        \end{tikzcd}\]
+        If $(V,\varphi_V)$ is another chart with $x \in V$,
+        then
+        we have commutative diagram:
+        % https://q.uiver.app/?q=WzAsMyxbMCwwLCJcXGJiUl5uIl0sWzIsMCwiXFxiYlJebiJdLFsxLDEsIlRfeChNKSJdLFswLDEsIkpfe1xcdmFycGhpX1Veey0xfSh4KX0gKFxcdmFycGhpX1ZcXGNpcmMgXFx2YXJwaGlfVV57LTF9KSJdLFswLDIsIlQgXFx2YXJwaGlfVV57LTF9IiwyXSxbMSwyLCJUIFxcdmFycGhpX1Veey0xfSJdXQ==
+        \[\begin{tikzcd}[row sep = 1cm, column sep = 1cm]
+            {\bbR^n} && {\bbR^n} \\
+            & {T_x(M)}
+            \arrow["{\d (\varphi_V\circ \varphi_U^{-1}) |_y}", from=1-1, to=1-3]
+            \arrow["{T \varphi_U^{-1}}"', from=1-1, to=2-2]
+            \arrow["{T \varphi_U^{-1}}", from=1-3, to=2-2]
+        \end{tikzcd}\]
+        where $y = \varphi_U^{-1}(x)$.
+    \end{note}
+
+    \begin{defn}
+        Let $(M,A)$ be an $n$-dimensional $C^{r+1}$-manifold,
+        the \tbf{space of all tangent vectors} of $M$
+        is a $2n$-dimensional $C^r$-manifold defined by
+        $T(M) := \bigsqcup\limits_{x \in M} T_x(M) $
+        with atlas $\{(T(U),\phi_U)\}_{U \in A}$
+        (called \tbf{natural atlas})
+        defined by
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXGJpZ3NxY3VwXFxsaW1pdHNfe3ggXFxpbiBVfSBUX3goTSkiXSxbMSwwLCJcXHZhcnBoaV9VKFUpXFx0aW1lcyBcXGJiUl5uIl0sWzAsMSwiKHgsW1xcZ2FtbWFdX3tcXHNpbV9UfSkiXSxbMSwxLCIoXFx2YXJwaGlfVSh4KSxcXGQgKFxcdmFycGhpX1UgXFxjaXJjIFxcZ2FtbWEpKSJdLFswLDEsIlxccGhpX1UiXSxbMiwwLCJcXGluIiwzLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsMywiIiwzLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFszLDEsIlxcaW4iLDMseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+        \[\begin{tikzcd}[row sep = 0.6cm]
+            {\bigsqcup\limits_{x \in U} T_x(M)} & {\varphi_U(U)\times \bbR^n} \\
+            {(x,[\gamma]_{\sim_T})} & {(\varphi_U(x),\d (\varphi_U \circ \gamma))}
+            \arrow["{\phi_U}", from=1-1, to=1-2]
+            \arrow["\in"{marking}, draw=none, from=2-1, to=1-1]
+            \arrow[maps to, from=2-1, to=2-2]
+            \arrow["\in"{marking}, draw=none, from=2-2, to=1-2]
+        \end{tikzcd}\]
+        The \tbf{tangent bundle} on $M$
+        is the bundle
+        \begin{align*}
+            p_M : T(M)  & \to M\\
+            (x, [\gamma]_{\sim_T}) & \mapsto x
+        \end{align*}
+    \end{defn}
+
+    \begin{defn}
+        Let $(M,A), (N,B)$ be two $C^{r+1}$-manifolds,
+        and $f : M \to N$
+        is an $C^{r+1}$ map.
+        Define an $C^r$ map between bundles $Tf : TM \to TN$
+        by
+        % https://q.uiver.app/?q=WzAsNixbMCwxLCIoeCxbXFxnYW1tYV1fe1xcc2ltX1R9KSJdLFsxLDEsIihmKHgpLFtmIFxcY2lyYyBcXGdhbW1hXV97XFxzaW1fVH0pIl0sWzAsMiwiKHgsIFxcZCAoXFx2YXJwaGlfVSBcXGNpcmMgXFxnYW1tYSkiXSxbMSwyLCIoZih4KSwgXFxkKFxccGhpX1YgXFxjaXJjIGYgXFxjaXJjIFxcdmFycGhpX1Veey0xfSkgXFxjaXJjIFxcZCggXFx2YXJwaGlfVSBcXGNpcmMgXFxnYW1tYSkpIl0sWzAsMCwiVGYgOiBUTSJdLFsxLDAsIlROIl0sWzAsMSwiIiwzLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFswLDIsIiIsMyx7Im9mZnNldCI6Miwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFsyLDAsIiIsMyx7Im9mZnNldCI6Miwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFsyLDMsIiIsMyx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMywxLCIiLDMseyJvZmZzZXQiOjIsInN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMSwzLCIiLDMseyJvZmZzZXQiOjIsInN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbNCw1XSxbNCwwLCJcXG5pIiwzLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsMSwiXFxuaSIsMyx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+        \[\begin{tikzcd}[row sep = 0.3cm]
+            {Tf : TM} & TN \\
+            {(x,[\gamma]_{\sim_T})} & {(f(x),[f \circ \gamma]_{\sim_T})} \\
+            {(\varphi_U(x), \d (\varphi_U \circ \gamma))} & {(\phi_V(f(x)), \d(\phi_V \circ f \circ \varphi_U^{-1}) \circ \d( \varphi_U \circ \gamma))}
+            \arrow[maps to, from=2-1, to=2-2]
+            \arrow[shift right=2, maps to, from=2-1, to=3-1]
+            \arrow[shift right=2, maps to, from=3-1, to=2-1]
+            \arrow[maps to, from=3-1, to=3-2]
+            \arrow[shift right=2, maps to, from=3-2, to=2-2]
+            \arrow[shift right=2, maps to, from=2-2, to=3-2]
+            \arrow[from=1-1, to=1-2]
+            \arrow["\ni"{marking}, draw=none, from=1-1, to=2-1]
+            \arrow["\ni"{marking}, draw=none, from=1-2, to=2-2]
+        \end{tikzcd}\]
+    \end{defn}
+
+    \begin{note}
+        In fact,
+        $T$ is a functor from category of $C^{r+1}$ manifolds
+        to $C^{r}$ manifolds.
+        And there is natural diffeomorphism $T(M \times N) \approx_{\d} TM \times TN$.
+    \end{note}
+
+    \begin{exmp}
+        Use atlas of $S^n := \{(x_0, \cdots , x_n) \in \bbR^{n+1} \mid \sqrt{\sum_i x_i^2} = 1 \}$
+        given by
+        stereographic projections:
+        \begin{align*}
+            U_0 := S^n - (1,0,\cdots , 0) & \xrightarrow{\varphi_0} \bbR^n \\
+                (x_0, x_1 ,\cdots , x_n) & \longmapsto (\dfrac{x_1}{1-x_0}, \cdots , \dfrac{x_n}{1-x_0})\\
+                (\dfrac{s^2 -1}{s^2+1}, \dfrac{2 x'_1}{s^2 + 1} , \cdots , \dfrac{2 x'_n}{s^2 + 1}) & \longmapsfrom (x'_1, \cdots , x'_n)\\
+                \text{where } s^2 := \sum_{1 \leq i \leq n} {x'_i}^2 &  = \dfrac{1+x_0}{1-x_0}\\
+            U_\infty := S^n - (-1,0,\cdots , 0) & \xrightarrow{\varphi_\infty} \bbR^n \\
+                (x_0, x_1 ,\cdots , x_n) & \longmapsto (\dfrac{x_1}{1+x_0}, \cdots , \dfrac{x_n}{1+x_0})\\
+                (\dfrac{1 - s'^2}{s'^2+1}, \dfrac{2 x'_1}{s'^2 + 1} , \cdots , \dfrac{2 x'_n}{s'^2 + 1}) & \longmapsfrom (x'_1, \cdots , x'_n)\\
+                \text{where } s'^2 := \sum_{1 \leq i \leq n} {x'_i}^2  & = \dfrac{1-x_0}{1+x_0}
+        \end{align*}
+        There is a diffeomorphism $TS^{n} \times \bbR \approx_{\d} S^n \times \bbR^{n+1}$
+        defined as:
+        \begin{align*}
+            TU_\lambda \times \bbR \approx \varphi_\lambda (U_\lambda) \times \bbR^{n} \times \bbR & \to U_\lambda \times \bbR^{n+1}\\
+            (\mbfx',\mbfv,a)  & \mapsto (\varphi_\lambda^{-1}(\mbfx'), \d(\varphi_\lambda^{-1}) \mbfv + a \cdot \mbfe_{K} )\\
+            (\varphi_\lambda(\mbfx), d(\varphi_\lambda) \mbfv' , p_{K} \mbfv' )& \mapsfrom (\mbfx, \mbfv')
+        \end{align*}
+        where $\lambda = 0 \text{ or } \infty$,
+        $K = \ker \d(\varphi_0) = \ker \d(\varphi_\infty)$ is a $1$-dimensional linear subspace, $\mbfe_K$ is the unit vector in it,
+        and $p_K$ is the orthogonal projection onto it.\\
+        It is easy to check it is compatible with transition maps.
+        
+    \end{exmp}
+
+    \begin{note}
+        In fact, embedding $i : M \hookrightarrow \bbR^k$
+        produces injective linear maps $T_x(M) \to T_{i(x)}\bbR^k$
+    \end{note}
+
+\end{document}

@@ -226,7 +226,7 @@
 
 
 
-    \section{Properties and Examples}
+    \section{CW-complexes Are Right Notion For Spaces}
 
     \begin{thm}
         Homotopy Extension and Lifting property\label{hyp:HELP}:\\
@@ -337,6 +337,8 @@
     
 
     \subsection{CW-approximation}
+
+    This subsection shows that CW-complexes encode all weak-homotopy types of $\mbf{TOP}$.
 
     \begin{defn}
         A \textbf{CW-approximation} of $(X,A) \in \mbf{Top(2)}$ is a CW-pair $(\widetilde{X}, \widetilde{A})$ and a
@@ -471,6 +473,7 @@
     \end{prf}
 
     \begin{thm}
+        \label{hyp:Whiteheads-theorem}
         (Whitehead's Theorem)\\
         Every $n$-equivalence between CW-complexes whose dimension is lower than $n$, is homotopy equivalence.
         Every weak homotopy equivalence between CW-complexes is homotopy equivalence.
@@ -576,6 +579,11 @@
     \end{prf}
 
     \subsection{Operation of CW-complexes}
+
+    We show that Product, Smash Product
+    of CW-complexes and Quotient of CW-pairs
+    (with compact-open topology) are CW-complexes.
+    (Compact-open topology is the right topology on CW-complexes)
 
     Product of CW-complexes:
 
@@ -745,6 +753,7 @@
     \end{cor}
 
     \subsection{Properties of Infinite Symmetric Product}
+    
     Functoriality:\\
 
     Pointed map $f : X \to Y$
@@ -790,7 +799,7 @@
     then $\SP i : \SP A \hookrightarrow \SP X$ is also inclusion.
     Furthermore, if $A$ is open (or closed) in $X$, then $\SP A$ is open (or closed) in $\SP X$.\\
 
-    \label{hyp:CW-structure-on-SP}CW-complex structure:\\
+    \label{hyp:CW-structure-on-SP}CW-complex structure of $\SP$:\\
 
     We can have natural CW-complex structure on $\prod_n X$ by applying $k(-)$.
     following theorems allows us to prove that $\SP^n X = \prod_n X/S_n$
@@ -996,6 +1005,10 @@
 
     \end{thm}
 
+    \begin{prf}
+        See \hyperref[hyp:proof-of-Dold-Thom-Theorem]{here}.
+    \end{prf}
+
     \begin{cor}
         If $X$ , $Y$ are $T_2$ spaces and $Y$ is connected, $f : X \to Y$.
         Then consider $X \to Y \to C_f \to \Sigma X$,
@@ -1199,7 +1212,7 @@
         \label{hyp:Ordinary-Homology-Theory}
         A (Ordinary) Homology Theory (on $\mbf{TOP}$ with coefficient $G \in \mbf{Ab}$) is
         functors $\{H_n(-,-;G) : \mbf{TOP(2)} \to \mbf{Ab}\}_{n \in \bbZ}$,\\
-        with natural transformations ${\partial_{n,(X,A)} : H_n(X,A;G) \to H_n(A,\emptyset;G)}$
+        with natural transformations ${\partial_{n,(X,A)} : H_n(X,A;G) \to H_{n-1}(A,\emptyset;G)}$
         (called connecting homomorphism)\\
         satisfying following axioms:\\
         \begin{itemize}
@@ -1638,27 +1651,33 @@
     \begin{defn}
         For pointed CW-complex $X$ with $X^{-1} := \ast$
         and a ordinary homology theory $H_*(-,-)$
-        the \tbf{cellular chain complex} $\{C_n(X), d_n\}$ of $X$
+        the (reduced) \tbf{cellular chain complex} $\{\waveC_n(X), d_n\}$ of $X$
         is defined by:
         \begin{align*}
-            C_n(X) & := H_n(X^n,X^{n-1}) \\
+            \waveC_n(X) & := H_n(X^n,X^{n-1}) \\
             d_n & : H_n(X^n,X^{n-1}) \xrightarrow{\partial_n} H_{n-1}(X^{n-1}) \xrightarrow{i_*} H_{n-1}(X^{n-1}, X^{n-2})
         \end{align*}
 
     \end{defn}
 
+    \begin{note}
+        Use \hyperref[hyp:cellular-approximation-lemma]{cellular approximation},
+        we can see that the construction $\waveC_*(-)$ is a functor.
+    \end{note}
+
     \begin{thm}
         For any ordinary homology theory $H_*(-,-)$ and 
         any pointed CW-complex $X$, (with $X^{-1} := \ast$)
-        the $n$-th homology of cellular chain complex is isomorphic to $H_n(X)$:
+        the $n$-th homology of cellular chain complex is isomorphic to $\waveH_n(X)$:
         $$
-        H_n(C_*(X)) \cong H_n(X)
+        H_n(\waveC_*(X)) \cong H_n(X,\ast)
         $$
+        if we set $X^{-1} := \emptyset$ in our $\waveC_*(X)$, then $ H_n(\waveC_*(X)) \cong H_n(X,\emptyset)$.
     \end{thm}
 
     \begin{prf}
         Notice that we have commutative diagram with each straight line exact:
-        (use long exact sequence of pairs)
+        (use long exact sequence of pairs, $n > 0$)
         % https://q.uiver.app/?q=WzAsOSxbMCwyLCJIX3tuKzF9KFhee24rMX0sWF5uKSJdLFsyLDIsIkhfbihYXm4sWF57bi0xfSkiXSxbNCwyLCJIX3tuLTF9KFhee24tMX0sWF57bi0yfSkiXSxbMSwzLCJIX24oWF5uKSA9IFxca2VyKFxccGFydGlhbF9uKSA9IFxca2VyKGRfbikiXSxbMywxLCJIX3tuLTF9KFhee24tMX0pIl0sWzIsMCwiSF97bi0xfShYXntuLTJ9KSBcXGNvbmcgMCJdLFswLDQsIkhfbihYXntuLTF9KVxcY29uZyAwIl0sWzIsNCwiSF9uKFhee24rMX0pID0gXFxjb2tlcihcXHBhcnRpYWxfe24rMX0pIl0sWzMsNSwiSF97bi0xfShYXntuKzF9LFhebilcXGNvbmcgMCJdLFszLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbMSw0LCJcXHBhcnRpYWxfbiJdLFs0LDIsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbNSw0XSxbMCwzLCJcXHBhcnRpYWxfe24rMX0iLDJdLFs2LDNdLFsxLDIsImRfbiJdLFswLDEsImRfe24rMX0iXSxbMyw3LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbNyw4XV0=
         \[\begin{tikzcd}[cells={nodes={font=\small}}, column sep = 0cm, row sep = 0.6cm]
             && {H_{n-1}(X^{n-2}) \cong 0} \\
@@ -1678,12 +1697,20 @@
             \arrow[two heads, from=4-2, to=5-3]
             \arrow[from=5-3, to=6-4]
         \end{tikzcd}\]
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCJIX3sxfShYXnsxfSxYXjApIl0sWzEsMCwiSF8wKFheMCxYXnstMX0pIl0sWzIsMCwiXFxjb2tlcihkXzEpIFxcY29uZyBIXzAoWF4xLFheey0xfSkiXSxbMywwLCIgSF8wKFheMSxYXjApIFxcY29uZyAwIl0sWzAsMSwiZF97MX0iXSxbMSwyLCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJlcGkifX19XSxbMiwzXV0=
+        For $n=0$:
+        \[\begin{tikzcd}
+            {H_{1}(X^{1},X^0)} & {H_0(X^0,X^{-1})} & {\coker(d_1) \cong H_0(X^1,X^{-1})} & { H_0(X^1,X^0) \cong 0}
+            \arrow["{d_{1}}", from=1-1, to=1-2]
+            \arrow[two heads, from=1-2, to=1-3]
+            \arrow[from=1-3, to=1-4]
+        \end{tikzcd}\]
         \qed
     \end{prf}
 
     \begin{note}
         If the ordinary homology theory has coefficient $\bbZ$,
-        then the $d_n : C_n(X) \to C_{n-1}(X)$
+        then the $d_n : \waveC_n(X) \to \waveC_{n-1}(X)$
         is given by:
         $$
         \bbZ_i \ni 1_i = e^n_i \mapsto \sum_{j \in I_{n-1}} \alpha^j_{i} e^{n-1}_j
@@ -1699,7 +1726,43 @@
         $p_j$ maps every point not in $S^{n-1}_j$ to $\ast$.
     \end{note}
 
+    \begin{cor}
+        For any ordinary homology theory $H_*(-,-)$ and 
+        any relative CW-complex $(X,A)$,
+        the cellular chain of $X$ with is $X^{-1} := A$ noted $C_*(X,A)$,
+        we have:
+        $$
+        H_n(C_*(X,A)) \cong H_n(X/A,\ast) \cong H_n(X,A)
+        $$
+    \end{cor}
 
+    \begin{prop}
+        If $(X,A)$ is a (pointed) CW-pair,
+        (with $X^{-1} := \ast =: A^{-1}$)
+        use the natural relative CW-complex $(X,A)$
+        to obtain $C_*(X,A)$,
+        then
+        $\waveC_*(X)/\waveC_*(A) \cong C_*(X,A)$ naturally.
+    \end{prop}
+
+    \begin{prf}
+        $H_n(X^n,X^{n-1})/H_n(A^n,A^{n-1}) \cong H_n((X/A)^n, (X/A)^{n-1})$\\
+        and
+        $H_0(X^0,X^{-1})/H_n(A^0,A^{-1}) \cong H_n((X/A)^0, (X/A)^{-1})$.
+        Naturality:
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXGRmcmFje1xcYmlnb3BsdXNfe0lfWF5ufVxcYmJaIH17IFxcYmlnb3BsdXNfe0lfQV5ufVxcYmJafSJdLFswLDEsIlxcZGZyYWN7XFxiaWdvcGx1c197SV9ZXm59XFxiYlogfXsgXFxiaWdvcGx1c197SV9CXm59XFxiYlp9Il0sWzEsMSwiXFxiaWdvcGx1c197SV5uX1kgLSBJXm5fQn0gXFxiYloiXSxbMSwwLCJcXGJpZ29wbHVzX3tJXm5fWCAtIElebl9BfSBcXGJiWiJdLFswLDEsImZfKiIsMl0sWzEsMiwiXFxjb25nIiwyXSxbMCwzLCJcXGNvbmciXSxbMywyLCJmXyoiXV0=
+        \[\begin{tikzcd}
+            {\dfrac{\bigoplus_{I_X^n}\bbZ }{ \bigoplus_{I_A^n}\bbZ}} & {\bigoplus_{I^n_X - I^n_A} \bbZ} \\
+            {\dfrac{\bigoplus_{I_Y^n}\bbZ }{ \bigoplus_{I_B^n}\bbZ}} & {\bigoplus_{I^n_Y - I^n_B} \bbZ}
+            \arrow["{f_*}"', from=1-1, to=2-1]
+            \arrow["\cong"', from=2-1, to=2-2]
+            \arrow["\cong", from=1-1, to=1-2]
+            \arrow["{f_*}", from=1-2, to=2-2]
+        \end{tikzcd}\]
+        where $I_Z^n$ is the index set of $n$-cells of $Z$, $f : (X,A) \to (Y,B)$
+        is a cellular map.\\
+        \qed
+    \end{prf}
 
     \section{Homotopy and Eilenberg-Mac Lane Spaces}
 
@@ -1722,258 +1785,10 @@
     \end{note}
 
     \begin{prf}
-        Define (pointed) the triad homotopy group for $q \geq 2$:\\
-        $$
-        \pi_q(X;A, B) := \pi_{q-1}(P_{i_{B,X}}, P_{i_{C,A}})
-        $$
-        where $i_{B,X} : B \hookrightarrow X$, $i_{C,A} : C \hookrightarrow A$
-        and $P_{f}$ is the homotopy fiber\\
-        $$
-        \{ (y,\gamma) \in Y \times M(I,Z)_* \mid \gamma(1) = f(y) \}
-        $$
-        of pointed map $f : Y \to Z$.
-        Use long exact sequence of pairs:
-        \begin{align*}
-            & \cdots \to \pi_{q}(P_{i_{B,X}}, P_{i_{C,A}}) \to \pi_{q-1}(P_{i_{C,A}})
-            \to \pi_{q-1} (P_{i_{B,X}}) \to \pi_{q-1}(P_{i_{B,X}}, P_{i_{C,A}})
-            \to \pi_{q-2}(P_{i_{C,A}}) \to \cdots \\
-            & \cdots \to
-            \pi_{1}(P_{i_{B,X}}, P_{i_{C,A}}) \to \pi_{0}(P_{i_{C,A}})
-            \to \pi_{0} (P_{i_{B,X}}) 
-        \end{align*}
-        and observe that $\pi_{q}(P_{i_{X,B}}) \cong \pi_{q+1}(X,B)$
-        since for any $f : S^q \to P_{i_{X,B}}$
-        we have:
-        \[\begin{tikzcd}
-            {S^q} \\
-            & {P_{i_{B,X}}} & {M(I,X)_*} \\
-            & B & X
-            \arrow[from=2-2, to=3-2]
-            \arrow[from=3-2, to=3-3]
-            \arrow[from=2-2, to=2-3]
-            \arrow[from=2-3, to=3-3]
-            \arrow["f", from=1-1, to=2-2]
-            \arrow["{f'}"', curve={height=-12pt}, from=1-1, to=2-3]
-            \arrow["g", curve={height=12pt}, from=1-1, to=3-2]
-            \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-2, to=3-3]
-        \end{tikzcd}\]
-        use the fact $f' \in M(S^q,M(I,X)_*)_* \cong M(S^q \wedge I, X)_* \ni f'' $
-        and $S^q \wedge I \approx D^{q+1}$ with
-        \begin{align*}
-            S^q & \hookrightarrow S^q \wedge I \approx D^{q+1}\\
-            s  & \mapsto (s,1)
-        \end{align*}
-        the condition $f'(s)(1) = g(s)$ is equivalent to $f''((s,1)) = g(s)$,
-        that is have a map $f$ is equivalent to have a map $f'' : (D^{q+1},S^q) \to (X,B)$.
-        With the analogue statement also valid for homotopies $S^q \times I \to P_{i_{X,B}}$,
-        we have $\pi_q(P_{i_{B,X}}) = [S^q,\ast; P_{i_{B,X}}, \ast] \cong [D^{q+1},S^q;X,B] = \pi_{q+1}(X,B)$.\\
-        Rewrites the long exact sequence of pairs above to:
-        \begin{align*}
-            & \cdots \to \pi_{q+1}(X;A,B) \to \pi_{q}(A,C)
-            \to \pi_{q} (X,B) \to \pi_{q}(X;A,B)
-            \to \pi_{q-1}(A,C) \to \cdots \\
-            & \cdots \to
-            \pi_{2}(X;A,B) \to \pi_{1}(A,C)
-            \to \pi_{1}(X,B) 
-        \end{align*}
-        Conditions $m \geq 1, n \geq 1$ guarantees
-        $\pi_0(C) \to \pi_0 (A)$ and $\pi_0(C) \to \pi_0(B)$
-        are surjections.\\
-        $m \geq 2$ is equivalent to $\pi_1(A,C) = 0$, which implies $\pi_0(C) \to \pi_0 (A)$ is bijection.\\
-        For $x \in \pi_0(A \cap_C B)$, we can always find
-        $b \in \pi_0(B), i_{B,X\ *} (b) = x$ or $a \in \pi_0(A), i_{A,X\ *} (a) = x$
-        which becomes $b \in \pi_0(B), i_{B,X\ *} (b) = x$ or $c \in \pi_0(C), i_{C,X\ *} (c) = x$
-        when  $\pi_0(C) \to \pi_0 (A)$ is bijection.
-        That is equivalent to $\pi_0(B) \to \pi_0(X) $ is bijection,
-        which means $\pi_1(X,B) = 0$.\\
-
-        We only need to show that for $2 \leq q \leq m+n-2$,
-        $\pi_q(X;A,B) = 0$.\\
-
-        With $J^{q-1} := (\partial I^{q-1} \times I) \cup (I^{q-1} \times \{ 0 \})$,
-        we have:
-
-        \begin{align*}
-            \pi_{q}(P_{i_{B,X}}, P_{i_{C,A}})
-            & = [I^{q}, \partial I^{q}, J^{q-1}; P_{i_{B,X}}, P_{i_{C,A}},*]\\
-            & = [I^{q} \wedge I;\ I^q, \ \partial I^{q} \wedge I,\ J^{q-1} \wedge I \to X; B, A, \ast]\\
-            & := \text{relative homotopy classes of pointed maps}\\
-            & \quad \quad f : I^q \wedge I \to X \text{ satisfying:}
-            \quad  \begin{cases}
-                f(I^q) & \subseteq B\\
-                f(\partial I^{q} \wedge I) & \subseteq A\\
-                f(\partial I^{q}) & \subseteq C\\
-                f(J^{q-1} \wedge I) & = *
-            \end{cases}\\
-            & \quad \quad \text{``relative'' means the homotopy $h$ determine the classes}\\
-            & \quad \quad \text{satisfy:}
-            \quad \begin{cases}
-                h(I^q \times I) & \subseteq B\\
-                h((\partial I^{q} \wedge I) \times I) & \subseteq A \\
-                h(\partial I^{q} \times I) & \subseteq C\\
-                h((J^{q-1} \wedge I) \times I) & = *
-            \end{cases}\\
-            & \quad \quad \text{(notice that $\partial I^{q} \wedge I \cap I^q = \partial I^q$, therefore $f(\partial I^q) \subseteq A \cap B = C$)}\\
-            & \quad \quad \quad \text{(this is called (relative) homotopy class of maps of tetrads)}\\
-            & \quad \\
-            & = [(I^{q} \times I)/ K;\ I^q \times \{1\},\ (\partial I^{q} \times I) / K,\  (J^{q-1} \times I)  / K \to X; B, A, \ast]\\
-            & \quad \quad \text{($K := I^q \times \{0\} \cup \{i_0\} \times I$)}\\
-            & = [I^{q+1};\ (I^q \times \{1\}) \cup K,\ (\partial I^{q} \times I) \cup K,\  J^{q-1} \times I \cup K \to X; B, A, \ast]\\
-            & \quad \\
-            & = [I^{q+1};\ I^q \times \{1\},\ I^{q-1} \times \{1\} \times I,\  J^{q-1} \times I \cup I^q \times \{0\} \to X; B, A, \ast]\\
-            & \quad \quad \text{(notice that $\partial I^q = \partial I^{q-1} \times I \cup I^{q-1} \times \{ 0 , 1\} $)}
-        \end{align*}
-
-        We can assume that $(A,C)$ have no relative $q<m$-cells and
-        $(B,C)$ have no relative $q<n$-cells.\\
-        And we can assume that $X$ has finite many cells
-        since $I^q$ is compact.\\
-        For subcomplexes $C \subseteq A' \subseteq A$,
-        where $A = e^m \cup A'$ (attaching one cell from $A'$).\\
-        Let $X' := A' \cup_C B$,
-        if the results hold for $(X';A',B)$ and $(X;A,X')$,
-        then it hold for $(X;A,B)$ since we have
-        map between exact homotopy sequences of triples
-        $(A,A',C)$ and  $(X,X',B)$:
-        \[\begin{tikzcd}
-            {\pi_{q+1}(A,A')} & {\pi_q(A',C)} & {\pi_q(A,C)} & {\pi_q(A,A')} & {\pi_{q-1}(A',C)} \\
-            {\pi_{q+1}(X,X')} & {\pi_q(X',B)} & {\pi_q(X,B)} & {\pi_q(X,X')} & {\pi_{q-1}(X',B)}
-            \arrow["{i_{2,q+1}}"', from=1-1, to=2-1]
-            \arrow[from=1-1, to=1-2]
-            \arrow[from=2-1, to=2-2]
-            \arrow[from=2-2, to=2-3]
-            \arrow[from=1-2, to=1-3]
-            \arrow[from=1-3, to=1-4]
-            \arrow[from=2-3, to=2-4]
-            \arrow[from=1-4, to=1-5]
-            \arrow[from=2-4, to=2-5]
-            \arrow["{i_{1,q-1}}"', from=1-5, to=2-5]
-            \arrow["{i_{2,q}}"', from=1-4, to=2-4]
-            \arrow["{i_{3,q}}"', from=1-3, to=2-3]
-            \arrow["{i_{1,q}}"', from=1-2, to=2-2]
-        \end{tikzcd}\]
-        induced by inclusion $(A,A',C) \hookrightarrow (X,X',B)$.
-        If the result hold for $(X';A',B)$ and $(X;A,X')$,
-        maps  $i_{1,q},\ i_{2,q}$
-        are isomorphisms when $1 \geq q \geq m+n-3$,
-        are epimorphisms when $q = m+n-2$.
-        Notice the $5$-lemma says that\\
-        if $i_{1,q}$ and $i_{2,q}$ are epimorphisms, $i_{1,q-1}$ are monomorphism, then $i_{3,q}$ is epimorphism.\\
-        if $i_{1,q}$ and $i_{2,q}$ are monomorphisms, $i_{2,q+1}$ are epimorphism, then $i_{3,q}$ is monomorphism.\\
-        We also have if $C \subseteq B' \subseteq B$ with $B = B' \cup e^n$,
-        the result hold for CW-triads $(X';A,B')$ and $(X;X',B)$
-        where $X' = A \cup_C B'$,
-        since $(A,C) \hookrightarrow (X,B)$ factors as
-        $(A,C) \hookrightarrow (X',B') \hookrightarrow (X,B)$.\\
-
-        Now we can assume that $A = C \cup D^m$ and $B = C \cup D^n$.\\
-
-        The current goal of proof is to prove any
-        $$
-        f : (I^{q+1};\ I^q \times \{1\},\ I^{q-1} \times \{1\} \times I,\  J^{q-1} \times I \cup I^q \times \{0\}) \to (X; B, A, \ast)
-        $$
-        is nullhomotopic for any $q+1$ with $2 \leq q+1 \leq m+n-2$.\\
-        For $a \in \interior{D^m}$, $b\in \interior{D^n}$ We have inclusions of based triads:
-        $$
-            (A;A,A-\{a\}) \hookrightarrow (X - \{b\};X -\{b\}, X - \{a,b\})
-            \hookrightarrow (X;X-\{b\},X-\{a\}) \hookleftarrow (X;A,B)
-        $$
-        The first and the third induces
-        isomorphisms on homotopy groups of triads
-        since $B$ is a strong deformation retract of $X - \{a\}$ in $X$
-        and $A$ is a strong deformation retract of $X - \{b\}$ in $X$.
-        $\pi_{*}(A;A,A - \{a\}) = 0$ since
-        $\pi_*(A,A - \{a\}) \to \pi_*(A,A \cap (A - \{a\}) )$
-        are isomorphisms.\\
-        
-        Current goal : choose good $a,b$ to show $f$ regarded as a pointed traid map to $(X;X-\{b\},X-\{a\})$
-        is homotopic to a map
-        $$
-        f' : (I^{q+1};\ I^{q-1} \times \{1\} \times I,\ I^q \times \{1\},\  J^{q-1} \times I \cup I^q \times \{0\}) \to (X - \{b\}; X-\{b\}, X-\{a,b\}, \ast)
-        $$
-        if $2 \leq q+1 \leq m+n-2$.\\
-
-        \begin{note}
-            We want to homotopically remove some point $f^{-1}(b)$,
-        first we may want to construct some Uryssohn function $u$
-        separating $f^{-1}(a) \cup J^{q-1} \times I \cup I^q \times \{0\}$ and $f^{-1}(b)$ 
-        and construct homotopy of cube $h^+: (r,s,t) \mapsto (r,(1-u(r,s)t)s)$
-        wishing that $f(h^+(r,s,1))$ would miss $b$.
-        The problem in this method is that
-        points $f^{-1}(b)$ in the cube would be homotopically
-        replaced by other points.
-        Since our desire homotopy does not change the first $q$
-        coordinates of the cube, we want to separate
-        $p^{-1}(p(f^{-1}(a))) \cup J^{q-1} \times I$
-        and
-        $p^{-1}(p(f^{-1}(b)))$
-        (where $p : I^q \times I \to I^q$).
-        Our problem is to find suitable $a$, $b$ such that
-        $p(f^{-1}(a)) \cap p(f^{-1}(b)) = \emptyset$.\\
-        \end{note}
-        
-        We use manifold structure on $D^m$ and $D^n$ to achieve it,
-        now we homotopically approximate $f$ by a map $g$ which 
-        smooth on $f^{-1}(D^m_{<1/2} \cup D^n_{<1/2})$.\\
-
-        Let $U_{<r} := f^{-1}(D^m_{<r} \cup D^n_{<r})$,
-        Use smooth deformation theorem to construct smooth map (for any $0 < \epsilon$)
-        $g' : U_{<3/4} \to D^m_{<3/4} \cup D^n_{<3/4}$ with homotopy
-        $h_1 : g' \simeq f|_{U_{<3/4}}$ (and bound $|g'(x) - f(x)| < \epsilon$ for any $x \in U_{<1}$)
-        and take partition of unity
-        $\{\rho, \rho'\}$ with subcoordinates $\{I^{q+1} - \ol{U_{<1/2}},\ U_{<3/4}\}$,
-        we have:
-        \begin{align*}
-            g & := \rho f + \rho' g' \\
-            h_2 & : g \simeq f \rel (I^{q+1} - U_{<3/4}) \\
-            h_2 & : I^{q+1} \times I \to X\\
-            & \quad (x,t) \mapsto \rho(x)f(x) + \rho'(x)h_1(x,t)\\
-        \end{align*}
-        with scalar multiplication and addition is already defined on smooth structure on $D^m_{<3/4} \cup D^n_{<3/4}$.\\
-        We could assmue that $g(I^{q-1} \times \{1\} \times I) \cap D^n_{<1/2} = \emptyset$
-        (which implies $g$ is a map of tetrads to $(X;X-\{b\},X-\{a\},\ast)$)
-        and $g(I^{q} \times \{1\}) \cap D^m_{<1/2} = \emptyset$
-        since $f(I^{q-1} \times \{1\} \times I) \subseteq A$ and $f(I^q\times \{1\}) \subseteq B$
-        and we can always tighten the bound $\epsilon$,
-        (Similar argument also hold for $h_2$,
-        then we have $h_2 : g \simeq f$ as homotopy between maps of tetrads.)\\
-
-        Use the manifold structure to find good $(a,b)$:\\
-        $V := g^{-1}(D^m_{<1/2}) \times g^{-1}(D^n_{<1/2})$
-        is a sub-manifold of $I^{2(q+1)}$.
-        Consider $W := \{ (v,v') \in V \mid p(v)=p(v') \}$,
-        which is the zero set of smooth submersion
-        $(v,v') \mapsto p(v) - p(v')$.
-        $W$ is smooth manifold with codimension $q$.
-        Therefore the map $(g,g) : W \to D^m_{<1/2} \times D^n_{<1/2}$
-        is smooth map between manifolds of dimension $q+2$ and $m+n$.
-        The map is not surjection since $q+2 < m+n$.
-        Then we have $(a,b) \notin (g,g)(W)$
-        (that is, $p(g^{-1}(a)) \cap p(g^{-1}(b))$).\\
-
-        Since $g(I^{q-1} \times \{1\} \times I) \cap D^n_{<1/2} = \emptyset$
-        and $g(J^{q-1} \times I) \cap D^n_{<1/2} = \emptyset$,
-        we have $g(\partial I^q \times I) \cap D^n_{<1/2} = \emptyset$.
-        By Uryssohn's lemma, we have $u : I^{q} \to I$ separating
-        $p(g^{-1}(a)) \cup \partial I^q$ and $p(g^{-1}(b))$.
-        Finally we have:
-        \begin{align*}
-            h' : I^q \times I \times I & \to I^q \times I\\
-            (r,s,t) & \mapsto (r,(1-u(r)t)s)
-        \end{align*}
-        and $h := g \circ h'$, $f' := h(-,1)$.
-        $f'(I^{q+1}) \cap \{b\} = \emptyset$ since if
-        $\E (r,s) \in I^q \times I, \ f'(r,s)=b$, then
-        $b = g(r,(1-u(r))s) = g(r,0) = \ast$ leads to contradiction.\\
-        Last step is to check that $h$ is a homotopy between maps 
-        $$
-        (I^{q+1};\ I^{q-1} \times \{1\} \times I,\ I^q \times \{1\},\  J^{q-1} \times I \cup I^q \times \{0\}) \to (X; X-\{b\}, X-\{a\}, \ast)
-        $$
-        Since $g$ is, $g \circ h'$ is too.\\
-        \qed
-
+        See \hyperref[hyp:proof-of-Homotopy-Excision-Theorem]{here}.
     \end{prf}
 
+    
     \begin{cor}
         \label{hyp:cofib-induce-r+s-1-equiv-use-r-1-conn-pair-s-1-conn-snd}
         Suppose that $Y_0 \hookrightarrow Y$ is cofibration,
@@ -2032,7 +1847,7 @@
         If $X$ is well-pointed and $(n-1)$-connected ($n \geq 1$),
         then the map:
         \begin{align*}
-            \sigma : \pi_q(X) & \to \pi_{q+1}(\Sigma X) \\
+            \sigma : \pi_q(X) & \to \pi_{q+1}(\Sigma X) \cong \pi_{q}(\Omega \Sigma X) \\
             f & \mapsto \Sigma f
         \end{align*}
         is isomorphism if $q < 2n-1$
@@ -2222,6 +2037,7 @@
             \arrow[maps to, from=1-5, to=2-5]
         \end{tikzcd}\]
         commutes.
+        Moreover, it commutes with connecting homomorphism.
     \end{note}
 
     \begin{lem}
@@ -2310,6 +2126,62 @@
         Finally apply $5$-lemma on the middle row and the bottom row.\\
         \qed
     \end{prf}
+
+    \begin{cor}
+        (Relative version of Hurewicz theorem)
+        If $(X,A)$ is $(n-1)$-connected CW-pair, $A$ is $1$-connected subcomplex
+        and $n \geq 2$,
+        then the Hurewicz morphism $h_{(X,A)} : \pi_n(X,A) \to H_n(X,A) $
+        (defined analogue to $h_X$)
+        is isomorphism.
+    \end{cor}
+
+    \begin{prf}
+        Use theorem \ref{hyp:cofib-induce-r+s-1-equiv-use-r-1-conn-pair-s-1-conn-snd}
+        and Hurewicz theorem of $h_{X/A}$.\\
+        \qed
+    \end{prf}
+
+    Uniqueness of Ordinary Homology Theory:
+    \begin{thm}
+        If $H_*(-,-)$ is ordinary homology theory with coefficient $\bbZ$
+        on CW-complexes, then $H_*(-,-)$ is unique up to natural isomorphism.
+    \end{thm}
+
+    \begin{prf}
+        Since $H_n(C_*(X)) \cong H_n(X)$ naturally (in $X$),
+        our goal is to prove the complex defined by
+        \begin{align*}
+            C'_n(X) & := \pi_n(X^n,X^{n-1})_{ab}\\
+            d'_n & := \pi_n(X^n,X^{n-1})_{ab} \xrightarrow{\partial} \pi_{n-1}(X^{n-1})_{ab} \to \pi_{n-1}(X^{n-1},X^{n-2})_{ab}
+        \end{align*}
+        is isomorphic to $C_*(X)$ naturally.
+        Isomorphic:
+        \[\begin{tikzcd}
+            {\pi_n(X^{n},X^{n-1})_{ab}} & {\pi_{n-1}(X^{n-1})_{ab}} & {\pi_{n-1}(X^{n-1},X^{n-2})_{ab}} \\
+            {\pi_n(X^n/X^{n-1})_{ab}} && {\pi_{n-1}(X^{n-1}/X^{n-2})_{ab}} \\
+            {H_n(X^n/X^{n-1})} & {H_{n-1}(X^{n-1})} & {H_{n-1}(X^{n-1}/X^{n-2})}
+            \arrow["\partial", from=1-1, to=1-2]
+            \arrow[from=1-2, to=1-3]
+            \arrow["\cong"', from=1-1, to=2-1]
+            \arrow[from=2-1, to=1-2]
+            \arrow[from=1-2, to=2-3]
+            \arrow["\cong", from=1-3, to=2-3]
+            \arrow["\cong"', from=2-1, to=3-1]
+            \arrow[from=3-1, to=3-2]
+            \arrow[from=3-2, to=3-3]
+            \arrow["\cong", from=2-3, to=3-3]
+            \arrow[from=1-2, to=3-2]
+        \end{tikzcd}\]
+        Naturality directly follows from naturality of Hurewicz morphism.\\
+        \qed
+    \end{prf}
+
+    \begin{note}
+        Similarly uniqueness pf ordinary homology theory with coefficient $G$.
+    \end{note}
+
+    
 
     \subsection{Moore Spaces}
 
@@ -2628,6 +2500,17 @@
     \end{prf}
 
     \begin{note}
+    We have two equivalent ways to construct
+    ordinary homology theory with coefficient $G \in \mbf{Ab}$
+    from $H_n(-,-;\bbZ)$:
+    \begin{enumerate}
+        \item Tensor cellular chain complex with $G$: $C_*(X) \otimes_{\bbZ} G$
+        (differentials are $d_n \otimes \id_G$)
+        \item $H_n(X,A;G) := \waveH_n((X \cup CA) \wedge M(G,n))$
+    \end{enumerate}
+    \end{note}
+
+    \begin{note}
         Construction of Eilenberg Mac-Lane space
         using Moore spaces is limited,
         there is another construction of
@@ -2649,7 +2532,7 @@
     Theorem following shows why $K(G,n)$ is important:
 
     \begin{thm}
-        If $Y$ is a path-connected commutative
+        If $Y$ is a path-connected commutative associative
         $H$-space with strict identity
         ($1 \cdot y = y$),
         then there is a weak equivalence
@@ -2709,12 +2592,818 @@
         and \hyperref[hyp:SP-commute-with-directed-colimit]{$\SP$ commute with directed colimit}.
         We can deduce that $f|_{\SP M(\pi_n(Y),n)} = f_n$
         from construction of the homeomorphism.\\
-        Last, $\interior{\prod}_n K(\pi_n(Y),n) \hookrightarrow \prod_n K(\pi_n(Y),n)$
+        Last, $\interior{\prod}_{n \geq 1} K(\pi_n(Y),n) \hookrightarrow \prod_{n \geq 1} K(\pi_n(Y),n)$
         is weak homotopy equivalence
         since $S^n$ have compact image.
         (is homotopy equivalence since they are CW-complexes)\\
         \qed
     \end{prf}
+
+    \begin{cor}
+        If $Y$ is a space,
+        then there is a weak equivalence
+        \[
+        \interior{\prod}_{n \geq 1} K(H_n(Y),n) \to \SP Y
+        \]
+        Moreover, we have weak equivalence
+        \[
+        \prod_{n \geq 1} K(H_n(Y),n) \to \SP Y
+        \]
+    \end{cor}
+
+    \section{Cohomology and Spectra}
+
+    \subsection{Axiom for Cohomology and reduced Cohomology}
+
+    \begin{defn}
+        \label{hyp:Generalized-Cohomology-Theory}
+        An Unreduced \tbf{Generalized Cohomology Theory} $(E^*, \delta)$ is
+        a functor to the category of $\bbZ$-graded abelian groups:\\
+        $E^*(-,-) : \mbf{TOP_{CW}(2)}^{\mathrm{op}} \to \mbf{Ab}^{\bbZ}$,\\
+        with a natural transformation of degree $+1$:\\
+        ${\delta_{n,(X,A)} : E^n(A,\emptyset) \to E^{n+1}(X,A)}$
+        (called connecting homomorphism)\\
+        satisfying following $3$ axioms:\\
+        \begin{itemize}
+            \item \textbf{Homotopy Invariance}:\\
+                Homotopy equivalence of pairs $f : (X,A) \to (Y,B)$
+                induces isomorphism
+                $$
+                E^*(f) : E^*(Y,B) \to E^*(X,A)
+                $$
+            \item \textbf{Long Exact Sequence}:\\
+                Map $A \hookrightarrow X$
+                induces a long exact sequence together
+                with $\delta$:
+                $$
+                \cdots E^{n}(X,A)  \to E^n(X) \to E^n(A) \xrightarrow{\delta} E^{n+1}(X,A) \to \cdots
+                $$
+                where $E^n(X) := E^n(X,\emptyset)$.\\
+            \item \textbf{Excision}:\\
+                If $(X;A,B)$ is an \textbf{excisive triad} (that is, $X = \interior{A} \cup \interior{B}$),
+                then inclusion $(A,A \cap B) \hookrightarrow (X,B)$
+                induces isomorphism
+                $$
+                E^*(A,A\cap B) \cong E^*(X,B)
+                $$\\
+        \end{itemize}
+        We say $(E^*, \delta)$ is \tbf{additive} if in addition:
+        \begin{itemize}
+            \item \textbf{Additivity}:\\
+                If $(X,A) = \coprod_\lambda (X_\lambda, A_\lambda) $ in $\mbf{TOP_{CW}(2)}$,
+                then inclusions $i_\lambda : (X_\lambda, A_\lambda) \to (X,A)$
+                induces isomorphism
+                \[
+                (\prod i_{\ast ,\lambda})  : E^*(X,A) \cong \prod_{\lambda} E^*(X_\lambda,A_\lambda)
+                \]
+        \end{itemize}
+        We say $(E^*, \delta)$ is \tbf{ordinary} if $(E^*, \delta)$ satisfy all axioms above and:
+        \begin{itemize}
+            \item \textbf{Dimension}:\\
+                \[
+                E^{*\neq0}(\ast,\emptyset) = 0
+                \]
+        \end{itemize}
+        An unreduced ordinary cohomology theory is called with coefficient $G$ if $E^0(\ast,\emptyset) = G$.
+    \end{defn}
+
+    \begin{defn}
+        \label{hyp:Reduced-Generalized-Cohomology-Theory}
+        An \tbf{Reduced Generalized Cohomology Theory} $(\waveE^*, \sigma)$ is
+        a functor from opposite of category of pointed CW-complexes
+        to the category of $\bbZ$-graded abelian groups:\\
+        $\waveE^*(-) : \mbf{TOP_{CW}^{*/}}^{\op} \to \mbf{Ab}^{\bbZ}$,\\
+        with a natural isomorphism of degree $+1$:\\
+        ${\sigma} : \waveE^{*}(-) \cong \waveE^{*+1} (\Sigma (-))$
+        (called suspension isomorphism)\\
+        satisfying following $2$ axioms:\\
+        \begin{itemize}
+            \item \textbf{Homotopy Invariance}:\\
+                Homotopic pointed maps $f,g : X \to Y$
+                induces same map:
+                $$
+                \waveE^*(f) = \waveE^*(g) : \waveE^*(Y) \to \waveE^*(X) 
+                $$
+            \item \textbf{Exactness}:\\
+                Pointed map $i : A \hookrightarrow X$
+                and $j : X \hookrightarrow C_i$
+                gives a exact sequence in $\mbf{Ab}^{\bbZ}$
+                $$
+                \waveE(C_i) \xrightarrow{\waveE^*(j)} \waveE^*(X) \xrightarrow{\waveE^*(j)} \waveE^*(A)
+                $$
+        \end{itemize}
+        We say $(\waveE^*, \sigma)$ is \tbf{additive} if in addition:
+        \begin{itemize}
+            \item \textbf{Wedge Axiom}:\\
+                The canonical comparison morphism
+                (induced by morphisms $X_i \hookrightarrow \bigvee_i X_i$)
+                \[
+                \waveE^*(\bigvee_i X_i) \to \prod_{i} \waveE^*(X_i)
+                \]
+                is isomorphism.\\
+        \end{itemize}
+        We say $(\waveE^*, \sigma)$ is \tbf{ordinary} if $(\waveE^*, \sigma)$ satisfy all axioms above and:
+        \begin{itemize}
+            \item \textbf{Dimension}:\\
+                \[
+                \waveE^{*\neq0}(S^0) = 0
+                \]
+        \end{itemize}
+        A reduced ordinary cohomology theory is called with coefficient $G$ if $\waveE^0(S^0) = G$. 
+    \end{defn}
+
+    \begin{note}
+        They are related to each other
+        by $E^*(X,A) := \waveE^*(X \cup CA)$
+        and $\waveE^* := E^*(X,\ast)$.
+        (proof is omitted)
+    \end{note}
+
+    \subsection{Brown Representability Theorem}
+
+    We will prove that
+    any additive reduced cohomology theory is naturally isomorphic to some $[-,Y]_*$.
+
+    \begin{defn}
+        \label{hyp:def-of-C_0}
+        $C_0 := \Ho(C)$, where $C$ is category of path-connected pointed CW-complexes.
+    \end{defn}
+
+    \begin{defn}
+        A weak limit/colimit is just
+        ordinary limit/colimit without the uniqueness its in universal property.
+    \end{defn}
+
+    \begin{lem}
+        \hyperref[hyp:def-of-C_0]{$C_0$} have weak coequalizers
+    \end{lem}
+
+    \begin{prf}
+        If we have map $f,g : A \to X$ in $C_0$
+        then define
+        $Z := X_1 \cup_f (A \times I) \cup_g X_2 / (x,0) \sim (x,1)$
+        where $X_1 = X \times \{0\}, X_2 = X \times \{1\}$.
+        $j : X \hookrightarrow Z$ is the weak coequalizer map.
+        $i : A \times I \hookrightarrow Z$ is the homotopy
+        $j \circ f \simeq j \circ g$.\\
+        For $s : X \to Y$ such that there is $h : s \circ f \simeq s \circ g$,
+        we have $s \cup h \cup s : X_1 \cup_f (A \times I) \cup_g X_2  \to Y$,
+        and it defines a map $s' : Z \to Y$ such that $s' \circ j = s$.\\
+        \qed
+    \end{prf}
+
+    \begin{lem}
+        Suppose $\{Y_n\}_{n \in \bbN}$ is a sequence of objects in \hyperref[hyp:def-of-C_0]{$C_0$}
+        with for all $n \in\bbN$, $i_n : Y_n \hookrightarrow Y_{n+1}$ is cofibration.\\
+        Let $Y := \colim_n Y_n$, then there is coequalizer diagram:
+        % https://q.uiver.app/?q=WzAsMyxbMCwwLCJcXGJpZ3ZlZV9uWV9uIl0sWzEsMCwiXFxiaWd2ZWVfbllfbiJdLFsyLDAsIlkiXSxbMCwxLCJcXGJpZ3ZlZV9uaV9uIiwwLHsib2Zmc2V0IjotMX1dLFsxLDIsIlxcYmlndmVlX25qX24iXSxbMCwxLCJcXGJpZ3ZlZV9uIFxcaWRfe1lfbn0iLDIseyJvZmZzZXQiOjF9XV0=
+        \[\begin{tikzcd}
+            {\bigvee_nY_n} & {\bigvee_nY_n} & Y
+            \arrow["{\bigvee_n i_n}", shift left=1, from=1-1, to=1-2]
+            \arrow["{\bigvee_n j_n}", from=1-2, to=1-3]
+            \arrow["{\bigvee_n \id_{Y_n}}"', shift right=1, from=1-1, to=1-2]
+        \end{tikzcd}\]
+        where $j_n : Y_n \hookrightarrow Y_{n+1} \hookrightarrow Y$.
+    \end{lem}
+
+    \begin{prf}
+        $j_{n+1} \circ i_n = j_n \circ \id_{Y_n}$,
+        and if we have $g : \bigvee_n Y_n \to Z$ such that
+        $g \circ \bigvee_n i_n \simeq g \circ \bigvee_n \id_{Y_n}$.
+        Define $g_n := g|_{Y_n}$, use induction on $n$
+        and HEP of cofibration,
+        we have $g'_n \simeq g_n$ such that $g'_{n+1} \circ i_n = g'_n $,
+        there data together defines a $g' : Y \to Z$ satisfy desired properties.\\
+        \qed
+    \end{prf}
+
+    \begin{defn}
+        A \tbf{Brown functor}
+        is a functor $H : C_0^{\op} \to \mbf{Set}^{*/}$
+        send coproducts to products,
+        weak coequalizers to weak equalizers:\\
+        \[
+        H(\bigvee_i X_i) \cong \prod_i H(X_i)
+        \]
+        If $j : X \to Z$ is coequalizer of $f,g : A \to X$,\\
+        then $H(j) : H(Z) \to H(X)$ is equalizer of $H(f),H(g) : H(X) \to H(A)$.
+    \end{defn}
+
+    \begin{note}
+        Every additive reduced cohomology theory
+        $\waveE^n(-) : \mbf{TOP_{CW}^{*/}}^{\op} \to \mbf{Ab} \to \mbf{Set}^{*/} $
+        is equivalent to a Brown functor.
+    \end{note}
+
+    \begin{defn}
+        Any $u \in H(Y)$
+        determine a natural transformation
+        $T_u : [-,Y]_* \to H(-)$
+        by
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCJbWCxZXVxcbmkgZiJdLFsxLDAsIkgoZikodSkgXFxpbiBIKFgpIl0sWzAsMSwiW1gnLFldXFxuaSBmIFxcY2lyYyBhIl0sWzEsMSwiSChmXFxjaXJjIGEpKHUpIFxcaW4gSChYJykiXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV0sWzAsMiwiIiwyLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibWFwcyB0byJ9fX1dLFsyLDMsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1hcHMgdG8ifX19XSxbMSwzLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtYXBzIHRvIn19fV1d
+        \[\begin{tikzcd}
+            {[X,Y]\ni f} & {H(f)(u) \in H(X)} \\
+            {[X',Y]\ni f \circ a} & {H(f\circ a)(u) \in H(X')}
+            \arrow[maps to, from=1-1, to=1-2]
+            \arrow[maps to, from=1-1, to=2-1]
+            \arrow[maps to, from=2-1, to=2-2]
+            \arrow[maps to, from=1-2, to=2-2]
+        \end{tikzcd}\]
+        where $a \in [X',X]$.\\
+        $u \in H(Y)$ is \tbf{$n$-universal} ($n \geq 1$)
+        if $T_{u, S^q} : [S^q,Y]_* \to H(S^q)$
+        is isomorphism for $1 \leq q \leq n-1$
+        and epimorphism for $q = n$.\\
+        $u \in H(Y)$ is \tbf{universal} if $u$ is $n$-universal forall $n \geq 1$.\\
+        $Y$ is called an \tbf{classifying space} for $H$ if there exists $u \in H(Y)$
+        that is universal.
+    \end{defn}
+
+    \begin{lem}
+        \label{hyp:classifying-space-map-preserve-universal-element-is-weak-equivalence}
+        If $H$ is a Brown functor,
+        $Y,Y' \in C_0$,
+        $u \in H(Y),\ u' \in H(Y')$ are universal,
+        and there is a map $f : Y \to Y'$
+        such that $H(f)(u') = u$,
+        then $f$ is a weak equivalence.
+    \end{lem}
+
+    \begin{prf}
+        Directly from $T_{u,S^q},\ T_{u',S^q}$ are isomorphisms:
+        % https://q.uiver.app/?q=WzAsMyxbMCwwLCJcXHBpX3EoWSkiXSxbMSwwLCJcXHBpX3EoWScpIl0sWzEsMSwiSChTXnEpIl0sWzAsMSwiZl8qIl0sWzEsMiwiVF97dScsU15xfSJdLFswLDIsIlRfe3UsU15xfSIsMl1d
+        \[\begin{tikzcd}
+            {\pi_q(Y)} & {\pi_q(Y')} \\
+            & {H(S^q)}
+            \arrow["{f_*}", from=1-1, to=1-2]
+            \arrow["{T_{u',S^q}}", from=1-2, to=2-2]
+            \arrow["{T_{u,S^q}}"', from=1-1, to=2-2]
+        \end{tikzcd}\]
+        \qed
+    \end{prf}
+
+    \begin{lem}
+        \label{hyp:Brown-functor-element-to-1-universal-element}
+        If $H$ is a Brown functor,
+        $Y \in C_0$ and $u \in H(Y)$,
+        then there exists $Y' \in C_0$
+        obtained from $Y$ by attaching $1$-cells,
+        and a $1$-universal element $u' \in H(Y')$
+        such that $H(i)(u') = u \in H(Y)$.
+        (where $i : Y \hookrightarrow Y'$)
+    \end{lem}
+
+    \begin{prf}
+        Let $Y' := Y \vee (\bigvee_{a \in H(Y)} S^1_a) $,
+        $H(i)$ is just projection:\\
+        $H(Y') \cong (H(Y) \times \prod_{a \in H(S^1)} H( S^1_a)) \to H(Y)$.\\
+        Let $g_a := S^1 \approx S^1_a \hookrightarrow Y'$,\\
+        $u' := (u,\prod_a a) \in H(Y) \times H(\bigvee_{a \in H(S^1)} S^1_a)$.\\
+        $T_{u',S^1} : [S^1,Y']_* \to H(S^1)$ is epimorphism since $H(g_a)(u') = a \in H(S^1)$.\\
+        \qed
+    \end{prf}
+
+    \begin{lem}
+        \label{hyp:Brown-functor-n-universal-element-to-n+1}
+        If $H$ is a Brown functor,
+        $Y \in C_0$ and $u \in H(Y)$ is $n$-universal ($n \geq 1$),
+        then there exists $Y' \in C_0$
+        obtained from $Y$ by attaching $(n+1)$-cells,
+        and a $(n+1)$-universal element $u' \in H(Y')$
+        such that $H(i)(u') = u \in H(Y)$.
+        (where $i : Y \hookrightarrow Y'$)
+    \end{lem}
+
+    \begin{prf}
+        Let $K := \ker(T_{u,S^n})$, we have:
+        \[
+        \ast \to K \hookrightarrow [S^n,Y]_* \xrightarrow{T_{u,S^n}} H(S^n) \to \ast
+        \]
+        Let $Y_1 := Y \vee (\bigvee_{i \in H(S^{n+1})} S^{n+1}_i)$.
+        We notice a cofib sequence:
+        \[
+        \bigvee_{k \in K} S^n_k \xrightarrow{f} Y_1 \to C_f
+        \]
+        where $f := \bigvee_{k \in K} k$.
+        Let $Y' := C_f$.\\
+        $u_1 := (u,\prod_{a\in H(S^{n+1})} a)  \in H(Y_1)$
+        where $g_a := S^{n+1} \approx S^{n+1}_a \hookrightarrow Y_1$.
+        The cofib sequence is just a weak coequalizer diagram in $C_0$:
+        % https://q.uiver.app/?q=WzAsMyxbMSwwLCJZXzEiXSxbMiwwLCJZJyJdLFswLDAsIlxcYmlndmVlX3trIFxcaW4gS31TXntuKzF9X2siXSxbMCwxXSxbMiwwLCJnIiwwLHsib2Zmc2V0IjotMSwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMiwwLCIwIiwyLHsib2Zmc2V0IjoxfV1d
+        \[\begin{tikzcd}
+            {\bigvee_{k \in K}S^{n}_k} & {Y_1} & Y'
+            \arrow[from=1-2, to=1-3]
+            \arrow["f", shift left=1, from=1-1, to=1-2]
+            \arrow["0"', shift right=1, from=1-1, to=1-2]
+        \end{tikzcd}\] 
+        Apply $H$ on it:
+        \[\begin{tikzcd}
+            {H(Y')} & {H(Y_1)} & {H(\bigvee_{k\in K} S^{n}_k)}
+            \arrow[from=1-1, to=1-2]
+            \arrow[shift right=1, from=1-2, to=1-3]
+            \arrow[shift left=1, from=1-2, to=1-3]
+        \end{tikzcd}\]
+        We have $H(f)(u_1) = \prod_{k \in K} H(k)(u_1) = \prod_{k \in K} H(k)(u) = \prod_{k \in K} T_{u,S^n}(k) = 0 = H(0)(u_1)$.\\
+        By definition of weak equalizer,
+        there exists $u' \in H(Y')$ such that $H(i)(u') = u \in H(Y)$.
+        ($i : Y \hookrightarrow Y'$)\\
+        Verify that $u' $ is $(n+1)$-universal:\\
+        $T_{u',S^{n+1}}$ is epimorphism
+        since $T_{u', S^{n+1}} (i_1 \circ g_a) = T_{u_1,S^{n+1}} (g_a) = a \in H(S^{n+1})$.\\
+        Current goal is to prove $T_{u',S^{q}}$, $q \leq n$ are isomorphisms.\\
+        We have commutative diagram:
+        % https://q.uiver.app/?q=WzAsNSxbMCwwLCJcXHBpX3txKzF9KFknLFkpIl0sWzEsMCwiXFxwaV9xKFkpIl0sWzIsMCwiXFxwaV9xKFknKSJdLFszLDAsIlxccGlfcShZJyxZKSJdLFsxLDEsIkgoU15xKSJdLFswLDFdLFsxLDJdLFsyLDNdLFsxLDQsIlRfe3UsU15xfSIsMl0sWzIsNCwiVF97dScsIFNecX0iXV0=
+        \[\begin{tikzcd}
+            {\pi_{q+1}(Y',Y)} & {\pi_q(Y)} & {\pi_q(Y')} & {\pi_q(Y',Y)} \\
+            & {H(S^q)}
+            \arrow[from=1-1, to=1-2]
+            \arrow["i_*", from=1-2, to=1-3]
+            \arrow[from=1-3, to=1-4]
+            \arrow["{T_{u,S^q}}"', from=1-2, to=2-2]
+            \arrow["{T_{u', S^q}}", from=1-3, to=2-2]
+        \end{tikzcd}\]
+        And we notice that $\pi_q(Y',Y) = 0$ for $q \leq n$. Then we have\\
+        $T_{u,S^{q}}$ is isomorphism for $q < n$ and epimorphism for $q = n$
+        implies that\\
+        $T_{u',S^{q}}$ is isomorphism for $q < n$ and epimorphism for $q = n$.\\
+        For any $k \in K \hookrightarrow \pi_n(Y)$,
+        $i \circ k = 0 \in \pi_n(Y') $.
+        That is, $K \subseteq \ker(i_*)$.\\
+        And we also have $\ker(i_*) \subseteq K$, since $T_{u',S^n} \circ i_* = T_{u,S^n}$.\\
+        $\ker(i_*) = K := \ker(T_{u,S^n})$ implies that $T_{u',S^n}$ is isomorphism.\\
+        \qed
+
+    \end{prf}
+
+    \begin{thm}
+        \label{hyp:Brown-functor-element-to-universal-element}
+        $H$ is a Brown functor,
+        $Y \in C_0$ and $u \in H(Y)$
+        then there is a classifying space $Y'$ for $H$
+        such that $(Y',Y)$ is a relative CW-complex
+        and the universal element $u' \in H(Y')$
+        satisfying $H(i)(u') = u$.
+        ($i : Y \hookrightarrow Y'$)
+    \end{thm}
+
+    \begin{prf}
+        Construct spaces $\{Y_n\}_{n \in \bbN}$ and $u_n \in H(Y_n)$
+        as following:
+        \begin{enumerate}
+            \item $Y_0 := Y$, $u_0 := u$
+            \item $Y_1,u_1$ is obtained from lemma \ref{hyp:Brown-functor-element-to-1-universal-element}.
+            \item Use lemma \ref{hyp:Brown-functor-n-universal-element-to-n+1} to construct $Y_{n+1}, u_{n+1}$ from $Y_{n},u_n$.\\
+        \end{enumerate}
+        Let $Y' := \colim \{ Y_0  \hookrightarrow \cdots \hookrightarrow Y_n  \hookrightarrow Y_{n+1} \hookrightarrow \cdots \}$
+        then we have weak equalizer diagram:
+        % https://q.uiver.app/?q=WzAsMyxbMSwwLCJcXHByb2RfbiBIKFlfbikiXSxbMiwwLCJcXHByb2RfbiBIKFlfbikiXSxbMCwwLCJIKFknKSJdLFswLDEsIlxccHJvZFxcbGltaXRzX3tuIFxcaW4gXFxiYk59IEgoXFxpZF97WV9ufSkiLDIseyJvZmZzZXQiOjJ9XSxbMCwxLCJcXHByb2RcXGxpbWl0c197biBcXGluIFxcYmJOfXtIKGlfbil9IiwwLHsib2Zmc2V0IjotMn1dLFsyLDBdXQ==
+        \[\begin{tikzcd}
+            {H(Y')} & {\prod_n H(Y_n)} & {\prod_n H(Y_n)}
+            \arrow["{\prod\limits_{n \in \bbN} H(\id_{Y_n})}"', shift right=2, from=1-2, to=1-3]
+            \arrow["{\prod\limits_{n \in \bbN}{H(i_n)}}", shift left=2, from=1-2, to=1-3]
+            \arrow[from=1-1, to=1-2]
+        \end{tikzcd}\]
+        and
+        \[
+        (\prod_{n \in \bbN}{H(i_n)}) (\prod_{n \in \bbN} u_n) = \prod_{n \in \bbN} u_n = {\prod_{n \in \bbN} H(\id_{Y_n})} (\prod_{n \in \bbN} u_n)
+        \]
+        (by $H(i_n)(u_{n+1}) = u_n$)
+        Then there exists $u' \in H(Y')$ satisfying  $\forall n \in \bbN, \ H(j_n) = u_n$.
+        (where $j_n : Y_n \hookrightarrow Y'$)\\
+        Verify that $u'$ is universal:
+        \[\begin{tikzcd}
+            {\pi_q(Y_{q+1})} & {\pi_q(Y_{q+2})} & \cdots & {\pi_q(Y')} \\
+            &&& {H(S^q)}
+            \arrow[from=1-1, to=1-2]
+            \arrow["\cong"{description}, from=1-1, to=2-4]
+            \arrow["\cong"{description}, from=1-2, to=2-4]
+            \arrow[from=1-2, to=1-3]
+            \arrow[from=1-3, to=1-4]
+            \arrow["\cong", from=1-4, to=2-4]
+        \end{tikzcd}\]
+        (The isomorphisms in diagram are $T_{u_{q+1},S^q}, \ T_{u_{q+2},S^q}, \ T_{u',S^q}$).\\
+        \qed
+    \end{prf}
+
+    \begin{cor}
+        For any Brown functor $H$,
+        there exist classifying spaces for $H$ which are CW complexes.
+    \end{cor}
+
+    \begin{prf}
+        Use theorem \ref{hyp:Brown-functor-element-to-universal-element}
+        with $Y = \ast$.\\
+        \qed
+    \end{prf}
+
+    \begin{lem}
+        \label{hyp:Brown-functor-extension-property-of-universal-element}
+        $H$ is a Brown functor,
+        $u \in H(Y)$ is a universal element, 
+        $i : A \hookrightarrow X$
+        is a relative CW-complex.
+        Given map $g : A \to Y$ and $v \in H(X)$
+        satisfy:
+        % https://q.uiver.app/?q=WzAsMyxbMCwxLCJIKFkpIFxcbmkgdSJdLFsxLDEsIkgoQSkgXFxuaSBIKGcpKHUpID0gSChpKSh2KSJdLFsxLDAsIkgoWCkgXFxuaSB2Il0sWzAsMV0sWzIsMV1d
+        \[\begin{tikzcd}
+            & {H(X) \ni v} \\
+            {H(Y) \ni u} & {H(A) \ni H(g)(u) = H(i)(v)}
+            \arrow[from=2-1, to=2-2]
+            \arrow[from=1-2, to=2-2]
+        \end{tikzcd}\]
+        Then exists
+        map $g' : X \to Y$
+        such that $g'|_A = g$ and diagram:
+        % https://q.uiver.app/?q=WzAsMyxbMCwxLCJIKFkpIFxcbmkgdSJdLFsxLDEsIkgoQSkgIl0sWzEsMCwiSChYKSBcXG5pIHYgPSBIKGcnKSh1KSJdLFswLDFdLFsyLDFdLFswLDIsIkgoZykiXV0=
+        \[\begin{tikzcd}
+            & {H(X) \ni v = H(g')(u)} \\
+            {H(Y) \ni u} & {H(A) }
+            \arrow[from=2-1, to=2-2]
+            \arrow[from=1-2, to=2-2]
+            \arrow["{H(g')}", from=2-1, to=1-2]
+        \end{tikzcd}\]
+        commutes.
+    \end{lem}
+
+    \begin{prf}
+        Let $(Z,j)$ be weak coequalizer of the diagram:
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCJBIl0sWzEsMCwiWCJdLFswLDEsIlkiXSxbMSwxLCJYIFxcdmVlIFkiXSxbMCwxLCJpIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XSxbMCwyLCJnIiwyXSxbMSwzLCJpXzEiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFsyLDMsImlfMiIsMix7Im9mZnNldCI6Miwic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJ0b3AifX19XV0=
+        \[\begin{tikzcd}
+            A & X \\
+            Y & {X \vee Y}
+            \arrow["i", hook, from=1-1, to=1-2]
+            \arrow["g"', from=1-1, to=2-1]
+            \arrow["{i_1}", hook, from=1-2, to=2-2]
+            \arrow["{i_2}"', hook, from=2-1, to=2-2]
+        \end{tikzcd}\]
+        then we have weak equalizer diagram:
+        % https://q.uiver.app/?q=WzAsMyxbMCwwLCJIKFopIl0sWzEsMCwiSChYKVxcdGltZXMgSChZKSJdLFsyLDAsIkgoQSkiXSxbMCwxXSxbMSwyLCJIKGlfMSBcXGNpcmMgaSkiLDAseyJvZmZzZXQiOi0xfV0sWzEsMiwiSChpXzIgXFxjaXJjIGcpIiwyLHsib2Zmc2V0IjoxfV1d
+        \[\begin{tikzcd}
+            {H(Z)} & {H(X)\times H(Y)} & {H(A)}
+            \arrow[from=1-1, to=1-2]
+            \arrow["{H(i_1 \circ i)}", shift left=1, from=1-2, to=1-3]
+            \arrow["{H(i_2 \circ g)}"', shift right=1, from=1-2, to=1-3]
+        \end{tikzcd}\]
+        We also have
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCJIKEEpIl0sWzEsMCwiSChYKSJdLFswLDEsIkgoWSkiXSxbMSwxLCJIKFgpXFx0aW1lcyBIKFkpIl0sWzEsMCwiSChpKSIsMl0sWzIsMCwiSChnKSJdLFszLDEsInBfMSA9IEgoaV8xKSIsMl0sWzMsMiwicF8yID0gSChpXzIpIl1d
+        \[\begin{tikzcd}
+            {H(A)} & {H(X)} \\
+            {H(Y)} & {H(X)\times H(Y)}
+            \arrow["{H(i)}"', from=1-2, to=1-1]
+            \arrow["{H(g)}", from=2-1, to=1-1]
+            \arrow["{p_1 = H(i_1)}"', from=2-2, to=1-2]
+            \arrow["{p_2 = H(i_2)}", from=2-2, to=2-1]
+        \end{tikzcd}\]
+        which implies $H(i) \circ H(i_1) (v,u) = H(i)(v) = H(g)(u) = H(g) \circ H(i_2) (v,u)$.\\
+        Then there is a element $u^+ \in H(Z)$ such that $H(j)(u^+) = (v,u)$.
+        Use theorem \ref{hyp:Brown-functor-element-to-universal-element} to obtain
+        relative CW-complex $(Z',Z)$
+        and universal element $u' \in H(Z')$ such that $H(i_Z)(u') = u^+$.
+        ($i_Z : Z \hookrightarrow Z'$)\\
+        By lemma \ref{hyp:classifying-space-map-preserve-universal-element-is-weak-equivalence},
+        $j' := i_Z \circ j \circ i_2 : Y \hookrightarrow X \vee Y \hookrightarrow Z \hookrightarrow Z'$
+        is a weak equivalence.
+        We also have diagram in $\mbf{TOP^{*/}_{CW}}$: (since $(Z,j)$ is weak coequalizer in $C_0$)
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCJBIl0sWzEsMCwiWCJdLFswLDEsIlkiXSxbMSwxLCJaJyJdLFswLDEsImkiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDIsImciLDJdLFsxLDMsImlfWlxcY2lyYyBqIFxcY2lyYyBpXzEiXSxbMiwzLCJqJyIsMl0sWzIsMSwiXFxzaW1lcSIsMyx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6Im5vbmUifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+        \[\begin{tikzcd}
+            A & X \\
+            Y & {Z'}
+            \arrow["i", hook, from=1-1, to=1-2]
+            \arrow["g"', from=1-1, to=2-1]
+            \arrow["{i_Z\circ j \circ i_1}", from=1-2, to=2-2]
+            \arrow["{j'}"', from=2-1, to=2-2]
+            \arrow["\simeq"{marking}, draw=none, from=2-1, to=1-2]
+        \end{tikzcd}\]
+        Apply \hyperref[hyp:HELP]{HELP}:
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCJBIl0sWzEsMCwiWCJdLFswLDEsIlkiXSxbMSwxLCJaJyJdLFswLDEsImkiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dLFswLDIsImciLDJdLFsxLDMsImlfWlxcY2lyYyBqIFxcY2lyYyBpXzEiXSxbMiwzLCJqJyIsMl0sWzEsMiwiZyciLDFdLFsyLDYsIlxcc2ltZXEiLDMseyJzaG9ydGVuIjp7InNvdXJjZSI6MjB9LCJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJub25lIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XV0=
+        \[\begin{tikzcd}
+            A & X \\
+            Y & {Z'}
+            \arrow["i", hook, from=1-1, to=1-2]
+            \arrow["g"', from=1-1, to=2-1]
+            \arrow[""{name=0, anchor=center, inner sep=0}, "{i_Z\circ j \circ i_1}", from=1-2, to=2-2]
+            \arrow["{j'}"', from=2-1, to=2-2]
+            \arrow["{g'}"{description}, from=1-2, to=2-1]
+            \arrow["\simeq"{marking}, Rightarrow, draw=none, from=2-1, to=0]
+        \end{tikzcd}\]
+        and verify that $H(g')(u) = H(g') \circ H(j')(u') = H(i_Z\circ j \circ i_1) u' = H(i_1) \circ H(j) (u^+) = H(i_1) (v,u) = v$.\\
+        \qed
+
+    \end{prf}
+
+    \begin{thm}
+        \label{hyp:Brown-functor-is-representable}
+        If $Y$ is a classifying space for a Brown functor $H$
+        and $u \in H(Y)$ is a universal
+        element, then $T_u : [-,Y] \to H(-)$ is a
+        natural isomorphism.
+    \end{thm}
+
+    \begin{prf}
+        $T_{u,X}$ is epimorphism:\\
+        For $v \in H(X)$, use lemma \ref{hyp:Brown-functor-extension-property-of-universal-element}
+        with $(X,A) := (X,\ast)$ to obtain a map $g' : X \to Y$
+        such that $T_{u,X}(g') = H(g')(u) = v$.\\
+        $T_{u,X}$ is monomorphism:\\
+        Let $f_0,f_1 : X \to Y$ such that $T_{u,X}(f_1) = T_{u,X}(f_2)$.\\
+        Define CW-complex $X' := X \times I / \{\ast\} \times I$
+        with CW-structure $X'^q = (X^q \times \partial I \cup X^{q-1} \times I)/\{\ast\} \times I$ for $q \geq 0$.\\
+        Define $h : X' \to X$ by $\ol{(x,t)} \mapsto x$
+        and define $v \in H(X')$ by $v = H(f_0 \circ h)(u)$.\\
+        Let $A' := X \vee X = X\times \partial I / \{\ast\} \times \partial I$, $i : A' \hookrightarrow X'$
+        and define $f : A' \to Y$ by $(a,0) \mapsto f_0(a), \ (a,1) \mapsto f_1(a)$.
+        Then we have $H(f)(u) = (H(f_0)(u),H(f_1)(u)) = (H(f_0)(u),H(f_0)(u)) = H(f_0 \circ h \circ i)(u) = H(i)(v)$.
+        Use lemma \ref{hyp:Brown-functor-extension-property-of-universal-element} with $(X,A) = (X',A')$
+        to obtain a $f' : X' \to Y$ such that $f'|_{A'} = f$ and $H(f')(u) = v$.\\
+        $h : X \times I \to X' \xrightarrow{f'} Y$ is the desired homotopy $g_0 \simeq g_1$.\\
+        \qed
+
+    \end{prf}
+
+    \begin{cor}
+        If $Y,Y'$ are classifying spaces of a Brown functor $H$,
+        and $u \in H(Y), u' \in H(Y')$ are their universal elements,
+        then there is a homotopy equivalence $f : Y \to Y$
+        which is unique up to homotopy
+        and satisfy $H(f)(u') = u$.
+    \end{cor}
+
+    \begin{prf}
+        By theorem \ref{hyp:Brown-functor-is-representable},
+        $T_{u',Y} : [Y,Y'] \to H(Y)$ is isomorphism.
+        Then there is unique $f : [Y,Y']$ such that $T_{u',Y}(f) = u$.
+        (notice that $T_{u',Y}(f) = H(f)(u')$)
+        By lemma \ref{hyp:classifying-space-map-preserve-universal-element-is-weak-equivalence}
+        and theorem \ref{hyp:Whiteheads-theorem}, $f$ is homotopy equivalence.\\
+        \qed
+
+    \end{prf}
+
+
+
+    \appendix
+    \section{Long Proofs}
+
+    \subsection{Proof of Dold-Thom Theorem}
+    \label{hyp:proof-of-Dold-Thom-Theorem}
+
+    \subsection{Proof of Homotopy Excision Theorem}
+
+    \begin{prf}
+        \label{hyp:proof-of-Homotopy-Excision-Theorem}
+        Follow notations in the \hyperref[hyp:Homotopy-Excision-Theorem]{statement} of the theorem.
+        Define (pointed) the triad homotopy group for $q \geq 2$:\\
+        $$
+        \pi_q(X;A, B) := \pi_{q-1}(P_{i_{B,X}}, P_{i_{C,A}})
+        $$
+        where $i_{B,X} : B \hookrightarrow X$, $i_{C,A} : C \hookrightarrow A$
+        and $P_{f}$ is the homotopy fiber\\
+        $$
+        \{ (y,\gamma) \in Y \times M(I,Z)_* \mid \gamma(1) = f(y) \}
+        $$
+        of pointed map $f : Y \to Z$.
+        Use long exact sequence of pairs:
+        \begin{align*}
+            & \cdots \to \pi_{q}(P_{i_{B,X}}, P_{i_{C,A}}) \to \pi_{q-1}(P_{i_{C,A}})
+            \to \pi_{q-1} (P_{i_{B,X}}) \to \pi_{q-1}(P_{i_{B,X}}, P_{i_{C,A}})
+            \to \pi_{q-2}(P_{i_{C,A}}) \to \cdots \\
+            & \cdots \to
+            \pi_{1}(P_{i_{B,X}}, P_{i_{C,A}}) \to \pi_{0}(P_{i_{C,A}})
+            \to \pi_{0} (P_{i_{B,X}}) 
+        \end{align*}
+        and observe that $\pi_{q}(P_{i_{X,B}}) \cong \pi_{q+1}(X,B)$
+        since for any $f : S^q \to P_{i_{X,B}}$
+        we have:
+        \[\begin{tikzcd}
+            {S^q} \\
+            & {P_{i_{B,X}}} & {M(I,X)_*} \\
+            & B & X
+            \arrow[from=2-2, to=3-2]
+            \arrow[from=3-2, to=3-3]
+            \arrow[from=2-2, to=2-3]
+            \arrow[from=2-3, to=3-3]
+            \arrow["f", from=1-1, to=2-2]
+            \arrow["{f'}"', curve={height=-12pt}, from=1-1, to=2-3]
+            \arrow["g", curve={height=12pt}, from=1-1, to=3-2]
+            \arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-2, to=3-3]
+        \end{tikzcd}\]
+        use the fact $f' \in M(S^q,M(I,X)_*)_* \cong M(S^q \wedge I, X)_* \ni f'' $
+        and $S^q \wedge I \approx D^{q+1}$ with
+        \begin{align*}
+            S^q & \hookrightarrow S^q \wedge I \approx D^{q+1}\\
+            s  & \mapsto (s,1)
+        \end{align*}
+        the condition $f'(s)(1) = g(s)$ is equivalent to $f''((s,1)) = g(s)$,
+        that is have a map $f$ is equivalent to have a map $f'' : (D^{q+1},S^q) \to (X,B)$.
+        With the analogue statement also valid for homotopies $S^q \times I \to P_{i_{X,B}}$,
+        we have $\pi_q(P_{i_{B,X}}) = [S^q,\ast; P_{i_{B,X}}, \ast] \cong [D^{q+1},S^q;X,B] = \pi_{q+1}(X,B)$.\\
+        Rewrites the long exact sequence of pairs above to:
+        \begin{align*}
+            & \cdots \to \pi_{q+1}(X;A,B) \to \pi_{q}(A,C)
+            \to \pi_{q} (X,B) \to \pi_{q}(X;A,B)
+            \to \pi_{q-1}(A,C) \to \cdots \\
+            & \cdots \to
+            \pi_{2}(X;A,B) \to \pi_{1}(A,C)
+            \to \pi_{1}(X,B) 
+        \end{align*}
+        Conditions $m \geq 1, n \geq 1$ guarantees
+        $\pi_0(C) \to \pi_0 (A)$ and $\pi_0(C) \to \pi_0(B)$
+        are surjections.\\
+        $m \geq 2$ is equivalent to $\pi_1(A,C) = 0$, which implies $\pi_0(C) \to \pi_0 (A)$ is bijection.\\
+        For $x \in \pi_0(A \cap_C B)$, we can always find
+        $b \in \pi_0(B), i_{B,X\ *} (b) = x$ or $a \in \pi_0(A), i_{A,X\ *} (a) = x$
+        which becomes $b \in \pi_0(B), i_{B,X\ *} (b) = x$ or $c \in \pi_0(C), i_{C,X\ *} (c) = x$
+        when  $\pi_0(C) \to \pi_0 (A)$ is bijection.
+        That is equivalent to $\pi_0(B) \to \pi_0(X) $ is bijection,
+        which means $\pi_1(X,B) = 0$.\\
+
+        We only need to show that for $2 \leq q \leq m+n-2$,
+        $\pi_q(X;A,B) = 0$.\\
+
+        With $J^{q-1} := (\partial I^{q-1} \times I) \cup (I^{q-1} \times \{ 0 \})$,
+        we have:
+
+        \begin{align*}
+            \pi_{q}(P_{i_{B,X}}, P_{i_{C,A}})
+            & = [I^{q}, \partial I^{q}, J^{q-1}; P_{i_{B,X}}, P_{i_{C,A}},*]\\
+            & = [I^{q} \wedge I;\ I^q, \ \partial I^{q} \wedge I,\ J^{q-1} \wedge I \to X; B, A, \ast]\\
+            & := \text{relative homotopy classes of pointed maps}\\
+            & \quad \quad f : I^q \wedge I \to X \text{ satisfying:}
+            \quad  \begin{cases}
+                f(I^q) & \subseteq B\\
+                f(\partial I^{q} \wedge I) & \subseteq A\\
+                f(\partial I^{q}) & \subseteq C\\
+                f(J^{q-1} \wedge I) & = *
+            \end{cases}\\
+            & \quad \quad \text{``relative'' means the homotopy $h$ determine the classes}\\
+            & \quad \quad \text{satisfy:}
+            \quad \begin{cases}
+                h(I^q \times I) & \subseteq B\\
+                h((\partial I^{q} \wedge I) \times I) & \subseteq A \\
+                h(\partial I^{q} \times I) & \subseteq C\\
+                h((J^{q-1} \wedge I) \times I) & = *
+            \end{cases}\\
+            & \quad \quad \text{(notice that $\partial I^{q} \wedge I \cap I^q = \partial I^q$, therefore $f(\partial I^q) \subseteq A \cap B = C$)}\\
+            & \quad \quad \quad \text{(this is called (relative) homotopy class of maps of tetrads)}\\
+            & \quad \\
+            & = [(I^{q} \times I)/ K;\ I^q \times \{1\},\ (\partial I^{q} \times I) / K,\  (J^{q-1} \times I)  / K \to X; B, A, \ast]\\
+            & \quad \quad \text{($K := I^q \times \{0\} \cup \{i_0\} \times I$)}\\
+            & = [I^{q+1};\ (I^q \times \{1\}) \cup K,\ (\partial I^{q} \times I) \cup K,\  J^{q-1} \times I \cup K \to X; B, A, \ast]\\
+            & \quad \\
+            & = [I^{q+1};\ I^q \times \{1\},\ I^{q-1} \times \{1\} \times I,\  J^{q-1} \times I \cup I^q \times \{0\} \to X; B, A, \ast]\\
+            & \quad \quad \text{(notice that $\partial I^q = \partial I^{q-1} \times I \cup I^{q-1} \times \{ 0 , 1\} $)}
+        \end{align*}
+
+        We can assume that $(A,C)$ have no relative $q<m$-cells and
+        $(B,C)$ have no relative $q<n$-cells.\\
+        And we can assume that $X$ has finite many cells
+        since $I^q$ is compact.\\
+        For subcomplexes $C \subseteq A' \subseteq A$,
+        where $A = e^m \cup A'$ (attaching one cell from $A'$).\\
+        Let $X' := A' \cup_C B$,
+        if the results hold for $(X';A',B)$ and $(X;A,X')$,
+        then it hold for $(X;A,B)$ since we have
+        map between exact homotopy sequences of triples
+        $(A,A',C)$ and  $(X,X',B)$:
+        \[\begin{tikzcd}
+            {\pi_{q+1}(A,A')} & {\pi_q(A',C)} & {\pi_q(A,C)} & {\pi_q(A,A')} & {\pi_{q-1}(A',C)} \\
+            {\pi_{q+1}(X,X')} & {\pi_q(X',B)} & {\pi_q(X,B)} & {\pi_q(X,X')} & {\pi_{q-1}(X',B)}
+            \arrow["{i_{2,q+1}}"', from=1-1, to=2-1]
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=2-1, to=2-2]
+            \arrow[from=2-2, to=2-3]
+            \arrow[from=1-2, to=1-3]
+            \arrow[from=1-3, to=1-4]
+            \arrow[from=2-3, to=2-4]
+            \arrow[from=1-4, to=1-5]
+            \arrow[from=2-4, to=2-5]
+            \arrow["{i_{1,q-1}}"', from=1-5, to=2-5]
+            \arrow["{i_{2,q}}"', from=1-4, to=2-4]
+            \arrow["{i_{3,q}}"', from=1-3, to=2-3]
+            \arrow["{i_{1,q}}"', from=1-2, to=2-2]
+        \end{tikzcd}\]
+        induced by inclusion $(A,A',C) \hookrightarrow (X,X',B)$.
+        If the result hold for $(X';A',B)$ and $(X;A,X')$,
+        maps  $i_{1,q},\ i_{2,q}$
+        are isomorphisms when $1 \geq q \geq m+n-3$,
+        are epimorphisms when $q = m+n-2$.
+        Notice the $5$-lemma says that\\
+        if $i_{1,q}$ and $i_{2,q}$ are epimorphisms, $i_{1,q-1}$ are monomorphism, then $i_{3,q}$ is epimorphism.\\
+        if $i_{1,q}$ and $i_{2,q}$ are monomorphisms, $i_{2,q+1}$ are epimorphism, then $i_{3,q}$ is monomorphism.\\
+        We also have if $C \subseteq B' \subseteq B$ with $B = B' \cup e^n$,
+        the result hold for CW-triads $(X';A,B')$ and $(X;X',B)$
+        where $X' = A \cup_C B'$,
+        since $(A,C) \hookrightarrow (X,B)$ factors as
+        $(A,C) \hookrightarrow (X',B') \hookrightarrow (X,B)$.\\
+
+        Now we can assume that $A = C \cup D^m$ and $B = C \cup D^n$.\\
+
+        The current goal of proof is to prove any
+        $$
+        f : (I^{q+1};\ I^q \times \{1\},\ I^{q-1} \times \{1\} \times I,\  J^{q-1} \times I \cup I^q \times \{0\}) \to (X; B, A, \ast)
+        $$
+        is nullhomotopic for any $q+1$ with $2 \leq q+1 \leq m+n-2$.\\
+        For $a \in \interior{D^m}$, $b\in \interior{D^n}$ We have inclusions of based triads:
+        $$
+            (A;A,A-\{a\}) \hookrightarrow (X - \{b\};X -\{b\}, X - \{a,b\})
+            \hookrightarrow (X;X-\{b\},X-\{a\}) \hookleftarrow (X;A,B)
+        $$
+        The first and the third induces
+        isomorphisms on homotopy groups of triads
+        since $B$ is a strong deformation retract of $X - \{a\}$ in $X$
+        and $A$ is a strong deformation retract of $X - \{b\}$ in $X$.
+        $\pi_{*}(A;A,A - \{a\}) = 0$ since
+        $\pi_*(A,A - \{a\}) \to \pi_*(A,A \cap (A - \{a\}) )$
+        are isomorphisms.\\
+        
+        Current goal : choose good $a,b$ to show $f$ regarded as a pointed traid map to $(X;X-\{b\},X-\{a\})$
+        is homotopic to a map
+        $$
+        f' : (I^{q+1};\ I^{q-1} \times \{1\} \times I,\ I^q \times \{1\},\  J^{q-1} \times I \cup I^q \times \{0\}) \to (X - \{b\}; X-\{b\}, X-\{a,b\}, \ast)
+        $$
+        if $2 \leq q+1 \leq m+n-2$.\\
+
+        \begin{note}
+            We want to homotopically remove some point $f^{-1}(b)$,
+        first we may want to construct some Uryssohn function $u$
+        separating $f^{-1}(a) \cup J^{q-1} \times I \cup I^q \times \{0\}$ and $f^{-1}(b)$ 
+        and construct homotopy of cube $h^+: (r,s,t) \mapsto (r,(1-u(r,s)t)s)$
+        wishing that $f(h^+(r,s,1))$ would miss $b$.
+        The problem in this method is that
+        points $f^{-1}(b)$ in the cube would be homotopically
+        replaced by other points.
+        Since our desire homotopy does not change the first $q$
+        coordinates of the cube, we want to separate
+        $p^{-1}(p(f^{-1}(a))) \cup J^{q-1} \times I$
+        and
+        $p^{-1}(p(f^{-1}(b)))$
+        (where $p : I^q \times I \to I^q$).
+        Our problem is to find suitable $a$, $b$ such that
+        $p(f^{-1}(a)) \cap p(f^{-1}(b)) = \emptyset$.\\
+        \end{note}
+        
+        We use manifold structure on $D^m$ and $D^n$ to achieve it,
+        now we homotopically approximate $f$ by a map $g$ which 
+        smooth on $f^{-1}(D^m_{<1/2} \cup D^n_{<1/2})$.\\
+
+        Let $U_{<r} := f^{-1}(D^m_{<r} \cup D^n_{<r})$,
+        Use smooth deformation theorem to construct smooth map (for any $0 < \epsilon$)
+        $g' : U_{<3/4} \to D^m_{<3/4} \cup D^n_{<3/4}$ with homotopy
+        $h_1 : g' \simeq f|_{U_{<3/4}}$ (and bound $|g'(x) - f(x)| < \epsilon$ for any $x \in U_{<1}$)
+        and take partition of unity
+        $\{\rho, \rho'\}$ with subcoordinates $\{I^{q+1} - \ol{U_{<1/2}},\ U_{<3/4}\}$,
+        we have:
+        \begin{align*}
+            g & := \rho f + \rho' g' \\
+            h_2 & : g \simeq f \rel (I^{q+1} - U_{<3/4}) \\
+            h_2 & : I^{q+1} \times I \to X\\
+            & \quad (x,t) \mapsto \rho(x)f(x) + \rho'(x)h_1(x,t)\\
+        \end{align*}
+        with scalar multiplication and addition is already defined on smooth structure on $D^m_{<3/4} \cup D^n_{<3/4}$.\\
+        We could assmue that $g(I^{q-1} \times \{1\} \times I) \cap D^n_{<1/2} = \emptyset$
+        (which implies $g$ is a map of tetrads to $(X;X-\{b\},X-\{a\},\ast)$)
+        and $g(I^{q} \times \{1\}) \cap D^m_{<1/2} = \emptyset$
+        since $f(I^{q-1} \times \{1\} \times I) \subseteq A$ and $f(I^q\times \{1\}) \subseteq B$
+        and we can always tighten the bound $\epsilon$,
+        (Similar argument also hold for $h_2$,
+        then we have $h_2 : g \simeq f$ as homotopy between maps of tetrads.)\\
+
+        Use the manifold structure to find good $(a,b)$:\\
+        $V := g^{-1}(D^m_{<1/2}) \times g^{-1}(D^n_{<1/2})$
+        is a sub-manifold of $I^{2(q+1)}$.
+        Consider $W := \{ (v,v') \in V \mid p(v)=p(v') \}$,
+        which is the zero set of smooth submersion
+        $(v,v') \mapsto p(v) - p(v')$.
+        $W$ is smooth manifold with codimension $q$.
+        Therefore the map $(g,g) : W \to D^m_{<1/2} \times D^n_{<1/2}$
+        is smooth map between manifolds of dimension $q+2$ and $m+n$.
+        The map is not surjection since $q+2 < m+n$.
+        Then we have $(a,b) \notin (g,g)(W)$
+        (that is, $p(g^{-1}(a)) \cap p(g^{-1}(b))$).\\
+
+        Since $g(I^{q-1} \times \{1\} \times I) \cap D^n_{<1/2} = \emptyset$
+        and $g(J^{q-1} \times I) \cap D^n_{<1/2} = \emptyset$,
+        we have $g(\partial I^q \times I) \cap D^n_{<1/2} = \emptyset$.
+        By Uryssohn's lemma, we have $u : I^{q} \to I$ separating
+        $p(g^{-1}(a)) \cup \partial I^q$ and $p(g^{-1}(b))$.
+        Finally we have:
+        \begin{align*}
+            h' : I^q \times I \times I & \to I^q \times I\\
+            (r,s,t) & \mapsto (r,(1-u(r)t)s)
+        \end{align*}
+        and $h := g \circ h'$, $f' := h(-,1)$.
+        $f'(I^{q+1}) \cap \{b\} = \emptyset$ since if
+        $\E (r,s) \in I^q \times I, \ f'(r,s)=b$, then
+        $b = g(r,(1-u(r))s) = g(r,0) = \ast$ leads to contradiction.\\
+        Last step is to check that $h$ is a homotopy between maps 
+        $$
+        (I^{q+1};\ I^{q-1} \times \{1\} \times I,\ I^q \times \{1\},\  J^{q-1} \times I \cup I^q \times \{0\}) \to (X; X-\{b\}, X-\{a\}, \ast)
+        $$
+        Since $g$ is, $g \circ h'$ is too.\\
+        \qed
+    \end{prf}
+
+    
 
 
 

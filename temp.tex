@@ -4,7 +4,7 @@
 \tikzcdset{row sep/normal=1cm}
 \tikzcdset{column sep/normal=1cm}
 \usepackage{amsfonts}
-\usepackage{hyperref}
+\usepackage[pdfborder={1 0 1}]{hyperref}
 \usepackage{amsthm}
 \usepackage{enumerate}
 \usepackage[left=3cm, right=3cm, top=2cm]{geometry}
@@ -24,8 +24,10 @@
 \usepackage{epigraph}
 \usepackage{enumitem}
 \usepackage{indentfirst}
-
 \usepackage{quiver}
+\usepackage{stmaryrd}
+
+
 
 
 \theoremstyle{plain}
@@ -250,6 +252,33 @@
 \newcommand{\mbfY}{\mathbf Y}
 \newcommand{\mbfZ}{\mathbf Z}
 
+\newcommand{\mbfa}{\mathbf a}
+\newcommand{\mbfb}{\mathbf b}
+\newcommand{\mbfc}{\mathbf c}
+\newcommand{\mbfd}{\mathbf d}
+\newcommand{\mbfe}{\mathbf e}
+\newcommand{\mbff}{\mathbf f}
+\newcommand{\mbfg}{\mathbf g}
+\newcommand{\mbfh}{\mathbf h}
+\newcommand{\mbfi}{\mathbf i}
+\newcommand{\mbfj}{\mathbf j}
+\newcommand{\mbfk}{\mathbf k}
+\newcommand{\mbfl}{\mathbf l}
+\newcommand{\mbfm}{\mathbf m}
+\newcommand{\mbfn}{\mathbf n}
+\newcommand{\mbfo}{\mathbf o}
+\newcommand{\mbfp}{\mathbf p}
+\newcommand{\mbfq}{\mathbf q}
+\newcommand{\mbfr}{\mathbf r}
+\newcommand{\mbfs}{\mathbf s}
+\newcommand{\mbft}{\mathbf t}
+\newcommand{\mbfu}{\mathbf u}
+\newcommand{\mbfv}{\mathbf v}
+\newcommand{\mbfw}{\mathbf w}
+\newcommand{\mbfx}{\mathbf x}
+\newcommand{\mbfy}{\mathbf y}
+\newcommand{\mbfz}{\mathbf z}
+
 % common math symbols
 
 \newcommand{\bs}{\backslash}
@@ -272,10 +301,15 @@
 \newcommand{\A}{\forall}
 \newcommand{\colim}{\varinjlim}
 \renewcommand{\lim}{\varprojlim}
+\newcommand{\op}{\mathrm{op}}
 \newcommand{\waveH}{\tilde{H}}
+\newcommand{\waveE}{\tilde{E}}
+\newcommand{\waveC}{\tilde{C}}
 \newcommand{\wtl}[1]{\widetilde{#1}}
 \newcommand{\Fct}{\mathrm{Funct}}
 \newcommand{\rel}{\mathrm{\ \!rel\ \!}}
+\newcommand{\qaqmapsfrom}{\leftarrow \raisebox{0.35pt}{\hspace{-5pt}$\shortmid \hspace{2.5pt} $}}
+\newcommand{\qaqlongmapsfrom}{\longleftarrow \raisebox{0.35pt}{\hspace{-5pt}$\shortmid \hspace{2.5pt} $}}
 
 % Operators
 
@@ -346,6 +380,7 @@
 \DeclareMathOperator{\Pic}{Pic}
 \DeclareMathOperator{\Tr}{Tr}
 \DeclareMathOperator{\Grass}{Grass}
+\DeclareMathOperator{\Gr}{Gr}
 \DeclareMathOperator{\LinSub}{LinSub}
 \DeclareMathOperator{\Eq}{Eq}
 \DeclareMathOperator{\can}{can}
@@ -370,6 +405,7 @@
 \DeclareMathOperator{\Ess}{Ess}
 \DeclareMathOperator{\Flag}{Flag}
 \DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\St}{St}
 \DeclareMathOperator{\Orb}{Orb}
 \DeclareMathOperator{\pl}{pl}
 \DeclareMathOperator{\Mat}{Mat}
@@ -383,7 +419,13 @@
 \DeclareMathOperator{\PGL}{PGL}
 \DeclareMathOperator{\PSL}{PSL}
 \DeclareMathOperator{\SP}{SP}
+\DeclareMathOperator{\Ho}{Ho}
 \DeclareMathOperator{\Fin}{Fin}
 \DeclareMathOperator{\Lim}{Lim}
 \DeclareMathOperator{\Colim}{Colim}
-\newcommand{\Cat}[1]{(\textrm{#1})}
+\DeclareMathOperator{\rank}{rank}
+\renewcommand{\d}{\operatorname{d}}
+\DeclareMathOperator{\D}{D}
+\newcommand{\Cat}[1]{\textrm{#1}}
+\DeclareMathOperator{\limit}{limit}
+\newcommand{\Limit}[2]{\limit_\limits{#1 \rightarrow #2}}
