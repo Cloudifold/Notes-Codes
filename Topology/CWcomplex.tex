@@ -226,7 +226,7 @@
 
 
 
-    \section{CW-complexes Are Right Notion For Spaces}
+    \section{Right Notion For Spaces}
 
     \begin{thm}
         Homotopy Extension and Lifting property\label{hyp:HELP}:\\
@@ -296,6 +296,7 @@
     \end{cor}
 
     \begin{thm}
+        \label{hyp:n-equivalence-induce-bijection-on-homotopy-classes-of-CW-complex-dim<n}
         If $X$ is an CW-complex, $e : Y \to Z$ is an $n$-equivalence,
         Then $e_{\ast} : [X,Y] \to [X,Z]$ is a bijection if $\dim{X} < n$,
         and a surjection if $\dim{X} = n$.(Also valid for pointed case)
@@ -681,6 +682,14 @@
         CW-complexes:
         $\lim_{i} X_i \approx \lim_i k(X_i) \approx k(\lim_i X_i)$
         ($X \approx k(X)$ and right adjoint preserve limits).
+    \end{note}
+
+    \begin{note}
+        Category of CW-complexes
+        is not cartesian closed, but category of compactly generated spaces
+        $\mbf{TOP_{CG}}$ is.
+        And its pointed version $\mbf{TOP_{CG}^{*/}}$ have based exponential law:
+        $\Hom(X\wedge Y, Z) \approx \Hom(X,\Hom(Y,Z))$.
     \end{note}
 
     Quotient of CW-pair:
@@ -1900,12 +1909,25 @@
         
     \end{prf}
 
+    \begin{cor}
+        If $Y$ is well pointed $(n-1)$-connected space
+        then $Y \to \Omega \Sigma Y$ is $(2n-1)$-equivalence.
+        By theorem \ref{hyp:n-equivalence-induce-bijection-on-homotopy-classes-of-CW-complex-dim<n},
+        for any CW-complex $X$ with $\dim X < 2n-1$,
+        $\Sigma : [X,Y]_* \to [\Sigma X, \Sigma Y]_* \cong [X,\Omega \Sigma Y]_*$
+        is bijection.
+    \end{cor}
+
     \begin{defn}
         We now define the $q$-th stable homotopy group:
-        $$
+        \[
         \pi^s_k(X) := \colim_{r} \pi_{k+r} (\Sigma^r X) \cong \pi_{2k+2} (\Sigma^{k+2} X) \cong \pi_{k+n} (\Sigma^{n} X) \quad \quad (n-1 > k)
-        $$
-        The relation right side is directly from $\Sigma^n X$ is $(n-1)$-connected.
+        \]
+        (Since $\Sigma^n X$ is $(n-1)$-connected)\\
+        And stable homotopy class:
+        \[
+        [X,Y]_*^s := \colim_{r} [\Sigma^r X, \Sigma^r Y]
+        \]
     \end{defn}
 
     \begin{note}
@@ -3121,6 +3143,7 @@
     \end{prf}
 
     \begin{cor}
+        \label{hyp:classifying-spaces-of-Brown-functor-are-homotopically-equivalent}
         If $Y,Y'$ are classifying spaces of a Brown functor $H$,
         and $u \in H(Y), u' \in H(Y')$ are their universal elements,
         then there is a homotopy equivalence $f : Y \to Y$
@@ -3138,6 +3161,372 @@
         \qed
 
     \end{prf}
+
+    \begin{defn}
+        A \tbf{sequential pre-spectrum} in topological spaces
+        is:
+        \begin{itemize}
+            \item A $\bbN$-graded compactly generated space : $X_* := \{ X_n \in \mbf{TOP_{CG}^{*/}} \}_{n \in \bbN}$.
+            \item Structure maps : $\{\sigma_n : \Sigma X_n  \to X_{n+1} \}_{n \in \bbN}$.\\
+        \end{itemize}
+        Map between sequential pre-spectra
+        is map between $\bbN$-graded spaces $f_n : X_n \to Y_n$
+        such that
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXFNpZ21hIFhfbiJdLFsxLDAsIlxcU2lnbWEgWV9uIl0sWzAsMSwiWF97bisxfSJdLFsxLDEsIllfe24rMX0iXSxbMCwxLCJcXFNpZ21hIGZfbiJdLFswLDIsIlxcc2lnbWFfbiIsMl0sWzEsMywiXFxzaWdtYSdfbiJdLFsyLDMsImZfe24rMX0iLDJdXQ==
+        \[\begin{tikzcd}
+            {\Sigma X_n} & {\Sigma Y_n} \\
+            {X_{n+1}} & {Y_{n+1}}
+            \arrow["{\Sigma f_n}", from=1-1, to=1-2]
+            \arrow["{\sigma_n}"', from=1-1, to=2-1]
+            \arrow["{\sigma'_n}", from=1-2, to=2-2]
+            \arrow["{f_{n+1}}"', from=2-1, to=2-2]
+        \end{tikzcd}\]
+        commutes.\\
+        An \tbf{$\Omega$-prespectrum}
+        is a sequential spectrum $X_*$ with
+        adjoints of structure maps
+        $\sigma_n : X_n \to \Omega X_{n+1}$
+        are weak equivalences.\\
+        For an $\Omega$-prespectrum $X_*$,
+        we can extend it into a $\bbZ$-graded space
+        by setting $X_{-n} := \Omega^{n} X_0$.
+    \end{defn}
+
+    \begin{thm}
+        If $(\waveE^*, \sigma)$ is a reduced additive cohomology theory,
+        then there exist homotopically unique
+        $\Omega$-prespectrum $Y_*$
+        (each $Y_n$ is a CW-complex)
+        such that $E^n(-) \cong [-,Y_n]_*$ naturally.
+        (naturality implies diagram below commutes)
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXHdhdmVFXntufSgtKSJdLFsxLDAsIlstLFlfbl1fKiJdLFsxLDEsIltcXFNpZ21hKC0pLFlfe24rMX1dXyogXFxjb25nWy0sXFxPbWVnYSBZX3tuKzF9XV8qIl0sWzAsMSwiXFx3YXZlRV57bisxfShcXFNpZ21hKC0pKSJdLFswLDFdLFsxLDJdLFswLDNdLFszLDJdXQ==
+        \[\begin{tikzcd}
+            {\waveE^{n}(-)} & {[-,Y_n]_*} \\
+            {\waveE^{n+1}(\Sigma(-))} & {[\Sigma(-),Y_{n+1}]_* \cong[-,\Omega Y_{n+1}]_*}
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=1-2, to=2-2]
+            \arrow[from=1-1, to=2-1]
+            \arrow[from=2-1, to=2-2]
+        \end{tikzcd}\]
+        If $Y_*$ is an $\Omega$-prespectrum,
+        then $\waveE^n := [-,Y_n]_*$, $\sigma_n : [-,Y_n]_* \to [-,\Omega Y_{n+1}] \cong [\Sigma(-),Y_{n+1}]$
+        is a reduced additive cohomology theory.
+    \end{thm}
+
+    \begin{defn}
+        For an abelian group $A$, the \tbf{Eilenberg-Mac Lane prespectrum}
+        $KA_*$
+        is defined
+        by $KA_n := K(A,n)$.
+        Structure maps is $KA_n \to M \to \Omega KA_{n+1}$
+        where $M$ is a CW-approximation of $\Omega KA_{n+1}$,
+        and homotopy equivalence $KA_n \to M$
+        is obtained from corollary \ref{hyp:classifying-spaces-of-Brown-functor-are-homotopically-equivalent}.
+    \end{defn}
+
+    \begin{prop}
+        If a reduced additive cohomology thoery $\waveH^*, \sigma$ is ordinary,
+        then $\waveH^n(-) \cong [-,KA_n]_*$ naturally.
+    \end{prop}
+
+    \begin{prf}
+        
+    \end{prf}
+
+    \section{Towers And Homotopy Limits}
+
+    \subsection{Pointed and Unpointed Homotopy Classes}
+
+    \begin{prop}
+        There are pointed spaces $X, Y \in \mbf{TOP^{*/}}$,
+        if $X$ is well-pointed,
+        then there is a right action of
+        $\pi_1(Y,y_0)$ on $[X,Y]_*$.
+    \end{prop}
+
+    \begin{prf}
+        The right action is given by:
+        $[f] \cdot [a] := [\hat f_{a,1}]$
+        where $\hat f_{a,1} := \hat f_a(-,1)$
+        % https://q.uiver.app/?q=WzAsNSxbMCwwLCJcXGFzdCJdLFsxLDAsIlgiXSxbMCwxLCJcXGFzdCBcXHRpbWVzIEkiXSxbMSwxLCJYIFxcdGltZXMgSSJdLFsyLDIsIlkiXSxbMCwxLCJ4XzAiXSxbMCwyXSxbMiwzXSxbMSwzXSxbMyw0LCJcXGhhdCBmX2EiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMSw0LCJmIiwwLHsiY3VydmUiOi0yfV0sWzIsNCwiYSBcXGluIFxccGlfMShZLHlfMCkiLDIseyJjdXJ2ZSI6Mn1dXQ==
+        \[\begin{tikzcd}[row sep=0.5cm, column sep=0.5cm]
+            \ast & X \\
+            {\ast \times I} & {X \times I} \\
+            && Y
+            \arrow["{x_0}", from=1-1, to=1-2]
+            \arrow[from=1-1, to=2-1]
+            \arrow[from=2-1, to=2-2]
+            \arrow[from=1-2, to=2-2]
+            \arrow["{\hat f_a}", dashed, from=2-2, to=3-3]
+            \arrow["f", curve={height=-12pt}, from=1-2, to=3-3]
+            \arrow["{a \in \pi_1(Y,y_0)}"', curve={height=12pt}, from=2-1, to=3-3]
+        \end{tikzcd}\]
+        Verify it is well-defined:\\
+        By the property of closed cofibration,
+        $\hat f_a $ is unique up to homotopy,
+        hence independent from choice of $a \in [a]$ and $f \in [f]$.\\
+        Verify it is an group action:\\
+        If $e$ is the constant loop in $\pi_1(Y,y_0)$,
+        then $\hat f_{e}(x,t) = f(x)$.\\
+        If $[a], [b] \in \pi_1(Y,y_0)$
+        then $[f] \cdot [a] = [\hat f_{a,1}]$,
+        $([f] \cdot [a]) \cdot [b] = [\hat {(\hat f_{a,1})}_{b,1} ]$.
+        define
+        \begin{align*}
+            h : X \times I & \to Y \\
+            (x,t) & \mapsto \begin{cases}
+                \hat f_a (x,2t) & t \leq 1/2\\
+                \hat (\hat f_{a,1})_b (x,2t -1) & t \geq 1/2
+            \end{cases}
+        \end{align*}
+        Since $h(-,0) = f$, $h(x_0,-) = a \cdot b$
+        $h \simeq \hat f_{a \cdot b}$.
+        $[f] \cdot ([a] \cdot [b]) = [\hat f_{a \cdot b} (-,1)]
+        = [h(-,1)] = ([f] \cdot [a])\cdot [b] $.\\
+        \qed
+    \end{prf}
+
+    \begin{thm}
+        If $X, Y \in \mbf{TOP^{*/}}$
+        there is a forgetful map
+        $\phi : [X,Y]_* \to [X,Y]$
+        where $[X,Y]$ is the \tbf{free} homotopy class of
+        \tbf(not necessarily pointed) maps $X \to Y$.
+        If $(X,x_0)$ is well-pointed and $Y$ is path-connected, then $\phi$
+        induces bijection $\ol{\phi} : [X,Y]_*/\pi_1(Y,y_0) \cong [X,Y]$.
+    \end{thm}
+
+    \begin{prf}
+        $\ol{\phi}$ is well-defined:\\
+        For any $a \in \pi_1(Y,y_0)$,
+        $f$ is freely homotopic to $\hat f_{a}(-,1)$.\\
+        $\ol{\phi}$ is injective:\\
+        If we have $\phi([f]) = \phi([g])$ which means there is free homotopy $h : f \simeq g$,
+        let $a := h(x_0,-)$,
+        then $h \simeq \hat f_a$,
+        $[f] \cdot [a] = [h(-,1)] = [g]$.\\
+        $\ol{\phi}$ is surjective:\\
+        Suppose $g \in \Hom_{\mbf{TOP}}(X,Y) $ is an unpointed map,
+        choose a path $a : g(x_0) \simeq y_0$,
+        extend $a,g$:
+        % https://q.uiver.app/?q=WzAsNSxbMCwwLCJcXGFzdCJdLFsxLDAsIlgiXSxbMCwxLCJcXGFzdCBcXHRpbWVzIEkiXSxbMSwxLCJYIFxcdGltZXMgSSJdLFsyLDIsIlkiXSxbMCwxLCJ4XzAiXSxbMCwyXSxbMiwzXSxbMSwzXSxbMyw0LCJoIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzEsNCwiZyIsMCx7ImN1cnZlIjotMn1dLFsyLDQsImEiLDIseyJjdXJ2ZSI6Mn1dXQ==
+        \[\begin{tikzcd}[row sep=0.5cm, column sep=0.5cm]
+            \ast & X \\
+            {\ast \times I} & {X \times I} \\
+            && Y
+            \arrow["{x_0}", from=1-1, to=1-2]
+            \arrow[from=1-1, to=2-1]
+            \arrow[from=2-1, to=2-2]
+            \arrow[from=1-2, to=2-2]
+            \arrow["h", dashed, from=2-2, to=3-3]
+            \arrow["g", curve={height=-12pt}, from=1-2, to=3-3]
+            \arrow["a"', curve={height=12pt}, from=2-1, to=3-3]
+        \end{tikzcd}\]
+        $\phi([h(-,1)]) = [g]$.\\
+        \qed
+    \end{prf}
+
+    \begin{thm}
+        If $(W,e)$ is a well-pointed $H$-space,
+        $\mu : W \times W \to W$
+        is its $H$-multiplication.
+        Then $\mu$ is homotopic to another $H$-multiplication
+        $\mu'$ such that $\mu'(-,e) = \id_W = \mu'(e,-)$ is strict identity.
+    \end{thm}
+
+    \begin{prf}
+        Let $l := \mu \circ (e,\id_W) \simeq \id_W$,
+        $r := \mu \circ (\id_W,e) \simeq \id_W$,
+        \begin{align*}
+            h : W \vee W \times I & \to W\\
+            (w,e,t) & \mapsto r(w,t)\\
+            (e,w,t) & \mapsto l(w,t)
+        \end{align*}
+        Then we have diagram: (since $W \vee W \to W \times W$ is cofib)
+        % https://q.uiver.app/?q=WzAsNSxbMCwwLCJXIFxcdmVlIFciXSxbMSwwLCJXIFxcdGltZXMgVyJdLFsxLDEsIldcXHRpbWVzIFcgXFx0aW1lcyBJIl0sWzAsMSwiVyBcXHZlZSBXIFxcdGltZXMgSSJdLFsyLDIsIlciXSxbMCwxXSxbMSwyXSxbMCwzXSxbMywyXSxbMSw0LCJcXG11IiwwLHsiY3VydmUiOi0yfV0sWzMsNCwiaCIsMix7ImN1cnZlIjoyfV0sWzIsNCwiXFxoYXQgaCIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+        \[\begin{tikzcd}[row sep=0.5cm, column sep=0.5cm]
+            {W \vee W} & {W \times W} \\
+            {W \vee W \times I} & {W\times W \times I} \\
+            && W
+            \arrow[from=1-1, to=1-2]
+            \arrow[from=1-2, to=2-2]
+            \arrow[from=1-1, to=2-1]
+            \arrow[from=2-1, to=2-2]
+            \arrow["\mu", curve={height=-12pt}, from=1-2, to=3-3]
+            \arrow["h"', curve={height=12pt}, from=2-1, to=3-3]
+            \arrow["{\hat h}"{description}, dashed, from=2-2, to=3-3]
+        \end{tikzcd}\]
+        $\mu' := \hat h (-,-,1)$.\\
+        \qed
+    \end{prf}
+
+    \begin{prop}
+        If $(X,x_0)$ is well-pointed space,
+        $(W,e)$ is a well-pointed $H$-space,
+        then $\pi_1(W,e)$ acts trivially on $[X,W]_*$
+    \end{prop}
+
+    \begin{prf}
+        For $[f] \in [X,W]_* $, $a \in \pi_1(W,e)$ define
+        \begin{align*}
+            h : X \times I & \to W\\
+                (x,t) & \mapsto \mu'(f(x),a(t))
+        \end{align*}
+        $[f] \cdot [a] = [h(-,1)] = [f]$
+        since $h \simeq  \hat f_a$.\\
+        \qed
+    \end{prf}
+
+    \begin{cor}
+        If $(X,x_0)$ is well-pointed space,
+        $(Y,e)$ is a well-pointed path-connected $H$-space,
+        then $\phi : [X,Y]_* \to [X,Y]$ is a bijection.
+    \end{cor}
+
+    \begin{thm}
+        $X \in \mbf{TOP}$,
+        $\pi_{\leq 1}(X)$ is the fundamental groupoid of $X$
+        there are functors
+        \begin{align*}
+            \Psi_n : \pi_{\leq 1}(X) & \to \mbf{Grp}\\
+            x_0 & \mapsto \pi_n(X,x_0)\\
+            \Hom_{\pi_{\leq 1}(X)}(x_0,x_1) \ni [a] & \mapsto ([S^n,X]_* \ni [f] \mapsto [\hat f_{a} (-,1)] )
+        \end{align*}
+        with property : for every $f : X \to Y, [a] \in \Hom_{\pi_{\leq 1}(X)}(x_0,x_1)$
+        diagram
+        % https://q.uiver.app/?q=WzAsNCxbMCwwLCJcXHBpX3tufSAoWCx4XzApIl0sWzEsMCwiXFxwaV9uKFgseF8xKSJdLFswLDEsIlxccGlfbihZLGYoeF8wKSkiXSxbMSwxLCJcXHBpX24oWSxmKHhfMSkpIl0sWzAsMSwiXFxQc2lfe259KGEpIl0sWzAsMiwiZl8qIiwyXSxbMiwzLCJcXFBzaV97bn0oZiBcXGNpcmMgYSkiLDJdLFsxLDMsImZfKiJdXQ==
+        \[\begin{tikzcd}
+            {\pi_{n} (X,x_0)} & {\pi_n(X,x_1)} \\
+            {\pi_n(Y,f(x_0))} & {\pi_n(Y,f(x_1))}
+            \arrow["{\Psi_{n}(a)}", from=1-1, to=1-2]
+            \arrow["{f_*}"', from=1-1, to=2-1]
+            \arrow["{\Psi_{n}(f \circ a)}"', from=2-1, to=2-2]
+            \arrow["{f_*}", from=1-2, to=2-2]
+        \end{tikzcd}\]
+        commutes.
+    \end{thm}
+
+    \begin{lem}
+        \label{hyp:image-of-[Sigma^2-X,Z]-in-[Sigma-C_f,Z]-is-central-subgroup}
+        Assume $X,Y,Z$ are path-connected and well-pointed.
+        Consider functor $[-,Z]_*$ apply on \tbf{Barratt-Puppe sequence}
+        \begin{align*}
+            \cdots \to [\Sigma Y,Z]_* \xrightarrow{\Sigma f^*} [\Sigma X,Z]_*
+            \xrightarrow{q^*} [C_f,Z]_* \xrightarrow{i^*}  [Y,Z]_* \xrightarrow{f^*} [X,Z]_*
+        \end{align*}
+        The sequence is exact (in category $\mbf{Set}^{*/}$),
+        and we have following by exactness:
+        \begin{enumerate}
+            \item $ [\Sigma X, Z]_*$ acts from right on $ [C_f,Z]_*$.
+            \item $q^* : [\Sigma X, Z]_* \to [C_f,Z]_*$ is a map between right $[\Sigma X ,Z]_*$-sets.
+            \item $q^*([x]) = q^*([x'])$ iff exists some $[y] \in [\Sigma Y, Z]_*$ such that $[x] = \Sigma f^*([y]) \cdot [x']$.
+            \item $i^*([z]) = i^*([z'])$ iff exists some $[x] \in [\Sigma X, Z]_*$ such that $[z] = [z'] \cdot [x]$.
+            \item $\Im (\Sigma q^* : [\Sigma^2 X,Z]_* \to [\Sigma C_{f}, Z]_*)$ is central subgroup of $[\Sigma C_{f}, Z]_*$.
+        \end{enumerate}
+    \end{lem}
+
+    \begin{prf}
+        \begin{enumerate}
+            \item Define $h$-coaction map:
+            \begin{align*}
+                u_f : C_f & \to C_f \vee \Sigma X\\
+                (y,0) & \mapsto (y,0)\\
+                \ol{(x,t)} & \mapsto \begin{cases}
+                    \ol{(x,2t)} \in C_f & t \leq 1/2 \\
+                    \ol{(x,2t-1)} \in \Sigma X & t \geq 1/2
+                \end{cases}
+            \end{align*}
+            \item% https://q.uiver.app/?q=WzAsNCxbMCwwLCJDX2YiXSxbMCwxLCJDX2YgXFx2ZWUgXFxTaWdtYSBYIl0sWzEsMCwiXFxTaWdtYSBYIl0sWzEsMSwiXFxTaWdtYSBYIFxcdmVlIFxcU2lnbWEgWCJdLFswLDEsInVfZiIsMl0sWzAsMiwicSJdLFsyLDMsInVfe1ggXFx0byBcXGFzdH0iXSxbMSwzLCJxIFxcdmVlXFxpZF97XFxTaWdtYSBYfSIsMl1d
+            \[\begin{tikzcd}[row sep=0.5cm, column sep=0.5cm]
+                {C_f} & {\Sigma X} \\
+                {C_f \vee \Sigma X} & {\Sigma X \vee \Sigma X}
+                \arrow["{u_f}"', from=1-1, to=2-1]
+                \arrow["q", from=1-1, to=1-2]
+                \arrow["{u_{X \to \ast}}", from=1-2, to=2-2]
+                \arrow["{q \vee\id_{\Sigma X}}"', from=2-1, to=2-2]
+            \end{tikzcd}\]
+            \item $q^*([x]) = q^*([x'])$ $\Leftrightarrow $ $q^*([x] \cdot [x']^{-1}) = \ast$ $\Leftrightarrow $ there exists some $[y] \in [\Sigma Y, Z]_*$ such that $[x] \cdot [x']^{-1} = \Sigma f^*(y)$.
+            \item If $i^*([z]) = i^*([z'])$,
+            then there are maps $c \simeq z$, $c' \simeq z'$
+            such that $c|_Y = c'|_{Y}$. (use HEP)
+            Define
+            \begin{align*}
+                x : \Sigma X & \to Z\\
+                    \ol{(x,t)} & \mapsto \begin{cases}
+                        c'(x,1-2t) & t \leq 1/2 \\
+                        c(x,2t-1) & t \geq 1/2
+                    \end{cases}
+            \end{align*}
+            we have $[c] = [c'] \cdot [x]$.
+            \item Let $G := [\Sigma C_f, Z]$, $H := \Im (\Sigma q^* )$.
+            $\Sigma u_f$ gives the right action $\star$ of $H$ on $G$.
+            It is different from the usual product $\cdot$ (given by $v_{\Sigma C_f}$) on $G$:
+            \begin{align*}
+                v_{\Sigma C_f} : \Sigma C_f & \to  {\Sigma C_f}_0 \vee {\Sigma C_f}_1 \\
+                (c,t) & \mapsto \begin{cases}
+                    (c,2t)_0 & t \leq 1/2\\
+                    (c,2t-1)_1 & t \geq 1/2
+                \end{cases}\\
+                \Sigma u_f : \Sigma C_f & \to \Sigma C_f \vee \Sigma^2 X\\
+                \ol{(y,0,t)} & \mapsto \ol{(y,0,t)}\\
+                \ol{(x,s,t)} & \mapsto \begin{cases}
+                    \ol{(x,2s,t)} \in \Sigma C_f & s \leq 1/2 \\
+                    \ol{(x,2s-1,t)} \in \Sigma^2 X & s \geq 1/2
+                \end{cases}
+            \end{align*}
+            And we have $(g \star h) \cdot (g' \star h') = (g \cdot g') \star (h \cdot h')$,
+            which is equivalent to commutativity of diagram below.
+            % https://q.uiver.app/?q=WzAsNCxbMCwxLCJcXFNpZ21hIENfZiBcXHZlZSBcXFNpZ21hXjIgWCAiXSxbMSwwLCJcXFNpZ21hIENfZiJdLFsyLDEsIntcXFNpZ21hIENfZn1fMCBcXHZlZSB7XFxTaWdtYSBDX2Z9XzEiXSxbMSwyLCJ7XFxTaWdtYSBDX2Z9XzAgXFx2ZWUge1xcU2lnbWEgQ19mfV8xIFxcdmVlIHtcXFNpZ21hXjIgWH1fMCBcXHZlZSB7XFxTaWdtYV4yIFh9XzEiXSxbMSwwLCJcXFNpZ21hIHVfZiJdLFsxLDIsInZfe1xcU2lnbWEgQ19mfSIsMl0sWzAsMywidl97XFxTaWdtYSBDX2Z9IFxcdmVlIHZfe1xcU2lnbWFeMiBYfSJdLFsyLDMsIlxcU2lnbWEgdV9mIFxcdmVlIFxcU2lnbWEgdV9mIiwyXV0=
+            \[\begin{tikzcd}
+                & {\Sigma C_f} \\
+                {\Sigma C_f \vee \Sigma^2 X } && {{\Sigma C_f}_0 \vee {\Sigma C_f}_1} \\
+                & {{\Sigma C_f}_0 \vee {\Sigma C_f}_1 \vee {\Sigma^2 X}_0 \vee {\Sigma^2 X}_1}
+                \arrow["{\Sigma u_f}", from=1-2, to=2-1]
+                \arrow["{v_{\Sigma C_f}}"', from=1-2, to=2-3]
+                \arrow["{v_{\Sigma C_f} \vee v_{\Sigma^2 X}}", from=2-1, to=3-2]
+                \arrow["{\Sigma u_f \vee \Sigma u_f}"', from=2-3, to=3-2]
+            \end{tikzcd}\]
+            Verify the commutativity:
+            \begin{align*}
+                C_f & \to  {\Sigma C_f}_0 \vee {\Sigma C_f}_1 \vee {\Sigma^2 X}_0 \vee {\Sigma^2 X}_1\\
+                \ol{(y,0,t)} & \mapsto \begin{cases}
+                    \ol{(y,0,2t)}_0 & t \leq 1/2\\
+                    \ol{(y,0,2t-1)}_1 & t \geq 1/2
+                \end{cases}\\
+                \ol{(x,s,t)} & \mapsto \begin{cases}
+                    \ol{(x,2s,2t)}_0 \in {\Sigma C_f}_0 & s \leq 1/2 , t \leq 1/2\\
+                    \ol{(x,2s-1,2t)}_0 \in {\Sigma^2 X}_0 & s \geq 1/2, t \leq 1/2\\
+                    \ol{(x,2s,2t-1)}_1 \in {\Sigma C_f}_1 & s \leq 1/2 , t \geq 1/2\\
+                    \ol{(x,2s-1,2t-1)}_1 \in {\Sigma^2 X}_1 & s \geq 1/2, t \geq 1/2
+                \end{cases}
+            \end{align*}
+            Final step:
+            \begin{align*}
+                g \cdot h & = (g \star 1) \cdot (1 \star h) = (g \cdot 1) \star (1 \cdot h)\\
+                & = (1 \cdot g) \star (h \cdot 1) = (1 \star h) \cdot (g \star 1) = h \cdot g
+            \end{align*}
+        \end{enumerate}
+        \qed
+    \end{prf}
+
+    \begin{lem}
+        \label{hyp:image-of-[Z,Omega^2-Y]-in-[Z,Omega-Pf]-is-central-subgroup}
+        Assume $X,Y,Z$ are path-connected and well-pointed.
+        (dual version of lemma \ref{hyp:image-of-[Sigma^2-X,Z]-in-[Sigma-C_f,Z]-is-central-subgroup}.)
+        \begin{align*}
+            \cdots \to [Z, \Omega X]_* \xrightarrow{\Omega f_*} [Z,\Omega Y]_*
+            \xrightarrow{j_*} [Z,P_f]_* \xrightarrow{p_*}  [Z,X]_* \xrightarrow{f_*} [Z,Y]_*
+        \end{align*}
+        The sequence is exact (in category $\mbf{Set}^{*/}$),
+        and we have following by exactness:
+        \begin{enumerate}
+            \item $[Z,\Omega Y]_*$ acts from right on $[Z,P_f]_* $.
+            \item $j_* : [Z,\Omega Y]_* \to [Z,P_f]_*$ is a map between right $[Z,\Omega Y]_*$-sets.
+            \item $j_*([y]) = j_*([y'])$ iff exists some $[x] \in [Z, \Omega X]_*$ such that $[y] = \Omega f_*([x]) \cdot [y']$.
+            \item $p_*([z]) = p_*([z'])$ iff exists some $[y] \in [Z, \Omega Y]_*$ such that $[z] = [z'] \cdot [y]$.
+            \item $\Im (\Omega j_* : [Z, \Omega^2 Y]_* \to [Z, \Omega P_f]_*)$ is central subgroup of $[Z, \Omega P_f]_*$.
+        \end{enumerate}
+    \end{lem}
 
 
 

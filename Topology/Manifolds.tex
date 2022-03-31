@@ -10,6 +10,8 @@
 
     \section{Manifolds and Maps}
 
+    \subsection{Manifolds}
+
     \begin{defn}
         A map $f : U \to \bbR^m$ (where $U$ is an open subset of $\bbR^n$)
         is called $C^k$ if
@@ -32,8 +34,8 @@
 
     \begin{note}
         By \tbf{Weierstrass M-test},
-        the ``pointwise converges'' condition in the definition of $C^\omega$ function
-        can be replaced equivalently by ``uniform converges''.
+        the \textit{pointwise converge} condition in the definition of $C^\omega$ function
+        can be replaced equivalently by \textit{uniform converge}.
     \end{note}
 
     \begin{defn}
@@ -58,13 +60,23 @@
     \end{defn}
 
     \begin{note}
+        In definition above, the condition \textit{$\varphi_j(U_j)$ open in $\bbR^n$}
+        can be replaced equivalently by \textit{$\varphi_j(U_j) = \bbR^n$}
+        since we can use $\varphi_j^{-1}(B_r(\varphi_j(x)))$
+        to produce a finer cover, and $\bbR^n$ is $C^\omega$ diffeomorphic to $B_r(y)$. 
+        (by $ x \mapsto y + r \arctan(\norm{x}) \cdot x $)
+
+    \end{note}
+
+    \begin{note}
         Manifolds defined above are locally compact,
         hence paracompact and  compactly generated Hausdorff.
     \end{note}
 
     \begin{defn}
         Suppose $M,N$ are $C^r$ manifolds with dimensions $n,k$
-        and atlas $A = \{(U_j,\varphi_j)\}_{j \in J}, \ B = \{(V_i,\phi_i)\}_{i \in I}$.
+        and atlas $A = \{(U_j,\varphi_j)\}_{j \in J}$,
+        $\ B = \{(V_i,\phi_i)\}_{i \in I}$.
         The \tbf{product of two manifolds}
         is a $(n+k)$-dimensional manifold
         with underlying space $M \times N$
@@ -101,7 +113,8 @@
 
     \begin{note}
         Open subset $U$ of a $n$-dimensional manifold $M$
-        is obviously a submanifold of dimension $n$.
+        is obviously a submanifold of dimension $n$.\\
+        Submanifold is invariant under diffeomorphisms.\\
     \end{note}
 
     \begin{exmp}
@@ -167,18 +180,18 @@
         Where $p_{V^\bot} : \bbR^n = V \oplus V^{\bot } \to V^{\bot}$.\\
         Atlas  on $\Gr_k(\bbR^n)$ is given by $\{(U_V, \varphi_V)\}_{V \in \Gr_k(\bbR^n)}$.\\
         We verify that the transition maps are analytic.
-        Suppose $E$ is spaned by $\mbfe_1, \cdots ,\mbfe_k$,
-        $V$ have orthonormal basis $[\mbfv_1, \cdots , \mbfv_k]$
-        and $V^\bot$ have orthonormal basis $[\mbfv_{k+1}, \cdots , \mbfv_{n}]$.
+        Suppose $E$ is spaned by $\mbfe_1, \ldots ,\mbfe_k$,
+        $V$ have orthonormal basis $[\mbfv_1, \ldots , \mbfv_k]$
+        and $V^\bot$ have orthonormal basis $[\mbfv_{k+1}, \ldots , \mbfv_{n}]$.
         Let $\GL_n(\bbR) \ni T : E \oplus E^\bot \to V \oplus V^\bot$
         be the transformation sends each $\mbfe_i$ to $\mbfv_i$.
-        Let $[T]$ be its matrix respect to $[\mbfe_1, \mbfe_2, \cdots, \mbfe_n]$,
+        Let $[T]$ be its matrix respect to $[\mbfe_1, \mbfe_2, \ldots, \mbfe_n]$,
         and $[T^{-1}]$ is matrix of its inverse.
         then $p_{V^\bot}$
         is given by
         \[
         a = 
-        [\mbfe_1, \mbfe_2, \cdots, \mbfe_n]
+        [\mbfe_1, \mbfe_2, \ldots, \mbfe_n]
         \begin{bmatrix}
             a_1 \\
             a_2 \\
@@ -186,7 +199,7 @@
             a_n
         \end{bmatrix}
         \mapsto
-        [\mbfv_{k+1}, \mbfv_{k+2}, \cdots, \mbfv_n]
+        [\mbfv_{k+1}, \mbfv_{k+2}, \ldots, \mbfv_n]
         \begin{bmatrix}
             T^{-1}
         \end{bmatrix}_{i > k}
@@ -200,11 +213,11 @@
         Suppose $M \in \Hom_{\bbR}(E,E^\bot)$
         satisfy $W := \Im(\id_E \times M) \in U_V$,
         (that is $M \in \varphi_E^{-1} (U_E \cap U_V)$)
-        let $[m_{i,j}]_{k\leq i \leq n, 1 \leq j \leq k}$ be its matrix respect to $[\mbfe_1, \mbfe_2, \cdots, \mbfe_n]$.
+        let ${[m_{i,j}]}_{k\leq i \leq n, 1 \leq j \leq k}$ be its matrix respect to $[\mbfe_1, \mbfe_2, \cdots, \mbfe_n]$.
         Then $p_{V}|_{W}$ is given by:
         \[
         a = 
-        [\mbfe_1, \mbfe_2, \cdots, \mbfe_n]
+        [\mbfe_1, \mbfe_2, \ldots, \mbfe_n]
         \begin{bmatrix}
             I_k \\
             M
@@ -216,7 +229,7 @@
             a_k
         \end{bmatrix}
         \longmapsto
-        [\mbfv_1, \mbfv_2, \cdots, \mbfv_k]
+        [\mbfv_1, \mbfv_2, \ldots, \mbfv_k]
         \begin{bmatrix}
             T^{-1}
         \end{bmatrix}_{i \leq k}
@@ -234,7 +247,7 @@
         And $i_W$ is given by:
         \[
         b = 
-        [\mbfv_1, \mbfv_2, \cdots, \mbfv_k]
+        [\mbfv_1, \mbfv_2, \ldots, \mbfv_k]
         \begin{bmatrix}
             b_1 \\
             b_2 \\
@@ -242,7 +255,7 @@
             b_k
         \end{bmatrix}
         \longmapsto
-        [\mbfe_1, \mbfe_2, \cdots, \mbfe_n]
+        [\mbfe_1, \mbfe_2, \ldots, \mbfe_n]
         \begin{bmatrix}
             I_k \\
             M
@@ -264,7 +277,7 @@
         Finally, we see that $p_{V^\bot} \circ i_W$ is:
         \[
         b = 
-        [\mbfv_1, \mbfv_2, \cdots, \mbfv_k]
+        [\mbfv_1, \mbfv_2, \ldots, \mbfv_k]
         \begin{bmatrix}
             b_1 \\
             b_2 \\
@@ -272,7 +285,7 @@
             b_k
         \end{bmatrix}
         \longmapsto
-        [\mbfv_{k+1}, \mbfv_{k+2}, \cdots, \mbfv_n]
+        [\mbfv_{k+1}, \mbfv_{k+2}, \ldots, \mbfv_n]
         \begin{bmatrix}
             T^{-1}
         \end{bmatrix}_{i > k}
@@ -298,6 +311,8 @@
 
         
     \end{exmp}
+
+    \subsection{Maps}
 
     \begin{defn}
         Let $(M,A)$, $(N,B)$ be $C^r$-manifolds,
@@ -330,6 +345,28 @@
         \varphi_{V^\bot} \circ (-)^\bot \circ \varphi_V^{-1} :  \Mat_{k\times (n-k)}(\bbR) \ni M \mapsto M^T \in \Mat_{(n-k) \times k}(\bbR)
         \]
     \end{exmp}
+
+    \begin{defn}
+        Let $(M,A)$, $(N,B)$ be $C^r$-manifolds,
+        a $C^r$ map $f : M \to N$
+        is said to be a \tbf{($C^r$) local diffeomorphism at}
+        $x \in M$
+        if exists openset $U \ni x$,
+        $f(U)$ is open in $Y$
+        and $f|_U : U \to f(U)$ is a $C^r$-diffeomorphism.\\
+        A $C^r$-map $f$ is said to be a \tbf{local diffeomorphism}
+        if forall $x \in M$,
+        $f$ is a local diffeomorphism at $x$.
+    \end{defn}
+
+    \begin{thm}
+        \tbf{Inverse Function Theorem}\\
+        Suppose $W$ is open subset of $\bbR^m$,
+        $f : W \to \bbR^n$ is a $C^r$ map.
+        If $\d f_p : TW_p \to T\bbR^n_{f(p)}$
+        is an isomorphism, then $f$
+        is a local diffeomorphism at $p$.
+    \end{thm}
 
     \begin{defn}
         Let $(M,A)$ be a $C^{r}$-manifold, $x \in M$
@@ -487,5 +524,40 @@
         In fact, embedding $i : M \hookrightarrow \bbR^k$
         produces injective linear maps $T_x(M) \to T_{i(x)}\bbR^k$
     \end{note}
+
+    \begin{defn}
+        Let $(M,A), (N,B)$ be two $C^r$-manifolds,
+        and $f : M \to N$
+        is an $C^{1}$ map.\\
+        We call f is \tbf{immersive} at $x \in M$
+        if $T_x f : T_x M \to T_x N$
+        is monomorphism,
+        and \tbf{submersive} if $T_x f$ is epimorphism.\\
+        We call $f$ is an \tbf{immersion/submersion} if
+        for all $x \in M$, $f$ is immersive/submersive at $x$.\\
+        We call $f$ is an \tbf{embedding} if $f$ is immersion
+        and $f : M \to f(M)$ is homeomorphism (between topological spaces).
+    \end{defn}
+
+    \begin{thm}
+        $N$ is a $C^r$-manifold,
+        A subspace $A \subseteq N$
+        is a submanifold of $N$
+        iff $A$ is the image of a $C^r$-embedding.
+    \end{thm}
+
+    \begin{prf}
+        $\implies$ : trivial\\
+        $\impliedby$ :
+        Suppose $A = f(M)$,
+        $\{(N_i, \varphi_i : N_i \to \bbR^n )\}_{i \in I}$ is charts of $N$ which covers $f(M)$.
+        Then find $A_M := \{(M_i, \phi_i : M_i \to \bbR^k )\}_{i \in I}$,
+        an atlas of $M$ such that $f(M_i) = A \cap N_i$.
+        (we could find such $A_M$ since $f$ is an embedding)
+        It is enough to prove that images of
+        $C^r$ embeddings
+        $f_i := \varphi_i \circ f \circ \phi_i^{-1} : \phi_i(M_i) \to \bbR^n$
+        are submanifolds.
+    \end{prf}
 
 \end{document}
